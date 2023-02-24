@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- mybatis에 내장된(built-in) typeAliass는 아래와 같이 다수개가 존재한다 -->
+  		<!-- <typeAlias type="패키지명.클래스명" alias="패키지별명(패키지 변수명)"/> --> 	
+		<typeAlias type="com.damoye.secondproject.model.NoticeDTO" alias="noticeDTO"/>
+	</typeAliases>
+</configuration>
