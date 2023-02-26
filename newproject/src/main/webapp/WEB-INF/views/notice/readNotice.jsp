@@ -29,7 +29,11 @@
 			
 			//삭제버튼
 			$('#deleteNotice').click(function(){
-				alert('deleteNotice');
+				if(confirm('정말 삭제하시겠습니까?')) {
+					location.href='${path}/notice/delete?no=${noticeDTO.no}';
+				} else {
+					return;
+				}
 			});
 		});
 </script>
@@ -50,10 +54,10 @@
 			<th>내용</th><td>${noticeDTO.content}</td>
 		</tr>
 		<tr>
-			<th>작성일자</th><td>${noticeDTO.regdate}</td>
+			<th>작성일자</th><td><fmt:formatDate value="${noticeDTO.regdate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 		</tr>
 		<tr>
-			<th>마지막수정일자</th><td>${noticeDTO.modidate}</td>
+			<th>마지막수정일자</th><td><fmt:formatDate value="${noticeDTO.modidate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 		</tr>
 		<tr>
 			<th>조회수</th><td>${noticeDTO.readcnt}</td>

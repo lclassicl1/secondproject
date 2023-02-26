@@ -14,6 +14,27 @@
 <title>Insert title here</title>
 <script>
 	$(function(){
+		$('#submit').click(function(){
+			/* 제목 검증 */
+			let title = $('#title').val();
+			if(title=='') {
+				alert('제목이 입력되지 않았습니다');
+				$('#title').focus();
+				return false;
+			}
+			/* 
+			내용 검증 현재 ck에디터 적용으로 반영 안되는듯
+			let content = $('#content').val();
+			if(content=='') {
+				alert('내용이 입력되지않았습니다');
+				$('#content').focus();
+				return;
+			} */
+			
+			//$('#form').submit();
+			
+		});
+		
 		$('#backBtn').click(function(){
 			history.back();
 		});
@@ -22,7 +43,7 @@
 </head>
 <body>
 	<h1>공지사항 작성하는 페이지</h1>
-	<form action="${path}/notice/insert" method="post">
+	<form action="${path}/notice/insert" method="post" id="form">
 		<table border="1">
 			<tr>
 				<th>작성자</th><td><input type="hidden" name="writername" id="writername" value="${userName}"/>${userName}</td>
@@ -38,7 +59,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="작성하기"/>&nbsp;
+				<td colspan="2"><input type="submit" id="submit" value="작성하기"/>&nbsp;
 					<input type="reset" value="취소"/>&nbsp;
 					<input type="button" value="뒤로가기" id="backBtn"/> </td>
 			</tr>
