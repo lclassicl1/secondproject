@@ -16,4 +16,7 @@ public interface NoticeService {
 	
 	//공지사항 글 수정
 	public int updateNotice(NoticeDTO noticeDTO);
+	
+	//공지사항 글 삭제
+	public int deleteNotice(int no);
 }

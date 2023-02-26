@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title></title>
 <style>
 img{
@@ -15,10 +16,19 @@ img{
 	height: 70px;
 }
 </style>
+<script>
+	function logout() {
+		if(confirm('로그아웃 하시겠습니까?')) {
+			location.href="${path}/logout";
+		} else {
+			return;
+		}
+	}
+</script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><img src="${path}/resources/img/mainlogo.png"></a>
+  <a class="navbar-brand" href="${path}/"><img src="${path}/resources/img/mainlogo.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,7 +57,7 @@ img{
         <a class="nav-link" href="#">마이페이지</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/logout">로그아웃</a>
+        <a class="nav-link" onclick="logout();">로그아웃</a>
       </li>
     </ul>
   </div>
