@@ -89,4 +89,14 @@ public class NoticeController {
 	
 	}
 	
+	//공지사항 글 삭제
+	@GetMapping("notice/delete")
+	public String deleteNotice(@RequestParam("no") int no) {
+		int cnt = noticeServiceImpl.deleteNotice(no);
+		if(cnt == 0) {
+			return "notice/deleteFail";
+		}
+		return "redirect:/notice";
+	}
+	
 }

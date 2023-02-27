@@ -38,4 +38,10 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return sqlSession.update("mapper.notice.updateNotice", noticeDTO);
 	}
 
+	//공지사항 글 삭제
+	@Override
+	public int deleteNotice(int no) {
+		return sqlSession.delete("mapper.notice.deleteNotice",no);
+	}
+
 }
