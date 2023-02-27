@@ -6,5 +6,11 @@ import com.damoye.secondproject.model.BoardVO;
 
 public interface BoardDAO {
 	
-	public List<BoardVO> getBoardList();
+	//클럽게시판 글목록
+	public List<BoardVO> getBoardList(int cNo);
+	
+	//클럽게시판 게시글 수
+	//public int count(int cNo);
+	
+	public BoardVO getBoardDetail(int boardNo);
 }

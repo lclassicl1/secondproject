@@ -14,10 +14,25 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
 	@Override
-	public List<BoardVO> getBoardList(){
-		List<BoardVO> boardList = sqlSession.selectList("mapper.board.boardList");
+	public List<BoardVO> getBoardList(int cNo){
+		List<BoardVO> boardList = sqlSession.selectList("mapper.board.boardList",cNo);
 		return boardList;
 	}
+	
+	/*
+	@Override
+	public int count(int cNo) {
+		return sqlSession.selectOne("mapper.board.count",cNo);
+	}
+	 */
+	
+	@Override
+	public BoardVO getBoardDetail(int boardNo){
+		return sqlSession.selectOne("mapper.board.getBoardDetail",boardNo);
+	}
+	
+	
 	
 }
