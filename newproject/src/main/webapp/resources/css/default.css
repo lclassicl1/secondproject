@@ -1,0 +1,17 @@
+@charset "UTF-8";
+html, body{
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	
+	text-align: center;
+	margin: 0px;
+}
+
+main {
+	flex: 1;
+	background: white;
+}

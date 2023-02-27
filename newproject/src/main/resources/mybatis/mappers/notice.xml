@@ -47,4 +47,13 @@
 			where no = #{no}
 		]]>
 	</select>
+	
+	<!-- 공지사항 글 삭제 -->
+	<select id="deleteNotice" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete 
+			from notice
+			where no=#{no}
+		]]>
+	</select>
 </mapper>

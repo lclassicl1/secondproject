@@ -36,5 +36,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public int updateNotice(NoticeDTO noticeDTO) {
 		return noticeDAOImpl.updateNotice(noticeDTO);
 	}
+	
+	//공지사항 글 삭제
+	@Override
+	public int deleteNotice(int no) {
+		return noticeDAOImpl.deleteNotice(no);
+	}
 
 }
