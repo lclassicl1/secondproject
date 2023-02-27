@@ -13,6 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="${path}/resources/css/default.css">
 <style></style>
 <script>
 	/* Jquery 선언부 */
@@ -26,7 +27,8 @@
 </head>
 <body>
 <header><jsp:include page="${path}/resources/module/header.jsp"/></header>
-	<h1>공지사항 글 수정</h1>
+<main>
+	<h1>공지사항 수정</h1>
 	몇번글수정?:${no}
 	넘겨받은DTO:${noticeDTO}
 	<form action="${path}/notice/updateForm" method="post">
@@ -48,6 +50,7 @@
 			</tr>
 		</table>
 	</form>
-<footer><jsp:include page="/resources/module/footer.jsp"/></footer>
+</main>	
+<footer><jsp:include page="${path}/resources/module/footer.jsp"/></footer>
 </body>
 </html>

@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <!-- ck editor 5 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/default.css">
 <title>Insert title here</title>
 <script>
 	$(function(){
@@ -42,7 +43,9 @@
 </script>
 </head>
 <body>
-	<h1>공지사항 작성하는 페이지</h1>
+<header><jsp:include page="/resources/module/header.jsp"></jsp:include></header>
+<main>
+	<h1>공지사항 글쓰기</h1>
 	<form action="${path}/notice/insert" method="post" id="form">
 		<table border="1">
 			<tr>
@@ -61,10 +64,13 @@
 			<tr>
 				<td colspan="2"><input type="submit" id="submit" value="작성하기"/>&nbsp;
 					<input type="reset" value="취소"/>&nbsp;
-					<input type="button" value="뒤로가기" id="backBtn"/> </td>
+					<input type="button" value="뒤로가기" id="backBtn"/>
+				</td>
 			</tr>
 		</table>
 	</form>
+</main>	
+<footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
 <script>
 	ClassicEditor
 	.create( document.querySelector( '#content' ))
