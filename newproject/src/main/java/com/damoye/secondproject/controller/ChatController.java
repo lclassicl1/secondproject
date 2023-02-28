@@ -1,12 +1,9 @@
 package com.damoye.secondproject.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,34 +32,32 @@ public class ChatController {
 		return "chat/room";
 	}
 	@RequestMapping(value="/chat/addMessage", method=RequestMethod.POST)
-	//@ResponseBody
-	public String addPostMessage(@RequestParam int roomNo,@RequestParam String writerId,
-								@RequestParam String content,Model model,HttpServletRequest req) {
-		try {
-			req.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+	@ResponseBody
+	public void addPostMessage(@RequestParam int roomNo,@RequestParam String writerId,
+								@RequestParam String content) {
+		//Map<String, Object> rs = new HashMap<>();
 		ChatDTO chatDTO = new ChatDTO();
 		chatDTO.setRoomNo(roomNo);
 		chatDTO.setWriterId(writerId);
 		chatDTO.setContent(content);
 		
-		chatService.addMessage(chatDTO);
-		model.addAttribute("roomNo", roomNo);
+		System.out.println(roomNo);
+		System.out.println(writerId);
+		System.out.println(content);
 		
-		return "redirect:/chat/room";
+		chatService.addMessage(chatDTO);
+		
+		//rs.put("message","success");
+		
+		//return rs;
 	}
 	
 	@RequestMapping(value = "/chat/checkMessage",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> listMessage(@RequestParam int roomNo) {
-		System.out.println(roomNo);
-		System.out.println("controller");
 		Map<String, Object> rs = new HashMap<>();
 		List<ChatDTO> list = chatService.listMessage(roomNo);
 		rs.put("message",list);
-		System.out.println("controller2");
 		return rs;
 	}
 

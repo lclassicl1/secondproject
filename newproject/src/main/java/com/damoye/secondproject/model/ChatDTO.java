@@ -1,6 +1,10 @@
 package com.damoye.secondproject.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ChatDTO {
 
@@ -8,6 +12,7 @@ public class ChatDTO {
 		private String writerId;
 		private String content;
 		private int roomNo;
+		@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="MM월 dd일 hh:mm")
 		private Date creDate;
 		
 		public ChatDTO() {}
@@ -30,8 +35,12 @@ public class ChatDTO {
 		public int getRoomNo() {
 			return roomNo;
 		}
-		public Date getCreDate() {
-			return creDate;
+		public String getCreDate() {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일 a hh:mm");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(creDate);
+			cal.add(Calendar.HOUR_OF_DAY, -9);
+			return sdf.format(cal.getTime());
 		}
 		public void setChattingNo(int chattingNo) {
 			this.chattingNo = chattingNo;
