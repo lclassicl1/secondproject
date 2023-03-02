@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damoye.secondproject.dao.BoardDAO;
+import com.damoye.secondproject.dao.BoardDAOImpl;
 import com.damoye.secondproject.model.BoardVO;
 
 @Service
@@ -24,12 +25,40 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO getBoardDetail(int boardNo) {
 		return boardDAOImpl.getBoardDetail(boardNo);
 	}
+
+	@Override
+	public void insertBoard(BoardVO boardVO) throws Exception {
+		boardDAOImpl.insertBoard(boardVO);
+	}
+
 	
-	/*
 	@Override
 	public int count(int cNo) {
 		return boardDAOImpl.count(cNo);
 	}
+
+	@Override
+	public List<BoardVO> getBoardListPage(int cNo, int displayPost, int postNum) throws Exception {
+		return boardDAOImpl.getBoardListPage(cNo, displayPost, postNum);
+	}
+/*
+	@Override
+	public int deleteBoard(int cNo, int boardNo,BoardVO boardVO) {
+		return boardDAOImpl.deleteBoard(cNo, boardNo, boardVO);
+	}
 	*/
+	/*
+	@Override
+	public BoardVO getupdateForm(int cNo, int num) {
+		return null;
+	}
+*/
+	@Override
+	public int updateBoard(BoardVO boardVO) {
+		return boardDAOImpl.updateBoard(boardVO);
+	}
+
+
+
 	
 }

@@ -7,10 +7,37 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	//목록으로
+	$("#boardList").on("click",function(){
+		location.href="${path}/board/list?cNo=${boardVO.cNo}&num=1";
+	});
 
+	//글 등록
+	
+	//글 수정
+	$("#updateBoard").on("click",function(){
+		location.href="${path}/board/boardUpdate?cNo=${cNo}&boardNo=${boardVO.boardNo}&num=${num}";
+	});
+	//글 삭제
+	$("#deleteBoard").on("click",function(){
+		location.href="${path}/board/list?cNo=${boardVO.cNo}&num=1";
+	});
+	//댓글 등록
+	
+	//댓글 수정
+	
+	//댓글 삭제
+	
+});
+
+</script>
 <title>클럽게시판 글읽기</title>
 <style>
-
+body {
+ background-color: transparent !important;
+}
   .container{
  	display: grid;
   	border: 1px solid;
@@ -37,6 +64,7 @@
 </style>
 </head>
 <body>
+
 <header><jsp:include page="/resources/module/header.jsp"/></header>
 	<div><h1>클럽게시판 글읽기</h1></div>
 	<%-- 현재 세션 아이디:${sessionId} --%>
@@ -58,11 +86,16 @@
 	    <div class="c1" style="display:table-cell">${boardVO.bWriter}</div>
 	  </div>
 	  <div style="display:table-row">
-	    <div class="c" style="display:table-cell">작성일</br>수정일</div>
+	   <c:if test="${boardVO.bRegdate == boardVO.bModdate}">
+	    <div class="c" style="display:table-cell">작성일</div>
+        <div class="c1" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${boardVO.bRegdate}"/></div>
+	 </c:if>
+	 <c:if test="${boardVO.bRegdate != boardVO.bModdate}">
+	    <div class="c" style="display:table-cell">작성일(수정일)</div>
         <div class="c1" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${boardVO.bRegdate}"/>
-        </br><fmt:formatDate pattern="yyyy-MM-dd" value="${boardVO.bModdate}"/>
-        </div>
-	  </div>
+        (<fmt:formatDate pattern="yyyy-MM-dd" value="${boardVO.bModdate}"/>)</div>
+	 </c:if>
+      </div>
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">제목</div>
         <div class="c1" style="display:table-cell">${boardVO.bTitle}</div>
@@ -73,11 +106,12 @@
 	  </div>
 	</div>
 	  <div style="display:table-row">
-		<button type="button" onclick="location.href='${path}/board/?cNo=${boardVO.cNo}'">목록으로</button>
+	  	<input type="button" name="boardList" id="boardList" value="목록으로"/>
+		<!-- <button type="button" onclick="location.href='${path}/board/?cNo=${boardVO.cNo}'">목록으로</button> -->
 		<!-- 본인글이면 수정 또는 삭제가능 -->
 			<c:if test="${sessionScope.userId == boardVO.bWriter}">
-	  		  <input type="button" name="" id="" value="수정">
-			  <input type="button" name="" id="" value="삭제">
+	  		  <input type="button" name="updateBoard" id="updateBoard" value="수정">
+			  <input type="button" name="deleteBoard" id="deleteBoard" value="삭제">
 			</c:if>
 	  </div>
 	  
@@ -110,24 +144,27 @@
 		<div class="c1" style="display:table-cell">${comm.comment}</div>
 	  </div>
 	 <div style="display:table-row">
-	    <div class="c" style="display:table-cell">작성일</br>수정일</div>
-        <div class="c1" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${comm.commRegdate}"/>
-        </br><fmt:formatDate pattern="yyyy-MM-dd" value="${comm.commModdate}"/>
-        </div>
+	 <c:if test="${comm.commRegdate == comm.commModdate}">
+	    <div class="c" style="display:table-cell">작성일</div>
+        <div class="c1" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${comm.commRegdate}"/></div>
+	 </c:if>
+	 <c:if test="${comm.commRegdate != comm.commModdate}">
+	    <div class="c" style="display:table-cell">수정일</div>
+        <div class="c1" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${comm.commModdate}"/></div>
+	 </c:if>
 	  </div>
 	  </div>
 	  	<div style="display:table-row">
 		<!-- 본인글이면 수정 또는 삭제가능 -->
 			<c:if test="${sessionScope.userId == boardVO.bWriter}">
-	  		  <input type="button" name="" id="" value="수정">
-			  <input type="button" name="" id="" value="삭제">
+	  		  <input type="submit" name="updateBoard" id="updateBoard" value="수정">
+			  <input type="submit" name="deleteBoard" id="deleteBoard" value="삭제">
 			</c:if>
 	    </div>
 	  </c:if>
 	  </c:forEach>
 	  
   </div>
-	
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>
