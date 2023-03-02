@@ -43,5 +43,17 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public int deleteNotice(int no) {
 		return sqlSession.delete("mapper.notice.deleteNotice",no);
 	}
+	
+	//공지사항 조회수 증가
+	@Override
+	public int updateReadCount(int no) {
+		return sqlSession.update("mapper.notice.updateReadCount", no);
+	}
+	
+	//공지사항 전체 글 수 조회
+	@Override
+	public int selectAllCount() {
+		return sqlSession.selectOne("mapper.notice.totalcnt");
+	}
 
 }

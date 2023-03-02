@@ -56,4 +56,14 @@
 			where no=#{no}
 		]]>
 	</select>
+	
+	<!-- 조회수증가 -->
+	<update id="updateReadCount" parameterType="java.lang.Integer">
+	 	<![CDATA[
+			update notice
+			set readcnt = readcnt + 1
+			where no = #{no}
+		]]>
+	
+	</update> 
 </mapper>

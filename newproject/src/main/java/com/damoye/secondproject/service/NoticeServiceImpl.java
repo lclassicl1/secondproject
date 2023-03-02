@@ -42,5 +42,17 @@ public class NoticeServiceImpl implements NoticeService {
 	public int deleteNotice(int no) {
 		return noticeDAOImpl.deleteNotice(no);
 	}
+	
+	//공지사항 조회수 증가
+	@Override
+	public int updateReadCount(int no) {
+		return noticeDAOImpl.updateReadCount(no);
+	}
+	
+	//공지사항 전체게시글 수
+	@Override
+	public int selectAllCount() {
+		return noticeDAOImpl.selectAllCount();
+	}
 
 }
