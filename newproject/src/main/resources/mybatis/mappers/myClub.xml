@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="myClub">
+<mapper namespace="mapper.myClub">
 
-	<resultMap type="ClubMemberDTO" id="ClubMemberDTO">
+	<resultMap type="clubMemberDTO" id="clubMemberDTO">
 		<result property="cMember" column="cMember"/>
 		<result property="cNo" column="cNo"/>
 		<result property="no" column="no"/>
-		<result property="memberId" column="memberId"/>
 		<result property="joinDate" column="joinDate"/>
+		<result property="signIn" column="signIn"/>
 	</resultMap>
 	
-	<resultMap type="ClubDTO" id="ClubDTO">
+	<resultMap type="clubDTO" id="clubDTO">
 		<result property="cNo" column="cNo"/>
 		<result property="cName" column="cName"/>
 		<result property="cIntro" column="cIntro"/>
@@ -22,10 +22,17 @@
 		<result property="categoryNo" column="categoryNo"/>
 	</resultMap>
 	
-	<select id="getMyClubNo" resultMap="ClubDTO" parameterType="ClubDTO">
+	<select id="getMyClubNo" resultMap="clubMemberDTO" parameterType="clubMemberDTO">
 		<![CDATA[
-			insert into chat(writerid, content, roomno)
-			values(#{writerId},#{content},#{roomNo})	
+			
+			select * from clubmember where no = #{userNo};	
+		]]>
+	</select>
+	
+	<select id="getMyClub" resultMap="clubDTO" parameterType="clubDTO">
+		<![CDATA[
+			
+			select * from club where cno = #{cNo};	
 		]]>
 	</select>
 	
