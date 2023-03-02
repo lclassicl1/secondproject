@@ -13,8 +13,8 @@
 <title></title>
 <style>
 img{
-	width: 200px;
-	height: 70px;
+	width: 300px;
+	height: 100px;
 }
 </style>
 <script>
@@ -29,7 +29,7 @@ img{
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="${path}/"><img src="${path}/resources/img/mainlogo.png"></a>
+  <a class="navbar-brand" href="${path}/"><img src="${path}/resources/img/navlogo.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -60,9 +60,14 @@ img{
       <li class="nav-item">
         <a class="nav-link" onclick="logout();">로그아웃</a>
       </li>
+      <c:if test="${userId=='admin'}">
+	  	<li class="nav-item">
+        	<a class="nav-link" href="#">회원관리</a>
+      	</li>
+  	</c:if>
     </ul>
   </div>
-    <div>${userName}님 접속중입니다.</div>
+  	<div>${userName}님 접속중입니다.</div>	
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>

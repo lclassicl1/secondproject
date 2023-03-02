@@ -24,7 +24,7 @@
 		})
 		
 		//ajax로 페이징처리 구현시도
-		$.ajax({
+		/* $.ajax({
 			url: '${path}/notice/paging',
 			type: 'get',
 			data: {},
@@ -34,7 +34,7 @@
 			}, error:function(){
 				alert('ajax 실행 오류발생');
 			}
-		}); 
+		});  */
 		//ajax 끝
 		
 	});
@@ -79,7 +79,11 @@
 				<option value="10">10</option>
 				<option value="20">20</option>
 			</select>
-					[이전] 1 2 3 4 5 6 [다음]</td>
+				<div class="board-list-paging">
+					<c:set var="startPage" value="1"/>
+					
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="5">

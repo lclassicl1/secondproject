@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.service.NoticeService;
@@ -29,7 +30,7 @@ public class NoticeController {
 	
 	//공지사항 전체글 리스트
 	@RequestMapping(value="notice", method=RequestMethod.GET)
-	public String getNoticeList(Model model, HttpServletRequest req) throws UnsupportedEncodingException {
+	public String getNoticeList(Model model, HttpServletRequest req, @RequestParam(required = false, defaultValue = "1") int pageNo) throws UnsupportedEncodingException {
 		req.setCharacterEncoding("UTF-8");
 		//세션
 //		HttpSession session = req.getSession();
@@ -37,6 +38,7 @@ public class NoticeController {
 //		System.out.println("id값:"+id);
 		
 		List<NoticeDTO> noticeList = noticeServiceImpl.getNoticeList();
+		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("text/html; charset=UTF-8");
 		model.addAttribute("noticeList",noticeList);
 		return "notice/noticeList";
@@ -110,7 +112,9 @@ public class NoticeController {
 	
 	//공지사항 페이지 Ajax
 	@GetMapping("notice/paging")
-	public void noticePaging(Model model,@RequestParam("count") int count) throws IOException {
+	@ResponseBody
+	public void noticePaging(@RequestBody String filterJson, HttpServletResponse res, Model model) throws IOException {
+		
 		
 		int allcount = noticeServiceImpl.selectAllCount();
 		System.out.println("전체게시글수:"+allcount);

@@ -55,7 +55,7 @@ public class ChatController {
 	@RequestMapping(value = "/chat/checkMessage",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> listMessage(@RequestParam int roomNo) {
-		Map<String, Object> rs = new HashMap<>();
+		Map<String, Object> rs = new HashMap<String, Object>();
 		List<ChatDTO> list = chatService.listMessage(roomNo);
 		rs.put("message",list);
 		return rs;

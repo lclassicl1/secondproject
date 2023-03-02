@@ -18,7 +18,7 @@
 		<![CDATA[
 			select *
 			from notice
-			order by no desc	
+			order by no desc
 		]]>
 	</select>
 	
