@@ -15,6 +15,9 @@ $(document).ready(function(){
 	});
 	
 	//수정하기
+	$("#boardUpload").on("click",function(){
+		location.href="${path}/board/list?cNo=${cNo}&num=${num}";
+	});
 
 });
 
@@ -51,7 +54,7 @@ body {
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
-<form action="${path}/board/boardUpdate?boardNo=${boardNo}&num=${num}" method="post">
+<form action="${path}/board/boardUpdate?cNo=${cNo}&boardNo=${boardNo}" method="post">
 	<div><h1>클럽게시판 수정하기</h1></div>
 	<%-- 게시글정보: ${boardList} --%>
 	${boardVO}
@@ -73,13 +76,13 @@ body {
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">제목</div>
         <div class="c1" style="display:table-cell">
-        <input type="text" name="bTitle" id="bTitle" required="required"/>
+        <input type="text" name="bTitle" id="bTitle" value="${boardVO.bTitle}" required="required"/>
         </div>
 	  </div>
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">내용</div>
         <div class="c1" style="display:table-cell; height:400px;">
-        <textarea name="bContent" id="bContent" required="required"></textarea>
+        <textarea name="bContent" id="bContent" required="required">${boardVO.bContent}</textarea>
         </div>
 	  </div>
 	</div>

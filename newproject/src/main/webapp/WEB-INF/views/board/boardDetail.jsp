@@ -18,7 +18,7 @@ $(document).ready(function(){
 	
 	//글 수정
 	$("#updateBoard").on("click",function(){
-		location.href="${path}/board/boardUpdate?cNo=${cNo}&boardNo=${boardVO.boardNo}&num=${num}";
+		location.href="${path}/board/boardUpdate?cNo=${boardVO.cNo}&boardNo=${boardVO.boardNo}";
 	});
 	//글 삭제
 	$("#deleteBoard").on("click",function(){

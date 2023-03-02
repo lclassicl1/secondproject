@@ -100,6 +100,64 @@ public class BoardController {
 		model.addAttribute("num", num);
 		return "redirect:/board/list?cNo="+cNo+"&num="+num;
 	}
+	/*
+	//클럽게시판 글삭제(update)
+	//요청주소~컨패/article/delete?cNo=&boardNo=
+	@PostMapping(value="/board/deleteBoard")
+	public ModelAndView deleteBoard(@RequestParam int cNo, @RequestParam int boardNo, ModelAndView mv) throws Exception {
+		BoardVO boardVO = new BoardVO();
+		boardVO.setcNo(cNo);
+		boardVO.setBoardNo(boardNo);
+		
+		int cnt = boardServiceImpl.deleteBoard(cNo, boardNo, boardVO);
+		if(cnt==1) {
+			mv.setViewName("redirect:/board/list?cNo="+cNo+"&num=1");
+		}else {
+			mv.setViewName("redirect:/board/detail");
+		}
+		return mv;
+		
+	}*/
+	
+	//클럽게시판 글수정
+	//수정폼
+	/*@GetMapping("/board/boardUpdate")
+	public String updateBoard(@RequestParam(name="cNo") int cNo,@RequestParam(name="num") int num, @RequestParam(name="boardNo") int boardNo,Model model) throws Exception {
+		
+		BoardVO boardVO = boardServiceImpl.getBoardDetail(boardNo);
+		model.addAttribute("cNo", cNo);
+		model.addAttribute("num", num);
+		model.addAttribute("boardVO", boardVO);
+		return "board/boardUpdate";
+	}*/
+	
+	@GetMapping("/board/boardUpdate")
+	public String updateBoard(@RequestParam(name="boardNo") int boardNo,Model model) throws Exception {
+		
+		BoardVO boardVO = boardServiceImpl.getBoardDetail(boardNo);
+		//model.addAttribute("cNo", cNo);
+		//model.addAttribute("num", num);
+		model.addAttribute("boardVO", boardVO);
+		return "board/boardUpdate";
+	}
 
+		
+	//수정처리
+	@PostMapping("/board/boardUpdate")
+	public ModelAndView updateSubmitBoard(@RequestParam(name="cNo") int cNo, @RequestParam(name="boardNo") int boardNo,ModelAndView mv) {
+		BoardVO boardVO = new BoardVO();
+		boardVO.setcNo(cNo);
+		boardVO.setBoardNo(boardNo);
+		
+		int cnt = boardServiceImpl.updateBoard(boardVO);
+		if(cnt==1) {
+			mv.setViewName("/board/boardListPage");
+		}else {
+			mv.setViewName("/board/boardUpdate");
+		}
+		
+		return mv;
+
+	}
 	
 }
