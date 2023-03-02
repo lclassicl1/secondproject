@@ -48,6 +48,11 @@ public class SignInController {
 				
 				session.setAttribute("userId", loginUser.getId());
 				session.setAttribute("userName", loginUser.getName());
+				
+				
+				session.setAttribute("userNo", loginUser.getNo());
+				
+				
 				return "user/main";
 			}
 		else {
