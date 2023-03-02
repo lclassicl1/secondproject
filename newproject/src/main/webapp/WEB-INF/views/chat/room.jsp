@@ -14,77 +14,100 @@
 	 <script type="text/javascript">
 	 
 		$(document).ready(function(){
+
+			var listCount; //db에서 가져온 메시지의 크기
 			
+			/* 작성버튼 클릭시 입력동작  */
+			$('#formBtn').on("click",addMessage());
 			
-			$('#formBtn').on("click",function (){
-				var writerId = $('#writerId').val().trim();
+			/* 작성폼에서 엔터시 입력동작 */ 
+			$('#content').on("keyup",function(key){
+		        if(key.keyCode==13) {
+		        	addMessage();
+		        }
+		    });
+			
+			// 메시지 작성 
+			function addMessage(){
 				var content = $('#content').val().trim();
+				var roomNo = ${param.roomNo};
 				
-				
-				
-				if(writerId.length == 0){
-					alert("작성자를 입력해주세요");
-					$('#writerId').focus();
-					
-					return false;
-				}
 				if(content.length == 0){
-					alert("내용을 입력해주세요");
 					$('#content').focus();
 					
 					return false;
-				} 
-				
+				}
 				$.ajax({
 		 			type: "POST",
 		 			url: "./addMessage",
 		 			data:{
-		 				roomNo : ${param.roomNo},
-		 				writerId : writerId,
+		 				roomNo : roomNo,
 		 				content : content
 		 			},
 		 			dataType:"json",
 		 			success:console.log("add message"),
 		 			error: function(){
-		 				alert("insert error");
+		 				console.log("insert error");
 		 			}
 		 		});
-			});
+				$('#content').val(null);
+				$('html, body').scrollTop($('#scrollTest').scrollHeight);
+			};
 			
-			
+			//메시지 불러오기 
 			function loadMessage(){
+				var roomNo = ${param.roomNo};
 				$.ajax({
 		 			type: "POST",
 		 			url: "./checkMessage",
 		 			data:{
-		 				roomNo:${param.roomNo}
+		 				roomNo:roomNo
 		 			},
 		 			success: function(data){
+		 				if(listCount == data.message.length){
+		 					return;
+		 				}
+		 				listCount = data.message.length;
 		 				document.getElementById("chatInfo").innerHTML = '';
 		 				for(var i=0;i<data.message.length;i++){
-		 					//document.getElementById("result").innerHTML += data.message[i].writerId+" : "+ data.message[i].content +" ["+data.message[i].creDate+"]<br>";
-		 					drawMessage(data.message[i]);
+		 					
+		 					var writerData = data.message[i].writerId;
+		 					
+		 					if(${userId} == writerData){
+		 						drawMyMessage(data.message[i]);
+		 					}else{
+			 					drawMessage(data.message[i]);
+		 					} 
 		 				}
+		 				$('html, body').scrollTop($(document).height());
 		 			},
 		 			error: function(){
-		 				alert("error1");
-		 				$('#result').text("error");
+		 				console.log("error1");
 		 			}
 		 		});
 			};
 			
-			 function drawMessage(chatMessage){
+			//다른사람의 메시지 구분 
+			function drawMessage(chatMessage){
+			
+				 $('#chatInfo').append(	'<div class="friend-chat"><div class="friend-chat-col">'+
+										' <span class="profile-name" id="chatName">'+chatMessage.writerId+'</span>'+
+										'<span class="balloon" id="chatContent">'+chatMessage.content+'</span>'+
+										' <span id="chatTime">'+chatMessage.creDate+'</span></div></div>'); 
+			
+			}; 
+			
+			//내가 쓴 메시지 구분
+			function drawMyMessage(chatMessage){
 				
-				$('#chatInfo').append(' <span class="profile-name" id="chatName">'+chatMessage.writerId+'</span>');
-				$('#chatInfo').append('<span class="balloon" id="chatContent">'+chatMessage.content+'</span>');
-				$('#chatInfo').append(' <span id="chatTime">'+chatMessage.creDate+'</span>');
-				
-
-			 //	$('#chatContent').scrollTop($('#chatContent')[0].scrollHeight);
+				$('#chatInfo').append(	'<div class="me-chat"><div class="me-chat-col">'+
+										'<span class="balloon" id="chatContent">'+chatMessage.content+'</span>'+
+										' <span id="chatTime">'+chatMessage.creDate+'</span></div></div>');
 
 			}; 
 			
-			 setInterval(loadMessage,1000);
+			//실시간 메시지 (1초마다 메시지리스트함수 실행)
+			setInterval(loadMessage,1000);
 			
 		});//ready end
 		
@@ -101,38 +124,22 @@
             <main>
                 <!-- 채팅 내용 시작 -->
                 <div class="chat-content" id="chat-content">
-                    <!-- 메시지 시작 날짜 -->
-                    <!-- <div class="date-line">
-                        <time datetime="2021-03-29">2021년 3월 29일 월요일</time>
-                    </div> -->
                     <!-- 채팅 내용 -->
                     <div class="main-chat">
-                        <div class="friend-chat">
-                            <div class="friend-chat-col" id="chatInfo">
-                            </div>
-                        </div>
+                           <div class="friend-chat-col" id="chatInfo">
+                           </div>
                   	 </div>
                 </div>
+                <div class="scrollTest" id="scrollTest"></div>
                 <!-- 채팅 입력창 -->
                 <div class="insert-content">
                 	 <form name="chatform" id="addForm" method="post" >
 					 		<input type="hidden" name="roomNo" value="${param.roomNo }"/><br>
-							<input type="text" name="writerId" id="writerId" placeholder="작성자"/><br>
-							<textarea  name="content" id="content" placeholder="내용"></textarea>
-							<button id="formBtn" class="chat-submit">작성</button>
+							<textarea  name="content" id="content"></textarea>
+							<span id="formBtn" class="chat-submit">작성</span>
 					</form> 
                 </div>
             </main>
         </div>
-	
-	
-	
-	<%-- <p id="result"></p>
-	 <form id="addForm" method="post" >
-	 		<input type="hidden" name="roomNo" value="${param.roomNo }"/><br>
-			작성자 : <input type="text" name="writerId" id="writerId" placeholder="작성자"/><br>
-			내용 : <input type="text" name="content" id="content" placeholder="내용"/><br>
-			<button id="formBtn">작성</button>
-	</form>  --%>
 </body>
 </html>

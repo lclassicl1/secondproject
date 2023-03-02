@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myClub">
+
+	<resultMap type="ClubMemberDTO" id="ClubMemberDTO">
+		<result property="cMember" column="cMember"/>
+		<result property="cNo" column="cNo"/>
+		<result property="no" column="no"/>
+		<result property="memberId" column="memberId"/>
+		<result property="joinDate" column="joinDate"/>
+	</resultMap>
+	
+	<resultMap type="ClubDTO" id="ClubDTO">
+		<result property="cNo" column="cNo"/>
+		<result property="cName" column="cName"/>
+		<result property="cIntro" column="cIntro"/>
+		<result property="masterId" column="masterId"/>
+		<result property="cLoc" column="cLoc"/>
+		<result property="creDate" column="creDate"/>
+		<result property="cPeople" column="cPeople"/>
+		<result property="cIsShow" column="cIsShow"/>
+		<result property="categoryNo" column="categoryNo"/>
+	</resultMap>
+	
+	<select id="getMyClubNo" resultMap="ClubDTO" parameterType="ClubDTO">
+		<![CDATA[
+			insert into chat(writerid, content, roomno)
+			values(#{writerId},#{content},#{roomNo})	
+		]]>
+	</select>
+	
+</mapper>

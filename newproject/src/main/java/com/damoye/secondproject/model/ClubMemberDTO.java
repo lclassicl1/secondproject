@@ -9,6 +9,7 @@ public class ClubMemberDTO {
 	private int no; //회원번호
 	private String memberId; //회원아이디
 	private Date joinDate; //클럽 가입일
+	
 	public ClubMemberDTO() {}
 	public ClubMemberDTO(int cMemberNo, int cNo, int no, String memberId, Date joinDate) {
 		this.cMemberNo = cMemberNo;

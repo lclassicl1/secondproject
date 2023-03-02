@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,22 +29,21 @@ public class ChatController {
 	private ChatService chatService;
 	
 	@RequestMapping("/chat/room")
-	public String showRoom(int roomNo) {
+	public String showRoom(int roomNo,HttpSession session, Model model) {
+		String userId = (String)session.getAttribute("userId");
+		model.addAttribute("userId", userId);
 		return "chat/room";
 	}
 	@RequestMapping(value="/chat/addMessage", method=RequestMethod.POST)
 	@ResponseBody
-	public void addPostMessage(@RequestParam int roomNo,@RequestParam String writerId,
-								@RequestParam String content) {
+	public void addPostMessage(@RequestParam int roomNo,@RequestParam String content
+								,HttpSession session) {
 		//Map<String, Object> rs = new HashMap<>();
 		ChatDTO chatDTO = new ChatDTO();
+		String writerId = (String)session.getAttribute("userId");
 		chatDTO.setRoomNo(roomNo);
 		chatDTO.setWriterId(writerId);
 		chatDTO.setContent(content);
-		
-		System.out.println(roomNo);
-		System.out.println(writerId);
-		System.out.println(content);
 		
 		chatService.addMessage(chatDTO);
 		
