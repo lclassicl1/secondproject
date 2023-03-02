@@ -18,6 +18,7 @@
 <header><jsp:include page="/resources/module/header.jsp"></jsp:include></header>
 <main>
 ${userId }님, ${userName }님	반갑습니다!<br/>
+<a href="<%=request.getContextPath()%>/club/maintest">클럽 홈</a><br/>
 <a href="<%=request.getContextPath()%>/myClub">내가 가입된 클럽보기</a><br/>
 <a href="<%=request.getContextPath()%>/chat/room?roomNo=1">채팅방 1 test</a><br/>
 <a href="<%=request.getContextPath()%>/chat/room?roomNo=2">채팅방 2 test</a><br/>
