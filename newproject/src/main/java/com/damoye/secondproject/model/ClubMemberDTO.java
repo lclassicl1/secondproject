@@ -7,15 +7,16 @@ public class ClubMemberDTO {
 	private int cMemberNo; //클럽에 가입한 회원번호
 	private int cNo; //클럽번호
 	private int no; //회원번호
-	private String memberId; //회원아이디
 	private Date joinDate; //클럽 가입일
+	private String signIn; //가입여부
 	public ClubMemberDTO() {}
-	public ClubMemberDTO(int cMemberNo, int cNo, int no, String memberId, Date joinDate) {
+	public ClubMemberDTO(int cMemberNo, int cNo, int no, Date joinDate, String signIn) {
+		super();
 		this.cMemberNo = cMemberNo;
 		this.cNo = cNo;
 		this.no = no;
-		this.memberId = memberId;
 		this.joinDate = joinDate;
+		this.signIn = signIn;
 	}
 	public int getcMemberNo() {
 		return cMemberNo;
@@ -35,23 +36,24 @@ public class ClubMemberDTO {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
 	public Date getJoinDate() {
 		return joinDate;
 	}
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
+	public String getSignIn() {
+		return signIn;
+	}
+	public void setSignIn(String signIn) {
+		this.signIn = signIn;
+	}
 	@Override
 	public String toString() {
-		return "ClubMemberDTO [cMemberNo=" + cMemberNo + ", cNo=" + cNo + ", no=" + no + ", memberId=" + memberId
-				+ ", joinDate=" + joinDate + "]";
+		return "ClubMemberDTO [cMemberNo=" + cMemberNo + ", cNo=" + cNo + ", no=" + no + ", joinDate=" + joinDate
+				+ ", signIn=" + signIn + "]";
 	}
+	
 	
 	
 

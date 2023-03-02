@@ -14,6 +14,34 @@ public class ClubDTO {
 	private String cIsShow; //노출여부 Y | N
 	private int categoryNo; //카테고리번호
 	
+	
+	private String searchCName; //검색어
+
+	public ClubDTO(int cNo, String cName, String cIntro, String masterId, String cLoc, Date creDate, int cPeople,
+			String cIsShow, int categoryNo, String searchCName) {
+		this.cNo = cNo;
+		this.cName = cName;
+		this.cIntro = cIntro;
+		this.masterId = masterId;
+		this.cLoc = cLoc;
+		this.creDate = creDate;
+		this.cPeople = cPeople;
+		this.cIsShow = cIsShow;
+		this.categoryNo = categoryNo;
+		this.searchCName = searchCName;
+	}
+	
+	
+	public String getSearchCName() {
+		return searchCName;
+	}
+
+
+	public void setSearchCName(String searchCName) {
+		this.searchCName = searchCName;
+	}
+
+
 	public ClubDTO() {}
 	public ClubDTO(int cNo, String cName, String cIntro, String masterId, String cLoc, Date creDate, int cPeople,
 			String cIsShow, int categoryNo) {
@@ -85,7 +113,7 @@ public class ClubDTO {
 	public String toString() {
 		return "ClubDTO [cNo=" + cNo + ", cName=" + cName + ", cIntro=" + cIntro + ", masterId=" + masterId + ", cLoc="
 				+ cLoc + ", creDate=" + creDate + ", cPeople=" + cPeople + ", cIsShow=" + cIsShow + ", categoryNo="
-				+ categoryNo + "]";
+				+ categoryNo + ", searchCName=" + searchCName + "]";
 	}
 	
 
