@@ -11,6 +11,7 @@ public class ClubMemberDTO {
 	private String signIn; //가입여부
 	public ClubMemberDTO() {}
 	public ClubMemberDTO(int cMemberNo, int cNo, int no, Date joinDate, String signIn) {
+		super();
 		this.cMemberNo = cMemberNo;
 		this.cNo = cNo;
 		this.no = no;
