@@ -17,6 +17,7 @@ import com.damoye.secondproject.service.UserService;
 
 
 
+
 @Controller
 public class SignInController {
 	
@@ -30,10 +31,11 @@ public class SignInController {
 	}
 	
 	@RequestMapping(value="/signIn", method =  RequestMethod.POST)
-	public String SubmitSignIn(@ModelAttribute("user") User user, BindingResult result, Model model, HttpSession session) {
+	public String SubmitSignIn(@ModelAttribute("user") User user, String id, BindingResult result, Model model, HttpSession session) throws Exception {
 
 		System.out.println("User user="+user);
 		if(result.hasFieldErrors("id")||result.hasFieldErrors("password")) {
+			//id에서 에러가 나왔을 때 || pass에서 에러가 나왔을 때
 			model.addAttribute(result.getModel());
 			//에러 메시지를 가진 model을 login에 전달
 			return "user/signInForm";
@@ -44,26 +46,19 @@ public class SignInController {
 			System.out.println("loginUser="+loginUser);
 			
 			if(user.getPassword().equals(loginUser.getPassword())) {
+				
 				model.addAttribute("loginUser", loginUser);
 				
-				session.setAttribute("userId", loginUser.getId());
-				session.setAttribute("userName", loginUser.getName());
-				
-				
-				session.setAttribute("userNo", loginUser.getNo());
-				
 				session.setAttribute("loginUser", loginUser);
-				
-				
 				return "user/main";
 			}
 		else {
-			result.rejectValue("password", "error.password.user", "패스워드 불일치!");
+			result.rejectValue("password", "error.password.user", "패스워드가 일치하지 않습니다.");
 			model.addAllAttributes(result.getModel());
 			return "user/signInForm";
 		}
 	}catch(EmptyResultDataAccessException e) {
-		result.rejectValue("id", "error.id.user", "아이디 불일치!");
+		result.rejectValue("id", "error.id.user", "존재하지 않는 아이디입니다.");
 		model.addAllAttributes(result.getModel());
 		return "user/signInForm";
 	}
@@ -72,10 +67,8 @@ public class SignInController {
 	@RequestMapping(value="/loginSuccess", method = RequestMethod.GET)
 	public String onSubmitGET(User user, BindingResult result, Model model, HttpSession session) {
 		
-		String userid = (String)session.getAttribute("userId");
-		String userName = (String)session.getAttribute("userName");
-		model.addAttribute("userId", userid);
-		model.addAttribute("userName", userName);
+		String loginUser = (String)session.getAttribute("loginUser");
+		model.addAttribute("loginUser", loginUser);
 	
 		return "/main";
 	}
