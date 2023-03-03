@@ -23,13 +23,13 @@
  	]]>
  	</select> 	
  	
- 	<!-- 클럽리스트 검색 -->
+ 	<!-- 해당카테고리 클럽명 검색 -->
 	<select id="searchClub" resultMap="clubDTO" parameterType="clubDTO">
  	<![CDATA[
 		select *
 		from club
 		where 
-		     cName like concat ('%',#{cName},'%')	
+		    cName like concat(concat('%',#{cName}),'%')	
 	  		and categoryNo=#{categoryNo}
 			order by cNo desc
   	]]> 	
@@ -107,14 +107,23 @@
 		where cNo=#{cNo}
  	]]> 
  	</update>
+ 	<!-- 특정회원조회 -->
+ 	<select id="selClubMember" parameterType="int" resultType="clubMemberDTO">
+ 	<![CDATA[
+ 	select *
+	from clubmember
+	where cMemberNo=#{cMemberNo}
+ 	]]> 
+ 	
+ 	</select>
  	
  	<!-- 클럽탈퇴하기 -->
  	<update id="delUpClub" parameterType="clubMemberDTO">
- 	<![CDATA[
+ 	<![CDATA[ 	
 	 	update clubmember
 		set signIn='N'
 		where cNo=#{cNo}
-		and no=#{no}
+		and cMemberNo=#{cMemberNo}
  	]]> 
  	</update>
  	

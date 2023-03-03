@@ -12,12 +12,12 @@
 <body>
 <c:if test="${cnt==1}">
 		       <script>       
-					alert("탈퇴성공");
+					alert("클럽 삭제 성공");
 				</script>
 </c:if>
 <c:if test="${cnt==0}">
 		       <script>       
-					alert("탈퇴실패");
+					alert("클럽 삭제 실패");
 				</script>
 </c:if>
 				

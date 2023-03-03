@@ -74,8 +74,8 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 	//클럽 생성
 	@Override
-	public void getCreClub(ClubDTO clubDTO) throws DataAccessException{
-		sqlSession.insert("mapper.club.createClub", clubDTO);
+	public int getCreClub(ClubDTO clubDTO) throws DataAccessException{
+		return sqlSession.insert("mapper.club.createClub", clubDTO);
 	}
 	//클럽수정 updateClub
 	@Override
@@ -98,6 +98,12 @@ public class ClubDAOImpl implements ClubDAO {
 	public int getDel(int cNo) throws DataAccessException {
 		int cnt=sqlSession.delete("mapper.club.clubDel", cNo);
 		return cnt;
+	}
+
+	//특정회원 조회
+	@Override
+	public ClubMemberDTO selClubMember(int mNo) throws DataAccessException {
+		return (ClubMemberDTO)sqlSession.selectOne("mapper.club.selClubMember", mNo);
 	}
 
 	

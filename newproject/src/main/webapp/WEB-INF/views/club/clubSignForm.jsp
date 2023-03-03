@@ -14,16 +14,13 @@
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
 <span></span><span></span><span></span>
 
-<form id="signClub" method="post">
 <script>
 </script>
-<h3>가입을 축하합니다</h3>
-클럽번호:${cNo}
-session:${loginUser}
-<p><input type="hidden" name="cNo" id="cNo" readonly="readonly" value="${cNo}"/></p> <!-- 클럽번호 -->
-<P><input type="text" name="memberId" id="memberId" readonly="readonly" value="${loginUser.id}"/></P> <!-- 회원아이디 -->
+<h3>가입화면</h3>
+<form id="signClub" method="post">
+<p><input type="number" name="categoryNo" id="categoryNo" readonly="readonly" value="${categoryNo}"/>
+<p><input type="number" name="cNo" id="cNo" readonly="readonly" value="${cNo}"/></p> <!-- 클럽번호 -->
 <p><input type="number" name="no" id="no" readonly="readonly" value="${loginUser.no}"/></p> <!-- 회원번호 -->
-<p><a herf="${path}/club/main"><input type="submit" value="가입완료"/></a></p>
 </form>
 
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>

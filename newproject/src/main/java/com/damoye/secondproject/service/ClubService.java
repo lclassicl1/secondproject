@@ -35,14 +35,15 @@ public interface ClubService {
 	//클럽 가입하기
 	public void getSignClub(ClubMemberDTO clubMemberDTO) throws Exception;	
 	//클럽 생성
-	public void getCreClub(ClubDTO clubDTO) throws Exception;
+	public int getCreClub(ClubDTO clubDTO) throws Exception;
 	//클럽수정
 	public int getUpdateClub(ClubDTO clubDTO) throws Exception;
 	//클럽탈퇴
 	public int getUpDel(ClubMemberDTO clubMemberDTOo) throws Exception;
 	//클럽삭제
 	public int getDel(int cNo) throws Exception;
-	
+	//특정 클럽회원 조회
+	public ClubMemberDTO selClubMember(int mNo) throws Exception;
 
 	
 	

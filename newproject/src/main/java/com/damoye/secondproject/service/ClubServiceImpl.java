@@ -70,8 +70,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 	//클럽 생성
 	@Override
-	public void getCreClub(ClubDTO clubDTO) throws Exception {
-		clubDAO.getCreClub(clubDTO);		
+	public int getCreClub(ClubDTO clubDTO) throws Exception {
+		return clubDAO.getCreClub(clubDTO);		
 	}
 	//클럽수정
 	@Override
@@ -93,6 +93,10 @@ public class ClubServiceImpl implements ClubService {
 	public int getDel(int cNo) throws Exception {
 		int cnt=clubDAO.getDel(cNo);
 		return cnt;
+	}
+	//특정 클럽멤버 조회
+	public ClubMemberDTO selClubMember(int mNo) throws Exception {
+		return (ClubMemberDTO)clubDAO.selClubMember(mNo);
 	}
 
 
