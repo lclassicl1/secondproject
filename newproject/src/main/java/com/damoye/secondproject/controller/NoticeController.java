@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
+import com.damoye.secondproject.model.NoticePaging;
 import com.damoye.secondproject.service.NoticeService;
 
 @Controller
@@ -28,17 +29,30 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeServiceImpl;
 	
+	@Autowired
+	Criteria cri;
+	
+	@Autowired
+	NoticePaging noticePaging;
+	/*
+	 * @Autowired NoticePaging noticePaging;
+	 */
+	
 	//공지사항 전체글 리스트
 	@RequestMapping(value="notice", method=RequestMethod.GET)
-	public String getNoticeList(Model model, HttpServletRequest req, @RequestParam(required = false, defaultValue = "1") int pageNo) throws UnsupportedEncodingException {
+	public String getNoticeList(Model model, HttpServletRequest req, Criteria cri) throws UnsupportedEncodingException {
 		req.setCharacterEncoding("UTF-8");
 		//세션
 //		HttpSession session = req.getSession();
 //		String id = (String) session.getAttribute("id");
 //		System.out.println("id값:"+id);
 		
-		List<NoticeDTO> noticeList = noticeServiceImpl.getNoticeList();
-		model.addAttribute("pageNo", pageNo);
+		List<NoticeDTO> noticeList = noticeServiceImpl.getNoticeList(cri);
+		int total = noticeServiceImpl.selectAllCount();
+		
+		noticePaging = new NoticePaging(cri, total);
+		System.out.println(noticePaging+"개"+total);
+		model.addAttribute("paging",noticePaging);
 		model.addAttribute("text/html; charset=UTF-8");
 		model.addAttribute("noticeList",noticeList);
 		return "notice/noticeList";

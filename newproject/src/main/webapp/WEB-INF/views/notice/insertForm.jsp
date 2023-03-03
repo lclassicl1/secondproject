@@ -49,7 +49,7 @@
 	<form action="${path}/notice/insert" method="post" id="form">
 		<table border="1">
 			<tr>
-				<th>작성자</th><td><input type="hidden" name="writername" id="writername" value="${userName}"/>${userName}</td>
+				<th>작성자</th><td><input type="hidden" name="writername" id="writername" value="${loginUser.name}"/>${loginUser.name}</td>
 			</tr>
 			<tr>
 				<th>제목</th><td><input type="text" name="title" id="title" placeholder="제목을 입력해주세요"/></td>

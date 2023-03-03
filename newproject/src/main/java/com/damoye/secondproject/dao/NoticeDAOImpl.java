@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
+import com.damoye.secondproject.model.NoticePaging;
 
 @Repository
 public class NoticeDAOImpl implements NoticeDAO {
@@ -16,8 +18,9 @@ public class NoticeDAOImpl implements NoticeDAO {
 	
 	//공지사항 게시글 전체 리스트
 	@Override
-	public List<NoticeDTO> getNoticeList() {
-		List<NoticeDTO> noticeList = sqlSession.selectList("mapper.notice.noticeList");
+	public List<NoticeDTO> getNoticeList(Criteria cri) {
+		List<NoticeDTO> noticeList = sqlSession.selectList("mapper.notice.noticeList", cri);
+		System.out.println("noticeList"+noticeList);
 		return noticeList;
 	}
 	
@@ -55,5 +58,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public int selectAllCount() {
 		return sqlSession.selectOne("mapper.notice.totalcnt");
 	}
+
 
 }

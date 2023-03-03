@@ -2,83 +2,91 @@ package com.damoye.secondproject.model;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class NoticePaging {
-	private int total;
-	private int currentPage;
-	private List<NoticeDTO> content;
-	private int totalPages;
-	private int startPage;
-	private int endPage;
+	private int total; //전체 게시글수
+	private boolean prev, next; //이전 다음버튼 
+	private int startPage; //시작페이지
+	private int endPage; //끝페이지
+	private Criteria cri;
 	
 	public NoticePaging() {
-		
 	}
-
-	public NoticePaging(int total, int currentPage, int size, List<NoticeDTO> content,
-			int endPage) {
-		this.total = total;
-		this.currentPage = currentPage;
-		this.content = content;
+	
+	public NoticePaging(Criteria cri, int total) {
+		this.endPage = (int) (Math.ceil(cri.getPageNo()/10.0))*10;
+		this.startPage = this.endPage - 9;
 		
-		//전체 게시글수가 없다면 전체페이지 0, 시작페이지0, 끝페이지0 으로 설정
-		if(total == 0) {
-			this.totalPages = 0;
-			this.startPage = 0;
-			this.endPage = 0;
-		} else { //0이 아니라면 게시글이 있다는것
-			this.totalPages = total / size;
-			
-			if(total % size > 0) {
-				this.totalPages++;
-			}
-			
-			int modVal = currentPage%5;
-			
-			this.startPage = currentPage/5*5+1;
-			
-			if(modVal == 0) {
-				startPage -= 5;
-			}
-			
-			endPage = startPage + 4;
-			if(endPage > totalPages) {
-				endPage = totalPages;
-			}
+		//전체 마지막 페이지
+		int realEnd = (int)(Math.ceil(total * 1.0/cri.getAmount()));
+		
+		if(realEnd < this.endPage) {
+			this.endPage = realEnd;
 		}
 		
-		
-	}
-	
-	public boolean hasNoArticles() {
-		return this.total == 0;
-	}
-	
-	public boolean hasArticles() {
-		return this.total > 0;
+		this.prev = this.startPage > 1;
+		this.next = this.endPage < realEnd;
 	}
 
 	public int getTotal() {
 		return total;
 	}
 
-	public int getCurrentPage() {
-		return currentPage;
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
-	public List<NoticeDTO> getContent() {
-		return content;
+	public boolean isPrev() {
+		return prev;
 	}
 
-	public int getTotalPages() {
-		return totalPages;
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
 	}
 
 	public int getStartPage() {
 		return startPage;
 	}
 
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
 	public int getEndPage() {
 		return endPage;
 	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public Criteria getCri() {
+		return cri;
+	}
+
+	public void setCri(Criteria cri) {
+		this.cri = cri;
+	}
+
+	@Override
+	public String toString() {
+		return "NoticePaging [total=" + total + ", prev=" + prev + ", next=" + next + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", cri=" + cri + "]";
+	}
+	
+	
+	
+	
+	
 	
 }

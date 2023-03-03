@@ -6,17 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damoye.secondproject.dao.NoticeDAO;
+import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
+import com.damoye.secondproject.model.NoticePaging;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
 	NoticeDAO noticeDAOImpl;
 	
+	@Autowired
+	Criteria cri;
+	
 	
 	@Override
-	public List<NoticeDTO> getNoticeList() {
-		List<NoticeDTO> noticeList = noticeDAOImpl.getNoticeList();
+	public List<NoticeDTO> getNoticeList(Criteria cri) {
+		List<NoticeDTO> noticeList = noticeDAOImpl.getNoticeList(cri);
 		return noticeList;
 	}
 

@@ -2,12 +2,14 @@ package com.damoye.secondproject.dao;
 
 import java.util.List;
 
+import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
+import com.damoye.secondproject.model.NoticePaging;
 
 public interface NoticeDAO {
 	
-	//mybatis 연동 테스트
-	public List<NoticeDTO> getNoticeList();
+	//공지사항 글 리스트(페이징)
+	public List<NoticeDTO> getNoticeList(Criteria cri);
 	
 	//공지사항 글작성
 	public int noticeInsert(NoticeDTO noticeDTO);
