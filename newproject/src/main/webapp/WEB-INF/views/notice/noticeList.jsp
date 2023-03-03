@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/default.css">
 <script>
 	$(function(){
 		$('#noticeWrite').click(function(){
@@ -19,11 +20,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<main>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
-	<div><h1>공지사항 페이지</h1></div>
+	<div><h1>공지사항 목록</h1></div>
 	<%-- 총 게시글수: ${result} --%>
 	<%-- 현재 세션 아이디:${sessionId} --%>
 	<%-- 게시글정보: ${noticeList} --%>
+	sessionName:${userName}
+	sessionID:${userId}
 	<table border="1">
 		<tr>
 			<th><input type="checkbox"/></th><th>제목</th><th>작성자</th><th>작성시간</th><th>조회수</th>
@@ -44,11 +48,19 @@
 			</tr>	
 			</c:forEach>
 		<tr>
-			<td colspan="5"><input type="button" value="글쓰기" id="noticeWrite"/></td>
+			<td colspan="5" style="text-align: center;">[이전] 1 2 3 4 5 6 [다음]</td>
+		</tr>
+		<tr>
+			<td colspan="5">
+			 	<!-- 관리자만 글쓰기 작성 활성화 -->
+				<c:if test="${userId == 'admin'}">
+					<input type="button" value="글쓰기" id="noticeWrite"/>
+				</c:if>
+			</td>
 		</tr>
 		</c:if>
-		
 	</table>
+</main>	
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>
