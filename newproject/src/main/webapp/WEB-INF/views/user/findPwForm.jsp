@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FIND ID</title>
+<title>FIND PASSWORD</title>
 </head>
 <body>
-<form:form action="findId" modelAttribute="user" method="post">
+<form:form action="findPw" modelAttribute="user" method="post">
+아이디:<form:input path="id"/><br/>
 이름:<form:input path="name"/><br/>
 이메일<form:input path="email"/><br/>
-전화번호<form:input path="phonenum"/><br/>
 <input type="submit" value="찾기">
 </form:form>
 </body>
