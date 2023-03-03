@@ -38,7 +38,6 @@ public class ChatController {
 	@ResponseBody
 	public void addPostMessage(@RequestParam int roomNo,@RequestParam String content
 								,HttpSession session) {
-		//Map<String, Object> rs = new HashMap<>();
 		ChatDTO chatDTO = new ChatDTO();
 		String writerId = (String)session.getAttribute("userId");
 		chatDTO.setRoomNo(roomNo);
@@ -46,10 +45,6 @@ public class ChatController {
 		chatDTO.setContent(content);
 		
 		chatService.addMessage(chatDTO);
-		
-		//rs.put("message","success");
-		
-		//return rs;
 	}
 	
 	@RequestMapping(value = "/chat/checkMessage",method=RequestMethod.POST)

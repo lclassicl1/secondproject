@@ -72,6 +72,7 @@ public class ClubController {
 	public String getClubDetail(int categoryNo,int cNo, Model model) throws Exception {
 		String category=clubService.getSelCategoryName(categoryNo);
 		model.addAttribute("category", category);
+		model.addAttribute("categoryNo", categoryNo);
 		//클럽 소개글-selClubDetail
 		ClubDTO clubDTO = clubService.getSelClubDetail(cNo);
 		model.addAttribute("clubDTO", clubDTO);
