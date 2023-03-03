@@ -75,20 +75,20 @@ ${loginUser}님 반갑습니다!<br/>
 	<div class="twelve columns">
 		<ul class="ca-menu">
 			<li>
-			<a href="#">
+			<a href="<%= request.getContextPath() %>/club/clist?categoryNo=1">
 			<span class="ca-icon"><i class="fa fa-heart"></i></span>
 			<div class="ca-content">
-				<h2 class="ca-main">모임 카테고리1</h2>
-				<h3 class="ca-sub">간략한 모임 소개</h3>
+				<h2 class="ca-main">공부</h2>
+				<h3 class="ca-sub">공부 모임입니다. </h3>
 			</div>
 			</a>
 			</li>
 			<li>
-			<a href="#">
+			<a href="<%=request.getContextPath() %>/club/clist?categoryNo=2">
 			<span class="ca-icon"><i class="fa fa-bullhorn"></i></span>
 			<div class="ca-content">
-				<h2 class="ca-main">모임 카테고리2</h2>
-				<h3 class="ca-sub">간략한 모임 소개</h3>
+				<h2 class="ca-main"> 요리</h2>
+				<h3 class="ca-sub">요리 모임입니다.</h3>
 			</div>
 			</a>
 			</li>
