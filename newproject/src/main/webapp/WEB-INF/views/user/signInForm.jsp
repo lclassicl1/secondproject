@@ -12,12 +12,17 @@
 <h3>로그인</h3>
 	<form:form action="/signIn" modelAttribute ="user" method="post">
 		
-		<p>아이디 : <form:input path="id"  name="id" />
-		<p>비밀번호 : <form:password path="password" />
-
-		<p><input type="submit" value="가입하기"/>
+		<div>   
+		아이디 : <form:input path="id"  name="id" value="kim" />
+		<span class="fieldError"><form:errors path="id"/></span>
+		</div>
+		<div>
+		비밀번호 : <form:password path="password" value="123" />
+		<span class="fieldError"><form:errors path="password" /></span>
+		</div>
+		<input type="submit" value="가입하기"/>
 		<a href="<%=request.getContextPath()%>/signUp">회원가입</a><br/>
-		<a href="<%=request.getContextPath()%>/#">아이디찾기</a><a href="<%=request.getContextPath()%>/#">비밀번호찾기</a>
+		<a href="<%=request.getContextPath()%>/findId">아이디찾기</a><a href="<%=request.getContextPath()%>/findPw">비밀번호찾기</a>
 	
 	</form:form>
 </body>
