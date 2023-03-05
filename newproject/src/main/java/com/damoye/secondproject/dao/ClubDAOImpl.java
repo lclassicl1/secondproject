@@ -63,8 +63,8 @@ public class ClubDAOImpl implements ClubDAO {
 	
 	//클럽 상세보기-클럽가입 아이디 리스트
 	@Override
-	public List<User> getSignMember(int cNo) throws DataAccessException {
-		List<User> memberList=sqlSession.selectList("mapper.club.clubMemeber", cNo);
+	public List<ClubMemberDTO> getSignMember(int cNo) throws DataAccessException {
+		List<ClubMemberDTO> memberList=sqlSession.selectList("mapper.club.clubMemeber", cNo);
 		return memberList;
 	}
 	//클럽 가입하기
@@ -91,13 +91,6 @@ public class ClubDAOImpl implements ClubDAO {
 		int cnt=sqlSession.delete("mapper.club.clubAdminDel", cNo);
 		System.out.println("DAO"+cnt);
 		return cnt;
-	}
-
-	//클럽에 가입한 회원멤버 조회
-	@Override
-	public List<ClubMemberDTO> signClubMeberList(int cNo) throws DataAccessException {
-		List<ClubMemberDTO> CMList=sqlSession.selectList("mapper.club.AllClubMemberList",cNo);
-		return CMList;
 	}
 
 	//클럽 멤버 삭제

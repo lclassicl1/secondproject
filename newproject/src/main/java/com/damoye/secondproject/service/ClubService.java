@@ -31,7 +31,7 @@ public interface ClubService {
 	//클럽 상세보기-모임글
 	public List<BoardVO> getSelBDetail(int cNo) throws Exception;
 	//클럽 상세보기-클럽가입 아이디 리스트
-	public List<User> getSignMember(int cNo) throws Exception;	
+	public List<ClubMemberDTO> getSignMember(int cNo) throws Exception;	
 	//클럽 가입하기
 	public void getSignClub(ClubMemberDTO clubMemberDTO) throws Exception;	
 	//클럽 생성
@@ -40,8 +40,6 @@ public interface ClubService {
 	public int getUpdateClub(ClubDTO clubDTO) throws Exception;
 	//클럽삭제
 	public int getDel(int cNo) throws Exception;
-	//특정 클럽에 가입한 회원번호 조회
-	public List<ClubMemberDTO> signClubMeberList(int cNo) throws Exception;
 	//클럽회원삭제
 	public int getMemberDel(int cMemberNo) throws Exception;
 

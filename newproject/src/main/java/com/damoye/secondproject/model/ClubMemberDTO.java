@@ -9,6 +9,16 @@ public class ClubMemberDTO {
 	private int no; //회원번호
 	private Date joinDate; //클럽 가입일
 	private String signIn; //가입여부
+	
+	private String id;// 회원아이디
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public ClubMemberDTO() {}
 	public ClubMemberDTO(int cMemberNo, int cNo, int no, Date joinDate, String signIn) {
 		this.cMemberNo = cMemberNo;

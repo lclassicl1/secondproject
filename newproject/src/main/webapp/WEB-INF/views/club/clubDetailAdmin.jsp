@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="<%=request.getContextPath()%>"/> 
-<c:set var="gMember" value="${!empty loginUser && loginUser.grade==1 && (loginUser.id != clubDTO.masterId) && (loginUser.no == currentMember.no)}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,28 +10,11 @@
 <meta charset="UTF-8">
 <script>
 $(document).ready(function(){	
-		//클럽가입
-		$("#btnSign").on("click",function(){
-		var c=confirm("클럽에 가입하시겠습니까?");
-		  if(c){
-			  $('#registForm').attr("action","${path}/club/sign").submit();
-		  }else{
-			 return false;		 }
-	  	});		
+	
 		//클럽수정버튼 cNo
 	  $("#btUpdate").on("click",function(){
 			location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cIntro}";
 	  	});
-
-		//클럽회원탈퇴
- 	  $("#btnDelMember").on("click",function(){   
-		  var c=confirm("클럽을 탈퇴하시겠습니까?");
-		  if(c){
-			  location.href="${path}/club/clubMemberDel?cMemberNo=${currentMember.cMemberNo}";
-		  }else{
-				 return false;
-			 }
-	  	});			
 
 		//클럽삭제버튼
 	  $("#btnADel").on("click",function(){
@@ -161,27 +143,6 @@ session:${loginUser}<br/>
 			</td>
 		</tr>
  	</c:if>
- 	
-	<%-- 가입하지 않은 사람만 보이게 처리 필요 등급처리--%>
-	<c:if test="${gMember && exist == false}">
-		<tr>
-			<td colspan="2">			
-				<p style="text-align:center;">
-					<input type="button" name="btnSign" id="btnSign" value="클럽가입"/>
-				</p>
-			</td>
-		</tr>
-	</c:if>
-	<%-- 클럽에 가입한 사람만 보이게 처리 필요/클럽장은 안보이게 처리 --%>
-	<c:if test="${gMember && (currentMember.signIn == 'Y')}">
-		<tr>
-			<td colspan="2">
-				<p style="text-align:center;">
-					<input type="button" name="btnDelMember" id="btnDelMember" value="클럽탈퇴(회원)"/>
-				</p>
-			</td>
-		</tr>
-	</c:if>
 </table>
 
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>

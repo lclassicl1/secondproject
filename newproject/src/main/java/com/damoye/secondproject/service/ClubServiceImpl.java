@@ -51,8 +51,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 	//클럽 상세보기-가입리스트
 	@Override
-	public List<User> getSignMember(int cNo) throws Exception {
-		List<User> memberList =clubDAO.getSignMember(cNo);
+	public List<ClubMemberDTO> getSignMember(int cNo) throws Exception {
+		List<ClubMemberDTO> memberList =clubDAO.getSignMember(cNo);
 		return memberList;
 	}
 	//클럽 상세보기-모임글
@@ -85,12 +85,6 @@ public class ClubServiceImpl implements ClubService {
 	public int getDel(int cNo) throws Exception {
 		int cnt=clubDAO.getDel(cNo);
 		return cnt;
-	}
-	//클럽에 가입한 회원 전체 조회
-	@Override
-	public List<ClubMemberDTO> signClubMeberList(int cNo) throws Exception {
-		List<ClubMemberDTO> CMList= clubDAO.signClubMeberList(cNo);
-		return CMList;
 	}
 	//클럽회원삭제
 	@Override

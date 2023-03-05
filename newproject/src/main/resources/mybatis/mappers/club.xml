@@ -74,12 +74,13 @@
 	</select> 
 	
 	<!--  클럽 가입한 회원리스트 -->
-	<select id="clubMemeber" parameterType="int" resultType="com.damoye.secondproject.model.User">
+	<select id="clubMemeber" parameterType="int" resultType="clubMemberDTO">
 	<![CDATA[
-		select u.id
+		select u.id, c.*
 		from user u,clubmember c
 		where u.no=c.no
 		and c.cNo=#{cNo}
+		order by joinDate desc
 	]]>
 	</select>
 

@@ -64,8 +64,7 @@ public class ClubController {
 		List<ClubDTO> clubList = clubService.getSearchCName(clubDTO);
 		logger.info(clubList.toString());//확인용
 		mv.addObject("clubList", clubList);
-		mv.setViewName("club/clubList");
-		
+		mv.setViewName("club/clubList");		
 		return mv;
 	}
 	
@@ -75,7 +74,8 @@ public class ClubController {
 	public String getClubDetail(HttpServletRequest request, int categoryNo,int cNo, Model model) throws Exception {
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
-		
+		model.addAttribute("loginUser", user);
+		//카테고리명
 		String category=clubService.getSelCategoryName(categoryNo);
 		model.addAttribute("category", category);
 		//클럽 소개글-selClubDetail
@@ -85,16 +85,31 @@ public class ClubController {
 		int clubSign=clubService.getClubCount(cNo);
 		model.addAttribute("sPeople", clubSign);		
 		//클럽 모임글 selBoardDetail
-		List<BoardVO> boardVO=clubService.getSelBDetail(cNo);
-		model.addAttribute("boardVO", boardVO);			
-		//클럽가입 아이디 리스트
-		List<User> cMemberId=clubService.getSignMember(cNo);
-		model.addAttribute("cMemberId", cMemberId);	
+		List<BoardVO> board=clubService.getSelBDetail(cNo);
+		model.addAttribute("boardVO", board);
+		//클럽가입한 회원 정보 리스트
+		ClubMemberDTO currentMember = null;
+		List<ClubMemberDTO> signMemberList=clubService.getSignMember(cNo);
+		model.addAttribute("signMemberList", signMemberList);	
 		
-		//클럽에 가입한 회원 리스트 조회
-		List<ClubMemberDTO> signMemberList=clubService.signClubMeberList(cNo);
-		model.addAttribute("signMemberList", signMemberList);
+		for(ClubMemberDTO clubmbmer : signMemberList) {
+			if(user.getNo() == clubmbmer.getNo()) { //로그인한 회원번호 == 클럽에 가입한 기존 회원번호
+				currentMember = clubmbmer;
+			}else if(user.getId()== "admin") {
+			//}else if(user.getGrade()== 999) {  수정 필요~~~~~~~~~~~~~~~~~~~~~~~
+				currentMember = clubmbmer;
+				break;
+			}
+		}
 		
+		boolean exist = true; //초기값 있다면
+		for(ClubMemberDTO clubmbmer : signMemberList) {
+			if(clubmbmer.getNo() == user.getNo()) // 클럽에 가입된 회원번호가 동일하다면
+				exist = true; //있다
+				break;
+		}
+		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
+		model.addAttribute("exist", exist);
 		return "club/clubDetail";
 		
 	}
@@ -111,16 +126,23 @@ public class ClubController {
 		//-------------------------------------
 		clubDTO.setCategoryNo(categoryNo);
 		model.addAttribute("categoryNo", categoryNo);
+		
 		return "club/clubSignForm";		
 	}
 	@PostMapping("sign")
-	public String getInSignClubFrm(ClubMemberDTO clubMemberDTO,@RequestParam int cNo, Model model, int categoryNo) throws Exception {
+	public String getInSignClubFrm(HttpServletRequest request,ClubMemberDTO clubMemberDTO,@RequestParam int cNo, Model model, int categoryNo) throws Exception {
+		HttpSession session=request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		model.addAttribute("loginUser", user);
+		
 		ClubDTO club = new ClubDTO();
 		System.out.println("클럽DTO : "+club);
 		club.setcNo(cNo);
 		model.addAttribute("cNo", cNo);
 		clubService.getSignClub(clubMemberDTO);	
+		
 		//---------------
+		//카테고리명
 		String category=clubService.getSelCategoryName(categoryNo);
 		model.addAttribute("category", category);
 		//클럽 소개글-selClubDetail
@@ -130,16 +152,39 @@ public class ClubController {
 		int clubSign=clubService.getClubCount(cNo);
 		model.addAttribute("sPeople", clubSign);		
 		//클럽 모임글 selBoardDetail
-		List<BoardVO> boardVO=clubService.getSelBDetail(cNo);
-		model.addAttribute("boardVO", boardVO);			
-		//클럽가입 아이디 리스트
-		List<User> cMemberDTO=clubService.getSignMember(cNo);
-		model.addAttribute("signMember", cMemberDTO);
-		//클럽에 가입한 회원 리스트 조회
-		List<ClubMemberDTO> signMemberList=clubService.signClubMeberList(cNo);
-		model.addAttribute("signMemberList", signMemberList);
+		List<BoardVO> board=clubService.getSelBDetail(cNo);
+		model.addAttribute("boardVO", board);
+		//클럽가입한 회원 정보 리스트
+		ClubMemberDTO currentMember = null;
+		List<ClubMemberDTO> signMemberList=clubService.getSignMember(cNo);
+		model.addAttribute("signMemberList", signMemberList);	
 		
-		return "club/clubDetail";			
+		for(ClubMemberDTO clubmbmer : signMemberList) {
+			if(user.getNo() == clubmbmer.getNo()) { //로그인한 회원번호 == 클럽에 가입한 기존 회원번호
+				currentMember = clubmbmer;
+			}else if(user.getId()== "admin") {
+			//}else if(user.getGrade()== 999) {  수정 필요~~~~~~~~~~~~~~~~~~~~~~~
+				currentMember = clubmbmer;
+				break;
+			}
+		}
+		
+		boolean exist = true; //초기값 있다면
+		for(ClubMemberDTO clubmbmer : signMemberList) {
+			if(clubmbmer.getNo() == user.getNo()) // 클럽에 가입된 회원번호가 동일하다면
+				exist = true; //있다
+				break;
+		}
+		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
+		model.addAttribute("exist", exist);
+		
+		
+		/*
+		 * if(user.getId() == "admin") { // 등급으로 수정
+		 * 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ return "club/clubDetailAdmin"; }else {
+		 * return "club/clubDetail"; }
+		 */
+		return "club/clubDetail";
 	}
 	//클럽 생성하기-폼요청
 	@GetMapping("clubCre")
@@ -217,21 +262,9 @@ public class ClubController {
 	 public ModelAndView delUp(HttpServletRequest request,ClubMemberDTO clubMemberDTO, ModelAndView mv) throws Exception {	
 		 int cMemberNo = Integer.parseInt(request.getParameter("cMemberNo"));
 		clubMemberDTO.setcMemberNo(cMemberNo);	
-		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute("loginUser");
 		int cnt=clubService.getMemberDel(cMemberNo);
 		
-		System.out.println("컨트롤러"+cnt);
-		
-		if(!canDel(user, clubMemberDTO)){
-			if(user.getNo() == clubMemberDTO.getNo()) {
-				canDel(user, clubMemberDTO);
-			}else {
-				mv.setViewName("club/fail");
-			}
-			return mv;	
-		}
-		
+		System.out.println("컨트롤러"+cnt);		
 			mv.addObject("cnt", cnt);
 		if(cnt==1) {
 			mv.setViewName("club/clubDrop"); //jsp파일명
@@ -240,15 +273,6 @@ public class ClubController {
 		}
 		return mv;		
 	 }	
-
-		 private boolean canDel(User user, ClubMemberDTO clubMemberDTO) {
-			 	//로그인한 유저정보에서 no가져오기(회원번호)
-				int no = user.getNo();
-				//클럽에 가입한 정보에서 no가져오기
-				int dNo=clubMemberDTO.getNo();
-				return no==dNo;
-		 }
-
 
 	//-------------------------------------------------------------------------
 	//클럽삭제-clubDel (관리자,클럽장)
@@ -267,7 +291,6 @@ public class ClubController {
 			}else {
 				mv.setViewName("club/fail");
 			}
-			return mv;
 		}
 */		
 		mv.addObject("cnt", cnt);
