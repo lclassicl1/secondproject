@@ -3,6 +3,7 @@ package com.damoye.secondproject.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,32 +13,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.BoardVO;
 import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.ClubMemberDTO;
-import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.User;
-import com.damoye.secondproject.service.ClubServiceImpl;
+import com.damoye.secondproject.service.ClubService;
 
 @Controller
+@RequestMapping("club")
 public class ClubController {
 	private static final Logger logger = LoggerFactory.getLogger(ClubController.class);
 
 	@Autowired
-	private ClubServiceImpl clubService;
+	private ClubService clubService;
 
 	
-	@GetMapping("/club/maintest")
-	public String getCheck(Model model ) {
+	@GetMapping("maintest")
+	public String getCheck(Model model) {
 		return "club/main";
 	}	
 
 	//클럽리스트
 	//   /club/clist?categoryNo=1
-	@GetMapping("/club/clist")
+	@GetMapping("clist")
 	public String getSelClub(int categoryNo, Model model,ClubDTO clubDTO,HttpSession session) throws Exception {		
 		//특정 카테고리명 조회 selCategoryName
 		String cateogryName=clubService.getSelCategoryName(categoryNo);
@@ -53,7 +55,7 @@ public class ClubController {
 	}
 	
 	//클럽 검색 /club/searchClist
-	@GetMapping("/club/searchCName")
+	@GetMapping("searchCName")
 	public ModelAndView searchCName(@RequestParam String searchCName,@RequestParam int categoryNo, ModelAndView mv) throws Exception {		
 		ClubDTO clubDTO = new ClubDTO();
 		clubDTO.setCategoryNo(categoryNo);
@@ -69,8 +71,11 @@ public class ClubController {
 	
 	
 	//클럽상세보기 
-	@GetMapping("/club/detail")
-	public String getClubDetail(int categoryNo,int cNo, Model model) throws Exception {
+	@GetMapping("detail")
+	public String getClubDetail(HttpServletRequest request, int categoryNo,int cNo, Model model) throws Exception {
+		HttpSession session=request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		
 		String category=clubService.getSelCategoryName(categoryNo);
 		model.addAttribute("category", category);
 		//클럽 소개글-selClubDetail
@@ -83,13 +88,19 @@ public class ClubController {
 		List<BoardVO> boardVO=clubService.getSelBDetail(cNo);
 		model.addAttribute("boardVO", boardVO);			
 		//클럽가입 아이디 리스트
-		List<User> clubMemberDTO=clubService.getSignMember(cNo);
-		model.addAttribute("signMember", clubMemberDTO);		
+		List<User> cMemberId=clubService.getSignMember(cNo);
+		model.addAttribute("cMemberId", cMemberId);	
+		
+		//클럽에 가입한 회원 리스트 조회
+		List<ClubMemberDTO> signMemberList=clubService.signClubMeberList(cNo);
+		model.addAttribute("signMemberList", signMemberList);
+		
 		return "club/clubDetail";
+		
 	}
 	
 	//클럽 가입하기-signClub
-	@GetMapping("/club/sign")
+	@GetMapping("sign")
 	public String getInSignClub(HttpServletRequest request, @RequestParam int cNo,ClubMemberDTO clubMemberDTO, Model model, int categoryNo) throws Exception {
 		ClubDTO clubDTO = new ClubDTO();
 		clubDTO.setcNo(cNo);
@@ -102,7 +113,7 @@ public class ClubController {
 		model.addAttribute("categoryNo", categoryNo);
 		return "club/clubSignForm";		
 	}
-	@PostMapping("/club/sign")
+	@PostMapping("sign")
 	public String getInSignClubFrm(ClubMemberDTO clubMemberDTO,@RequestParam int cNo, Model model, int categoryNo) throws Exception {
 		ClubDTO club = new ClubDTO();
 		System.out.println("클럽DTO : "+club);
@@ -124,11 +135,14 @@ public class ClubController {
 		//클럽가입 아이디 리스트
 		List<User> cMemberDTO=clubService.getSignMember(cNo);
 		model.addAttribute("signMember", cMemberDTO);
+		//클럽에 가입한 회원 리스트 조회
+		List<ClubMemberDTO> signMemberList=clubService.signClubMeberList(cNo);
+		model.addAttribute("signMemberList", signMemberList);
 		
 		return "club/clubDetail";			
 	}
 	//클럽 생성하기-폼요청
-	@GetMapping("/club/clubCre")
+	@GetMapping("clubCre")
 	public String getInClub(HttpServletRequest request, Model model) throws Exception {
 		ClubDTO clubDTO = new ClubDTO();
 		HttpSession session=request.getSession();
@@ -138,7 +152,7 @@ public class ClubController {
 		return "club/clubCreate";		
 	}	
 	//클럽 생성하기-처리요청
-	@PostMapping("/club/clubCre")
+	@PostMapping("clubCre")
 	public ModelAndView getInClubFrm(ClubDTO clubDTO, ModelAndView mv) throws Exception {		
 		logger.info(clubDTO.toString()); //확인용
 		int cnt=clubService.getCreClub(clubDTO);
@@ -151,74 +165,128 @@ public class ClubController {
 	}
 	
 	//클럽 수정하기-폼요청
-	@GetMapping("/club/clubUp")
-	public String getUpClub(@RequestParam("cNo") int cNo, Model model,HttpServletRequest request) throws Exception {
+	@GetMapping("clubUp")
+	public String getUpClub(@RequestParam("cNo") int cNo, Model model,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//클럽 상세보기
 		ClubDTO clubDTO=clubService.getSelClubDetail(cNo);	
-		clubDTO.setcNo(cNo);
+		clubDTO.setcNo(cNo);	
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
+/*		
+		if(!canModify(user, clubDTO)) {
+			if(user.getGrade() == 999) { //확인 후 변경 필요
+				canModify(user, clubDTO);
+			}else if(user.getId()==clubDTO.getMasterId()) {				
+				canModify(user, clubDTO);
+			}else {
+				return "club/fail";
+			}
+		}
+*/		
 		model.addAttribute("cNo", cNo);
 		model.addAttribute("loginUser",user);
 		model.addAttribute("clubDTO", clubDTO);
 		return "club/clubUpdate";		
 	}
-	
+/*	
+	private boolean canModify(User user, ClubDTO clubDTO) {
+			//로그인한유저정보에서 id를 가져오기
+			String id = user.getId();				
+			//작성자정보에서 id를 가져오기
+			String masterid = clubDTO.getMasterId();				
+			//"로그인한userid".equals("작성자id")
+			return id.equals(masterid);		
+	}
+*/
 	//클럽 수정하기-처리요청 updateClub
-	@PostMapping("/club/clubUp")
+	@PostMapping("clubUp")
 	public ModelAndView getUpdateClubFrm(ModelAndView mv, ClubDTO clubDTO) throws Exception{
 		//수정
 		int cnt=clubService.getUpdateClub(clubDTO);	
 		if(cnt==1) {
 			mv.setViewName("club/main");
 		}else {
-			mv.setViewName("forward:/club/clubUp?cNo="+clubDTO.getcNo());
+			mv.setViewName("redirect:/club/clubUp?cNo="+clubDTO.getcNo());
 		}
-		
+
 		return mv;
 	}
 	//----------------------------------------------------------------------------------------
-	//클럽 탈퇴-update selClubMember
-	@GetMapping("/club/clubUpDel")
-	public String delUp( HttpServletRequest request,@RequestParam("cMemberNo") int cMemberNo, Model model) throws Exception {
-		ClubMemberDTO clubMemberDTO = clubService.selClubMember(cMemberNo);	
+	//클럽회원삭제(탈퇴)
+	 @GetMapping("clubMemberDel") 
+	 public ModelAndView delUp(HttpServletRequest request,ClubMemberDTO clubMemberDTO, ModelAndView mv) throws Exception {	
+		 int cMemberNo = Integer.parseInt(request.getParameter("cMemberNo"));
+		clubMemberDTO.setcMemberNo(cMemberNo);	
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
-		model.addAttribute("loginUser",user);
-		model.addAttribute("clubMemberDTO", clubMemberDTO);	
-		return ("club/clubLeave");
-	}
-	
-	@PostMapping("/club/clubUpDel")
-	public ModelAndView delUpClub(ModelAndView mv,ClubMemberDTO clubMemberDTO,ClubDTO clubDTO) throws Exception {
-		int cnt=clubService.getUpDel(clubMemberDTO);
-		mv.addObject("clubMemberDTO", clubMemberDTO);
-		if(cnt==1) {
-			mv.setViewName("club/main");
-		}else {
-			mv.setViewName("forward:/club/detail?cNo="+clubDTO.getcNo());
-		}		
-		return mv;
-	}
-	
-	//클럽삭제-clubDel
-	@GetMapping("/club/clubADel")
-	public ModelAndView getDelClub(int cNo,HttpServletRequest request,ModelAndView mv,ClubDTO clubDTO) throws Exception {
+		int cnt=clubService.getMemberDel(cMemberNo);
 		
-		int cnt=clubService.getDel(cNo);
-		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute("loginUser");
-		mv.addObject("loginUser",user);
-		if(cnt==1) {
-			mv.setViewName("club/clubLeave");
-		}else {
-			mv.setViewName("redirect:/club/detail?cNo="+clubDTO.getcNo()+clubDTO.getCategoryNo());
-		}		
-		return mv;
+		System.out.println("컨트롤러"+cnt);
 		
-	}
-	
+		if(!canDel(user, clubMemberDTO)){
+			if(user.getNo() == clubMemberDTO.getNo()) {
+				canDel(user, clubMemberDTO);
+			}else {
+				mv.setViewName("club/fail");
+			}
+			return mv;	
+		}
+		
+			mv.addObject("cnt", cnt);
+		if(cnt==1) {
+			mv.setViewName("club/clubDrop"); //jsp파일명
+		}else {
+			mv.setViewName("club/fail");
+		}
+		return mv;		
+	 }	
 
-	
-	
+		 private boolean canDel(User user, ClubMemberDTO clubMemberDTO) {
+			 	//로그인한 유저정보에서 no가져오기(회원번호)
+				int no = user.getNo();
+				//클럽에 가입한 정보에서 no가져오기
+				int dNo=clubMemberDTO.getNo();
+				return no==dNo;
+		 }
+
+
+	//-------------------------------------------------------------------------
+	//클럽삭제-clubDel (관리자,클럽장)
+	@GetMapping("clubADel")
+	public ModelAndView DelClub(int cNo,ModelAndView mv,ClubDTO clubDTO,HttpServletRequest request) throws Exception {
+		HttpSession session=request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		int cnt=clubService.getDel(cNo);
+		System.out.println("컨트롤러"+cnt);
+		
+/*		if(!canAdminDel(user, clubDTO)) {
+			if(user.getGrade() == 999) { //확인 후 변경 필요
+				canAdminDel(user, clubDTO);
+			}else if(user.getId()==clubDTO.getMasterId()) {				
+				canAdminDel(user, clubDTO);
+			}else {
+				mv.setViewName("club/fail");
+			}
+			return mv;
+		}
+*/		
+		mv.addObject("cnt", cnt);
+		
+		if(cnt==1) {
+			mv.setViewName("club/clubDrop"); //jsp파일명
+		}else {
+			mv.setViewName("club/fail");
+		}
+		return mv;		
+	}
+/*
+	private boolean canAdminDel(User user, ClubDTO clubDTO) {
+		//로그인한유저정보에서 id를 가져오기
+		String id = user.getId();				
+		//작성자정보에서 id를 가져오기
+		String masterid = clubDTO.getMasterId();				
+		//"로그인한userid".equals("작성자id")
+		return id.equals(masterid);	
+	}	
+*/	
 }

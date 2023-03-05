@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.damoye.secondproject.dao.ClubDAO;
 import com.damoye.secondproject.dao.ClubDAOImpl;
 import com.damoye.secondproject.model.BoardVO;
 import com.damoye.secondproject.model.ClubDTO;
@@ -15,7 +16,7 @@ import com.damoye.secondproject.model.User;
 public class ClubServiceImpl implements ClubService {
 	
 	@Autowired
-	private ClubDAOImpl clubDAO;
+	private ClubDAO clubDAO;
 
 	//특정 카테고리 조회
 	@Override
@@ -76,28 +77,28 @@ public class ClubServiceImpl implements ClubService {
 	//클럽수정
 	@Override
 	public int getUpdateClub(ClubDTO clubDTO) throws Exception {
-		int cnt=clubDAO.getUpdateClub(clubDTO);
-		return cnt;
-		
+		int cnt=clubDAO.getUpdateClub(clubDTO);	
+		return cnt;		
 	}
-	//클럽탈퇴
-	@Override
-	public int getUpDel(ClubMemberDTO clubMemberDTO) throws Exception {
-		int cnt=clubDAO.getUpDel(clubMemberDTO);
-		return cnt;
-		
-	}
-	
 	//클럽삭제
 	@Override
 	public int getDel(int cNo) throws Exception {
 		int cnt=clubDAO.getDel(cNo);
 		return cnt;
 	}
-	//특정 클럽멤버 조회
-	public ClubMemberDTO selClubMember(int mNo) throws Exception {
-		return (ClubMemberDTO)clubDAO.selClubMember(mNo);
+	//클럽에 가입한 회원 전체 조회
+	@Override
+	public List<ClubMemberDTO> signClubMeberList(int cNo) throws Exception {
+		List<ClubMemberDTO> CMList= clubDAO.signClubMeberList(cNo);
+		return CMList;
 	}
+	//클럽회원삭제
+	@Override
+	public int getMemberDel(int cMemberNo) throws Exception {
+		int cnt=clubDAO.getMemberDel(cMemberNo);
+		return cnt;
+	}
+
 
 
 

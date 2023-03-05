@@ -38,11 +38,11 @@ public interface ClubDAO {
 	public int getCreClub(ClubDTO clubDTO) throws DataAccessException;
 	//클럽수정
 	public int getUpdateClub(ClubDTO clubDTO) throws DataAccessException;
-	//클럽탈퇴
-	public int getUpDel(ClubMemberDTO clubMemberDTO) throws DataAccessException;
 	//클럽삭제
-	public int getDel(int cNo) throws DataAccessException;
-	//특정 클럽 회원 조회
-	public ClubMemberDTO selClubMember(int mNo) throws DataAccessException;
+	public int getDel(int cNo) throws DataAccessException;	
+	//클럽에 가입한 회원번호 조회
+	public List<ClubMemberDTO> signClubMeberList(int cNo) throws DataAccessException;
+	//클럽회원삭제
+	public int getMemberDel(int cMemberNo) throws DataAccessException;
 
 }

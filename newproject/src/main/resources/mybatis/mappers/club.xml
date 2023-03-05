@@ -107,28 +107,26 @@
 		where cNo=#{cNo}
  	]]> 
  	</update>
- 	<!-- 특정회원조회 -->
- 	<select id="selClubMember" parameterType="int" resultType="clubMemberDTO">
- 	<![CDATA[
- 	select *
-	from clubmember
-	where cMemberNo=#{cMemberNo}
- 	]]> 
  	
+ 	<!--  특정클럽에 가입한 회원 전체 조회 -->
+ 	<select id="AllClubMemberList" resultType="clubMemberDTO">
+ 	 <![CDATA[
+	 	select *
+		from clubmember
+		where cNo=#{cNo}
+ 	]]>  	
  	</select>
  	
- 	<!-- 클럽탈퇴하기 -->
- 	<update id="delUpClub" parameterType="clubMemberDTO">
- 	<![CDATA[ 	
-	 	update clubmember
-		set signIn='N'
-		where cNo=#{cNo}
-		and cMemberNo=#{cMemberNo}
+ 	<!-- 클럽 회원 삭제하기 -->
+   	<delete id="clubDelMember" parameterType="int">
+ 	<![CDATA[
+		delete from clubmember
+		where cMemberNo=#{cMemberNo}
  	]]> 
- 	</update>
+ 	</delete>
  	
- 	<!-- 클럽 삭제하기 /클럽장과 관리자만-->
- 	<delete id="clubDel" parameterType="int">
+ 	 <!-- 클럽 삭제하기 /클럽장과 관리자만-->
+ 	<delete id="clubAdminDel" parameterType="int">
  	<![CDATA[
 		delete from club
 		where cNo=#{cNo}

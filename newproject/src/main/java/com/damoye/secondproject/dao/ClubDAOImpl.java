@@ -82,29 +82,32 @@ public class ClubDAOImpl implements ClubDAO {
 	public int getUpdateClub(ClubDTO clubDTO) throws DataAccessException {
 		int cnt=sqlSession.update("mapper.club.updateClub", clubDTO);
 		System.out.println("수정성공시1"+cnt);
-		return cnt;
-		
+		return cnt;		
 	}
-
-	//클럽탈퇴 deleteClub
-	@Override
-	public int getUpDel(ClubMemberDTO clubMemberDTO) throws DataAccessException {
-		int cnt=sqlSession.update("mapper.club.delUpClub", clubMemberDTO);
-		return cnt;
-	}
-
+	
 	//클럽삭제
 	@Override
 	public int getDel(int cNo) throws DataAccessException {
-		int cnt=sqlSession.delete("mapper.club.clubDel", cNo);
+		int cnt=sqlSession.delete("mapper.club.clubAdminDel", cNo);
+		System.out.println("DAO"+cnt);
 		return cnt;
 	}
 
-	//특정회원 조회
+	//클럽에 가입한 회원멤버 조회
 	@Override
-	public ClubMemberDTO selClubMember(int mNo) throws DataAccessException {
-		return (ClubMemberDTO)sqlSession.selectOne("mapper.club.selClubMember", mNo);
+	public List<ClubMemberDTO> signClubMeberList(int cNo) throws DataAccessException {
+		List<ClubMemberDTO> CMList=sqlSession.selectList("mapper.club.AllClubMemberList",cNo);
+		return CMList;
 	}
+
+	//클럽 멤버 삭제
+	@Override
+	public int getMemberDel(int cMemberNo) throws DataAccessException {
+		int cnt = sqlSession.delete("mapper.club.clubDelMember", cMemberNo);
+		return cnt;
+	}
+
+
 
 	
 }

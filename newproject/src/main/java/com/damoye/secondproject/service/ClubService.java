@@ -38,12 +38,12 @@ public interface ClubService {
 	public int getCreClub(ClubDTO clubDTO) throws Exception;
 	//클럽수정
 	public int getUpdateClub(ClubDTO clubDTO) throws Exception;
-	//클럽탈퇴
-	public int getUpDel(ClubMemberDTO clubMemberDTOo) throws Exception;
 	//클럽삭제
 	public int getDel(int cNo) throws Exception;
-	//특정 클럽회원 조회
-	public ClubMemberDTO selClubMember(int mNo) throws Exception;
+	//특정 클럽에 가입한 회원번호 조회
+	public List<ClubMemberDTO> signClubMeberList(int cNo) throws Exception;
+	//클럽회원삭제
+	public int getMemberDel(int cMemberNo) throws Exception;
 
 	
 	

@@ -12,17 +12,17 @@
 <body>
 <c:if test="${cnt==1}">
 		       <script>       
-					alert("클럽 삭제 성공");
+					alert("다음에 또 만나요~");
 				</script>
 </c:if>
 <c:if test="${cnt==0}">
 		       <script>       
-					alert("클럽 삭제 실패");
+					alert("실패");
 				</script>
 </c:if>
 				
 <script>
-location.href="${cPath}/club/main"; 
+location.href="${cPath}/club/maintest"; 
 </script>
 </body>
 </html>

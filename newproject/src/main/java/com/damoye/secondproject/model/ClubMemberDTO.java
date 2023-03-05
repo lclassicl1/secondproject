@@ -11,7 +11,6 @@ public class ClubMemberDTO {
 	private String signIn; //가입여부
 	public ClubMemberDTO() {}
 	public ClubMemberDTO(int cMemberNo, int cNo, int no, Date joinDate, String signIn) {
-		super();
 		this.cMemberNo = cMemberNo;
 		this.cNo = cNo;
 		this.no = no;
@@ -45,8 +44,8 @@ public class ClubMemberDTO {
 	public String getSignIn() {
 		return signIn;
 	}
-	public void setSignIn(String signIn) {
-		this.signIn = signIn;
+	public String setSignIn(String signIn) {
+		return this.signIn = signIn;
 	}
 	@Override
 	public String toString() {

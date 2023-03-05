@@ -23,20 +23,21 @@ $(document).ready(function(){
 			location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cIntro}";
 	  	});
 
-		//탈퇴버튼
- 	  $("#btnUpDel").on("click",function(){
+		//클럽회원탈퇴
+ 	  $("#btnDelMember").on("click",function(){   
 		  var c=confirm("클럽을 탈퇴하시겠습니까?");
 		  if(c){
-			  $('#upDelForm').attr("action","${path}/club/clubUpDel").submit();
+			  location.href="${path}/club/clubMemberDel?cMemberNo=${signMemberList.cMemberNo}";
 		  }else{
 				 return false;
 			 }
-	  	});	 
+	  	});			
+
 		//클럽삭제버튼
 	  $("#btnADel").on("click",function(){
 		  var c=confirm("클럽을 삭제하시겠습니까?");
 		  if(c){
-			location.href="${path}club/clbuADel";
+			location.href="${path}/club/clubADel?cNo=${clubDTO.cNo}";
 	  }else{
 			 return false;
 		 }
@@ -50,24 +51,24 @@ $(document).ready(function(){
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
 session:${loginUser}<br/>
 상세보기:${clubDTO}<br/>
-클럽멤버:${signMember}<br/>
+클럽아이디:${cMemberId}<br/>
 게시판:${boardVO}<br/>
-<span><a href="${path}/club/detail?cNo=${clubDTO.cNo}&categoryNo=${clubDTO.categoryNo}">클럽정보</a></span><span><a href="#">게시판</a></span><span><a href="#">채팅</a></span>
+가입한 회원리스트:${signMemberList}<br/>
 <form id="registForm" method="post" action="">
 <input type="hidden" name="no" value="${loginUser.no}"/><br/>
-<input type="hidden" name="cNo" value="${clubDTO.categoryNo}"/><br/>
+<input type="hidden" name="categoryNo" value="${clubDTO.categoryNo}"/><br/>
 <input type="hidden" name="cNo" value="${clubDTO.cNo}"/><br/>
 </form>
-
-<form id="btnUpDel" method="post" action="">
-<input type="hidden" name="cMemberNo" value="${signMember.cMemberNo}"/><br/>
-<input type="hidden" name="signIn" value="${signMember.signIn}"/><br/>
-</form>
-
-<input type="hidden" name="boardNo" value="boardNo"/><br/>
-카테고리:${category}<br/>
+<span><a href="${path}/club/detail?cNo=${clubDTO.cNo}&categoryNo=${clubDTO.categoryNo}">클럽정보</a></span>
+<c:if test="${!empty loginUser && signMemberList.signIn eq 'Y'}">
+<span><a href="#">게시판</a></span>
+<span><a href="#">채팅</a></span>
+</c:if>
+<input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/><br/>
+회원번호
+<input type="number" name="cMemberNo" id="cMemberNo" value="${signMemberList.cMemberNo}"/><br/>
+		<div> ${category} </div>
 <table border="1" style="text-align:center;">
-		<div>${category}<div>
 		<tr>
 			<th>클럽명</th>
 			<th>활동지역</th>
@@ -123,33 +124,47 @@ session:${loginUser}<br/>
 			<th colspan="2"> 가입자 리스트</th>
 		</tr>
 		<tr>
-	<c:forEach var="sMember" items="${signMember}">
+	<c:forEach var="sMember" items="${cMemberId}">
 			<td colspan="2">${sMember.id}</td><br/><!-- 클럽가입자리스트 -->
 	</c:forEach>
 		</tr>
+	<%-- 클럽장,관리자만 수정 가능 --%>
+	<%-- <c:if test="${(not empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}"> --%>
 		<tr>
 			<td colspan="2">
-			<!-- 클럽장만 수정 가능 -->
-			<p style="text-align:right;"><input type="button" name="btUpdate" id="btUpdate"	value="클럽수정"/></p>
+				<p style="text-align:right;">
+					<input type="button" name="btUpdate" id="btUpdate"	value="클럽수정"/>
+				</p>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-			<!-- 가입한 사람은 가입버튼 안보이게 처리 필요 -->
 				<p style="text-align:center;">
-				<input type="button" name="btnSign" id="btnSign" value="클럽가입"/></p>
-			</td>
-			<td colspan="2">
-			<!-- 클럽에 가입한 사람만 보이게 처리 필요/클럽장은 안보이게 처리 -->
-				<p style="text-align:center;">
-				<input type="button" name="btnUpDel" id="btnUpDel" value="클럽탈퇴"/></p>
-			</td>
-			<td colspan="2">
-			<!-- 클럽장,관리자만 보이게 처리 필요 -->
-				<p style="text-align:center;">
-				<input type="button" name="btnADel" id="btnADel" value="클럽삭제"/></p>
+				<input type="button" name="btnADel" id="btnADel" value="클럽삭제"/>
+				</p>
 			</td>
 		</tr>
+<%-- 	</c:if> --%>
+	<%-- 가입하지 않은 사람만 보이게 처리 필요 --%>
+	<c:if test="${(not empty loginUser) && (signMemberList.signIn == 'N') || (signMemberList.cMemberNo == null)}">
+		<tr>
+			<td colspan="2">			
+				<p style="text-align:center;">
+					<input type="button" name="btnSign" id="btnSign" value="클럽가입"/>
+				</p>
+			</td>
+		</tr>
+	</c:if>
+	<%-- 클럽에 가입한 사람만 보이게 처리 필요/클럽장은 안보이게 처리 --%>
+	<c:if test="${(not empty loginUser) && (loginUser.no == signMemberList.no) && (signMemberList.signIn == 'Y') || (loginUser.id != clubDTO.masterId)}">
+		<tr>
+			<td colspan="2">
+				<p style="text-align:center;">
+					<input type="button" name="btnDelMember" id="btnDelMember" value="클럽탈퇴(회원)"/>
+				</p>
+			</td>
+		</tr>
+	</c:if>
 </table>
 
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
