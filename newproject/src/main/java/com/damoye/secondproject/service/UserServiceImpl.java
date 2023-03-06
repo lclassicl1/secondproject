@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public Map<String, String> validateHandling(Errors errors) {
-        Map<String, String> validatorResult = new HashMap<>();
+        Map<String, String> validatorResult = new HashMap<String, String>();
 
         for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());

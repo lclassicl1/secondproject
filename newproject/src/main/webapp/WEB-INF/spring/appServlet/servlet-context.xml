@@ -21,6 +21,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 멀티파트 리졸버 : 다수 개 파일을 한번에 업로드 가능 -->
+    <beans:bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+       <beans:property name="maxUploadSize" value="52428800" /> <!-- 최대 업로드 가능한 파일크기 설정 . 여기에서는 약 52MB-->
+       <beans:property name="maxInMemorySize" value="1000000" /><!-- 임시파일을 생성하기 전  메모리에 보관할 수 있는 최대byte수 설정. 여기에서는 약 1MB -->
+       <beans:property name="defaultEncoding" value="utf-8" /><!-- 매개변수의 인코딩설정 -->
+    </beans:bean>
+	
+	
 	<context:component-scan base-package="com.damoye.*" />
 	
 </beans:beans>
