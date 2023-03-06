@@ -15,13 +15,13 @@ public class User {
 	private String email;
 	private String phonenum;
 	private String gender;
-	private String grade;
+	private int grade;
 	private String regdate;
 
 	
 	public User() {}
 	public User(int no, String id, String password, String name, String zipcode, String address, String detailaddress,
-			String pricynum, String email, String phonenum, String gender, String grade, String regdate) {
+			String pricynum, String email, String phonenum, String gender, int grade, String regdate) {
 		this.no = no;
 		this.id = id;
 		this.password = password;
@@ -110,10 +110,10 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 	public String getRegdate() {

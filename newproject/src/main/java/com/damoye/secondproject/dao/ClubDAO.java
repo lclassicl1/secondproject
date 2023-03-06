@@ -30,17 +30,17 @@ public interface ClubDAO {
 	//클럽 상세보기-모임글
 	public List<BoardVO> getSelBDetail(int cNo) throws DataAccessException;
 	
-	//클럽 상세보기-클럽가입 아이디 리스트
-	public List<User> getSignMember(int cNo) throws DataAccessException;	
+	//클럽 상세보기-클럽가입 회원정보
+	public List<ClubMemberDTO> getSignMember(int cNo) throws DataAccessException;	
 	//클럽 가입
 	public void getSignClub(ClubMemberDTO clubMemberDTO) throws DataAccessException;
 	//클럽 생성
-	public void getCreClub(ClubDTO clubDTO) throws DataAccessException;
+	public int getCreClub(ClubDTO clubDTO) throws DataAccessException;
 	//클럽수정
 	public int getUpdateClub(ClubDTO clubDTO) throws DataAccessException;
-	//클럽탈퇴
-	public int getUpDel(ClubMemberDTO clubMemberDTO) throws DataAccessException;
 	//클럽삭제
-	public int getDel(int cNo) throws DataAccessException;
+	public int getDel(int cNo) throws DataAccessException;	
+	//클럽회원삭제
+	public int getMemberDel(int cMemberNo) throws DataAccessException;
 
 }
