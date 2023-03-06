@@ -26,17 +26,16 @@ public interface BoardService {
 	
 	//클럽게시판 글목록조회+페이징
 	public List<BoardVO> getBoardListPage(int cNo, int displayPost, int postNum) throws Exception;
-
-
-	
-	//클럽게시판 글삭제
-	//public int deleteBoard(int cNo, int boardNo, BoardVO boardVO);
 	
 	//클럽게시판 글수정
-	//public BoardVO getupdateForm(int cNo, int num);
-	public int updateBoard(BoardVO boardVO);
+	public int updateSubmitBoard(BoardVO boardVO) throws Exception;
+
+	//클럽게시판 글삭제
+	public int deleteBoard(int cNo, int boardNo, BoardVO boardVO);
 
 
+
+	
 
 
 

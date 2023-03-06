@@ -2,7 +2,7 @@ package com.damoye.secondproject.model;
 
 import java.sql.Date;
 
-public class CommVO {
+public class CommBoardVO {
 	
 	private int commNo;
 	private String comment;
@@ -13,10 +13,10 @@ public class CommVO {
 	private int boardNo;
 	
 	
-	public CommVO() {
+	public CommBoardVO() {
 	}
 
-	public CommVO(int commNo, String comment, String commId, Date commRegdate, Date commModdate, String commIsShow, int boardNo) {
+	public CommBoardVO(int commNo, String comment, String commId, Date commRegdate, Date commModdate, String commIsShow, int boardNo) {
 		this.commNo = commNo;
 		this.comment = comment;
 		this.commId = commId;

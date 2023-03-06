@@ -5,6 +5,8 @@ import java.util.List;
 public class BoardPage {
 
 	//필드
+	private int categoryNo;
+	
 	//클럽구분용(클럽번호)
 	private int cNo;
 	
@@ -36,19 +38,30 @@ public class BoardPage {
 	private boolean prev;
 	private boolean next;
 	
-	public int getNum() {
-		return num;
+	
+	
+	
+	
+	public int getCategoryNo() {
+		return categoryNo;
 	}
-	
-	
+
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+
 	public int getcNo() {
 		return cNo;
 	}
-
+	
 	public void setcNo(int cNo) {
 		this.cNo = cNo;
 	}
 
+	public int getNum() {
+		return num;
+	}
+	
 	public int getCount() {
 		return count;
 	}
