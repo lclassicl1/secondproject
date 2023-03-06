@@ -57,14 +57,14 @@ img{
       <li class="nav-item">
         <a class="nav-link" href="#">마이페이지</a>
       </li>
+      <c:if test="${loginUser.id=='admin'}">
+	  	<li class="nav-item">
+        	<a class="nav-link" href="${path}/admin/userList">회원관리</a>
+      	</li>
+  	</c:if>
       <li class="nav-item">
         <a class="nav-link" onclick="logout();">로그아웃</a>
       </li>
-      <c:if test="${userId=='admin'}">
-	  	<li class="nav-item">
-        	<a class="nav-link" href="#">회원관리</a>
-      	</li>
-  	</c:if>
     </ul>
   </div>
 

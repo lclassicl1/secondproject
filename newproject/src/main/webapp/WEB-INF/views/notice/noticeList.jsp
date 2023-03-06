@@ -55,7 +55,7 @@
 	<input type="hidden" name="amount" value="${paging.cri.amount}">
 	<table border="1">
 		<tr>
-			<th><input type="checkbox"/></th><th>제목</th><th>작성자</th><th>작성시간</th><th>조회수</th>
+			<th>제목</th><th>작성자</th><th>작성시간</th><th>조회수</th>
 		</tr>
 		<c:if test="${empty noticeList}">
 		<tr>
@@ -65,7 +65,6 @@
 		<c:if test="${not empty noticeList}">
 			<c:forEach items="${noticeList}" var="list">
 			<tr> 
-				<td><input type="checkbox"/></td>
 				<td><a href="${path}/notice/read?no=${list.no}">${list.title}</a></td>
 				<td>${list.writername}</td>
 				<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
@@ -74,17 +73,19 @@
 			</c:forEach>
 		<tr>
 			<td colspan="5" style="text-align: center;" id="pagingspan">
-			<select id="paging">
-				<option value="">선택</option>
-				<option value="5">5</option>
-				<option value="10">10</option>
-				<option value="20">20</option>
-			</select>
 				<div class="board-list-paging">
+					<!-- 이전버튼 활성화 -->
+					<c:if test="${paging.prev}">
+						<a href="${path}/notice?pageNo=${paging.startPage-1 }">prev</a>
+					</c:if>
 					<!-- 게시판 페이징 영역 -->
 					<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-						<a href="${path}/notice?pageNo=${num}">[${num}]&nbsp;</a>
+						<a href="${path}/notice?pageNo=${num}">[${num}]</a>
 					</c:forEach>
+					<!-- 다음버튼 활성화 -->
+					<c:if test="${paging.next}">
+						<a href="${path}/notice?pageNo=${paging.endPage+1 }">next</a>
+					</c:if>
 				</div>
 			</td>
 		</tr>

@@ -23,16 +23,16 @@
 				$('#title').focus();
 				return false;
 			}
-			/* 
-			내용 검증 현재 ck에디터 적용으로 반영 안되는듯
+			
+			//내용 검증 현재 ck에디터 적용으로 반영 안되는듯
 			let content = $('#content').val();
 			if(content=='') {
 				alert('내용이 입력되지않았습니다');
 				$('#content').focus();
-				return;
-			} */
+				return false;
+			}
 			
-			//$('#form').submit();
+			$('#form').submit();
 			
 		});
 		
@@ -71,12 +71,5 @@
 	</form>
 </main>	
 <footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
-<script>
-	ClassicEditor
-	.create( document.querySelector( '#content' ))
-	.catch( error => {
-	    console.error( error );
-	});
-</script>	
 </body>
 </html>
