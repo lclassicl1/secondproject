@@ -22,7 +22,7 @@ public class MyClubController {
 	
 	@RequestMapping("/myClub")
 	public String myClub(HttpSession session,Model model) {
-		int userNo = (int)session.getAttribute("userNo");
+		int userNo = (Integer)session.getAttribute("userNo");
 		List<ClubDTO> clubList = myClubService.getMyClub(userNo);
 		model.addAttribute("list",clubList);
 		
