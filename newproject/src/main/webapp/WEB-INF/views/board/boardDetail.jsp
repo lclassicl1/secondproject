@@ -163,7 +163,7 @@ body {
 		<!-- 본인 댓글이면 수정 또는 삭제가능 -->
 			<c:if test="${sessionScope.userId == comm.commId}">
 	  		<input type="button" value="수정" onClick="location='${path}/comm/updateComm?boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">
-			<input type="button" value="삭제" onClick="location='${path}/comm/deleteComm?commNo=${comm.commNo}'">
+			<input type="button" value="삭제" onClick="location='${path}/comm/deleteComm?cNo=${boardVO.cNo}&boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">
 			</c:if>
 	    </div>
 	  </c:if>

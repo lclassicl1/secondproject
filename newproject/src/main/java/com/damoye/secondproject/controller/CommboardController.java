@@ -57,6 +57,7 @@ public class CommboardController {
 	//댓글삭제
 	@GetMapping(value="/comm/deleteComm")
 	public ModelAndView deleteComm(int commNo, ModelAndView mv,CommBoardVO commBoardVO,BoardVO boardVO) throws Exception {
+		System.out.println(boardVO);
 		commBoardVO.setCommNo(commNo);
 		//commBoardVO.setBoardNo(boardNo);
 		commboardServiceImpl.deleteComm(commNo);
