@@ -31,18 +31,17 @@ public interface ClubService {
 	//클럽 상세보기-모임글
 	public List<BoardVO> getSelBDetail(int cNo) throws Exception;
 	//클럽 상세보기-클럽가입 아이디 리스트
-	public List<User> getSignMember(int cNo) throws Exception;	
+	public List<ClubMemberDTO> getSignMember(int cNo) throws Exception;	
 	//클럽 가입하기
 	public void getSignClub(ClubMemberDTO clubMemberDTO) throws Exception;	
 	//클럽 생성
-	public void getCreClub(ClubDTO clubDTO) throws Exception;
+	public int getCreClub(ClubDTO clubDTO) throws Exception;
 	//클럽수정
 	public int getUpdateClub(ClubDTO clubDTO) throws Exception;
-	//클럽탈퇴
-	public int getUpDel(ClubMemberDTO clubMemberDTOo) throws Exception;
 	//클럽삭제
 	public int getDel(int cNo) throws Exception;
-	
+	//클럽회원삭제
+	public int getMemberDel(int cMemberNo) throws Exception;
 
 	
 	

@@ -62,9 +62,11 @@ $(document).ready(function(){
 		if(inputCode==code){
 			checkResult.html("인증번호가 일치합니다.");
 			checkResult.attr("class", "correct");
+			return true;
 		} else{
 			checkResult.html("인증번호가 일치하지 않습니다!");
 			checkResult.attr("class", "incorrect");
+			return false;
 		}
 	});
 });
@@ -79,7 +81,7 @@ $(document).ready(function(){
 <h3>회원가입</h3>
 	<hr/>
 	<form:form action="/signUp" modelAttribute="user" method="post" accept-charset="utf-8">
-	아이디:<form:input path="id" name="id" oninput="checkId()"/>
+	아이디:<form:input path="id" name="id" oninput="checkId()"/><br/>
 	비밀번호:<form:password path="password" name="password"/><br/>
 	비밀번호확인:<input type="password" name="re_password"/><br/>
 	이름:<form:input path="name" name="name"/><br/>

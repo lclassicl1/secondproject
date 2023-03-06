@@ -1,9 +1,12 @@
 package com.damoye.secondproject.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +15,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damoye.secondproject.model.User;
@@ -46,9 +48,24 @@ public class SignUpController {
 	
 	// 회원등록 데이터 처리
 	@RequestMapping(value="/signUp", method=RequestMethod.POST)
-	public String submitSignUp(@ModelAttribute("user") User user, Model model, Errors errors, HttpServletRequest request) throws Exception{
+	public String submitSignUp(@Valid @ModelAttribute("user") User user, Model model, BindingResult result, HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");
 
+		if(result.hasErrors()) {
+			model.addAttribute("user", user);
+			
+			Map<String, String> validateMap = new HashMap<>();
+			
+			for(FieldError error : result.getFieldErrors()) {
+				String validKeyName = "valid_" + error.getField();
+				validateMap.put(validKeyName, error.getDefaultMessage()); 
+			}
+			
+			for(String key : validateMap.keySet()) {
+				model.addAttribute(key, validateMap.get(key));
+			}
+			return "user/signUpForm";
+		}
 		userService.signUpUser(user);
 		return "user/signInForm";
 	}
