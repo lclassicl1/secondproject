@@ -2,11 +2,9 @@ package com.damoye.secondproject.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
-import com.damoye.secondproject.model.NoticePaging;
+import com.damoye.secondproject.model.User;
 
 public interface NoticeService {
 	
@@ -30,5 +28,8 @@ public interface NoticeService {
 	
 	//공지사항 전체게시글 수 조회
 	public int selectAllCount();
+	
+	//유저 전체 리스트	
+	public List<User> allUserList();
 	
 }
