@@ -1,7 +1,6 @@
 package com.damoye.secondproject.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -16,7 +15,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,24 +47,16 @@ public class SignUpController {
 	
 	// 회원등록 데이터 처리
 	@RequestMapping(value="/signUp", method=RequestMethod.POST)
-	public String submitSignUp(@Valid @ModelAttribute("user") User user, Model model, BindingResult result, HttpServletRequest request) throws Exception{
+	public String submitSignUp(@Valid User user, Model model, BindingResult bindingResult, HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");
-
-		if(result.hasErrors()) {
-			model.addAttribute("user", user);
-			
-			Map<String, String> validateMap = new HashMap<>();
-			
-			for(FieldError error : result.getFieldErrors()) {
-				String validKeyName = "valid_" + error.getField();
-				validateMap.put(validKeyName, error.getDefaultMessage()); 
+		
+			if(bindingResult.hasErrors()) {
+				List<ObjectError> list = bindingResult.getAllErrors();
+				for(ObjectError e : list){
+				}
+				return "user/signUpForm";
 			}
-			
-			for(String key : validateMap.keySet()) {
-				model.addAttribute(key, validateMap.get(key));
-			}
-			return "user/signUpForm";
-		}
+		
 		userService.signUpUser(user);
 		return "user/signInForm";
 	}

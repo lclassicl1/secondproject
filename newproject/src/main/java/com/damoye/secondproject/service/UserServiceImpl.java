@@ -1,9 +1,13 @@
 package com.damoye.secondproject.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
 import com.damoye.secondproject.dao.UserDAO;
 import com.damoye.secondproject.model.User;
@@ -68,6 +72,17 @@ public class UserServiceImpl implements UserService {
 		user.changeMyInfo(password, email, zipcode, address, detailaddress);
 		userDAO.modifyUserInfo(user);
 	}
+	
+	public Map<String, String> validateHandling(Errors errors) {
+        Map<String, String> validatorResult = new HashMap<>();
+
+        for (FieldError error : errors.getFieldErrors()) {
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorResult.put(validKeyName, error.getDefaultMessage());
+        }
+
+        return validatorResult;
+    }
 	
 	@Override
 	public List<User> getAllMemberList() {
