@@ -69,11 +69,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public User findPw(String id, String name, String email) {
-		String sql="select password from user where id=? and name=? and email=? ";
-		RowMapper<User> mapper = new BeanPropertyRowMapper<User>(User.class);
-		User user = this.template.queryForObject(sql, mapper, id, name, email);
-		return user;
+	public void updatePw(User user) {
+		String sql = "update user set password=? where id=? and name=? and email=?";
+		try {
+			 template.update(sql, user.getPassword(), user.getId(), user.getName(), user.getEmail());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -81,7 +83,6 @@ public class UserDAOImpl implements UserDAO {
 		String sql="update user set password=?, email=?, phonenum=?, zipcode=?, address=?, detailaddress=? where id=?";
 		try {
 			template.update(sql, user.getPassword(), user.getEmail(), user.getPhonenum(), user.getZipcode(), user.getAddress(), user.getDetailaddress(), user.getId());
-			System.out.println("DAO"+user.getZipcode());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

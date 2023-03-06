@@ -9,9 +9,10 @@
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"></jsp:include></header>
-<<<<<<< HEAD
-<main>
-${userId }님, ${userName }님	반갑습니다!<br/>
+
+${loginUser}
+${loginUser.id}님 반갑습니다!<br/>
+
 <a href="${path}/club/maintest">클럽 홈</a><br/>
 <a href="${path}/myClub">내가 가입된 클럽보기</a><br/>
 <a href="${path}/chat/room?roomNo=1">채팅방 1 test</a><br/>
@@ -22,6 +23,7 @@ ${userId }님, ${userName }님	반갑습니다!<br/>
 =======
 세션 아이디: ${sessionId}<br/>
 ${loginUser}님 반갑습니다!<br/>
+>>>>>>> refs/remotes/origin/main
 >>>>>>> refs/remotes/origin/main
 <a href="/logout">로그아웃</a>
 <a href="/myInfo">내 정보</a>

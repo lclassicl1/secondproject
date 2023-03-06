@@ -20,8 +20,8 @@ public interface UserDAO {
 	//회원 아이디 찾기
 	public User findId(String name,String email, String phonenum);
 	
-	//회원 비밀번호 찾기
-	public User findPw(String id, String name, String email);
+	//임시 비밀번호 변경
+	public void updatePw(User user);
 	
 	//회원 개인정보 수정
 	public void modifyUserInfo(User user);
