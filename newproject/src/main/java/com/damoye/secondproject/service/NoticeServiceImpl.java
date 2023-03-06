@@ -6,17 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damoye.secondproject.dao.NoticeDAO;
+import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
+import com.damoye.secondproject.model.NoticePaging;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
 	NoticeDAO noticeDAOImpl;
 	
+	@Autowired
+	Criteria cri;
+	
 	
 	@Override
-	public List<NoticeDTO> getNoticeList() {
-		List<NoticeDTO> noticeList = noticeDAOImpl.getNoticeList();
+	public List<NoticeDTO> getNoticeList(Criteria cri) {
+		List<NoticeDTO> noticeList = noticeDAOImpl.getNoticeList(cri);
 		return noticeList;
 	}
 
@@ -41,6 +46,18 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int deleteNotice(int no) {
 		return noticeDAOImpl.deleteNotice(no);
+	}
+	
+	//공지사항 조회수 증가
+	@Override
+	public int updateReadCount(int no) {
+		return noticeDAOImpl.updateReadCount(no);
+	}
+	
+	//공지사항 전체게시글 수
+	@Override
+	public int selectAllCount() {
+		return noticeDAOImpl.selectAllCount();
 	}
 
 }

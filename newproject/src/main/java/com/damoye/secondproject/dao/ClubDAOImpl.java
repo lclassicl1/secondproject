@@ -63,8 +63,8 @@ public class ClubDAOImpl implements ClubDAO {
 	
 	//클럽 상세보기-클럽가입 아이디 리스트
 	@Override
-	public List<User> getSignMember(int cNo) throws DataAccessException {
-		List<User> memberList=sqlSession.selectList("mapper.club.clubMemeber", cNo);
+	public List<ClubMemberDTO> getSignMember(int cNo) throws DataAccessException {
+		List<ClubMemberDTO> memberList=sqlSession.selectList("mapper.club.clubMemeber", cNo);
 		return memberList;
 	}
 	//클럽 가입하기
@@ -74,31 +74,33 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 	//클럽 생성
 	@Override
-	public void getCreClub(ClubDTO clubDTO) throws DataAccessException{
-		sqlSession.insert("mapper.club.createClub", clubDTO);
+	public int getCreClub(ClubDTO clubDTO) throws DataAccessException{
+		return sqlSession.insert("mapper.club.createClub", clubDTO);
 	}
 	//클럽수정 updateClub
 	@Override
 	public int getUpdateClub(ClubDTO clubDTO) throws DataAccessException {
 		int cnt=sqlSession.update("mapper.club.updateClub", clubDTO);
 		System.out.println("수정성공시1"+cnt);
-		return cnt;
-		
+		return cnt;		
 	}
-
-	//클럽탈퇴 deleteClub
-	@Override
-	public int getUpDel(ClubMemberDTO clubMemberDTO) throws DataAccessException {
-		int cnt=sqlSession.update("mapper.club.delUpClub", clubMemberDTO);
-		return cnt;
-	}
-
+	
 	//클럽삭제
 	@Override
 	public int getDel(int cNo) throws DataAccessException {
-		int cnt=sqlSession.delete("mapper.club.clubDel", cNo);
+		int cnt=sqlSession.delete("mapper.club.clubAdminDel", cNo);
+		System.out.println("DAO"+cnt);
 		return cnt;
 	}
+
+	//클럽 멤버 삭제
+	@Override
+	public int getMemberDel(int cMemberNo) throws DataAccessException {
+		int cnt = sqlSession.delete("mapper.club.clubDelMember", cMemberNo);
+		return cnt;
+	}
+
+
 
 	
 }
