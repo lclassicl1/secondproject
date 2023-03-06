@@ -39,7 +39,9 @@ body {
 	${boardList}
 	${cNo} <br/>
 	${num} <br/>
-	${boardPage}
+	${boardPage}<br/>
+	${categoryNo}
+	
 	<div><h1>클럽 페이지</h1></div>
 	<%-- 클럽게시판: ${boardList} --%>
 	<div class="container" style="display:table; width:100%;">

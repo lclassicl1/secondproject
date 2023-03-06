@@ -18,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.BoardPage;
 import com.damoye.secondproject.model.BoardVO;
-import com.damoye.secondproject.model.CommVO;
+import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.CommBoardVO;
 import com.damoye.secondproject.service.BoardService;
+import com.damoye.secondproject.service.ClubService;
 import com.damoye.secondproject.service.CommboardService;
 
 @Controller
@@ -30,10 +32,14 @@ public class BoardController {
 	
 	@Autowired
 	public CommboardService commboardServiceImpl;
-
-	//클럽게시판 글목록
+	
+	@Autowired
+	public ClubService clubService;
+	
+	//클럽게시판 글목록(임시확인용)
 	//요청주소 ~컨패/board?cNo=1
-	@RequestMapping(value="/board", method=RequestMethod.GET)
+	/*
+	@RequestMapping(value="/board/comm", method=RequestMethod.GET)
 	public String getBoardList(Model model,@RequestParam(name="cNo") int cNo) throws Exception {
 			
 		List<BoardVO> boardList = boardServiceImpl.getBoardList(cNo);
@@ -41,11 +47,11 @@ public class BoardController {
 		model.addAttribute("cNo", cNo);
 		return "/board/boardList";
 	}
-	
+	*/
 	//클럽게시판 글목록+페이징
 	//요청주소 ~컨패/board/list?cNo=1
 	@RequestMapping(value="/board/list", method=RequestMethod.GET)
-	public String getBoardListPage(Model model,@RequestParam(name="cNo") int cNo, @RequestParam(name="num") int num) throws Exception {
+	public String getBoardListPage(Model model,@RequestParam int cNo, @RequestParam int num) throws Exception {
 		
 		BoardPage boardPage = new BoardPage();
 		
@@ -54,7 +60,9 @@ public class BoardController {
 		boardPage.setcNo(cNo);
 
 		List<BoardVO> boardList = boardServiceImpl.getBoardListPage(boardPage.getcNo(),boardPage.getDisplayPost(),boardPage.getPostNum());
-		//List<BoardVO> boardList = boardServiceImpl.getBoardListPage(cNo, displayPost, postNum);
+		
+		//List<ClubDTO> clubList = clubService.getSelClubList(categoryNo);
+		//model.addAttribute("clubList", clubList);
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("cNo", cNo);
@@ -67,14 +75,17 @@ public class BoardController {
 	//클럽게시판 글 상세보기+댓글보기
 	//요청주소 ~컨패/board/detail?cNo=&boardNo=
 	@RequestMapping(value="/board/detail", method=RequestMethod.GET)
-	public String boardDetail(Model model, @RequestParam(name="boardNo") int boardNo) throws Exception {
+	public String boardDetail(Model model, @RequestParam(name="num") int num,@RequestParam(name="boardNo") int boardNo) throws Exception {
 		BoardVO boardVO = boardServiceImpl.getBoardDetail(boardNo);
 		model.addAttribute("boardVO", boardVO);
+		model.addAttribute("num", num);
 		
 		//댓글조회
-		List<CommVO> commList = commboardServiceImpl.getcommList(boardNo);
+		List<CommBoardVO> commList = commboardServiceImpl.getcommList(boardNo);
 		model.addAttribute("commList", commList);
 		
+
+
 		return "/board/boardDetail";
 		
 	}
@@ -85,7 +96,7 @@ public class BoardController {
 	@GetMapping("/board/boardWrite")
 	public String insertBoardForm(Model model, @RequestParam(name="cNo") int cNo,@RequestParam(name="num") int num,HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		session.setAttribute("userId", "hongid");//임시!!!!!!!!!!!!!!!!!!!!!!!
+		session.setAttribute("User", "dummy1");//임시!!!!!!!!!!!!!!!!!!!!!!!
 		model.addAttribute("cNo", cNo);
 		model.addAttribute("num", num);
 		return "/board/boardWrite";
@@ -100,6 +111,57 @@ public class BoardController {
 		model.addAttribute("num", num);
 		return "redirect:/board/list?cNo="+cNo+"&num="+num;
 	}
+	
+	//클럽게시판 글수정
+	//수정폼
+	@GetMapping("/board/boardUpdate")
+	public String updateBoard(@RequestParam(name="cNo") int cNo,@RequestParam(name="boardNo") int boardNo,
+		 Model model) throws Exception {
+		
+		BoardVO boardVO = boardServiceImpl.getBoardDetail(boardNo);
+		model.addAttribute("cNo", cNo);
+		model.addAttribute("boardVO", boardVO);
+		return "board/boardUpdate";
+	}
 
+	//수정처리
+	@PostMapping("/board/boardUpdate")
+	public ModelAndView updateSubmitBoard(@RequestParam(name="cNo") int cNo,@RequestParam(name="boardNo") int boardNo,@ModelAttribute BoardVO boardVO, ModelAndView mv) throws Exception {
+		System.out.println("포스트 수정");
+		boardVO.setcNo(cNo);
+		boardVO.setBoardNo(boardNo);
+		System.out.println("boardVO"+boardVO);
+		int cnt = boardServiceImpl.updateSubmitBoard(boardVO);
+		if(cnt==1) {
+			mv.setViewName("redirect:/board/detail?"+boardVO.getcNo()+"&boardNo="+boardVO.getBoardNo()+"&num="+1);
+		}else {
+			mv.setViewName("redirect:/board/boardUpdate?cNo="+boardVO.getcNo()+"&boardNo="+boardVO.getBoardNo());
+		}
+		return mv;
+	}
+
+	
+	//클럽게시판 글삭제(update)
+	//요청주소~컨패/article/delete?cNo=&boardNo=
+	@GetMapping(value="/board/deleteBoard")
+	public ModelAndView deleteBoard(@RequestParam int cNo, @RequestParam int boardNo, ModelAndView mv) throws Exception {
+		BoardVO boardVO = new BoardVO();
+		boardVO.setcNo(cNo);
+		boardVO.setBoardNo(boardNo);
+		
+		int cnt = boardServiceImpl.deleteBoard(cNo, boardNo, boardVO);
+		if(cnt==1) {
+			mv.setViewName("redirect:/board/list?cNo="+cNo+"&num=1");
+		}else {
+			mv.setViewName("redirect:/board/detail?="+boardVO.getcNo()+"&boardNo="+boardVO.getBoardNo()+"&num=1");
+		}
+		return mv;
+		
+	}
+
+	
+	
+	
+	
 	
 }

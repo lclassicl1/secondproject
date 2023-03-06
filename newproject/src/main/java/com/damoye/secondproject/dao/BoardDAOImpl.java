@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.damoye.secondproject.model.BoardVO;
@@ -22,11 +23,13 @@ public class BoardDAOImpl implements BoardDAO {
         return sqlSession.selectList("boardList", cNo);
     }
 	
+	 //클럽게시판 글 상세보기
 	 @Override
 	 public BoardVO getBoardDetail(int boardNo){
 		 return sqlSession.selectOne("mapper.board.getBoardDetail",boardNo);
 	 }
-
+	 
+	 //클럽게시판 글작성
 	 @Override
 	 public void insertBoard(BoardVO boardVO) {
 		 int cnt = sqlSession.insert("mapper.board.insertBoard", boardVO);
@@ -34,14 +37,15 @@ public class BoardDAOImpl implements BoardDAO {
 		 
 	 }
 	
-
+	 //클럽게시판 댓글카운트
 	 @Override
 	 public int count(int cNo) {
 		 return sqlSession.selectOne("mapper.board.count", cNo);
 	 }
-
-	@Override
-	public List<BoardVO> getBoardListPage(int cNo, int displayPost, int postNum) {
+	 
+	 //클럽게시판 리스트+페이징
+	 @Override
+	 public List<BoardVO> getBoardListPage(int cNo, int displayPost, int postNum) {
 		
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("cNo", cNo);
@@ -49,24 +53,23 @@ public class BoardDAOImpl implements BoardDAO {
 		data.put("postNum",postNum);
 		
 		return sqlSession.selectList("boardListPage", data);
-	}
-
-	/*
-	//클럽게시판 글삭제(update)
-	@Override
-	public int deleteBoard(int cNo, int boardNo, BoardVO boardVO) {
-		int cnt=sqlSession.selectOne("mapper.board.deleteBoard", boardVO);
+	 }
+	 
+	 //클럽게시판 글수정
+	 @Override
+	 public int updateSubmitBoard(BoardVO boardVO) throws DataAccessException{
+		int cnt=sqlSession.update("mapper.board.updateSubmitBoard", boardVO);
 		System.out.println(cnt);
 		return cnt;
-	}
-*/
-	@Override
-	public int updateBoard(BoardVO boardVO) {
-		int cnt=sqlSession.update("mapper.board.updateBoard", boardVO);
-		System.out.println(cnt);
-		return cnt;
-	}
+	 }
 	
+	 //클럽게시판 글삭제(update)
+	 @Override
+	 public int deleteBoard(int cNo, int boardNo, BoardVO boardVO) {
+		int cnt=sqlSession.update("mapper.board.deleteBoard", boardVO);
+		System.out.println(cnt);
+		return cnt;
+	 }
 
 	
 	

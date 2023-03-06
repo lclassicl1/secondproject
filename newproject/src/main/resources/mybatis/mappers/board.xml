@@ -53,23 +53,23 @@
 			values(#{cNo},#{bType},#{bTitle},#{bContent},now(),#{bWriter})
 		]]>
 	</insert>
+	
+ 
+ 	<!-- 클럽게시판 글수정 -->
+ 	<update id="updateSubmitBoard" parameterType="boardVO">
+ 		<![CDATA[
+			update board 
+			set bType=#{bType},bTitle=#{bTitle},bContent=#{bContent},bModdate=now()
+			where cNo=#{cNo} and boardNo=#{boardNo}
+		]]>
+ 	</update>
+
 	<!-- 클럽게시판 글삭제 -->
-<!-- 
 	<update id="deleteBoard" parameterType="boardVO">
 		<![CDATA[
 			update board set bIsshow='N'
 			where cNo=#{cNo} and boardNo=#{boardNo}
 		]]>
 	</update>
- -->
- 
- 	<!-- 클럽게시판 글수정 -->
- 	<update id="updateBoard" parameterType="boardVO">
- 		<![CDATA[
-			update board set bType=#{bType},bTitle=#{bTitle},bContent=#{bContent},bModdate=now()
-			where cNo=#{cNo} and boardNo=#{boardNo}
-		]]>
- 	</update>
-
 	
 </mapper>

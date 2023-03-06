@@ -10,7 +10,7 @@ public class NoticePaging {
 	private boolean prev, next; //이전 다음버튼 
 	private int startPage; //시작페이지
 	private int endPage; //끝페이지
-	private Criteria cri;
+	private Criteria cri;   
 	
 	public NoticePaging() {
 	}
