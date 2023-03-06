@@ -9,6 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+
 	//목록으로
 	$("#btnList").on("click",function(){
 		location.href="${path}/board/list?cNo=${cNo}&num=1";
@@ -16,8 +17,10 @@ $(document).ready(function(){
 	
 	//글쓰기
 	$("#boardUpload").on("click",function(){
+		
 		location.href="${path}/board/list?cNo=${cNo}&num=";
 	});
+	
 });
 
 </script>
@@ -80,7 +83,7 @@ body {
 	  </div>
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">내용</div>
-        <div class="c1" style="display:table-cell; height:400px;">
+        <div class="c1" style="display:table-cell; height:400px">
         <textarea name="bContent" id="bContent" required="required"></textarea>
         </div>
 	  </div>

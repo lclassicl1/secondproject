@@ -11,13 +11,9 @@
 $(document).ready(function(){
 	//목록으로
 	$("#btnList").on("click",function(){
-		location.href="${path}/board/list?cNo=${cNo}&num=${num}";
+		location.href="${path}/board/list?cNo=${boardVO.cNo}&num=${num}";
 	});
 	
-	//수정하기
-	$("#boardUpload").on("click",function(){
-		location.href="${path}/board/list?cNo=${cNo}&num=${num}";
-	});
 
 });
 
@@ -54,25 +50,32 @@ body {
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
-<form action="${path}/board/boardUpdate?cNo=${cNo}&boardNo=${boardNo}" method="post">
+<form id=boardUpdate action="${path}/board/boardUpdate" method="POST">
 	<div><h1>클럽게시판 수정하기</h1></div>
 	<%-- 게시글정보: ${boardList} --%>
 	${boardVO}
-	${cNo}
+	${boardVO.cNo}
 	${num}
+	${boardVO.boardNo}
+	${boardVO.bType}
+	${boardVO.bTitle}
+	${boardVO.bContent}
+
   <div class="container" style="display:table; width:100%;">
-  <input type="hidden" name="bWriter" id="bWriter" value="${sessionScope.userId}"/>
-  <input type="hidden" name="cNo" id="cNo" value="${cNo}"/>
-  <input type="hidden" name="num" id="num" value="${num}"/>
+  <%-- <input type="hidden" name="bWriter" id="bWriter" value="${sessionScope.userId}"/> 
+  --%>
+  <input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
+  <input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/>
 	<div class="divTableBody">
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">타입</div>
 	    <div class="c1" style="display:table-cell">
-	    <select name="bType" id="bType" required="required">
-			<option value="모집">모집</option>
+	  	<select name="bType" id="bType" required="required" value="${boardVO.bType}">
+		 	<option value="모집">모집</option>
 			<option value="자유">자유</option>
-	    </select></div>
+		</select>
 	  </div>
+</div>
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">제목</div>
         <div class="c1" style="display:table-cell">
@@ -88,9 +91,8 @@ body {
 	</div>
 	  <div style="display:table-row">
 	  	<input type="button" name="btnList" id="btnList" value="목록으로"/>
-	  	<input type="submit" name="boardUpload" id="boardUpload" value="수정하기"/>
+	  	<input type="submit" name="btnUpdate" id="btnUpdate" value="수정하기"/>
 	  </div>	 
-
 	  
   </div>
 </form>

@@ -41,23 +41,16 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getBoardListPage(int cNo, int displayPost, int postNum) throws Exception {
 		return boardDAOImpl.getBoardListPage(cNo, displayPost, postNum);
 	}
-/*
+
+	@Override
+	public int updateSubmitBoard(BoardVO boardVO) throws Exception {
+		return boardDAOImpl.updateSubmitBoard(boardVO);
+	}
+
 	@Override
 	public int deleteBoard(int cNo, int boardNo,BoardVO boardVO) {
 		return boardDAOImpl.deleteBoard(cNo, boardNo, boardVO);
 	}
-	*/
-	/*
-	@Override
-	public BoardVO getupdateForm(int cNo, int num) {
-		return null;
-	}
-*/
-	@Override
-	public int updateBoard(BoardVO boardVO) {
-		return boardDAOImpl.updateBoard(boardVO);
-	}
-
 
 
 	
