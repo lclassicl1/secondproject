@@ -39,9 +39,11 @@ $(document).ready(function(){
 		if(inputCode==code){
 			checkResult.html("인증번호가 일치합니다.");
 			checkResult.attr("class", "correct");
+			return true;
 		} else{
 			checkResult.html("인증번호가 일치하지 않습니다!");
 			checkResult.attr("class", "incorrect");
+			return false;
 		}
 	});
 });
@@ -56,30 +58,21 @@ $(document).ready(function(){
 <h3>회원가입</h3>
 	<hr/>
 	<form:form action="/signUp" modelAttribute="user" method="post" accept-charset="utf-8">
-	아이디:<form:input path="id" name="id"/><button type="button" id="check_id">중복확인</button><br/>
-		 <form:errors path="id"/>
+	아이디:<form:input path="id" name="id" oninput="checkId()"/><br/>
+	<form:errors path="id"/>
 	비밀번호:<form:password path="password" name="password"/><br/>
-	 <form:errors path="password"/>
 	비밀번호확인:<input type="password" name="re_password"/><br/>
-	 <form:errors path="re_password"/>
 	이름:<form:input path="name" name="name"/><br/>
-	 <form:errors path="name"/>
 	우편번호:<form:input path="zipcode" name="zipcode"/><button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
-	 <form:errors path="zipcode"/>
 	주소:<form:input path="address" name="address"/><br/>
-	 <form:errors path="address"/>
 	상세주소:<form:input path="detailaddress" name="detailaddress"/><br/>
 	주민등록번호:<form:input path="pricynum" name="pricynum"/><br/>
-	 <form:errors path="pricynum"/>
 	이메일:<form:input path="email" class="Email" name="email"/><button type="button" class="mail_button" onclick="mail_button">본인인증</button><br/>
-	 <form:errors path="email"/>
 	이메일 인증:<input type="text" id="mail-check-input" name="email_check" disabled="disabled" placeholder="이메일 입력과 본인인증을 해주세요" maxlength="6"/>
 	<span id="mail_check_input_box_warn"></span><br/>
 	전화번호:<form:input path="phonenum" name="phonenum"/><br/>
-	 <form:errors path="phonenum"/>
 	성별:<form:radiobutton path="gender" name="gender" value="M"/> 남성
 		<form:radiobutton path="gender" name="gender" value="F"/> 여성<br/>
-		 <form:errors path="gender"/>
 	
 	<input type="submit" value="가입하기">
 	<input type="reset" value="다시쓰기">
