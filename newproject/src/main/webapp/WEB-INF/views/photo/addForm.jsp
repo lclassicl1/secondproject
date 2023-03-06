@@ -124,7 +124,9 @@
    }
    //------------------------------------ 
 
-  
+  <%
+String id = (String)session.getAttribute("id");
+%>
  
 </script>
 </head>
@@ -142,7 +144,7 @@ disabled는 서버로 전송x <input type="text" name="dis"  disabled="disabled"
  		<tr>
  		 <th>작성자</th>
  		 <td>${sessionScope.AUTHUSER_ID}
- 		  <input type="hidden" name="id" value="${sessionScope.AUTHUSER_ID}"/>
+ 		  <input type="hidden" name="id" value="${AUTHORUSER_ID}"/>
  		 </td>
  		</tr>
  		<tr>
