@@ -1,5 +1,6 @@
 package com.damoye.secondproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,15 +37,24 @@ public class ClubController {
 	public String getCheck(Model model) {
 		return "club/main";
 	}	
-
+//	전체 카테고리의 모임 출력 
+	@GetMapping("/allClubList")
+	public String getAllClub(Model model) throws Exception {		
+		List<ClubDTO> clubList = clubService.getAllClubList();
+		model.addAttribute("clubList", clubList);		
+		return "club/clubList";		
+	}
+	
+	
 	//클럽리스트
-	//   /club/clist?categoryNo=1
+	//   ${path}/clist?categoryNo=1/clist?categoryNo=1
 	@GetMapping("clist")
 	public String getSelClub(@RequestParam("categoryNo") int categoryNo, Model model,ClubDTO clubDTO,HttpSession session) throws Exception {		
 		//특정 카테고리명 조회 selCategoryName
 		String cateogryName=clubService.getSelCategoryName(categoryNo);
 		//mv.addObject("category", cateogryName);
 		model.addAttribute("category", cateogryName);
+		model.addAttribute("categoryNo", categoryNo);
 	
 		//클럽 조회
 		List<ClubDTO> clubList = clubService.getSelClubList(categoryNo);
@@ -55,14 +65,26 @@ public class ClubController {
 	
 	//클럽 검색 /club/searchClist
 	@GetMapping("searchCName")
-	public ModelAndView searchCName(@RequestParam String searchCName,int categoryNo, ModelAndView mv) throws Exception {		
-		ClubDTO clubDTO = new ClubDTO();
-		clubDTO.setCategoryNo(categoryNo);
-		clubDTO.setcName(searchCName);
+	public ModelAndView searchCName(@RequestParam String searchCName, ModelAndView mv,HttpServletRequest req) throws Exception {
 		
-		List<ClubDTO> clubList = clubService.getSearchCName(clubDTO);
+		String categoryNoVal = req.getParameter("category");
+		int categoryNo = 0;
+		ClubDTO clubDTO = new ClubDTO();
+		List<ClubDTO> clubList = new ArrayList<>();
+		if(categoryNoVal != null) {
+			categoryNo = Integer.parseInt(categoryNoVal);
+			clubDTO.setcName(searchCName);
+			clubDTO.setCategoryNo(categoryNo);
+			clubList = clubService.getSearchCName(clubDTO);
+		}else {
+			clubDTO.setcName(searchCName);
+			clubDTO.setCategoryNo(categoryNo);
+			clubList = clubService.getAllSearchCName(clubDTO);
+		}
+		
 		logger.info(clubList.toString());//확인용
 		mv.addObject("clubList", clubList);
+		mv.addObject("categoryNo", categoryNo);
 		mv.setViewName("club/clubList");		
 		return mv;
 	}
@@ -77,6 +99,7 @@ public class ClubController {
 		//카테고리명
 		String category=clubService.getSelCategoryName(categoryNo);
 		model.addAttribute("category", category);
+		model.addAttribute("categoryNo", categoryNo);
 		//클럽 소개글-selClubDetail
 		ClubDTO clubDTO = clubService.getSelClubDetail(cNo);
 		model.addAttribute("clubDTO", clubDTO);

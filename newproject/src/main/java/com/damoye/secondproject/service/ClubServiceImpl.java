@@ -18,6 +18,12 @@ public class ClubServiceImpl implements ClubService {
 	@Autowired
 	private ClubDAO clubDAO;
 
+	
+	@Override
+	public List<ClubDTO> getAllClubList()throws Exception{	
+		List<ClubDTO> cList= clubDAO.getAllClubList();
+		return cList;
+	}
 	//특정 카테고리 조회
 	@Override
 	public String getSelCategoryName(int categoryNo) throws Exception {
@@ -35,6 +41,12 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws Exception {
 		List<ClubDTO> cNameList=clubDAO.getSearchCName(clubDTO);
+		return cNameList;
+	}
+	//전체 검색
+	@Override
+	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws Exception {
+		List<ClubDTO> cNameList=clubDAO.getAllSearchCName(clubDTO);
 		return cNameList;
 	}
 	

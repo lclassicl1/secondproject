@@ -17,10 +17,16 @@ import com.damoye.secondproject.model.User;
 
 @Repository
 public class ClubDAOImpl implements ClubDAO {
+
 	//필드
 	@Autowired
 	private SqlSession sqlSession;
 
+	@Override
+	public List<ClubDTO> getAllClubList() throws DataAccessException {
+		List<ClubDTO> cList=sqlSession.selectList("mapper.club.allClubList");
+		return cList;
+	}
 
 	//특정 카테고리 조회
 	@Override
@@ -42,7 +48,12 @@ public class ClubDAOImpl implements ClubDAO {
 		List<ClubDTO> list = sqlSession.selectList("mapper.club.searchClub", clubDTO);
 		return list;
 	}
-
+	//전체 검색
+	@Override
+	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws DataAccessException {
+		List<ClubDTO> list = sqlSession.selectList("mapper.club.allSearchClub", clubDTO);
+		return list;
+	}
 	//클럽 상세보기-소개글
 	@Override
 	public ClubDTO getSelClubDetail(int cNo)throws DataAccessException{

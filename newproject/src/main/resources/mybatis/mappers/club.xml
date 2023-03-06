@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="mapper.club">
-		<resultMap type="clubDTO" id="clubDTO">
+ 
+	<resultMap type="clubDTO" id="clubDTO">
 		<result property="cNo" column="cNo"/>
 		<result property="cName" column="cName"/>
 		<result property="cIntro" column="cIntro"/>
@@ -12,6 +13,13 @@
 		<result property="cPeople" column="cPeople"/>
 		<result property="cIsShow" column="cIsShow"/>
 		<result property="categoryNo" column="categoryNo"/>
+	</resultMap> 
+ 	<resultMap type="ClubMemberDTO" id="ClubMemberDTO">
+		<result property="cMemberNo" column="cMemberNo"/>
+		<result property="cNo" column="cNo"/>
+		<result property="no" column="no"/>
+		<result property="joinDate" column="joinDate"/>
+		<result property="signIn" column="signIn"/>
 	</resultMap> 
  
  	<!-- 카테고리 조회 -->
@@ -29,12 +37,31 @@
 		select *
 		from club
 		where 
-		    cName like concat(concat('%',#{cName}),'%')	
-	  		and categoryNo=#{categoryNo}
-			order by cNo desc
+		    cName like concat('%',#{cName},'%')
+	  		and categoryNo like concat('%',#{categoryNo},'%')
+			order by cNo asc
+  	]]> 	
+ 	</select>
+ 	
+ 	<!-- 전체 클럽명 검색 -->
+	<select id="allSearchClub" resultMap="clubDTO" parameterType="clubDTO">
+ 	<![CDATA[
+		select *
+		from club
+		where 
+		    cName like concat('%',#{cName},'%')
+			order by cNo asc
   	]]> 	
  	</select>
 
+	<!-- 클럽 리스트 전체 조회  -->
+	<select id="allClubList" parameterType="int" resultType="clubDTO">
+ 	<![CDATA[
+		select *
+		from club
+		order by cNo asc
+  	]]>
+	</select>  	
 
  	<!-- 클럽 리스트 조회  -->
 	<select id="selClubList" resultType="clubDTO" parameterType="int">
@@ -42,7 +69,7 @@
 		select *
 		from club
 		where categoryNo=#{categoryNo}
-		order by cNo desc
+		order by cNo asc
   	]]>
 	</select>  	
 
@@ -144,5 +171,10 @@
  	]]> 
  	</delete>
  	
- 
+ 	<!-- 클럽 가입되었는지 확인 -->
+ 	<select id="clubJoinValid" parameterType="ClubMemberDTO" resultType="int">
+ 	<![CDATA[
+ 		select count(*) from clubmember where cNo=#{cNo} and no=#{no}
+  	]]>
+	</select> 
  </mapper>

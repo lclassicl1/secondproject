@@ -23,7 +23,8 @@ public interface ClubService {
 	
 	//검색
 	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws Exception;
-	
+	//전체 검색
+	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws Exception;
 	//클럽 상세보기-소개글
 	public ClubDTO getSelClubDetail(int cNo) throws Exception;
 	//클럽 상세보기-가입자수
@@ -42,6 +43,8 @@ public interface ClubService {
 	public int getDel(int cNo) throws Exception;
 	//클럽회원삭제
 	public int getMemberDel(int cMemberNo) throws Exception;
+	//전체 클럽 조회 
+	public List<ClubDTO> getAllClubList() throws Exception;
 
 	
 	
