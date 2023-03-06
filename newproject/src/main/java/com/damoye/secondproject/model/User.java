@@ -131,6 +131,10 @@ public class User {
 		this.detailaddress = detailaddress;
 	}
 	
+	public void changePassword(String newPwd) {
+		this.password = newPwd;
+	}
+	
     //비밀번호 확인
     public boolean isPwEqualToCheckPw() {
         return password.equals(re_password);

@@ -12,10 +12,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damoye.secondproject.model.User;
@@ -37,18 +39,17 @@ public class SignUpController {
 	
 	// 회원등록 폼 이동
 	@RequestMapping(value="/signUp", method=RequestMethod.GET)
-	public String requestSignUpForm(@ModelAttribute("user") User user, Model model,HttpServletRequest request) throws Exception{
+	public String requestSignUpForm(@ModelAttribute("user") User user, Model model, HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		return "user/signUpForm";
 	}
 	
 	// 회원등록 데이터 처리
 	@RequestMapping(value="/signUp", method=RequestMethod.POST)
-	public String submitSignUp(@ModelAttribute("user")User user, Model model, BindingResult result, HttpServletRequest request) throws Exception{
+	public String submitSignUp(@ModelAttribute("user") User user, Model model, Errors errors, HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");
 
 		userService.signUpUser(user);
-		
 		return "user/signInForm";
 	}
 	

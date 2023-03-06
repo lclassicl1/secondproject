@@ -12,6 +12,29 @@
 <script>
 var code=""; //이메일로 전송되는 인증번호 저장을 위한 변수작성
 
+function checkId(){
+var id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
+$.ajax({
+    url:'./idCheck', //Controller에서 요청 받을 주소
+    type:'post', //POST 방식으로 전달
+    data:{id:id},
+    success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
+        if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+            $('.id_ok').css("display","inline-block"); 
+            $('.id_already').css("display", "none");
+        } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+            $('.id_already').css("display","inline-block");
+            $('.id_ok').css("display", "none");
+            alert("아이디를 다시 입력해주세요");
+            $('#id').val('');
+        }
+    },
+    error:function(){
+        alert("에러입니다");
+    }
+});
+};
+
 /* 인증번호 이메일 전송 */
 $(document).ready(function(){
 	$(".mail_button").click(function(){
@@ -56,30 +79,20 @@ $(document).ready(function(){
 <h3>회원가입</h3>
 	<hr/>
 	<form:form action="/signUp" modelAttribute="user" method="post" accept-charset="utf-8">
-	아이디:<form:input path="id" name="id"/><button type="button" id="check_id">중복확인</button><br/>
-		 <form:errors path="id"/>
+	아이디:<form:input path="id" name="id" oninput="checkId()"/>
 	비밀번호:<form:password path="password" name="password"/><br/>
-	 <form:errors path="password"/>
 	비밀번호확인:<input type="password" name="re_password"/><br/>
-	 <form:errors path="re_password"/>
 	이름:<form:input path="name" name="name"/><br/>
-	 <form:errors path="name"/>
 	우편번호:<form:input path="zipcode" name="zipcode"/><button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
-	 <form:errors path="zipcode"/>
 	주소:<form:input path="address" name="address"/><br/>
-	 <form:errors path="address"/>
 	상세주소:<form:input path="detailaddress" name="detailaddress"/><br/>
 	주민등록번호:<form:input path="pricynum" name="pricynum"/><br/>
-	 <form:errors path="pricynum"/>
 	이메일:<form:input path="email" class="Email" name="email"/><button type="button" class="mail_button" onclick="mail_button">본인인증</button><br/>
-	 <form:errors path="email"/>
 	이메일 인증:<input type="text" id="mail-check-input" name="email_check" disabled="disabled" placeholder="이메일 입력과 본인인증을 해주세요" maxlength="6"/>
 	<span id="mail_check_input_box_warn"></span><br/>
 	전화번호:<form:input path="phonenum" name="phonenum"/><br/>
-	 <form:errors path="phonenum"/>
 	성별:<form:radiobutton path="gender" name="gender" value="M"/> 남성
 		<form:radiobutton path="gender" name="gender" value="F"/> 여성<br/>
-		 <form:errors path="gender"/>
 	
 	<input type="submit" value="가입하기">
 	<input type="reset" value="다시쓰기">
