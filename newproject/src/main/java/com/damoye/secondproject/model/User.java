@@ -1,24 +1,27 @@
 package com.damoye.secondproject.model;
 
+
 public class User {
 
 	private int no;
 	private String id;
 	private String password;
+	private String re_password;
 	private String name;
-	private int zipcode;
+	private String zipcode;
 	private String address;
 	private String detailaddress;
 	private String pricynum;
 	private String email;
 	private String phonenum;
 	private String gender;
-	private String grade;
+	private int grade;
 	private String regdate;
+
 	
 	public User() {}
-	public User(int no, String id, String password, String name, int zipcode, String address, String detailaddress,
-			String pricynum, String email, String phonenum, String gender, String grade, String regdate) {
+	public User(int no, String id, String password, String name, String zipcode, String address, String detailaddress,
+			String pricynum, String email, String phonenum, String gender, int grade, String regdate) {
 		this.no = no;
 		this.id = id;
 		this.password = password;
@@ -33,6 +36,7 @@ public class User {
 		this.grade = grade;
 		this.regdate = regdate;
 	}
+	
 	
 	public int getNo() {
 		return no;
@@ -52,16 +56,22 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getRe_password() {
+		return re_password;
+	}
+	public void setRe_password(String re_password) {
+		this.re_password = re_password;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
-	public void setZipcode(int zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 	public String getAddress() {
@@ -100,10 +110,10 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 	public String getRegdate() {
@@ -112,13 +122,26 @@ public class User {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
+	public void changeMyInfo(String password, String email, String zipcode, String address, String detailaddress) {
+		this.password = password;
+		this.email = email;
+		this.zipcode = zipcode;
+		this.address = address;
+		this.detailaddress = detailaddress;
+	}
 	
+    //비밀번호 확인
+    public boolean isPwEqualToCheckPw() {
+        return password.equals(re_password);
+    }
 	
 	@Override
 	public String toString() {
 		return "User [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", zipcode=" + zipcode
 				+ ", address=" + address + ", detailaddress=" + detailaddress + ", pricynum=" + pricynum + ", email="
-				+ email + ", phonenum=" + phonenum + ", gender=" + gender + ", grade=" + grade + ", regdate=" + regdate
-				+ "]";
+				+ email + ", phonenum=" + phonenum + ", gender=" + gender + ", grade=" + grade + ", regdate=" + regdate + "]";
 	}
+	
+
 }

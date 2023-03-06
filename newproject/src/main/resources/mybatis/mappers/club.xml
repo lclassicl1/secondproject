@@ -2,14 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="mapper.club">
- 	<!-- 카테고리 조회 -->
-<!--  	<select id="selCategory" resultType="com.ourcom.app3.domain.CategoryDTO" >
- 	<![CDATA[
-	select * from category
- 	]]>
- 	</select> -->
+		<resultMap type="clubDTO" id="clubDTO">
+		<result property="cNo" column="cNo"/>
+		<result property="cName" column="cName"/>
+		<result property="cIntro" column="cIntro"/>
+		<result property="masterId" column="masterId"/>
+		<result property="cLoc" column="cLoc"/>
+		<result property="creDate" column="creDate"/>
+		<result property="cPeople" column="cPeople"/>
+		<result property="cIsShow" column="cIsShow"/>
+		<result property="categoryNo" column="categoryNo"/>
+	</resultMap> 
  
- 	<!-- 카테고리명 조회 -->
+ 	<!-- 카테고리 조회 -->
  	<select id="selCategoryName" resultType="String" parameterType="int">
  	 <![CDATA[
 		select categoryName
@@ -18,55 +23,49 @@
  	]]>
  	</select> 	
  	
- 	<!-- 클럽리스트 검색 -->
- 	<select id="searchClub" resultType="clubDTO" parameterType="clubDTO">
- 	<![CDATA[
-	select *
-	from club
-	where #{cName} like concat ('%',#{search},'%')
-	and categoryNo=#{categoryNo}
-	order by cNo desc
-  	]]>
- 	
- 	</select>
-
- 	<!-- 클럽 리스트 조회  -->
-	<select id="selClubList" resultType="clubDTO">
+ 	<!-- 해당카테고리 클럽명 검색 -->
+	<select id="searchClub" resultMap="clubDTO" parameterType="clubDTO">
  	<![CDATA[
 		select *
 		from club
+		where 
+		    cName like concat(concat('%',#{cName}),'%')	
+	  		and categoryNo=#{categoryNo}
+			order by cNo desc
+  	]]> 	
+ 	</select>
+
+
+ 	<!-- 클럽 리스트 조회  -->
+	<select id="selClubList" resultType="clubDTO" parameterType="int">
+ 	<![CDATA[
+		select *
+		from club
+		where categoryNo=#{categoryNo}
 		order by cNo desc
   	]]>
 	</select>  	
-	 	<!-- 클럽 검색+조회 초기 검색은 클럽명-->
- 	<!--  페이징리스트 -->
-  	<!-- 페이징 검색 게시글 수 -->
-<!--  <select id="getTotalCount" parameterType="pageClub" resultType="int">
-  	<![CDATA[
-  		select count(cNo) from club
- 	]]>
-	</select>
- -->
+
  	<!-- 클럽 상세보기-소개글 -->
- 	<select id="selClubDetail" parameterType="int" resultType="clubDTO">
+ 	<select id="selClubDetail" resultType="clubDTO" parameterType="int">
  	<![CDATA[
-		select cNo,cName,cIntro,masterId,creDate,cPeople,cLoc
+		select *
 		from club
 		where cNo=#{cNo}
   	]]>
 	</select> 
 	<!-- 클럽 가입자 수 -->
-	<select id="clubCount" parameterType="int" resultType="int">
+	<select id="clubCount" resultType="int" parameterType="int">
  	<![CDATA[
 		select count(cMemberNo)
 		from clubmember
 		where cNo=#{cNo}
   	]]>
 	</select> 
-	<!-- 모임글 조회 -->
-	<select id="selBoardDetail" parameterType="int" resultType="boardVO">
+	<!-- 상세보기-모임글 조회 -->
+	<select id="selBoardDetail" resultType="boardVO" parameterType="int">
  	<![CDATA[
-	 	select boardNo,bTitle,bWriter,bContent
+	 	select *
 	 	from board
 	 	where cNo=#{cNo}
 	 	and bType='모집'
@@ -75,60 +74,75 @@
 	</select> 
 	
 	<!--  클럽 가입한 회원리스트 -->
-	<select id="clubMemeber" parameterType="int" resultType="clubMemberDTO">
+	<select id="clubMemeber" resultType="clubMemberDTO" parameterType="int">
 	<![CDATA[
-	select *
-	from clubmember
-	where cNo=#{cNo}
+		select u.id, c.*
+		from user u,clubmember c
+		where u.no=c.no
+		and c.cNo=#{cNo}
+		order by joinDate desc
 	]]>
 	</select>
-	
-	
-	<!--추가 예정/ 클럽 상세보기 (게시판의 모임글)-->
- <!-- <select id="selBoardDetail" parameterType="int" resultType="board">
- 	<![CDATA[
- 	select boardNo,bTitle,bWriter,bContent
- 	from board
- 	where cNo=#{cNo}
- 	and bType='모집'
- 	limit 0, 2
- 	  	]]>
-	</select> 
- -->
- 
+
  	<!-- 클럽가입하기 -->
  	<insert id="signClub" parameterType="clubMemberDTO">
  	<![CDATA[
- 	insert into clubmember(cNo,no,memberId)
-	values(#{cNo},#{no},#{memberId}) 	 	
+	 	insert into clubmember(cNo,no)
+		values(#{cNo},#{no}) 	 	
  	]]> 	
  	</insert>
-
+ 	
+ 	<!-- 중복조회 -->
+<!--  	<select id="noDuplication" resultType="int" parameterType="clubMemberDTO">
+ 	<![CDATA[
+		select cMemberNo
+		from clubmember
+		where cNo=#{cNo}
+			and no=#{no}
+	]]> 	
+ 	</select>
+ -->
  	<!-- 클럽생성하기 -->
  	<insert id="createClub" parameterType="clubDTO">
  	<![CDATA[
-	insert into club(cName,cIntro,masterId,categoryNo,cLoc,cPeople)
-	values(#{cName},#{cIntro},#{masterId},#{categoryNo},#{cLoc},#{cPeople}) 	
+		insert into club(cName,cIntro,masterId,categoryNo,cLoc,cPeople)
+		values(#{cName},#{cIntro},#{masterId},#{categoryNo},#{cLoc},#{cPeople}) 	
  	]]> 	
  	</insert>
  	
  	<!-- 클럽수정하기  -->
  	<update id="updateClub" parameterType="clubDTO">
  	<![CDATA[
- 	update club
-	set cName=#{cName},cIntro=#{cIntro},categoryNo=#{categoryNo},cLoc=#{cLoc},cPeople=#{cPeople}
-	where cNo=#{cNo}
+	 	update club
+		set cName=#{cName},cIntro=#{cIntro},categoryNo=#{categoryNo},cLoc=#{cLoc},cPeople=#{cPeople}
+		where cNo=#{cNo}
  	]]> 
  	</update>
  	
- 	<!-- 클럽탈퇴하기 -->
- 	<update id="deleteClub" parameterType="int">
+ 	<!--  특정클럽에 가입한 회원 전체 조회 -->
+ 	<select id="AllClubMemberList" resultType="clubMemberDTO">
+ 	 <![CDATA[
+	 	select *
+		from clubmember
+		where cNo=#{cNo}
+ 	]]>  	
+ 	</select>
+ 	
+ 	<!-- 클럽 회원 삭제하기 -->
+   	<delete id="clubDelMember" parameterType="int">
  	<![CDATA[
- 	update clubmember
-	set signIn='N'
-	where cMemberNo=#{cMemberNo}
+		delete from clubmember
+		where cMemberNo=#{cMemberNo}
  	]]> 
- 	</update>
+ 	</delete>
+ 	
+ 	 <!-- 클럽 삭제하기 /클럽장과 관리자만-->
+ 	<delete id="clubAdminDel" parameterType="int">
+ 	<![CDATA[
+		delete from club
+		where cNo=#{cNo}
+ 	]]> 
+ 	</delete>
  	
  
  </mapper>

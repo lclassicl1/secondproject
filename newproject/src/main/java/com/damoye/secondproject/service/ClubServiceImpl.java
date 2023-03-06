@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damoye.secondproject.dao.ClubDAO;
+import com.damoye.secondproject.dao.ClubDAOImpl;
 import com.damoye.secondproject.model.BoardVO;
 import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.ClubMemberDTO;
+import com.damoye.secondproject.model.User;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -16,21 +18,26 @@ public class ClubServiceImpl implements ClubService {
 	@Autowired
 	private ClubDAO clubDAO;
 
-	//카테고리 조회 selCategory
-	/*
-	 * public List<CategoryDTO> getSelCategory(){ List<CategoryDTO> cgategory=
-	 * clubDAO.getSelCategory(); return cgategory; }
-	 */
-	//특정 카테고리명 조회
+	//특정 카테고리 조회
 	@Override
 	public String getSelCategoryName(int categoryNo) throws Exception {
-		return (String)clubDAO.getSelCategoryName(categoryNo);		
+		String category =clubDAO.getSelCategoryName(categoryNo);	
+		return category;
 	}
-	//클럽 목록 검색+조회 selClubList
+	//클럽 목록 조회 selClubList
 	@Override
-	public List<ClubDTO> getSelClubList()throws Exception{	
-		return clubDAO.getSelClubList();
+	public List<ClubDTO> getSelClubList(int categoryNo)throws Exception{	
+		List<ClubDTO> cList= clubDAO.getSelClubList(categoryNo);
+		return cList;
 	}
+	
+	//검색
+	@Override
+	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws Exception {
+		List<ClubDTO> cNameList=clubDAO.getSearchCName(clubDTO);
+		return cNameList;
+	}
+	
 	//클럽 상세보기-소개글
 	@Override
 	public ClubDTO getSelClubDetail(int cNo)throws Exception{
@@ -50,8 +57,10 @@ public class ClubServiceImpl implements ClubService {
 	}
 	//클럽 상세보기-모임글
 	@Override
-	public BoardVO getSelBDetail(int cNo) throws Exception {
-		return clubDAO.getSelBDetail(cNo);
+	public List<BoardVO> getSelBDetail(int cNo) throws Exception {
+		List<BoardVO> boardList= clubDAO.getSelBDetail(cNo);
+		System.out.println("서비스"+boardList);//확인용
+		return boardList;		
 		
 	}
 	
@@ -62,23 +71,31 @@ public class ClubServiceImpl implements ClubService {
 	}
 	//클럽 생성
 	@Override
-	public void getCreClub(ClubDTO clubDTO) throws Exception {
-		clubDAO.getCreClub(clubDTO);		
+	public int getCreClub(ClubDTO clubDTO) throws Exception {
+		return clubDAO.getCreClub(clubDTO);		
 	}
 	//클럽수정
 	@Override
 	public int getUpdateClub(ClubDTO clubDTO) throws Exception {
-		int cnt=clubDAO.getUpdateClub(clubDTO);
-		return cnt;
-		
+		int cnt=clubDAO.getUpdateClub(clubDTO);	
+		return cnt;		
 	}
-	//클럽탈퇴
+	//클럽삭제
 	@Override
-	public int getDel(int mNo) throws Exception {
-		int cnt=clubDAO.getDel(mNo);
+	public int getDel(int cNo) throws Exception {
+		int cnt=clubDAO.getDel(cNo);
 		return cnt;
-		
 	}
+	//클럽회원삭제
+	@Override
+	public int getMemberDel(int cMemberNo) throws Exception {
+		int cnt=clubDAO.getMemberDel(cMemberNo);
+		return cnt;
+	}
+
+
+
+
 
 
 
