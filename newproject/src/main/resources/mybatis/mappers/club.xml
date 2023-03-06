@@ -15,7 +15,7 @@
 	</resultMap> 
  
  	<!-- 카테고리 조회 -->
- 	<select id="selCategoryName" parameterType="int" resultType="String">
+ 	<select id="selCategoryName" resultType="String" parameterType="int">
  	 <![CDATA[
 		select categoryName
 		from category
@@ -37,7 +37,7 @@
 
 
  	<!-- 클럽 리스트 조회  -->
-	<select id="selClubList" parameterType="int" resultType="clubDTO">
+	<select id="selClubList" resultType="clubDTO" parameterType="int">
  	<![CDATA[
 		select *
 		from club
@@ -47,7 +47,7 @@
 	</select>  	
 
  	<!-- 클럽 상세보기-소개글 -->
- 	<select id="selClubDetail" parameterType="int" resultType="clubDTO">
+ 	<select id="selClubDetail" resultType="clubDTO" parameterType="int">
  	<![CDATA[
 		select *
 		from club
@@ -55,7 +55,7 @@
   	]]>
 	</select> 
 	<!-- 클럽 가입자 수 -->
-	<select id="clubCount" parameterType="int" resultType="int">
+	<select id="clubCount" resultType="int" parameterType="int">
  	<![CDATA[
 		select count(cMemberNo)
 		from clubmember
@@ -63,7 +63,7 @@
   	]]>
 	</select> 
 	<!-- 상세보기-모임글 조회 -->
-	<select id="selBoardDetail" parameterType="int" resultType="boardVO">
+	<select id="selBoardDetail" resultType="boardVO" parameterType="int">
  	<![CDATA[
 	 	select *
 	 	from board
@@ -74,7 +74,7 @@
 	</select> 
 	
 	<!--  클럽 가입한 회원리스트 -->
-	<select id="clubMemeber" parameterType="int" resultType="clubMemberDTO">
+	<select id="clubMemeber" resultType="clubMemberDTO" parameterType="int">
 	<![CDATA[
 		select u.id, c.*
 		from user u,clubmember c
@@ -91,7 +91,17 @@
 		values(#{cNo},#{no}) 	 	
  	]]> 	
  	</insert>
-
+ 	
+ 	<!-- 중복조회 -->
+<!--  	<select id="noDuplication" resultType="int" parameterType="clubMemberDTO">
+ 	<![CDATA[
+		select cMemberNo
+		from clubmember
+		where cNo=#{cNo}
+			and no=#{no}
+	]]> 	
+ 	</select>
+ -->
  	<!-- 클럽생성하기 -->
  	<insert id="createClub" parameterType="clubDTO">
  	<![CDATA[

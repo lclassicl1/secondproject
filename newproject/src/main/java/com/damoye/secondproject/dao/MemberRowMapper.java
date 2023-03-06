@@ -27,7 +27,7 @@ public class MemberRowMapper implements RowMapper<User> {
 		user.setEmail(rs.getString("email"));
 		user.setPhonenum(rs.getString("phoneNum"));
 		user.setGender(rs.getString("gender"));
-		user.setGrade(rs.getString("grade"));
+		user.setGrade(rs.getInt("grade"));
 		user.setRegdate(rs.getString("regdate"));
 		
 		return user;

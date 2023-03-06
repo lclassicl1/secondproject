@@ -18,7 +18,15 @@ $(document).ready(function(){
 			  $('#registForm').attr("action","${path}/club/sign").submit();
 		  }else{
 			 return false;		 }
-	  	});		
+	  	});	
+		
+		
+		
+		
+		
+		
+		
+		
 		//클럽수정버튼 cNo
 	  $("#btUpdate").on("click",function(){
 			location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cIntro}";
@@ -97,9 +105,12 @@ session:${loginUser}<br/>
 		<tr>
 			<td colspan="2">${clubDTO.cIntro}</td><!-- 클럽소개글 -->
 		</tr>
+		<tr>
+			<th colspan="2">모임활동(모집)</th>
+		</tr>
 	<c:if test="${empty boardVO}">
 		<tr>
-				<td colspan="5">개설된 모임활동이 없습니다</td>
+			<td colspan="2">개설된 모임활동이 없습니다</td>
 		</tr>	
 	</c:if>
 	<c:if test="${!empty boardVO}">	
@@ -124,7 +135,7 @@ session:${loginUser}<br/>
 	
 	<%--관리자모드 --%>
 	<%-- <c:if test="${(!empty loginUser) && (loginUser.grade == 999)}"> --%>
-	<c:if test="${(!empty loginUser) && (loginUser.id == 'admin')}"> 
+	<c:if test="${(!empty loginUser) && (loginUser.grade == 999)}"> 
 		<tr>
 			<th colspan="3">가입자 리스트</th>
 		</tr>
@@ -145,7 +156,7 @@ session:${loginUser}<br/>
 	
 	<%-- 클럽장,관리자만 수정 가능 --%>
 	<%-- <c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}"> --%>
-	<c:if test="${(!empty loginUser) && (loginUser.id == 'admin') || (loginUser.id == clubDTO.masterId)}">
+	<c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
 		<tr>
 			<td colspan="2">
 				<p style="text-align:right;">
