@@ -39,41 +39,70 @@
 		});
 </script>
 <title>Insert title here</title>
+<style>
+#tableCenter{
+	display: flex;
+ 	justify-content: center;
+	
+}
+table{
+	width:60%;
+}
+</style>
 </head>
 <body>
 <header><jsp:include page="${path}/resources/module/header.jsp"/></header>
 <main>
-	<h1>공지사항</h1>
-	${noticeDTO}
-	<table border="1">
-		<tr>
-			<th>작성자</th><td>${noticeDTO.writername}</td>
-		</tr>
-		<tr>
-			<th>제목</th><td>${noticeDTO.title}</td>
-		</tr>
-		<tr>
-			<th>내용</th><td>${noticeDTO.content}</td>
-		</tr>
-		<tr>
-			<th>작성일자</th><td><fmt:formatDate value="${noticeDTO.regdate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-		</tr>
-		<tr>
-			<th>마지막수정일자</th><td><fmt:formatDate value="${noticeDTO.modidate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-		</tr>
-		<tr>
-			<th>조회수</th><td>${noticeDTO.readcnt}</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<c:if test="${userId == 'admin'}">
-					<input type="button" name="" id="updateNotice" value="수정"/>
-					<input type="button" name="" id="deleteNotice" value="삭제"/>
-				</c:if>	
-					<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록"/>
-			</td>
-		</tr>
-	</table>
+	<div id="subheader">
+		<div class="row">
+			<div class="eight columns">
+				<p class="bread leftalign">
+					<b>공지 사항</b>
+				</p> 
+			</div>
+			<div class="four columns">
+				<div class="row collapse">
+					<div class="ten mobile-three columns">
+						<div class="two mobile-one columns">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="hr">
+	</div>
+	<div id="tableCenter">
+		<table border="1">
+			<tr>
+				<th>작성자</th><td>${noticeDTO.writername}</td>
+			</tr>
+			<tr>
+				<th>제목</th><td>${noticeDTO.title}</td>
+			</tr>
+			<tr>
+				<th>내용</th><td>${noticeDTO.content}</td>
+			</tr>
+			<tr>
+				<th>작성일자</th><td><fmt:formatDate value="${noticeDTO.regdate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+			</tr>
+			<tr>
+				<th>마지막수정일자</th><td><fmt:formatDate value="${noticeDTO.modidate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+			</tr>
+			<tr>
+				<th>조회수</th><td>${noticeDTO.readcnt}</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<c:if test="${userId == 'admin'}">
+						<input type="button" name="" id="updateNotice" value="수정"/>
+						<input type="button" name="" id="deleteNotice" value="삭제"/>
+					</c:if>	
+						<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록"/>
+				</td>
+			</tr>
+		</table>
+	</div>
 </main>	
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>	
 </body>

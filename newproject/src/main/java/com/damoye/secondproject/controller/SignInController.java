@@ -25,7 +25,15 @@ public class SignInController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/signIn", method=RequestMethod.GET)
+	@RequestMapping("/logoMain")
+	public String requestMain(HttpSession session) {
+		if(session.getAttribute("loginUser") == null) {
+			return "user/signInForm";
+		}
+		return "user/main";
+	}
+	
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String requestSignIn(@ModelAttribute("user") User user, BindingResult result, Model model) {
 		
 		return "user/signInForm";
@@ -77,7 +85,7 @@ public class SignInController {
 	@RequestMapping("/logout")
     public ModelAndView logout(HttpSession session) {
         session.invalidate();
-        ModelAndView mv = new ModelAndView("redirect:/signIn");
+        ModelAndView mv = new ModelAndView("redirect:/");
         return mv;
     }
 	

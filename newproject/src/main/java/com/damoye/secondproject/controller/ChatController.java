@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damoye.secondproject.model.ChatDTO;
+import com.damoye.secondproject.model.ClubMemberDTO;
+import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.ChatService;
 
 
@@ -30,15 +32,25 @@ public class ChatController {
 	
 	@RequestMapping("/chat/room")
 	public String showRoom(int roomNo,HttpSession session, Model model) {
-		String userId = (String)session.getAttribute("userId");
+		User user = (User)session.getAttribute("loginUser");
+		String userId = user.getId();
 		model.addAttribute("userId", userId);
+		
+		int userNo = user.getNo();
+		ClubMemberDTO clubMember = new ClubMemberDTO();
+		clubMember.setcNo(roomNo);
+		clubMember.setNo(userNo);
+		int result = chatService.validClubMember(clubMember);
+		if(result == 0) {
+			return "club/clubNoJoin";
+		}
+		
 		return "chat/room";
 	}
 	@RequestMapping(value="/chat/addMessage", method=RequestMethod.POST)
 	@ResponseBody
 	public void addPostMessage(@RequestParam int roomNo,@RequestParam String content
 								,HttpSession session) {
-		//Map<String, Object> rs = new HashMap<>();
 		ChatDTO chatDTO = new ChatDTO();
 		String writerId = (String)session.getAttribute("userId");
 		chatDTO.setRoomNo(roomNo);
@@ -46,10 +58,6 @@ public class ChatController {
 		chatDTO.setContent(content);
 		
 		chatService.addMessage(chatDTO);
-		
-		//rs.put("message","success");
-		
-		//return rs;
 	}
 	
 	@RequestMapping(value = "/chat/checkMessage",method=RequestMethod.POST)

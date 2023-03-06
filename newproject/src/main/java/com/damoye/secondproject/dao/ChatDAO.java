@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.damoye.secondproject.model.ChatDTO;
+import com.damoye.secondproject.model.ClubMemberDTO;
 
 
 @Repository
@@ -27,6 +28,10 @@ public class ChatDAO {
 		
 		List<ChatDTO> list = sqlSession.selectList("mapper.chat.chatList",roomNo);
 		return list;
+	}
+	
+	public int validClubMember(ClubMemberDTO clubMember) {
+		return sqlSession.selectOne("mapper.club.clubJoinValid", clubMember);
 	}
 
 }

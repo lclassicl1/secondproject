@@ -15,6 +15,7 @@
 		<typeAlias type="com.damoye.secondproject.model.BoardVO" alias="boardVO"/>
 		<typeAlias type="com.damoye.secondproject.model.GoodsVO" alias="goodVO"/>
 		<typeAlias type="com.damoye.secondproject.model.ImageFileVO" alias="imageFileVO"/>	
+	                                   
 		<typeAlias type="com.damoye.secondproject.model.CommBoardVO" alias="commBoardVO"/>
 	</typeAliases>
 </configuration>

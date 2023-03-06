@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.MyClubService;
 
 @Controller
@@ -22,9 +23,10 @@ public class MyClubController {
 	
 	@RequestMapping("/myClub")
 	public String myClub(HttpSession session,Model model) {
-		int userNo = (Integer)session.getAttribute("userNo");
+		User user = (User)session.getAttribute("loginUser");
+		int userNo = user.getNo();
 		List<ClubDTO> clubList = myClubService.getMyClub(userNo);
-		model.addAttribute("list",clubList);
+		model.addAttribute("clubList",clubList);
 		
 		return "club/myClub";
 	}
