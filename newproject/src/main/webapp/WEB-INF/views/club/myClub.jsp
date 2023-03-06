@@ -21,7 +21,7 @@
 	<div class="row">
 		<div class="eight columns">
 			<p class="bread leftalign">
-				내 클럽
+				<b>내 클럽</b>
 			</p> 
 		</div>
 		<div class="four columns">

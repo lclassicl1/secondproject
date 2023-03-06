@@ -57,7 +57,7 @@ table{
 		<div class="row">
 			<div class="eight columns">
 				<p class="bread leftalign">
-					공지 사항
+					<b>공지 사항</b>
 				</p> 
 			</div>
 			<div class="four columns">

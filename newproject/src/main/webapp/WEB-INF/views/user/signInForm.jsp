@@ -53,13 +53,30 @@ $(document).ready(function(){
 	toggle = () => {
 	  container.classList.toggle('sign-in')
 	  container.classList.toggle('sign-up')
-	}
+	};
 
 	setTimeout(() => {
 	  container.classList.add('sign-in')
-	}, 200)
+	}, 200);
 });
 </script>
+<style>
+#zipcode{
+	width: 60%;
+}
+#zipcode_Btn{
+	width: 40%;
+}
+#email{
+	width: 70%;
+}
+#email_Btn{
+	width: 30%;
+}
+a{
+	text-decoration: none;
+}
+</style>
 </head>
 <body>
 	<div id="container" class="container">
@@ -72,7 +89,7 @@ $(document).ready(function(){
           	<form:form action="/signUp" modelAttribute="user" method="post" accept-charset="utf-8">
             <div class="input-group">
               <i class='bx bxs-user'></i>
-              <form:input path="id" name="id" oninput="checkId()" placeholder="Username"/><br/>
+              <form:input path="id" name="id" oninput="checkId()" placeholder="ID"/><br/>
 				<form:errors path="id"/>
             </div>
             <div class="input-group">
@@ -85,31 +102,27 @@ $(document).ready(function(){
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <input type="password" placeholder="Confirm password">
+              <form:input path="name" name="name" placeholder="Name"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="name" name="name" placeholder="name"/><br/>
+              <form:input path="zipcode" name="zipcode" id="zipcode" placeholder="Zipcode"/><button type="button" id="zipcode_Btn" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="zipcode" name="zipcode" placeholder="zipcode"/><button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
+              <form:input path="address" name="address" placeholder="Address"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="address" name="address" placeholder="address"/><br/>
+              <form:input path="detailaddress" name="detailaddress" placeholder="Detail_Address"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="detailaddress" name="detailaddress" placeholder="detailaddress"/><br/>
+              <form:input path="pricynum" name="pricynum" placeholder="Pricynum"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="pricynum" name="pricynum" placeholder="pricynum"/><br/>
-            </div>
-            <div class="input-group">
-              <i class='bx bxs-lock-alt'></i>
-              <form:input path="email" class="Email" name="email" placeholder="email"/><button type="button" class="mail_button" onclick="mail_button">본인인증</button><br/>
+              <form:input path="email" class="Email" name="email" id="email"  placeholder="Email"/><button type="button" id="email_Btn" class="mail_button" onclick="mail_button">본인인증</button><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
@@ -118,12 +131,13 @@ $(document).ready(function(){
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="phonenum" name="phonenum" placeholder="phonenum"/><br/>
+              <form:input path="phonenum" name="phonenum" placeholder="Phonenum"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:radiobutton path="gender" name="gender" value="M"/> 남성
-		<form:radiobutton path="gender" name="gender" value="F"/> 여성<br/>
+             Gender
+              <form:radiobutton path="gender" name="gender" class="gender" value="M"/> 남성
+		<form:radiobutton path="gender" name="gender" class="gender" value="F"/> 여성<br/>
             </div>
             <button>
               Sign up
@@ -157,14 +171,13 @@ $(document).ready(function(){
 	              <form:password path="password" placeholder="Password" />
 				<span class="fieldError"><form:errors path="password" /></span>
 	            </div>
-	            <input type="submit" value="가입하기"/>
+	            <button id="Login_Btn" class="Login_Btn">Login in</button><br/>
             </form:form>
             <p>
               <b>
                <a href="<%=request.getContextPath()%>/findId"> Forgot ID?</a>
               </b>
-            </p>
-            <p>
+              /
               <b>
                 <a href="<%=request.getContextPath()%>/findPw">Forgot password?</a>
               </b>
@@ -217,5 +230,64 @@ $(document).ready(function(){
     </div>
     <!-- END CONTENT SECTION -->
   </div>
+  
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+function execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('zipcode').value = data.zonecode;
+            document.getElementById("address").value = roadAddr;
+            document.getElementById("jibunAddress").value = data.jibunAddress;
+            
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if(roadAddr !== ''){
+                document.getElementById("extraAddress").value = extraRoadAddr;
+            } else {
+                document.getElementById("extraAddress").value = '';
+            }
+
+            var guideTextBox = document.getElementById("guide");
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                guideTextBox.style.display = 'block';
+
+            } else if(data.autoJibunAddress) {
+                var expJibunAddr = data.autoJibunAddress;
+                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                guideTextBox.style.display = 'block';
+            } else {
+                guideTextBox.innerHTML = '';
+                guideTextBox.style.display = 'none';
+            }
+        }
+    }).open();
+}
+</script>
 </body>
 </html>

@@ -12,28 +12,28 @@
 <div id="ei-slider" class="ei-slider">
 	<ul class="ei-slider-large">
 		<li>
-		<img src="http://www.wowthemes.net/demo/studiofrancesca/images/slideshow/large/2.jpg" alt="image01" class="responsiveslide">
+		<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDVfNCAg%2FMDAxNjc1NTcyMTMwNjU5.fJNcSr5QvRK4bAkYZT4yS1tqSj9wpGewghNxllMSuPAg.Da54wC-vq7xVBo0sHLrQvl6TIXOy6wtqCHBjrgDuoKYg.JPEG.ljaskylove00%2FKakaoTalk_20221113_120311429_03.jpg&type=sc960_832" alt="image01" class="responsiveslide">
 		<div class="ei-title">
 			<h2>모임소개1</h2>
 			<h3>모임이름1</h3>
 		</div>
 		</li>
 		<li>
-		<img src="http://placehold.it/1400x500/222" alt="image02" class="responsiveslide">
+		<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjJfNjQg%2FMDAxNjA2MDU0NjM2ODY3.RljtHkVr8zixMBER4MACMBeiQhNSt1EGARM8h95R4GEg.NDMQdw902x8JjS3xjcDdUYFLfa2zMe_ySbf6TEPyNmIg.JPEG.andrichrich%2FIMG%25A3%25DF20201104%25A3%25DF011157.jpg&type=sc960_832" alt="image02" class="responsiveslide">
 		<div class="ei-title">
 			<h2>모임소개2</h2>
 			<h3>모임이름2</h3>
 		</div>
 		</li>
 		<li>
-		<img src="http://placehold.it/1400x500/222" alt="image03" class="responsiveslide">
+		<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEyMjJfMjIg%2FMDAxNjcxNjM5Mzg4NzI1.TOl2dnd87pQxHTATjMQLVADLASVZvnxLZ96dMsLNPGAg.6vpQaD3XQTo4emolDcWwqV6e4dtGTj1fTPrkfphnbVIg.JPEG.kangjs1981%2FKakaoTalk_Photo_2022-12-22-01-13-16_009.jpeg&type=sc960_832" alt="image03" class="responsiveslide">
 		<div class="ei-title">
 			<h2>모임소개3</h2>
 			<h3>모임이름3</h3>
 		</div>
 		</li>
 		<li>
-		<img src="http://placehold.it/1400x500/222" alt="image04" class="responsiveslide">
+		<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAxMjVfMjEw%2FMDAxNjc0NjM4MjUxNDA3.wAUwN3pwIMNbJLoxZLRBJMIJ-5KKw0OwdsjwaWDONskg.6-dqMPi9RdhVj7A5R-etmL-ISKqJaYEm0aOjFzw6W94g.JPEG.qkrwkdgus00%2FKakaoTalk_20230125_181215637_01.jpg&type=sc960_832" alt="image04" class="responsiveslide">
 		<div class="ei-title">
 			<h2>모임소개14</h2>
 			<h3>모임이름4</h3>
@@ -44,10 +44,10 @@
 	<!-- slider-thumbs -->
 	<ul class="ei-slider-thumbs">
 		<li class="ei-slider-element">Current</li>
-		<li><a href="#">Slide 1</a><img src="http://placehold.it/150x59/444" class="slideshowthumb" alt="thumb01"/></li>
-		<li><a href="#">Slide 2</a><img src="http://placehold.it/150x59/444" class="slideshowthumb" alt="thumb02"/></li>
-		<li><a href="#">Slide 3</a><img src="http://placehold.it/150x59/444" class="slideshowthumb" alt="thumb03"/></li>
-		<li><a href="#">Slide 4</a><img src="http://placehold.it/150x59/444" class="slideshowthumb" alt="thumb04"/></li>
+		<li><a href="#">Slide 1</a><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAyMDVfNCAg%2FMDAxNjc1NTcyMTMwNjU5.fJNcSr5QvRK4bAkYZT4yS1tqSj9wpGewghNxllMSuPAg.Da54wC-vq7xVBo0sHLrQvl6TIXOy6wtqCHBjrgDuoKYg.JPEG.ljaskylove00%2FKakaoTalk_20221113_120311429_03.jpg&type=sc960_832" class="slideshowthumb" alt="thumb01"/></li>
+		<li><a href="#">Slide 2</a><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDExMjJfNjQg%2FMDAxNjA2MDU0NjM2ODY3.RljtHkVr8zixMBER4MACMBeiQhNSt1EGARM8h95R4GEg.NDMQdw902x8JjS3xjcDdUYFLfa2zMe_ySbf6TEPyNmIg.JPEG.andrichrich%2FIMG%25A3%25DF20201104%25A3%25DF011157.jpg&type=sc960_832" class="slideshowthumb" alt="thumb02"/></li>
+		<li><a href="#">Slide 3</a><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEyMjJfMjIg%2FMDAxNjcxNjM5Mzg4NzI1.TOl2dnd87pQxHTATjMQLVADLASVZvnxLZ96dMsLNPGAg.6vpQaD3XQTo4emolDcWwqV6e4dtGTj1fTPrkfphnbVIg.JPEG.kangjs1981%2FKakaoTalk_Photo_2022-12-22-01-13-16_009.jpeg&type=sc960_832" class="slideshowthumb" alt="thumb03"/></li>
+		<li><a href="#">Slide 4</a><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAxMjVfMjEw%2FMDAxNjc0NjM4MjUxNDA3.wAUwN3pwIMNbJLoxZLRBJMIJ-5KKw0OwdsjwaWDONskg.6-dqMPi9RdhVj7A5R-etmL-ISKqJaYEm0aOjFzw6W94g.JPEG.qkrwkdgus00%2FKakaoTalk_20230125_181215637_01.jpg&type=sc960_832" class="slideshowthumb" alt="thumb04"/></li>
 	</ul>
 </div>
 <div class="minipause">

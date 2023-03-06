@@ -70,7 +70,7 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="eight columns">
 			<p class="bread leftalign">
-				${clubDTO.cName}  
+				<b>${clubDTO.cName}</b>  
 			</p>
 		</div>
 	</div>
@@ -90,7 +90,7 @@ $(document).ready(function(){
 				${clubDTO.cIntro}
 			</p>
 			<div id="tableCenter">
-				<table border="1" style="text-align:center;">
+				<table border="1" style="text-align:center; display: flex; justify-content: center; width: 100%;">
 					<tr>
 						<td>${category}</td>
 					</tr>
@@ -149,10 +149,10 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<!-- SIDEBAR -->
-		<div class="four columns">
+		<div class="four columns" style="margin-top: 15px;">
 			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${categoryNo}&cNo=${clubDTO.cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
 			<br class="clear"/>
-			<a href="#"><h6 class="sidebartitle">CLUB BOARD</h6></a>
+			<a href="<%=request.getContextPath() %>/board/list?cNo=${clubDTO.cNo}&num=1"><h6 class="sidebartitle">CLUB BOARD</h6></a>
 			<br class="clear"/>
 			<a href="#" target="_blank" onclick="openPop()"><h6 class="sidebartitle">CLUB CHAT</h6></a>
 		</div>

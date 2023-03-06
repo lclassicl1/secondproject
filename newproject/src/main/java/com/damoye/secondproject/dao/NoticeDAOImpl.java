@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.NoticePaging;
+import com.damoye.secondproject.model.User;
 
 @Repository
 public class NoticeDAOImpl implements NoticeDAO {
@@ -57,6 +58,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public int selectAllCount() {
 		return sqlSession.selectOne("mapper.notice.totalcnt");
+	}
+
+	@Override
+	public List<User> allUserList() {
+		return sqlSession.selectList("mapper.notice.userAllList");
 	}
 
 

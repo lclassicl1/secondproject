@@ -1,26 +1,24 @@
 package com.damoye.secondproject.controller;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.NoticePaging;
+import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.NoticeService;
 
 @Controller
@@ -124,14 +122,13 @@ public class NoticeController {
 		return "redirect:/notice";
 	}
 	
-	//공지사항 페이지 Ajax
-	@GetMapping("notice/paging")
-	@ResponseBody
-	public void noticePaging(@RequestBody String filterJson, HttpServletResponse res, Model model) throws IOException {
-		
-		
-		int allcount = noticeServiceImpl.selectAllCount();
-		System.out.println("전체게시글수:"+allcount);
+	//관리자 회원관리 페이지
+	@GetMapping("admin/userList")
+	public ModelAndView userList(Model model, ModelAndView mv) {
+		List<User> userList = noticeServiceImpl.allUserList();
+		mv.addObject("userList", userList);
+		mv.setViewName("notice/allUserList");
+		return mv;
 	}
 	
 }

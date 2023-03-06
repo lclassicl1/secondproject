@@ -64,7 +64,7 @@ table{
 		<div class="row">
 			<div class="eight columns">
 				<p class="bread leftalign">
-					공지 사항
+					<b>공지 사항</b>
 				</p> 
 			</div>
 			<div class="four columns">
@@ -89,7 +89,6 @@ table{
 			<c:if test="${empty noticeList}">
 			<tr>
 				<td colspan="5">작성된 공지사항이 없습니다</td>
-			</tr>	
 			</c:if>
 			<c:if test="${not empty noticeList}">
 				<c:forEach items="${noticeList}" var="list">

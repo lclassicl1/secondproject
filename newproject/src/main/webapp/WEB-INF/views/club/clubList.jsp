@@ -42,17 +42,19 @@
 	<div class="row">
 		<div class="eight columns">
 			<p class="bread leftalign">
-				<c:choose>
-				    <c:when test="${categoryNo eq 1}">
-				    	공부 모임
-				    </c:when>
-				    <c:when test="${categoryNo eq 2}">
-				    	요리 모임
-				    </c:when>
-				    <c:otherwise>
-				    	전체 모임
-				    </c:otherwise>
-				</c:choose>
+				<b>
+					<c:choose>
+					    <c:when test="${categoryNo eq 1}">
+					    	공부 모임
+					    </c:when>
+					    <c:when test="${categoryNo eq 2}">
+					    	요리 모임
+					    </c:when>
+					    <c:otherwise>
+					    	전체 모임
+					    </c:otherwise>
+					</c:choose>
+				</b>
 			</p> 
 		</div>
 		<div class="four columns">
