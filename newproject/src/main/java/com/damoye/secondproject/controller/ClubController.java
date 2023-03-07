@@ -1,5 +1,6 @@
 package com.damoye.secondproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,30 +22,34 @@ import com.damoye.secondproject.model.BoardVO;
 import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.User;
-import com.damoye.secondproject.service.ClubService;
+import com.damoye.secondproject.service.ClubServiceImpl;
 
 @Controller
-@RequestMapping("club")
+@RequestMapping("club/")
 public class ClubController {
 	private static final Logger logger = LoggerFactory.getLogger(ClubController.class);
 
 	@Autowired
-	private ClubService clubService;
+	private ClubServiceImpl clubService;
 
+	//전체 카테고리의 모임 출력 
+	@GetMapping("/allClubList")
+	public String getAllClub(Model model) throws Exception {		
+		List<ClubDTO> clubList = clubService.getAllClubList();
+		model.addAttribute("clubList", clubList);		
+		return "club/clubList";		
+	}
 	
-	@GetMapping("maintest")
-	public String getCheck(Model model) {
-		return "club/main";
-	}	
-
+	
 	//클럽리스트
-	//   /club/clist?categoryNo=1
+	//   ${path}/clist?categoryNo=1/clist?categoryNo=1
 	@GetMapping("clist")
 	public String getSelClub(@RequestParam("categoryNo") int categoryNo, Model model,ClubDTO clubDTO,HttpSession session) throws Exception {		
 		//특정 카테고리명 조회 selCategoryName
 		String cateogryName=clubService.getSelCategoryName(categoryNo);
 		//mv.addObject("category", cateogryName);
 		model.addAttribute("category", cateogryName);
+		model.addAttribute("categoryNo", categoryNo);
 	
 		//클럽 조회
 		List<ClubDTO> clubList = clubService.getSelClubList(categoryNo);
@@ -55,14 +60,26 @@ public class ClubController {
 	
 	//클럽 검색 /club/searchClist
 	@GetMapping("searchCName")
-	public ModelAndView searchCName(@RequestParam String searchCName,int categoryNo, ModelAndView mv) throws Exception {		
-		ClubDTO clubDTO = new ClubDTO();
-		clubDTO.setCategoryNo(categoryNo);
-		clubDTO.setcName(searchCName);
+	public ModelAndView searchCName(@RequestParam String searchCName, ModelAndView mv,HttpServletRequest req) throws Exception {
 		
-		List<ClubDTO> clubList = clubService.getSearchCName(clubDTO);
+		String categoryNoVal = req.getParameter("category");
+		int categoryNo = 0;
+		ClubDTO clubDTO = new ClubDTO();
+		List<ClubDTO> clubList = new ArrayList<ClubDTO>();
+		if(categoryNoVal != null) {
+			categoryNo = Integer.parseInt(categoryNoVal);
+			clubDTO.setcName(searchCName);
+			clubDTO.setCategoryNo(categoryNo);
+			clubList = clubService.getSearchCName(clubDTO);
+		}else {
+			clubDTO.setcName(searchCName);
+			clubDTO.setCategoryNo(categoryNo);
+			clubList = clubService.getAllSearchCName(clubDTO);
+		}
+		
 		logger.info(clubList.toString());//확인용
 		mv.addObject("clubList", clubList);
+		mv.addObject("categoryNo", categoryNo);
 		mv.setViewName("club/clubList");		
 		return mv;
 	}
@@ -70,13 +87,14 @@ public class ClubController {
 	
 	//클럽상세보기 
 	@GetMapping("detail")
-	public String getClubDetail(HttpServletRequest request, int categoryNo,int cNo, Model model) throws Exception {
+	public String getClubDetail(HttpServletRequest request, int categoryNo,int cNo, Model model, ClubMemberDTO clubMemberDTO) throws Exception {
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("loginUser", user);
 		//카테고리명
 		String category=clubService.getSelCategoryName(categoryNo);
 		model.addAttribute("category", category);
+		model.addAttribute("categoryNo", categoryNo);
 		//클럽 소개글-selClubDetail
 		ClubDTO clubDTO = clubService.getSelClubDetail(cNo);
 		model.addAttribute("clubDTO", clubDTO);
@@ -94,21 +112,23 @@ public class ClubController {
 		for(ClubMemberDTO clubmbmer : signMemberList) {
 			if(user.getNo() == clubmbmer.getNo()) { //로그인한 회원번호 == 클럽에 가입한 기존 회원번호
 				currentMember = clubmbmer;
-			}else if(user.getId()== "admin") {
-			//}else if(user.getGrade()== 999) {  수정 필요~~~~~~~~~~~~~~~~~~~~~~~
+			}else if(user.getGrade()== 999) {
 				currentMember = clubmbmer;
-				break;
 			}
+			break;
 		}
-		
-		boolean exist = true; //초기값 있다면
-		for(ClubMemberDTO clubmbmer : signMemberList) {
-			if(clubmbmer.getNo() == user.getNo()) // 클럽에 가입된 회원번호가 동일하다면
-				exist = true; //있다
-				break;
-		}
-		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
+
+		 boolean exist = true; //초기값 있다면 
+		 for(ClubMemberDTO clubmbmer : signMemberList) {
+			 if(clubmbmer.getNo() == user.getNo()) {  // 클럽에 가입된 회원번호가 동일하다면 
+				 exist = true; //있다
+			 }
+			 	break; 
+			 }
+		 
 		model.addAttribute("exist", exist);
+		 
+		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
 		return "club/clubDetail";
 		
 	}
@@ -116,18 +136,17 @@ public class ClubController {
 	//클럽 가입하기-signClub
 	@GetMapping("sign")
 	public String getInSignClub(HttpServletRequest request, int cNo,ClubMemberDTO clubMemberDTO, Model model, int categoryNo) throws Exception {
-		
-		
+
 		ClubDTO clubDTO = new ClubDTO();
 		clubDTO.setcNo(cNo);
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("cNo", cNo);
 		model.addAttribute("loginUser",user);
-		//-------------------------------------
+		//-------------------------------------		
 		clubDTO.setCategoryNo(categoryNo);
 		model.addAttribute("categoryNo", categoryNo);
-		
+
 		return "club/clubSignForm";		
 	}
 	@PostMapping("sign")
@@ -141,7 +160,7 @@ public class ClubController {
 		club.setcNo(cNo);
 		model.addAttribute("cNo", cNo);
 		clubService.getSignClub(clubMemberDTO);	
-		
+		model.addAttribute("clubMemberDTO", clubMemberDTO);
 		//---------------
 		//카테고리명
 		String category=clubService.getSelCategoryName(categoryNo);
@@ -163,28 +182,24 @@ public class ClubController {
 		for(ClubMemberDTO clubmbmer : signMemberList) {
 			if(user.getNo() == clubmbmer.getNo()) { //로그인한 회원번호 == 클럽에 가입한 기존 회원번호
 				currentMember = clubmbmer;
-			}else if(user.getId()== "admin") {
-			//}else if(user.getGrade()== 999) {  수정 필요~~~~~~~~~~~~~~~~~~~~~~~
+			}else if(user.getGrade()== 999) {
 				currentMember = clubmbmer;
 				break;
 			}
 		}
 		
+		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보	
+		
 		boolean exist = true; //초기값 있다면
 		for(ClubMemberDTO clubmbmer : signMemberList) {
-			if(clubmbmer.getNo() == user.getNo()) // 클럽에 가입된 회원번호가 동일하다면
+			if(clubmbmer.getNo() == user.getNo()) { // 클럽에 가입된 회원번호가 동일하다면
 				exist = true; //있다
+			}
 				break;
 		}
-		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
-		model.addAttribute("exist", exist);
-		
-		
-		/*
-		 * if(user.getId() == "admin") { // 등급으로 수정
-		 * 필요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ return "club/clubDetailAdmin"; }else {
-		 * return "club/clubDetail"; }
-		 */
+		model.addAttribute("exist", exist);		
+ 		
+
 		return "club/clubDetail";
 	}
 	//클럽 생성하기-폼요청
@@ -214,13 +229,14 @@ public class ClubController {
 	@GetMapping("clubUp")
 	public String getUpClub(@RequestParam("cNo") int cNo, Model model,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//클럽 상세보기
-		ClubDTO clubDTO=clubService.getSelClubDetail(cNo);	
+		ClubDTO clubDTO=clubService.getSelClubDetail(cNo);
+		System.out.println("컨트롤러"+clubDTO);
 		clubDTO.setcNo(cNo);	
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		
 		if(!canModify(user, clubDTO)) {
-			if(user.getGrade() == 999) { //확인 후 변경 필요
+			if(user.getGrade() == 999) {
 				canModify(user, clubDTO);
 			}else if(user.getId()==clubDTO.getMasterId()) {				
 				canModify(user, clubDTO);
@@ -238,9 +254,9 @@ public class ClubController {
 	private boolean canModify(User user, ClubDTO clubDTO) {
 			//로그인한유저정보에서 id를 가져오기
 			String id = user.getId();				
-			//작성자정보에서 id를 가져오기
+			//db에서 id를 가져오기
 			String masterid = clubDTO.getMasterId();				
-			//"로그인한userid".equals("작성자id")
+			
 			return id.equals(masterid);		
 	}
 
@@ -250,7 +266,7 @@ public class ClubController {
 		//수정
 		int cnt=clubService.getUpdateClub(clubDTO);	
 		if(cnt==1) {
-			mv.setViewName("club/main");
+			mv.setViewName("user/main");
 		}else {
 			mv.setViewName("redirect:/club/clubUp?cNo="+clubDTO.getcNo());
 		}
@@ -261,43 +277,39 @@ public class ClubController {
 	//클럽회원삭제(탈퇴)
 	 @GetMapping("clubMemberDel") 
 	 public ModelAndView delUp(HttpServletRequest request,ClubMemberDTO clubMemberDTO, ModelAndView mv) throws Exception {	
-		 int cMemberNo = Integer.parseInt(request.getParameter("cMemberNo"));
+		int cMemberNo = Integer.parseInt(request.getParameter("cMemberNo"));
 		clubMemberDTO.setcMemberNo(cMemberNo);	
 		int cnt=clubService.getMemberDel(cMemberNo);
 		
 		System.out.println("컨트롤러"+cnt);		
 			mv.addObject("cnt", cnt);
 		if(cnt==1) {
-			mv.setViewName("club/clubDrop"); //jsp파일명
+			mv.setViewName("club/clubDrop");
 		}else {
 			mv.setViewName("club/fail");
 		}
 		return mv;		
 	 }	
 
-	//-------------------------------------------------------------------------
 	//클럽삭제-clubDel (관리자,클럽장)
 	@GetMapping("clubADel")
 	public ModelAndView DelClub(int cNo,ModelAndView mv,ClubDTO clubDTO,HttpServletRequest request) throws Exception {
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		int cnt=clubService.getDel(cNo);
-		System.out.println("컨트롤러"+cnt);
 		
 		if(!canAdminDel(user, clubDTO)) {
-			if(user.getGrade() == 999) { //확인 후 변경 필요
+			if(user.getGrade() == 999) {
 				canAdminDel(user, clubDTO);
 			}else if(user.getId()==clubDTO.getMasterId()) {				
 				canAdminDel(user, clubDTO);
-			}else {
-				mv.setViewName("club/fail");
 			}
 		}
 		
 		mv.addObject("cnt", cnt);
 		
 		if(cnt==1) {
-			mv.setViewName("club/clubDrop"); //jsp파일명
+			mv.setViewName("club/clubDrop");
 		}else {
 			mv.setViewName("club/fail");
 		}
@@ -307,9 +319,9 @@ public class ClubController {
 	private boolean canAdminDel(User user, ClubDTO clubDTO) {
 		//로그인한유저정보에서 id를 가져오기
 		String id = user.getId();				
-		//작성자정보에서 id를 가져오기
+		//db에서 id를 가져오기
 		String masterid = clubDTO.getMasterId();				
-		//"로그인한userid".equals("작성자id")
+		
 		return id.equals(masterid);	
 	}	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.NoticePaging;
+import com.damoye.secondproject.model.User;
 
 public interface NoticeDAO {
 	
@@ -28,6 +29,9 @@ public interface NoticeDAO {
 	
 	//공지사항 전체 글 수 조회
 	public int selectAllCount();
+	
+	//유저 전체 리스트
+	public List<User> allUserList();
 	
 	
 }

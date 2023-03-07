@@ -11,7 +11,7 @@ public class Criteria {
 	
 	public Criteria() { //기본생성자 호출시 pageNo 1 한페이지당 글수 5개로 초기화
 		this.pageNo = 1;
-		this.amount = 5;
+		this.amount = 10;
 		this.skip = 0;
 	}
 	

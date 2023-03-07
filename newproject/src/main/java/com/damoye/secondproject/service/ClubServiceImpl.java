@@ -16,8 +16,14 @@ import com.damoye.secondproject.model.User;
 public class ClubServiceImpl implements ClubService {
 	
 	@Autowired
-	private ClubDAO clubDAO;
+	private ClubDAOImpl clubDAO;
 
+	
+	@Override
+	public List<ClubDTO> getAllClubList()throws Exception{	
+		List<ClubDTO> cList= clubDAO.getAllClubList();
+		return cList;
+	}
 	//특정 카테고리 조회
 	@Override
 	public String getSelCategoryName(int categoryNo) throws Exception {
@@ -35,6 +41,12 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws Exception {
 		List<ClubDTO> cNameList=clubDAO.getSearchCName(clubDTO);
+		return cNameList;
+	}
+	//전체 검색
+	@Override
+	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws Exception {
+		List<ClubDTO> cNameList=clubDAO.getAllSearchCName(clubDTO);
 		return cNameList;
 	}
 	
@@ -61,7 +73,6 @@ public class ClubServiceImpl implements ClubService {
 		List<BoardVO> boardList= clubDAO.getSelBDetail(cNo);
 		System.out.println("서비스"+boardList);//확인용
 		return boardList;		
-		
 	}
 	
 	//클럽 가입하기
@@ -92,11 +103,6 @@ public class ClubServiceImpl implements ClubService {
 		int cnt=clubDAO.getMemberDel(cMemberNo);
 		return cnt;
 	}
-
-
-
-
-
 
 
 }
