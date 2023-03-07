@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.damoye.secondproject.model.BoardVO;
 import com.damoye.secondproject.model.CategoryDTO;
 import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubListPage;
 import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.User;
 
@@ -19,12 +20,12 @@ public interface ClubService {
 	//특정 카테고리 조회
 	public String getSelCategoryName(int categoryNo) throws Exception;
 	//클럽 목록 조회 selClubList
-	public List<ClubDTO> getSelClubList(int categoryNo) throws Exception;	
+	public ClubListPage getSelClubList(int categoryNo,int PageNo) throws Exception;	
 	
 	//검색
-	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws Exception;
+	public ClubListPage getSearchCName(ClubDTO clubDTO,int pageNo) throws Exception;
 	//전체 검색
-	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws Exception;
+	public ClubListPage getAllSearchCName(ClubDTO clubDTO,int pageNo) throws Exception;
 	//클럽 상세보기-소개글
 	public ClubDTO getSelClubDetail(int cNo) throws Exception;
 	//클럽 상세보기-가입자수
@@ -44,7 +45,7 @@ public interface ClubService {
 	//클럽회원삭제
 	public int getMemberDel(int cMemberNo) throws Exception;
 	//전체 클럽 조회 
-	public List<ClubDTO> getAllClubList() throws Exception;
+	public ClubListPage getAllClubList(int pageNo) throws Exception;
 
 	
 	

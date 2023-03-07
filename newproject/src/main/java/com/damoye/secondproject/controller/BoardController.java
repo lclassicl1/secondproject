@@ -51,8 +51,13 @@ public class BoardController {
 	//클럽게시판 글목록+페이징
 	//요청주소 ~컨패/board/list?cNo=1
 	@RequestMapping(value="/board/list", method=RequestMethod.GET)
-	public String getBoardListPage(Model model,@RequestParam int cNo, @RequestParam int num) throws Exception {
+	public String getBoardListPage(Model model,@RequestParam int cNo,HttpServletRequest req) throws Exception {
 		
+		String numVal = req.getParameter("num");
+		int num = 1;
+		if(numVal !=null) {
+			num = Integer.parseInt(numVal);
+		}
 		BoardPage boardPage = new BoardPage();
 		
 		boardPage.setNum(num);

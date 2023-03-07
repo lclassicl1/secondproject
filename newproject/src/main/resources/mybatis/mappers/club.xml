@@ -14,6 +14,7 @@
 		<result property="cIsShow" column="cIsShow"/>
 		<result property="categoryNo" column="categoryNo"/>
 	</resultMap> 
+	
  	<resultMap type="ClubMemberDTO" id="ClubMemberDTO">
 		<result property="cMemberNo" column="cMemberNo"/>
 		<result property="cNo" column="cNo"/>
@@ -38,19 +39,37 @@
 		from club
 		where 
 		    cName like concat('%',#{cName},'%')
-	  		and categoryNo like concat('%',#{categoryNo},'%')
-			order by cNo asc
+	  		and categoryNo=#{categoryNo}
+			order by cNo asc limit #{pageNum},6
   	]]> 	
  	</select>
  	
+ 	<!-- 클럽 전체 수 -->
+ 	<select id="searchTotalCnt" parameterType="String" resultType="int">
+ 	<![CDATA[
+ 		select count(*) 
+ 		from club 
+ 		where cName like concat('%',#{cName},'%') 
+  	]]>
+	</select>
+	<!-- 클럽 전체 수 -->
+ 	<select id="searchCategoryTotalCnt" parameterType="map" resultType="int">
+ 	<![CDATA[
+ 		select count(*) 
+ 		from club 
+ 		where cName like concat('%',#{cName},'%') 
+ 		and categoryNo=#{categoryNo}
+  	]]>
+	</select>
+ 	
  	<!-- 전체 클럽명 검색 -->
-	<select id="allSearchClub" resultMap="clubDTO" parameterType="clubDTO">
+	<select id="allSearchClub" resultMap="clubDTO" parameterType="map">
  	<![CDATA[
 		select *
 		from club
 		where 
 		    cName like concat('%',#{cName},'%')
-			order by cNo asc
+			order by cNo asc limit #{pageNum},6
   	]]> 	
  	</select>
 
@@ -59,17 +78,17 @@
  	<![CDATA[
 		select *
 		from club
-		order by cNo asc
+		order by cNo asc limit #{pageNum},6
   	]]>
 	</select>  	
 
  	<!-- 클럽 리스트 조회  -->
-	<select id="selClubList" resultType="clubDTO" parameterType="int">
+	<select id="selClubList" resultType="clubDTO" parameterType="map">
  	<![CDATA[
 		select *
 		from club
 		where categoryNo=#{categoryNo}
-		order by cNo asc
+		order by cNo asc limit #{pageNum},6 
   	]]>
 	</select>  	
 
@@ -177,4 +196,20 @@
  		select count(*) from clubmember where cNo=#{cNo} and no=#{no}
   	]]>
 	</select> 
+	
+	<!-- 클럽 전체 수 -->
+ 	<select id="totalCnt" resultType="int">
+ 	<![CDATA[
+ 		select count(*) 
+ 		from club 
+  	]]>
+	</select>
+	<!-- 클럽 전체 수 -->
+ 	<select id="categoryTotalCnt" parameterType="int" resultType="int">
+ 	<![CDATA[
+ 		select count(*) 
+ 		from club 
+ 		where categoryNo=#{categoryNo}
+  	]]>
+	</select>
  </mapper>

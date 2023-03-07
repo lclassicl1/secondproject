@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.damoye.secondproject.dao.ChatDAO;
 import com.damoye.secondproject.model.ChatDTO;
+import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.ClubMemberDTO;
 
 @Service
@@ -32,6 +33,8 @@ public class ChatService {
 	public int validClubMember(ClubMemberDTO clubMember) {
 		return chatDAO.validClubMember(clubMember);
 	}
-
+	public ClubDTO getClubByNo(int cNo) {
+		return chatDAO.getClubByNo(cNo);
+	}
 }
 

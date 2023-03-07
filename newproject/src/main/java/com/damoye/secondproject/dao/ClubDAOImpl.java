@@ -1,8 +1,11 @@
 package com.damoye.secondproject.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.damoye.secondproject.model.BoardVO;
 import com.damoye.secondproject.model.CategoryDTO;
 import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubListPage;
 import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.User;
 
@@ -23,8 +27,9 @@ public class ClubDAOImpl implements ClubDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ClubDTO> getAllClubList() throws DataAccessException {
-		List<ClubDTO> cList=sqlSession.selectList("mapper.club.allClubList");
+	public List<ClubDTO> getAllClubList(int pageNum) throws DataAccessException {
+		
+		List<ClubDTO> cList=sqlSession.selectList("mapper.club.allClubList", pageNum);
 		return cList;
 	}
 
@@ -37,21 +42,34 @@ public class ClubDAOImpl implements ClubDAO {
 
 	//클럽 목록 조회 selClubList
 	@Override
-	public List<ClubDTO> getSelClubList(int categoryNo) throws DataAccessException{
-		List<ClubDTO> cList=sqlSession.selectList("mapper.club.selClubList",categoryNo);
-		return cList;
+	public List<ClubDTO> getSelClubList(int categoryNo,int pageNum) throws DataAccessException{
+		Map map = new HashMap();
+		map.put("categoryNo",categoryNo);
+		map.put("pageNum",pageNum);
+		return sqlSession.selectList("mapper.club.selClubList",map);
 	}
 	
 	//검색
 	@Override
-	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws DataAccessException {
-		List<ClubDTO> list = sqlSession.selectList("mapper.club.searchClub", clubDTO);
+	public List<ClubDTO> getSearchCName(ClubDTO clubDTO,int pageNum) throws DataAccessException {
+		Map map = new HashMap();
+		String cName = clubDTO.getcName();
+		int categoryNo = clubDTO.getCategoryNo();
+		map.put("cName",cName);
+		map.put("categoryNo",categoryNo);
+		map.put("pageNum",pageNum);
+		List<ClubDTO> list = sqlSession.selectList("mapper.club.searchClub", map);
 		return list;
 	}
+	
 	//전체 검색
 	@Override
-	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws DataAccessException {
-		List<ClubDTO> list = sqlSession.selectList("mapper.club.allSearchClub", clubDTO);
+	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO,int pageNum) throws DataAccessException {
+		Map map = new HashMap();
+		String cName = clubDTO.getcName();
+		map.put("cName",cName);
+		map.put("pageNum",pageNum);
+		List<ClubDTO> list = sqlSession.selectList("mapper.club.allSearchClub", map);
 		return list;
 	}
 	//클럽 상세보기-소개글
@@ -111,7 +129,29 @@ public class ClubDAOImpl implements ClubDAO {
 		return cnt;
 	}
 
-
+	//클럽 토탈 
+	@Override
+	public int clubCount() throws DataAccessException {
+		return sqlSession.selectOne("mapper.club.totalCnt");
+	}
+	//클럽 토탈 
+	@Override
+	public int categoryClubCount(int categoryNo) throws DataAccessException {
+		return sqlSession.selectOne("mapper.club.categoryTotalCnt",categoryNo);
+	}
+	@Override
+	public int searchTotalCnt(ClubDTO clubDTO) throws DataAccessException {
+		String cName = clubDTO.getcName();
+		return sqlSession.selectOne("mapper.club.searchTotalCnt",cName);
+	}
+	//클럽 토탈 
+	@Override
+	public int searchCategoryTotalCnt(ClubDTO clubDTO) throws DataAccessException {
+		Map map = new HashMap();
+		map.put("cName",clubDTO.getcName());
+		map.put("categoryNo",clubDTO.getCategoryNo());
+		return sqlSession.selectOne("mapper.club.searchCategoryTotalCnt",map);
+	}
 
 	
 }

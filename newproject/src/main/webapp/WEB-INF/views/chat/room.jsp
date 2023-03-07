@@ -7,7 +7,7 @@
  <link rel="stylesheet" href="../resources/css/chat-room.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>    
-<title>${param.roomNo }번 채팅방</title>
+<title>${ clubDTO.cName} 채팅방</title>
 </head>
 
 
@@ -118,7 +118,7 @@
             <!-- 프로필 사진, 프로필명 -->
             <header>
                 <div class="profile-col">
-                    <span class="profile-name">${param.roomNo }번방</span>
+                    <span class="profile-name">${clubDTO.cName}</span>
                 </div>
             </header>
             <main>
