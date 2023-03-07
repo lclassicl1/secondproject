@@ -6,18 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<html class="no-js" lang="ko">
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<title></title>
-<style>
-img{
-	width: 300px;
-	height: 100px;
-}
-</style>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" href="${path}/resources/css/style.css">
+<link rel="stylesheet" href="${path}/resources/css/skins/green.css">
+<link rel="stylesheet" href="${path}/resources/css/responsive.css">
 <script>
+
 	function logout() {
 		if(confirm('로그아웃 하시겠습니까?')) {
 			location.href="${path}/logout";
@@ -28,49 +24,57 @@ img{
 </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="${path}/"><img src="${path}/resources/img/navlogo.png"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="/notice">공지사항</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-       		소모임게시판
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">자유주제</a>
-          <a class="dropdown-item" href="#">공부</a>
-          <a class="dropdown-item" href="#">여행</a>
-          <a class="dropdown-item" href="#">요리</a>
-          <a class="dropdown-item" href="#">게임</a>
-          <a class="dropdown-item" href="#">원데이클래스</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">사진게시판(삭제예정)</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">마이페이지</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" onclick="logout();">로그아웃</a>
-      </li>
-      <c:if test="${userId=='admin'}">
-	  	<li class="nav-item">
-        	<a class="nav-link" href="#">회원관리</a>
-      	</li>
-  	</c:if>
-    </ul>
-  </div>
-
-    <div>${loginUser.id}님 접속중입니다.</div>
-
-</nav>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<div class="row" style="margin-top: 15px;">
+	<div class="headerlogo four columns">
+		<div class="logo">
+			<a href="${path}/logoMain">
+			<img src="${path}/resources/img/logo.png" alt="logo img" style="height: 45px;">
+			</a>
+		</div>
+	</div>
+	<div class="headermenu eight columns noleftmarg" style="width: 66.6666%;">
+		<nav id="nav-wrap">
+		<ul id="main-menu" class="nav-bar sf-menu">
+			<li class="current">
+			<a href="<%=request.getContextPath()%>/notice">공지사항</a>
+			</li>
+			<li>
+			<a href="<%=request.getContextPath()%>/club/allClubList">다모여 클럽</a>
+			<ul>
+				<li><a href="#">자유주제</a></li>
+				<li><a href="${path}/club/clist?categoryNo=1">공부</a></li>
+				<li><a href="#">여행</a></li>
+				<li><a href="${path}/club/clist?categoryNo=2">요리</a></li>
+			</ul>
+			</li>
+			<li>
+			<a href="<%=request.getContextPath()%>/photo/main">사진게시판(삭제예정)</a>
+			<!-- <ul>
+				<li><a href="blogpage1.html">Blog page style 1</a></li>
+				<li><a href="blogpage2.html">Blog page style 2</a></li>
+				<li><a href="blogpage3.html">Blog page style 3</a></li>
+				<li><a href="blogsinglepost.html">Single post</a></li>
+			</ul> -->
+			</li>
+			<li>
+			<a href="<%=request.getContextPath()%>/myClub">내 클럽</a>
+			</li>
+			<li>
+			<a href="<%=request.getContextPath()%>/myInfo">마이페이지</a>
+			</li>
+			<li>
+			<a class="nav-link" onclick="logout();">로그아웃</a>
+			<!-- <ul>
+				<li><a href="columns.html">Columns</a></li>
+				<li><a href="elements.html">Elements</a></li>
+				<li><a href="typography.html">Typography</a></li>
+			</ul> -->
+			</li>
+		</ul>
+		</nav>
+	</div>
+</div>
+<div class="clear">
+</div>
 </body>
 </html>

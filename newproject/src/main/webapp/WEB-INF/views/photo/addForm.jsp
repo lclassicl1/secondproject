@@ -132,8 +132,6 @@ String id = (String)session.getAttribute("id");
 </head>
 <body>
 <pre>
-readonly는 서버로 전송된다 <input type="text" name="readon"  readonly  value="${sessionScope.AUTHUSER_ID}"/><br/>
-disabled는 서버로 전송x <input type="text" name="dis"  disabled="disabled" value="${sessionScope.AUTHUSER_ID}"/><br/><br/>      
 </pre>
   <h3>글등록(addForm.jsp)</h3>
   <form id="uploadFrm" 
@@ -143,8 +141,7 @@ disabled는 서버로 전송x <input type="text" name="dis"  disabled="disabled"
  	  <tbody>
  		<tr>
  		 <th>작성자</th>
- 		 <td>${sessionScope.AUTHUSER_ID}
- 		  <input type="hidden" name="id" value=""/>
+ 		 <td>${loginId}
  		 </td>
  		</tr>
  		<tr>

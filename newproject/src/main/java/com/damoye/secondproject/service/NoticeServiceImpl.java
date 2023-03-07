@@ -9,6 +9,7 @@ import com.damoye.secondproject.dao.NoticeDAO;
 import com.damoye.secondproject.model.Criteria;
 import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.NoticePaging;
+import com.damoye.secondproject.model.User;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	
@@ -58,6 +59,12 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int selectAllCount() {
 		return noticeDAOImpl.selectAllCount();
+	}
+	
+	//유저 전체 리스트
+	@Override
+	public List<User> allUserList() {
+		return noticeDAOImpl.allUserList();
 	}
 
 }

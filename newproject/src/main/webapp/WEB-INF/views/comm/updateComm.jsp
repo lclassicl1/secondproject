@@ -57,7 +57,7 @@ body {
 	  <div style="display:table-row">
 		<div class="c" style="display:table-cell">댓글</div>
 		<div class="c1" style="display:table-cell">
-		<textarea name="comment" id="comment" required="required">${comm.comment}</textarea></div>
+		<pre><textarea name="comment" id="comment" required="required">${comm.comment}</textarea></pre></div>
 	  </div>
 	  		<input type="submit" value="등록"/>
 	  </div>

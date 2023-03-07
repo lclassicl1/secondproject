@@ -11,9 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-				<script>
-				alert("실패했습니다.확인 후 다시 시도해보세요");
-				location.href="${path}/club/maintest"; 
-				</script>
+	<script>
+	alert("실패했습니다.확인 후 다시 시도해보세요");
+	location.href="${path}/user/logoMain"; 
+	</script>
 </body>
 </html>

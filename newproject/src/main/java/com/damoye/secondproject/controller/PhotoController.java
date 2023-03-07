@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,14 +41,18 @@ public class PhotoController extends  PhotoBaseController {
 	//요청방식 get
 	//요청주소 ~컨페/article/addForm
 	@GetMapping("/photo/addForm")
-	public String insertArticleForm(HttpServletRequest request) {
+	public String insertArticleForm(HttpSession session,Model model) {
 		//1.파라미터받기 //2.비즈니스로직
 		//3.model
 		//원칙적으로는 (로그인한 user가) 글입력 권한을 가진 사용자가 글입력해야지만
 		//여기에서는 임시로 세션에 정보를 저장하여 진행하겠다
-		HttpSession session = request.getSession();
-		session.setAttribute("isLogOn",true);
-		session.setAttribute("AUTHUSER_ID", "hongid");//임시
+		
+		//HttpSession session = request.getSession();
+		//session.setAttribute("isLogOn",true);
+		//session.setAttribute("AUTHUSER_ID", "hongid");//임시
+		User user = (User)session.getAttribute("loginUser");
+		String loginId = user.getId();
+		model.addAttribute("loginId",loginId );
 		//4.view
 		return "/photo/addForm";
 	}

@@ -9,21 +9,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <meta charset="UTF-8">
 <script>
-//클럽개설
-$(function(){
-	$("#createDone").on("click",function(){
-		var c=confirm("클럽 개설 성공!!");
-		  if(c){
-			  $('#creaFrm').attr("action","${path}/club/clubCre").submit();
-		  }else{
-			 return false;		 }
-	  	});	
+
+$(document).ready(function(){
+		//클럽개설
+		$(function(){
+		$("#createDone").on("click",function(){
+			var c=confirm("클럽 개설 성공!!");
+			  if(c){
+				  $('#creaFrm').attr("action","${path}/club/clubCre").submit();
+			  }else{
+				 return false;		 }
+		  	});	
+	});
 });
+
 </script>
 <title>클럽 개설</title>
 </head>
-session: ${loginUser}<br/>
 <body>
+session: ${loginUser}<br/>
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
 <form id="creaFrm" action="" method="post">
 <table border="1" style="text-align:center;">
@@ -31,9 +35,11 @@ session: ${loginUser}<br/>
 		<th>카테고리</th>
 		<td>		
 		<select name="categoryNo" id="categoryNo" required="required">
-			<option value="0">선택</option>
-			<option value="1">공부</option>
-			<option value="2">요리</option>
+			<option value=0>선택</option>
+			<option value=1>공부</option>
+			<option value=2>요리</option>
+			<option value=3>운동</option>
+			<option value=4>반려동물</option>
 		</select>		
 		</td>
 	</tr>
@@ -49,11 +55,11 @@ session: ${loginUser}<br/>
 		<th>정원(명)</th>
 		<td>
 		<select name="cPeople" id="cPeople" required="required">
-			<option value="0">선택</option>
-			<option value="10">10명</option>
-			<option value="30">30명</option>
-			<option value="50">50명</option>
-			<option value="100">100명</option>
+			<option value=0>선택</option>
+			<option value=10>10명</option>
+			<option value=30>30명</option>
+			<option value=50>50명</option>
+			<option value=100>100명</option>
 		</select>		
 		</td>
 	</tr>
@@ -65,7 +71,9 @@ session: ${loginUser}<br/>
 	</tr>
 	<tr>
 		<th>소개글</th>
-		<td colspan="2"><input type="text" name="cIntro" id="cIntro" required="required" placeholder="클럽을 소개해주세요!"/></td>
+		<td colspan="2">
+			<textarea rows="30" cols="80" name="cIntro" id="cIntro" required="required" placeholder="클럽을 소개해주세요!"></textarea>
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2">

@@ -16,6 +16,7 @@ import com.damoye.secondproject.model.User;
 @Repository
 public interface ClubDAO {	
 
+	public List<ClubDTO> getAllClubList() throws DataAccessException;
 	//특정 카테고리 조회
 	public String getSelCategoryName(int categoryNo) throws DataAccessException;	
 	//클럽 목록 검색+조회 selClubList
@@ -23,6 +24,9 @@ public interface ClubDAO {
 	
 	//검색
 	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws DataAccessException;
+	//전체 검색
+	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws DataAccessException;
+	
 	//클럽 상세보기-클럽소개
 	public ClubDTO getSelClubDetail(int cNo) throws DataAccessException;
 	//클럽 상세보기-가입자 수 
@@ -42,5 +46,7 @@ public interface ClubDAO {
 	public int getDel(int cNo) throws DataAccessException;	
 	//클럽회원삭제
 	public int getMemberDel(int cMemberNo) throws DataAccessException;
+	
+	
 
 }
