@@ -16,11 +16,13 @@
 
 <script>
 </script>
-<h3>가입화면</h3>
-<form id="signClub" method="post">
-<p><input type="number" name="categoryNo" id="categoryNo" readonly="readonly" value="${categoryNo}"/>
-<p><input type="number" name="cNo" id="cNo" readonly="readonly" value="${cNo}"/></p> <!-- 클럽번호 -->
-<p><input type="number" name="no" id="no" readonly="readonly" value="${loginUser.no}"/></p> <!-- 회원번호 -->
+<h3>가입을 축하드립니다!!</h3>
+<form id="signClub" method="post" action="${path}/club/sign">
+<p><input type="hidden" name="categoryNo" id="categoryNo" readonly="readonly" value="${categoryNo}"/>
+<p><input type="hidden" name="cNo" id="cNo" readonly="readonly" value="${clubMemberDTO.cNo}"/></p> <!-- 클럽번호 -->
+<p><input type="hidden" name="no" id="no" readonly="readonly" value="${loginUser.no}"/></p> <!-- 회원번호 -->
+<p><input type="hidden" name="signIn" id="signIn" readonly="readonly" value="${clubMemberDTO.signIn}"/></p> <!-- 회원번호 -->
+<p><input type="submit" value="상세보기 이동"/></p>
 </form>
 
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>

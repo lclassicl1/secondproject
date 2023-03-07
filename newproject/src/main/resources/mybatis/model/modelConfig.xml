@@ -18,5 +18,6 @@
 	                                   
 		<typeAlias type="com.damoye.secondproject.model.CommBoardVO" alias="commBoardVO"/>
 		<typeAlias type="com.damoye.secondproject.model.User" alias="user"/>
+
 	</typeAliases>
 </configuration>

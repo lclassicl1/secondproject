@@ -41,14 +41,16 @@ body {
 	${num} <br/>
 	${boardPage}<br/>
 	${categoryNo}
-	
+	${loginUser.id}
 	<div><h1>클럽 페이지</h1></div>
 	<%-- 클럽게시판: ${boardList} --%>
 	<div class="container" style="display:table; width:100%;">
-<%-- 	<c:if test="${empty boardList}">
+	 
+	
+ 	<c:if test="${empty boardList}">
 		<div style="display:table-row">클럽에 첫번째 글을 작성해보세요 </div>
 		<div style="display:table-row"><input type="button" name="btnWrite" id="btnWrite" value="글쓰기"></div>
-	</c:if> --%>
+	</c:if>
 	
 	<c:if test="${not empty boardList}">
 	  <div style="display:table-row">
@@ -74,7 +76,7 @@ body {
 	</c:if>
 	
 	<c:if test="${not empty boardList}">
-		<div style="display:table-row"><input type="button" name="btnWrite" id="btnWrite" value="글쓰기">
+		<div style="display:table-row"><input type="button" name="btnWrite" id="btnWrite" value="글쓰기"></div>
 		<c:if test="${boardPage.prev}">
 			<span>[<a href="/board/list?cNo=${cNo}&num=${boardPage.startPageNum - 1}">이전</a>]</span>
 		</c:if>
@@ -86,14 +88,13 @@ body {
 					<a href="/board/list?cNo=${cNo}&num=${num}">${num}</a>
 				</c:if> 			
 				
-				<c:if test="${select == num}">
+				<c:if test="${select == num && num < boardPage.pageNum}">
 					<b>${num}</b>
 				</c:if>
 		 			
 			</span>
 		</c:forEach>
-		
-		<c:if test="${boardPage.endPageNum<boardPage.postNum}">
+		<c:if test="${boardPage.endPageNum < boardPage.pageNum}">
 	
 		<c:if test="${boardPage.next}">
 			<span>[<a href="/board/list?cNo=${cNo}&num=${boardPage.endPageNum + 1}">다음</a>]</span>
@@ -102,8 +103,7 @@ body {
 		
 	</c:if>
 	</div>
-	</div>
-	</table>
-</body>
+	
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
+</body>
 </html>

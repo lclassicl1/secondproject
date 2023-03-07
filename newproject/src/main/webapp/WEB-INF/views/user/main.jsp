@@ -1,10 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="<%=request.getContextPath()%>"/>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <meta charset="UTF-8">
+<script>
+	//클럽개설
+	$(function(){
+		$('#clubCreate').click(function(){
+			location.href='${path}/club/clubCre';
+		});
+	});
+
+</script>
 <title>damoye</title>
 </head>
 <body>
@@ -69,7 +81,7 @@
 	<div class="twelve columns">
 		<ul class="ca-menu">
 			<li>
-			<a href="<%= request.getContextPath() %>/club/clist?categoryNo=1">
+			<a href="${path}/club/clist?categoryNo=1">
 			<span class="ca-icon"><i class="fa fa-heart"></i></span>
 			<div class="ca-content">
 				<h2 class="ca-main">공부</h2>
@@ -78,29 +90,29 @@
 			</a>
 			</li>
 			<li>
-			<a href="<%=request.getContextPath() %>/club/clist?categoryNo=2">
+			<a href="${path}/club/clist?categoryNo=2">
 			<span class="ca-icon"><i class="fa fa-bullhorn"></i></span>
 			<div class="ca-content">
-				<h2 class="ca-main"> 요리</h2>
+				<h2 class="ca-main">요리</h2>
 				<h3 class="ca-sub">요리 모임입니다.</h3>
 			</div>
 			</a>
 			</li>
 			<li>
-			<a href="#">
+			<a href="${path}/club/clist?categoryNo=3">
 			<span class="ca-icon"><i class="fa fa-user"></i></span>
 			<div class="ca-content">
-				<h2 class="ca-main">모임 카테고리3</h2>
-				<h3 class="ca-sub">간략한 모임 소개</h3>
+				<h2 class="ca-main">운동</h2>
+				<h3 class="ca-sub">운동 모임입니다</h3>
 			</div>
 			</a>
 			</li>
 			<li>
-			<a href="#">
+			<a href="${path}/club/clist?categoryNo=4">
 			<span class="ca-icon"><i class="fa fa-camera"></i></span>
 			<div class="ca-content">
-				<h2 class="ca-main">모임 카테고리4</h2>
-				<h3 class="ca-sub">간략한 모임 소개</h3>
+				<h2 class="ca-main">반려동물</h2>
+				<h3 class="ca-sub">반려동물 모임입니다</h3>
 			</div>
 			</a>
 			</li>
@@ -170,6 +182,9 @@
 	</div>
 </div>
 
+<div class="row" style="text-align: right;">
+<input class="readmore" type="button" name="clubCreate" id="clubCreate" value="클럽개설"/>
+</div>
 
 <footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
 </body>
