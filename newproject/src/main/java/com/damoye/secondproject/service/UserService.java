@@ -27,8 +27,10 @@ public interface UserService {
 	//회원 개인정보 수정
 	public void modifyUserInfo(String id, String password, String email, String phonenum, String zipcode, String address, String detailaddress);
 	
-	
+	//valid
 	public Map<String, String> validateHandling(Errors errors);
+	
+	public Integer checkId(String id);
 	
 	// 회원목록조회
 	public List<User> getAllMemberList();
