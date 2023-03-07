@@ -50,6 +50,12 @@
 					    <c:when test="${categoryNo eq 2}">
 					    	요리 모임
 					    </c:when>
+   					    <c:when test="${categoryNo eq 3}">
+					    	운동 모임
+					    </c:when>
+   					    <c:when test="${categoryNo eq 4}">
+					    	반려동물 모임
+					    </c:when>
 					    <c:otherwise>
 					    	전체 모임
 					    </c:otherwise>

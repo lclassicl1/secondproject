@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
 <c:set var="path" value="<%=request.getContextPath()%>"/> 
 <!DOCTYPE html>
 <html>
@@ -11,43 +12,43 @@
 <meta charset="UTF-8">
 <script>
 $(document).ready(function(){	
-		//클럽가입
-		$("#btnSign").on("click",function(){
-		var c=confirm("클럽에 가입하시겠습니까?");
-		  if(c){
-			  location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}";
-		  }else{
-			 return false;		 }
-	  	});		
-		//클럽수정버튼 cNo
-	  $("#btUpdate").on("click",function(){
-			location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cIntro}";
-	  	});
+	//클럽가입
+	$("#btnSign").on("click",function(){
+	var c=confirm("클럽에 가입하시겠습니까?");
+	  if(c){
+		  location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";
+	  }else{
+		 return false;		 }
+  	});		 
 
-		//탈퇴버튼
- 	  $("#btnDel").on("click",function(){
-		  var c=confirm("클럽을 탈퇴하시겠습니까?");
-		  if(c){
-			  $('#registForm').attr("action","${path}/club/clubUpDel").submit();
-		  }else{
-				 return false;
-			 }
-	  	});	 
-		//클럽삭제버튼
-	  $("#btnADel").on("click",function(){
-		  var c=confirm("클럽을 삭제하시겠습니까?");
-		  if(c){
-			location.href="${path}club/clbuADel";
+	//클럽수정버튼 cNo
+  $("#btUpdate").on("click",function(){
+		location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cIntro}";
+  	});
+
+	//클럽회원탈퇴
+	$("#btnDelMember").on("click",function(){   
+	  var c=confirm("클럽을 탈퇴하시겠습니까?");
+	  if(c){
+		  location.href="${path}/club/clubMemberDel?cMemberNo=${currentMember.cMemberNo}";
 	  }else{
 			 return false;
-		 }
-	  	});
-		
-    }); 
+	}
+ });
+
+	//클럽삭제버튼
+  $("#btnADel").on("click",function(){
+	  var c=confirm("클럽을 삭제하시겠습니까?");
+	  if(c){
+		location.href="${path}/club/clubADel?cNo=${clubDTO.cNo}";
+  }else{
+		 return false;
+	}
+  });	 
+});
 	function openPop(){
 		window.open('${path}/chat/room?roomNo=${clubDTO.cNo}', 'clubChat', 'width=700px,height=800px,scrollbars=yes');
 	};
-
 </script>
 <title>클럽 상세보기</title>
 <style>
@@ -91,60 +92,116 @@ $(document).ready(function(){
 			</p>
 			<div id="tableCenter">
 				<table border="1" style="text-align:center; display: flex; justify-content: center; width: 100%;">
-					<tr>
-						<td>${category}</td>
-					</tr>
-					<tr>
-						<td>${clubDTO.cName}</td> <!-- 클럽명 -->
-						<td>${clubDTO.cLoc}</td><!-- 지역 -->
-					</tr>
-					<tr>
-						<td>${clubDTO.masterId}</td><!-- 클럽장 -->		
-						<td><fmt:formatDate value="${clubDTO.creDate}" type="date" pattern="yyyy.MM.dd"/></td><!-- 클럽개설일 -->
-					</tr>
-					<tr>
-						<td colspan="2">${sPeople} / ${clubDTO.cPeople}(명)</td><!--가입자수/ 정원(명) -->
-					</tr>
-					<tr>
-						<td colspan="2">${clubDTO.cIntro}</td><!-- 클럽소개글 -->
-					</tr>
-					<c:forEach var="board" items="${boardVO}">
-					<tr>
-						<td>${board.bTitle}</td><!-- 타이틀 -->
-						<td>${board.bWriter}</td><!-- 작성자 -->
-					</tr>
-					<tr>
-						<td colspan="2">${board.bContent}</td><!-- 모집내용 -->
-					</tr>
-					</c:forEach>
-					<tr>
-					<c:forEach var="sMember" items="${signMember}">
-						<td colspan="2">${sMember.id}</td><br/><!-- 클럽가입자리스트 -->
-					</c:forEach>
-					</tr>
-					<tr>
-						<td colspan="2">
-						<!-- 클럽장만 수정 가능 -->
-						<p style="text-align:right;"><input type="button" name="btUpdate" id="btUpdate"	value="클럽수정"/></p>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-						<!-- 가입한 사람은 가입버튼 안보이게 처리 필요 -->
-							<p style="text-align:center;">
-							<input type="button" name="btnSign" id="btnSign" value="클럽가입"/></p>
-						</td>
-						<td colspan="2">
-						<!-- 클럽에 가입한 사람만 보이게 처리 필요/클럽장은 안보이게 처리 -->
-							<p style="text-align:center;">
-							<input type="button" name="btnDel" id="btnDel" value="클럽탈퇴"/></p>
-						</td>
-						<td colspan="2">
-						<!-- 클럽장,관리자만 보이게 처리 필요 -->
-							<p style="text-align:center;">
-							<input type="button" name="btnADel" id="btnADel" value="클럽삭제"/></p>
-						</td>
-					</tr>
+				<tr>
+					<th>클럽명</th>
+					<td>${clubDTO.cName}</td> <!-- 클럽명 -->
+				</tr>
+				<tr>
+					<th>활동지역</th>
+					<td>${clubDTO.cLoc}</td><!-- 지역 -->
+				</tr>
+				<tr>
+					<th>클럽장</th>
+					<td>${clubDTO.masterId}</td><!-- 클럽장 -->		
+				</tr>
+				<tr>
+					<th>개설일</th>
+					<td><fmt:formatDate value="${clubDTO.creDate}" type="date" pattern="yyyy.MM.dd"/></td><!-- 클럽개설일 -->
+				</tr>
+				<tr>
+					<th>가입인원</th>
+					<td>${sPeople}/${clubDTO.cPeople}(명)</td><!--가입자수/ 정원(명) -->
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+					<th colspan="2">클럽소개글</th>
+				</tr>
+				<tr>
+					<td colspan="2"><u:pre value="${clubDTO.cIntro}"/></td><!-- 클럽소개글 -->
+				</tr>
+				<tr>
+					<th colspan="2">모임활동(모집)</th>
+				</tr>
+				<c:if test="${empty boardVO}">
+				<tr>
+					<td colspan="2">개설된 모임활동이 없습니다</td>
+				</tr>	
+				</c:if>
+				<c:if test="${!empty boardVO}">	
+				<c:forEach var="board" items="${boardVO}">
+				<tr>
+					<th>제목</th>
+					<th>작성자</th>
+				</tr>
+				<tr>
+					<td>${board.bTitle}</td><!-- 타이틀 -->
+					<td>${board.bWriter}</td><!-- 작성자 -->
+				</tr>
+				<tr>
+					<th colspan="2">모집내용</th>
+				</tr>
+				<tr>
+					<td colspan="2"><u:pre value="${board.bContent}"/></td><!-- 모집내용 -->
+				</tr>
+				</c:forEach>
+				</c:if>
+				<%--관리자모드 --%>
+				<c:if test="${(!empty loginUser) && (loginUser.grade == 999)}"> 
+				<tr>
+					<th colspan="3">가입자 리스트</th>
+				</tr>
+				<tr>
+					<th>회원번호</th>
+					<th>회원아이디</th>
+					<th>클럽가입한날짜</th>
+				</tr>
+				<c:forEach var="sMember" items="${signMemberList}">
+				<tr>
+					<td>${sMember.no}</td><%-- 회원번호 --%>
+					<td>${sMember.id}</td><%-- 회원아이디 --%>
+					<td><fmt:formatDate value="${sMember.joinDate}" type="date" pattern="yyyy.MM.dd"/></td><%-- 클럽가입자날짜 --%>
+				</tr>
+				</c:forEach>
+				</c:if>
+
+				<%-- 클럽장,관리자만 수정 가능 --%>
+				<c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
+				<tr>
+					<td colspan="2">
+						<p style="text-align:right;">
+							<input type="button" name="btUpdate" id="btUpdate"	value="클럽수정"/>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p style="text-align:center;">
+						<input type="button" name="btnADel" id="btnADel" value="클럽삭제"/>
+						</p>
+					</td>
+				</tr>
+		 		</c:if>
+		 		<!-- 클럽에 가입하지않은 회원 -->
+				<c:if test="${gMember && (currentMember.signIn != 'Y') || exist==false}">
+				<tr>
+					<td colspan="2">			
+						<p style="text-align:center;">
+							<input type="button" name="btnSign" id="btnSign" value="클럽가입"/>
+						</p>
+					</td>
+				</tr>
+				</c:if>
+				<%-- 클럽에 가입한 일반회원만 보이게 처리 필요 --%>
+				<c:if test="${gMember && (currentMember.signIn == 'Y') && (loginUser.no == currentMember.no)}">
+				<tr>
+					<td colspan="2">
+						<p style="text-align:center;">
+							<input type="button" name="btnDelMember" id="btnDelMember" value="클럽탈퇴(회원)"/>
+						</p>
+					</td>
+				</tr>
+				</c:if>
 				</table>
 			</div>
 		</div>
