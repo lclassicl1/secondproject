@@ -111,7 +111,4 @@ public class ClubDAOImpl implements ClubDAO {
 		return cnt;
 	}
 
-
-
-	
 }
