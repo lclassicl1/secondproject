@@ -140,24 +140,24 @@ a{
           	<form:form id="signUpFrm" modelAttribute="user" method="post" accept-charset="utf-8" action="/signUp">
             <div class="input-group">
               <i class='bx bxs-user'></i>
-              <form:input path="id" name="id" placeholder="ID"/> <input type="button" id="check_Id" value="중복확인"><br/>
+              <form:input path="id" name="id" placeholder="ID" required="required"/> <input type="button" id="check_Id" value="중복확인"><br/>
 			  <span id="result_checkId" style="font-size:12px;"></span><br/>
             </div>
             <div class="input-group">
               <i class='bx bx-mail-send'></i>
-              <form:password path="password" name="password" placeholder="Password"/><br/>
+              <form:password path="password" name="password" placeholder="Password" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="name" name="name" placeholder="Name"/><br/>
+              <form:input path="name" name="name" placeholder="Name" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="zipcode" name="zipcode" id="zipcode" placeholder="Zipcode"/><button type="button" id="zipcode_Btn" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
+              <form:input path="zipcode" name="zipcode" id="zipcode" placeholder="Zipcode" required="required"/><button type="button" id="zipcode_Btn" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="address" name="address" placeholder="Address"/><br/>
+              <form:input path="address" name="address" placeholder="Address" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
@@ -165,11 +165,11 @@ a{
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="pricynum" name="pricynum" placeholder="Pricynum"/><br/>
+              <form:input path="pricynum" name="pricynum" placeholder="Pricynum" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="email" class="Email" name="email" id="email"  placeholder="Email"/><button type="button" id="email_Btn" class="mail_button">본인인증</button><br/>
+              <form:input path="email" class="Email" name="email" id="email"  placeholder="Email" required="required"/><button type="button" id="email_Btn" class="mail_button">본인인증</button><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
@@ -178,7 +178,7 @@ a{
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="phonenum" name="phonenum" placeholder="Phonenum"/><br/>
+              <form:input path="phonenum" name="phonenum" placeholder="Phonenum" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
