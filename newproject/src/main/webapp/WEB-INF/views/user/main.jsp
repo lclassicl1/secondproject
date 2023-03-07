@@ -20,6 +20,7 @@ ${loginUser.id}님 반갑습니다!<br/>
 <a href="${path}/chat/room?roomNo=3">채팅방 3 test</a><br/>
 <a href="${path}/chat/room?roomNo=4">채팅방 4 test</a><br/>
 <a href="${path}/chat/room?roomNo=5">채팅방 5 test</a><br/>
+<a href="${path}/photo/main">pTKWLS</a><br/>
 =======
 세션 아이디: ${sessionId}<br/>
 ${loginUser}님 반갑습니다!<br/>

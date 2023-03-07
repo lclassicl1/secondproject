@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.ImageFileVO;
+import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.PhotoGoodsService;
 
 @Controller
@@ -91,10 +92,11 @@ public class PhotoController extends  PhotoBaseController {
 		//AuthUser라는 객체가 없는 상태라면 아래와 같이 임시 저장해놓고 사용하다가
 		//소스합쳐지면 잊지말고   정리하자~~~~~!!!!!!!!!!!!!!!
 		//session.setAttribute("AUTHUSER_NO",1);
-		session.setAttribute("AUTHUSER_ID","hongId");//로그인했다 가정하고
+		//session.setAttribute("AUTHUSER_ID","hongId");//로그인했다 가정하고
 		//session.setAttribute("AUTHUSER_NAME","홍GD");
-		
-		String id = (String)session.getAttribute("AUTHUSER_ID");
+		User user = (User)session.getAttribute("loginUser");
+		String id = user.getId();
+		//String id = (String)session.getAttribute("AUTHUSER_ID");
 		
 				
 		//2.form요소 중에서<input type="file"> 가져오기		
