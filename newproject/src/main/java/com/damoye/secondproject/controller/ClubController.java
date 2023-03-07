@@ -65,7 +65,7 @@ public class ClubController {
 		String categoryNoVal = req.getParameter("category");
 		int categoryNo = 0;
 		ClubDTO clubDTO = new ClubDTO();
-		List<ClubDTO> clubList = new ArrayList<>();
+		List<ClubDTO> clubList = new ArrayList<ClubDTO>();
 		if(categoryNoVal != null) {
 			categoryNo = Integer.parseInt(categoryNoVal);
 			clubDTO.setcName(searchCName);

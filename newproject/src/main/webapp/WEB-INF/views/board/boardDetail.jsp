@@ -66,11 +66,12 @@ body {
 
 <header><jsp:include page="/resources/module/header.jsp"/></header>
 	<div><h1>클럽게시판 글읽기</h1></div>
-	현재 세션 아이디:${userId}<br/>
+	현재 세션 아이디:${loginUser.id}<br/>
 	<%-- 게시글정보: ${boardList} --%>
 	${boardVO}<br/>
 	${num}<br/>
 	${commList}<br/><br/>
+
   <div class="container" style="display:table; width:100%;">
 	<div class="divTableBody">
 	  <div style="display:table-row">
@@ -102,13 +103,13 @@ body {
 	  </div>
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">내용</div>
-        <div class="c1" style="display:table-cell; height:400px;">${boardVO.bContent}</div>
+        <div class="c1" style="display:table-cell; height:400px;"><pre>${boardVO.bContent}</pre></div>
 	  </div>
 	</div>
 	  <div style="display:table-row">
 	  	<input type="button" name="boardList" id="boardList" value="목록으로"/>
 		<!-- 본인글이면 수정 또는 삭제가능 -->
-			<c:if test="${sessionScope.userId == boardVO.bWriter}">
+			<c:if test="${loginUser.id == boardVO.bWriter}">
 		<!-- <button type="button" onclick="location.href='${path}/board/?cNo=${boardVO.cNo}'">목록으로</button> -->
 	  		  <input type="button" name="updateBoard" id="updateBoard" value="수정">
 			  <input type="button" name="deleteBoard" id="deleteBoard" value="삭제">
@@ -117,7 +118,7 @@ body {
 	   <p>
 	  <!-- 댓글작성 -->
 	<form id="insertCommBoard" action="${path}/comm" method="POST">
-	<input type="hidden" name="commId" id="commId" value="${sessionScope.userId}"/>
+	<input type="hidden" name="commId" id="commId" value="${loginUser.id}"/>
 	<input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
   	<input type="hidden" name="num" id="num" value="${num}"/>
   	<input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/>
@@ -125,7 +126,7 @@ body {
 	  <div style="display:table-row">
 		<div class="c" style="display:table-cell">댓글</div>
 		<div class="c1" style="display:table-cell">
-		<textarea name="comment" id="comment" required="required"></textarea></div>
+		<pre><textarea name="comment" id="comment" required="required"></textarea></pre></div>
 	  </div>
 	  		<input type="submit" value="등록">
 	  </div>
@@ -144,10 +145,6 @@ body {
 		<div class="c" style="display:table-cell">작성자</div>
 		<div class="c1" style="display:table-cell">${comm.commId}</div>
 	  </div>
-	  <div style="display:table-row">
-		<div class="c" style="display:table-cell">댓글</div>
-		<div class="c1" style="display:table-cell">${comm.comment}</div>
-	  </div>
 	 <div style="display:table-row">
 	 <c:if test="${comm.commRegdate == comm.commModdate}">
 	    <div class="c" style="display:table-cell">작성일</div>
@@ -158,16 +155,20 @@ body {
         <div class="c1" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${comm.commModdate}"/></div>
 	 </c:if>
 	  </div>
+	  <div style="display:table-row">
+		<div class="c" style="display:table-cell">댓글</div>
+		<pre><div class="c1" style="display:table-cell">${comm.comment}</pre></div>
  	</div>
 	  	<div style="display:table-row">
 		<!-- 본인 댓글이면 수정 또는 삭제가능 -->
-			<c:if test="${sessionScope.userId == comm.commId}">
+			<c:if test="${loginUser.id == comm.commId}">
 	  		<input type="button" value="수정" onClick="location='${path}/comm/updateComm?boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">
 			<input type="button" value="삭제" onClick="location='${path}/comm/deleteComm?cNo=${boardVO.cNo}&boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">
 			</c:if>
 	    </div>
 	  </c:if>
 	  </c:forEach>
+	  </div>
 	  
  </div>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
