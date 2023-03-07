@@ -41,11 +41,13 @@ public interface ClubService {
 	//클럽수정
 	public int getUpdateClub(ClubDTO clubDTO) throws Exception;
 	//클럽삭제
-	public int getDel(int cNo) throws Exception;
+	public int getDel(int cNo) throws Exception;	
 	//클럽회원삭제
 	public int getMemberDel(int cMemberNo) throws Exception;
 	//전체 클럽 조회 
 	public ClubListPage getAllClubList(int pageNo) throws Exception;
+
+
 
 	
 	

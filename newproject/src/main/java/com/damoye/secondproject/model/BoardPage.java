@@ -26,7 +26,7 @@ public class BoardPage {
 	private int displayPost;
 
 	// 한번에 표시할 페이징 번호의 갯수
-	private int pageNumCnt = 5;
+	private int pageNumCnt =5;
 
 	// 표시되는 페이지 번호 중 마지막 번호
 	private int endPageNum;
@@ -101,12 +101,9 @@ public class BoardPage {
 	private void dataCalc() {
 		
 		
-		if(endPageNum > pageNum) {
-			endPageNum = pageNum;
-			if(endPageNum-endPageNum==0) {
-				next=false;
-			}
-		}
+		/*if(endPageNum-endPageNum==0) {
+			next=false;
+		}*/
 		if(endPageNum>pageNum) {
 			next=false;
 		}
@@ -123,11 +120,13 @@ public class BoardPage {
 		startPageNum = endPageNum - (pageNumCnt - 1);
 		
 		// 마지막 번호 재계산
+		/*
 		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNumCnt));
 		
 		if(endPageNum > endPageNum_tmp) {
 			endPageNum = endPageNum_tmp;
 		}
+		*/
 		prev = startPageNum == 1 ? false : true;
 		next = endPageNum * pageNumCnt >= count ? false : true;
 		
@@ -135,6 +134,9 @@ public class BoardPage {
 		
 		//하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
 		pageNum = (int)Math.ceil((double)count/postNum);
+		if(endPageNum > pageNum) {
+			endPageNum = pageNum;
+		}
 		
 		}
 

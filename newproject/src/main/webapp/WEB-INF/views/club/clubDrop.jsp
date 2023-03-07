@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="cPath" value="<%=request.getContextPath()%>"/> 
+<c:set var="path" value="<%=request.getContextPath()%>"/> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
 </c:if>
 				
 <script>
-location.href="${cPath}/club/maintest"; 
+location.href="${path}/user/logoMain"; 
 </script>
 </body>
 </html>

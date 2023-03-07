@@ -18,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.BoardPage;
 import com.damoye.secondproject.model.BoardVO;
-import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.CommBoardVO;
+import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.BoardService;
 import com.damoye.secondproject.service.ClubService;
 import com.damoye.secondproject.service.CommboardService;
@@ -99,9 +99,10 @@ public class BoardController {
 	//입력폼보여주기
 	//요청주소 ~컨패/board/boardWrite?cNo=
 	@GetMapping("/board/boardWrite")
-	public String insertBoardForm(Model model, @RequestParam(name="cNo") int cNo,@RequestParam(name="num") int num,HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.setAttribute("User", "dummy1");//임시!!!!!!!!!!!!!!!!!!!!!!!
+	public String insertBoardForm(Model model, @RequestParam(name="cNo") int cNo,@RequestParam(name="num") int num,HttpSession session, HttpServletRequest request) {
+		session = request.getSession();
+		User user = (User) session.getAttribute("loginUser");
+		session.setAttribute("loginUser", user);
 		model.addAttribute("cNo", cNo);
 		model.addAttribute("num", num);
 		return "/board/boardWrite";

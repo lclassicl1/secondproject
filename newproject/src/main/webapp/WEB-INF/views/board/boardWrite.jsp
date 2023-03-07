@@ -63,7 +63,8 @@ body {
 	${cNo}
 	${num}
   <div class="container" style="display:table; width:100%;">
-  <input type="hidden" name="bWriter" id="bWriter" value="${sessionScope.userId}"/>
+ 
+  <input type="hidden" name="bWriter" id="bWriter" value="${loginUser.id}"/>
   <input type="hidden" name="cNo" id="cNo" value="${cNo}"/>
   <input type="hidden" name="num" id="num" value="${num}"/>
 	<div class="divTableBody">
@@ -84,7 +85,7 @@ body {
 	  <div style="display:table-row">
 	    <div class="c" style="display:table-cell">내용</div>
         <div class="c1" style="display:table-cell; height:400px">
-        <textarea name="bContent" id="bContent" required="required"></textarea>
+        <pre><textarea name="bContent" id="bContent" required="required"></textarea></pre>
         </div>
 	  </div>
 	</div>

@@ -106,6 +106,7 @@
 		select count(cMemberNo)
 		from clubmember
 		where cNo=#{cNo}
+		and signIn='Y'
   	]]>
 	</select> 
 	<!-- 상세보기-모임글 조회 -->
@@ -133,21 +134,11 @@
  	<!-- 클럽가입하기 -->
  	<insert id="signClub" parameterType="clubMemberDTO">
  	<![CDATA[
-	 	insert into clubmember(cNo,no)
-		values(#{cNo},#{no}) 	 	
+	 	insert into clubmember(cNo,no,signIn)
+		values(#{cNo},#{no},'Y') 	 	
  	]]> 	
  	</insert>
- 	
- 	<!-- 중복조회 -->
-<!--  	<select id="noDuplication" resultType="int" parameterType="clubMemberDTO">
- 	<![CDATA[
-		select cMemberNo
-		from clubmember
-		where cNo=#{cNo}
-			and no=#{no}
-	]]> 	
- 	</select>
- -->
+
  	<!-- 클럽생성하기 -->
  	<insert id="createClub" parameterType="clubDTO">
  	<![CDATA[
@@ -165,7 +156,7 @@
  	]]> 
  	</update>
  	
- 	<!--  특정클럽에 가입한 회원 전체 조회 -->
+ 	<!--특정클럽에 가입한 회원 전체 조회 -->
  	<select id="AllClubMemberList" resultType="clubMemberDTO">
  	 <![CDATA[
 	 	select *
