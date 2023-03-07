@@ -13,11 +13,7 @@
 <meta charset="UTF-8">
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
+  
 <body>
 
 <td  colspan="2" align="center" >
