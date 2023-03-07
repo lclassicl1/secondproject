@@ -15,6 +15,7 @@ ${loginUser.id}님 반갑습니다!<br/>
 
 <a href="${path}/club/maintest">클럽 홈</a><br/>
 <a href="${path}/myClub">내가 가입된 클럽보기</a><br/>
+<a href="${path}/board/list?cNo=1&num=1">클럽게시판(예시)</a><br/>
 <a href="${path}/chat/room?roomNo=1">채팅방 1 test</a><br/>
 <a href="${path}/chat/room?roomNo=2">채팅방 2 test</a><br/>
 <a href="${path}/chat/room?roomNo=3">채팅방 3 test</a><br/>
