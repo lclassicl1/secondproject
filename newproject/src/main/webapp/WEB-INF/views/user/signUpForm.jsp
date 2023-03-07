@@ -5,7 +5,8 @@
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 <meta charset="UTF-8">
 <title>회원가입</title>
  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -25,6 +26,7 @@ $(document).ready(function(){
 	        	checkBox.attr("disabled", false); //disabled해제(입력 가능으로 바뀜)
 	        	checkBox.attr("placeholder", "인증번호 6자리를 입력해주세요");
 	        	code = data;
+	        	alert("요청하신 이메일로 인증번호를 보내드렸습니다.")
 	        }
 	    });
 	});
@@ -39,15 +41,62 @@ $(document).ready(function(){
 		if(inputCode==code){
 			checkResult.html("인증번호가 일치합니다.");
 			checkResult.attr("class", "correct");
-			return true;
+
 		} else{
 			checkResult.html("인증번호가 일치하지 않습니다!");
 			checkResult.attr("class", "incorrect");
-			return false;
+
 		}
 	});
 });
 
+/*아이디 중복 확인*/
+$(document).ready(function(){
+	$("#checkId").click(function(){
+        var id = $("#id").val();
+        
+        $.ajax({
+            type:"GET",
+            url:"/checkId",
+            data: {"id" : id},
+            success: function(data){ 
+                if(data == "N"){ // 만약 성공할시
+                	msg = "사용 가능한 아이디입니다.";
+                    $("#result_checkId").html(msg).css("color", "green");
+                    $("#pass").trigger("focus");
+                 
+             }else{ // 만약 실패할시
+            	 msg = "사용 불가능한 아이디입니다.";
+                     $("#result_checkId").html(msg).css("color","red");
+                     $("#id").val("").trigger("focus");
+             }
+                 
+         },
+            error : function(error){alert(error);}
+        });
+        
+    });
+    
+});
+
+$(document).ready(function(){
+	$("#submit").click(function(){
+		
+		if($("#result_checkId").text()==""){
+			alert("아이디 중복검사를 해주세요.");
+			console.log($("#result_checkId").text());
+			return false;
+		}
+		else if($("#mail_check_input_box_warn").text()==""){
+			alert("이메일 인증을 완료해주세요.");
+			console.log($("#mail_check_input_box_warn").text());
+			return false;
+		}
+
+		$("#signUpFrm").submit();
+
+	});
+});
 </script>
 <style>
 	.correct{color:green;}
@@ -57,24 +106,23 @@ $(document).ready(function(){
 <body>
 <h3>회원가입</h3>
 	<hr/>
-	<form:form action="/signUp" modelAttribute="user" method="post" accept-charset="utf-8">
-	아이디:<form:input path="id" name="id" oninput="checkId()"/><br/>
-	<form:errors path="id"/>
-	비밀번호:<form:password path="password" name="password"/><br/>
-	비밀번호확인:<input type="password" name="re_password"/><br/>
-	이름:<form:input path="name" name="name"/><br/>
-	우편번호:<form:input path="zipcode" name="zipcode"/><button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
-	주소:<form:input path="address" name="address"/><br/>
+	<form:form id="signUpFrm" modelAttribute="user" method="post" accept-charset="utf-8" action="/signUp">
+	아이디:<form:input path="id" name="id" id="id" required="required"/><input type="button" id="checkId" value="중복확인"><span id="result_checkId" style="font-size:12px;"></span><br/>
+	비밀번호:<form:password path="password" name="password" id="pass" required="required"/><br/>
+	비밀번호확인:<input type="password" name="re_password" required="required"/><br/>
+	이름:<form:input path="name" name="name" required="required"/><br/>
+	우편번호:<form:input path="zipcode" name="zipcode" required="required"/><button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
+	주소:<form:input path="address" name="address" required="required"/><br/>
 	상세주소:<form:input path="detailaddress" name="detailaddress"/><br/>
-	주민등록번호:<form:input path="pricynum" name="pricynum"/><br/>
-	이메일:<form:input path="email" class="Email" name="email"/><button type="button" class="mail_button" onclick="mail_button">본인인증</button><br/>
+	주민등록번호:<form:input path="pricynum" name="pricynum" required="required"/><br/>
+	이메일:<form:input path="email" class="Email" name="email" required="required"/><button type="button" class="mail_button">본인인증</button><br/>
 	이메일 인증:<input type="text" id="mail-check-input" name="email_check" disabled="disabled" placeholder="이메일 입력과 본인인증을 해주세요" maxlength="6"/>
 	<span id="mail_check_input_box_warn"></span><br/>
-	전화번호:<form:input path="phonenum" name="phonenum"/><br/>
+	전화번호:<form:input path="phonenum" name="phonenum" required="required"/><br/>
 	성별:<form:radiobutton path="gender" name="gender" value="M"/> 남성
 		<form:radiobutton path="gender" name="gender" value="F"/> 여성<br/>
 	
-	<input type="submit" value="가입하기">
+	<button id="submit">가입하기</button>
 	<input type="reset" value="다시쓰기">
 	</form:form>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
