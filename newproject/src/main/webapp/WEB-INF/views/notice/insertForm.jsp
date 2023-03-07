@@ -12,7 +12,7 @@
 <!-- ck editor 5 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/default.css">
-<title>Insert title here</title>
+<title>공지사항 작성</title>
 <script>
 	$(function(){
 		$('#submit').click(function(){
@@ -41,12 +41,40 @@
 		});
 	});
 </script>
+<style>
+#tableCenter{
+	display: flex;
+ 	justify-content: center;
+}
+table{
+	width:60%;
+}
+</style>
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"></jsp:include></header>
+<div id="subheader">
+		<div class="row">
+			<div class="eight columns">
+				<p class="bread leftalign">
+					<b>공지 사항 작성</b>
+				</p> 
+			</div>
+			<div class="four columns">
+				<div class="row collapse">
+					<div class="ten mobile-three columns">
+						<div class="two mobile-one columns">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <main>
-	<h1>공지사항 글쓰기</h1>
+	<div class="hr">
+	</div>
 	<form action="${path}/notice/insert" method="post" id="form">
+		<div id="tableCenter">
 		<table border="1">
 			<tr>
 				<th>작성자</th><td><input type="hidden" name="writername" id="writername" value="${loginUser.name}"/>${loginUser.name}</td>
@@ -68,6 +96,7 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 	</form>
 </main>	
 <footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
