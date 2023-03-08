@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.damoye.secondproject.dao.BoardDAO;
 import com.damoye.secondproject.dao.BoardDAOImpl;
 import com.damoye.secondproject.model.BoardVO;
+import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubMemberDTO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -51,7 +53,13 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoard(int cNo, int boardNo,BoardVO boardVO) {
 		return boardDAOImpl.deleteBoard(cNo, boardNo, boardVO);
 	}
-
-
+	@Override
+	public ClubDTO getClubDTOByNo(int cNo) {
+		return boardDAOImpl.getClubDTOByNo(cNo);
+	}
+	@Override
+	public int validClubMember(ClubMemberDTO clubMember) {
+		return boardDAOImpl.validClubMember(clubMember);
+	}
 	
 }

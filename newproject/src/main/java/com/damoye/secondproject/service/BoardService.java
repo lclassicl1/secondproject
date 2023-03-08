@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.damoye.secondproject.model.BoardVO;
+import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubMemberDTO;
 
 public interface BoardService {
 	
@@ -32,6 +34,10 @@ public interface BoardService {
 
 	//클럽게시판 글삭제
 	public int deleteBoard(int cNo, int boardNo, BoardVO boardVO);
+
+	public ClubDTO getClubDTOByNo(int cNo);
+
+	public int validClubMember(ClubMemberDTO clubMember);
 
 
 

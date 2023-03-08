@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/default.css">
+<meta charset="UTF-8">
 <script>
 	$(function(){
 		$("#btnWrite").click(function(){
@@ -16,9 +18,16 @@
 </script>
 <title>클럽게시판</title>
 <style>
-body {
- background-color: transparent !important;
-}
+
+	#clubMain{
+		width: 66.6666%;
+	}
+	#tableCenter{
+		display: flex;
+	    justify-content: center;
+		
+	}
+
   .container, .board, .c{
   	border: 1px solid;
   	text-align: center;
@@ -36,13 +45,21 @@ body {
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
-	${boardList}
+	<%-- ${boardList}
 	${cNo} <br/>
 	${num} <br/>
 	${boardPage}<br/>
 	${categoryNo}
-	${loginUser.id}
-	<div><h1>클럽 페이지</h1></div>
+	${loginUser.id} --%>
+<div id="subheader">
+	<div class="row">
+		<div class="eight columns">
+			<p class="bread leftalign">
+				<b>클럽 게시판</b>  
+			</p>
+		</div>
+	</div>
+</div>
 	<%-- 클럽게시판: ${boardList} --%>
 	<div class="container" style="display:table; width:100%;">
 	 
