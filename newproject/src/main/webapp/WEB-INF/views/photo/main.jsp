@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath}" />
 <c:set var="path" value="<%=request.getContextPath()%>"/> 
+<c:set var="imageList"  value="${goodsMap.imageList}" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -34,8 +35,8 @@
 </div>
 <!-- CONTENT 
 ================================================== -->
-<div class="row">
-	<input type="button" value="파얼업로드" onClick="location.href='${conPath}/photo/addForm'" class='btn btn-success'/>
+<div class="row" style="display: flex; justify-content: right;">
+	<input type="button" value="파얼업로드" onClick="location.href='${conPath}/photo/addForm'" class='postfix button expand' style="width:100px;"/>
 </div>
 <div id="portofolio" class="row">
 	<!-- Project 1-->
@@ -48,7 +49,7 @@
 	<c:forEach items="${goodsMap.bestseller}" var="item">
 		<c:set var="goods_count" value="${goods_count+1 }" />
 		<div class="six columns category trains">
-			<h5>OLD TIMES</h5>
+			<h6>작성자:${item.id}</h6>
 			<div class="portofoliothumb">
 				<div class="portofoliothumboverlay">
 					<div class="inner">
@@ -67,7 +68,7 @@
 <footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
 </body>
 </html>
-<%--c:forEach 상품목록에서 bestseller끝 --%>
+
 
 
 
