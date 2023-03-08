@@ -83,6 +83,15 @@ public class UserServiceImpl implements UserService {
 
         return validatorResult;
     }
+
+	@Override
+	public Integer checkId(String id) {
+		System.out.println("Service");
+        int result = 0;
+        
+        result = userDAO.checkId(id);
+        return result;
+    }
 	
 	@Override
 	public List<User> getAllMemberList() {

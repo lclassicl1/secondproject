@@ -26,8 +26,8 @@ public class SignInController {
 	private UserService userService;
 	
 	@RequestMapping("/logoMain")
-	public String requestMain(HttpSession session) {
-		if(session.getAttribute("loginUser") == null) {
+	public String requestMain(@ModelAttribute("user") User user, HttpSession session) {
+		if((User)session.getAttribute("loginUser") == null) {
 			return "user/signInForm";
 		}
 		return "user/main";

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,12 +13,13 @@ import org.springframework.stereotype.Repository;
 
 import com.damoye.secondproject.model.User;
 
-
-
 @Repository
 public class UserDAOImpl implements UserDAO {
 
 	private JdbcTemplate template;
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	@Autowired 
     public void setDataSource(DataSource dataSource) {
@@ -86,6 +88,13 @@ public class UserDAOImpl implements UserDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public Integer checkId(String id) {
+		System.out.println("DAO");
+		System.out.println("id="+id);
+		int cnt = sqlSession.selectOne("mapper.user.checkId",id);
+		return cnt;
 	}
 	
 	@Override

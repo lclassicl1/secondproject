@@ -1,32 +1,30 @@
 package com.damoye.secondproject.model;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 public class User {
 
 	private int no;
-	@NotBlank(message="아이디는 필수 입력입니다.")
+	@NotEmpty(message="아이디는 필수 입력입니다.")
 	private String id;
-	@NotBlank(message="비밀번호는 필수 입력입니다.")
+	@NotEmpty(message="비밀번호는 필수 입력입니다.")
 	private String password;
-	@NotBlank(message="비밀번호 확인은 필수 입력입니다.")
-	private String re_password;
-	@NotBlank(message="이름은 필수 입력입니다.")
+	@NotEmpty(message="이름은 필수 입력입니다.")
 	private String name;
-	@NotBlank(message="우편번호는 필수 입력입니다.")
+	@NotEmpty(message="우편번호는 필수 입력입니다.")
 	private String zipcode;
-	@NotBlank(message="주소는 필수 입력입니다.")
+	@NotEmpty(message="주소는 필수 입력입니다.")
 	private String address;
 	private String detailaddress;
-	@NotBlank(message="주민등록번호는 필수 입력입니다.")
+	@NotEmpty(message="주민등록번호는 필수 입력입니다.")
 	private String pricynum;
-	@NotBlank(message="이메일은 필수 입력입니다.")
+	@NotEmpty(message="이메일은 필수 입력입니다.")
 	@Email(message="올바른 이메일 형식으로 작성해주십시오.")
 	private String email;
-	@NotBlank(message="전화번호는 필수 입력입니다.")
+	@NotEmpty(message="전화번호는 필수 입력입니다.")
 	private String phonenum;
-	@NotBlank(message="성별은  필수 선택입니다.")
+	@NotEmpty(message="성별은  필수 선택입니다.")
 	private String gender;
 	private int grade;
 	private String regdate;
@@ -68,12 +66,6 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getRe_password() {
-		return re_password;
-	}
-	public void setRe_password(String re_password) {
-		this.re_password = re_password;
 	}
 	public String getName() {
 		return name;
@@ -148,10 +140,6 @@ public class User {
 		this.password = newPwd;
 	}
 	
-    //비밀번호 확인
-    public boolean isPwEqualToCheckPw() {
-        return password.equals(re_password);
-    }
 	
 	@Override
 	public String toString() {
