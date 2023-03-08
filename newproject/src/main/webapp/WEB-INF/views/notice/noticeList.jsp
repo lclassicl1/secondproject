@@ -40,7 +40,7 @@
 	});
 
 </script>
-<title>Insert title here</title>
+<title>공지사항</title>
 <style>
 #tableCenter{
 	display: flex;
@@ -84,7 +84,7 @@ table{
 	<div id="tableCenter">
 		<table border="1">
 			<tr>
-				<th><input type="checkbox"/></th><th>제목</th><th>작성자</th><th>작성시간</th><th>조회수</th>
+				<th>제목</th><th>작성자</th><th>작성시간</th><th>조회수</th>
 			</tr>
 			<c:if test="${empty noticeList}">
 			<tr>
@@ -93,7 +93,6 @@ table{
 			<c:if test="${not empty noticeList}">
 				<c:forEach items="${noticeList}" var="list">
 				<tr> 
-					<td><input type="checkbox"/></td>
 					<td><a href="${path}/notice/read?no=${list.no}">${list.title}</a></td>
 					<td>${list.writername}</td>
 					<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
@@ -102,12 +101,6 @@ table{
 				</c:forEach>
 			<tr>
 				<td colspan="5" style="text-align: center;" id="pagingspan">
-				<select id="paging">
-					<option value="">선택</option>
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="20">20</option>
-				</select>
 					<div class="board-list-paging">
 						<!-- 게시판 페이징 영역 -->
 						<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
