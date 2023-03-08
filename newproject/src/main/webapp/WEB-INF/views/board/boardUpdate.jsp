@@ -54,7 +54,7 @@ body {
 	<div><h1>클럽게시판 수정하기</h1></div>
 	<%-- 게시글정보: ${boardList} --%>
 	${boardVO}
-	${boardVO.cNo}
+	${boardVO.cNo}<br/>
 	${num}
 	${boardVO.boardNo}
 	${boardVO.bType}

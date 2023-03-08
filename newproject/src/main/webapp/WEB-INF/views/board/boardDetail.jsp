@@ -44,6 +44,17 @@ $(document).ready(function(){
 	#boardDetail {
 		width:66.6666%
 	}
+	
+	#textarea {
+		resize:none;
+		width:598.46px;
+		height:100px;
+	}
+	
+	#btnComm {
+		text-align:center;
+	}
+
 
 
 
@@ -160,6 +171,7 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<p>작성된 댓글이 없습니다</p>
 		</c:if>
 		<c:forEach var="comm" items="${commList}">
+		<br class="clear">
 			<hr>
 		<div class="gravatar">
 			<img src="http://www.wowthemes.net/demo/studiofrancesca/images/gravatar.png" alt="" width=40px;>
@@ -190,11 +202,13 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
 	 	<input type="hidden" name="num" id="num" value="${num}"/>
 	 	<input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/>
-		<textarea class="six smoothborder" rows="7" placeholder="Comments *" name="comment" id="comment" required="required"></textarea>
+		<textarea class="six smoothborder" id="textarea" rows="7" placeholder="Comments *" name="comment" id="comment" required="required"></textarea>
   		<br class="clear">
   		<!-- <input type="button" name="boardList1" id="boardList1" value="목록으로"/> -->
+  		<div class="btnComm" id="btnComm">
 		<button type="submit" class="readmore" name="boardList1" id="boardList1">목록으로</button>
 		<button type="submit" class="readmore">등록</button>
+  		</div>
 		</form>	
 		</div>
 	
