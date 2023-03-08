@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 $(document).ready(function(){	
+	
 	//클럽가입
 	$("#btnSign").on("click",function(){
 		var c=confirm("클럽에 가입하시겠습니까?");
