@@ -70,7 +70,7 @@ $(document).ready(function(){
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
 <form id="creaFrm" action="${path}/club/clubCre" method="post">
-<table style="text-align:center; display: flex; justify-content: center; width: 100%;">
+<table border="1" style="text-align:center; display: flex; justify-content: center; width: 100%;">
 	<tr>
 		<th>카테고리</th>
 		<td>		

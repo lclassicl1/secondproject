@@ -72,13 +72,11 @@
 	</div>
 </div>
 <div class="hr">
-</div>
-<!-- ------------------------------------------------- -->
+</div>	
+<div class="row">
 <div style="text-align: right;">
 	<input class="readmore" type="button" name="clubCreate" id="clubCreate" value="클럽개설"/>
 </div>
-<!-- ------------------------------------------------- -->	
-<div class="row">
 	<div>
 		<form id="searchFrm" method="get" action="${path}/club/searchCName">
 				<input type="text" id="searchCName" name="searchCName" placeholder="Search..."/>

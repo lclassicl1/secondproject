@@ -21,7 +21,7 @@ $(document).ready(function(){
 	$(function(){
 		$("#clubUpdate").on("click",function(){
 			let categoryNo = $('#categoryNo').val();
-			if(categoryNo == '' || categoryNo == null) {
+			if(categoryNo == '' || categoryNo == 0) {
 				alert('카테고리를 선택해주세요.');
 				$('#categoryNo').focus();
 				return false;
@@ -72,7 +72,7 @@ $(document).ready(function(){
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
 <form id="clubUp" action="" method="post">
 <input type="hidden" name="cNo" value="${clubDTO.cNo}"/>
-<table style="text-align:center; display: flex; justify-content: center;">
+<table border="1" style="text-align:center; display: flex; justify-content: center;">
 	<tr>
 		<th>카테고리</th>
 		<td>
