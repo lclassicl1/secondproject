@@ -73,9 +73,9 @@ table{
 				<th>내용</th><td><textarea rows="10" cols="30" name="content" id="content" placeholder="${noticeDTO.content}"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="수정하기"/>&nbsp;
-					<input type="reset" value="취소"/>&nbsp;
-					<input type="button" value="뒤로가기" id="backBtn"/> </td>
+				<td colspan="2"><input type="submit" value="수정하기" class="readmore"/>&nbsp;
+					<input type="reset" value="취소" class="readmore"/>&nbsp;
+					<input type="button" value="뒤로가기" id="backBtn" class="readmore"/> </td>
 			</tr>
 		</table>
 		</div>

@@ -95,10 +95,10 @@ table{
 			<tr>
 				<td colspan="2">
 					<c:if test="${loginUser.grade == 999}">
-						<input type="button" name="" id="updateNotice" value="수정"/>
-						<input type="button" name="" id="deleteNotice" value="삭제"/>
+						<input type="button" name="" id="updateNotice" value="수정" class="readmore"/>
+						<input type="button" name="" id="deleteNotice" value="삭제" class="readmore"/>
 					</c:if>	
-						<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록"/>
+						<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록" class="readmore"/>
 				</td>
 			</tr>
 		</table>

@@ -50,6 +50,13 @@
 table{
 	width:60%;
 }
+
+#btn {
+  position: absolute;
+  top: 24.5%;
+  left: 77.8%;
+  transform: translateX(-50%);
+}
 </style>
 </head>
 <body>
@@ -81,6 +88,12 @@ table{
 	</div>
 	<input type="hidden" name="pageNo" value="${paging.cri.pageNo}">
 	<input type="hidden" name="amount" value="${paging.cri.amount}">
+	<!-- 관리자만 글쓰기 작성 활성화 -->
+	<div id="btn">
+		<c:if test="${loginUser.grade == 999}">
+			<input type="button" value="글쓰기" id="noticeWrite" class="readmore""/>
+		</c:if>
+	</div>
 	<div id="tableCenter">
 		<table border="1">
 			<tr>
@@ -99,26 +112,32 @@ table{
 					<td>${list.readcnt}</td>
 				</tr>	
 				</c:forEach>
-			<tr>
+		<%-- 	<tr>
 				<td colspan="5" style="text-align: center;" id="pagingspan">
 					<div class="board-list-paging">
+						<ul class="pagination">
 						<!-- 게시판 페이징 영역 -->
 						<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-							<a href="${path}/notice?pageNo=${num}">[${num}]&nbsp;</a>
+							<li class="current"><a href="${path}/notice?pageNo=${num}">${num}</a></li>
 						</c:forEach>
+						</ul>
 					</div>
 				</td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<td colspan="5">
-				 	<!-- 관리자만 글쓰기 작성 활성화 -->
-					<c:if test="${loginUser.grade == 999}">
-						<input type="button" value="글쓰기" id="noticeWrite"/>
-					</c:if>
 				</td>
 			</tr>
 			</c:if>
 		</table>
+	</div>
+	<div class="board-list-paging">
+		<ul class="pagination">
+				<!-- 게시판 페이징 영역 -->
+				<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+					<li class="current"><a href="${path}/notice?pageNo=${num}">${num}</a></li>
+				</c:forEach>
+		</ul>
 	</div>
 </main>	
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
