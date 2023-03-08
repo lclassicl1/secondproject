@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.damoye.secondproject.model.Criteria;
+import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.User;
 
 
@@ -31,4 +33,6 @@ public interface UserDAO {
 	
 	// 회원목록조회
 	public List<User> getAllMemberList();
+
+	public List<NoticeDTO> getNoticeList();
 }

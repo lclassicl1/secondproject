@@ -11,6 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.damoye.secondproject.model.Criteria;
+import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.User;
 
 @Repository
@@ -37,6 +39,12 @@ public class UserDAOImpl implements UserDAO {
 										new MemberRowMapper(), 
 										id
 									  ); 
+	}
+	
+	@Override
+	public List<NoticeDTO> getNoticeList() {
+		List<NoticeDTO> noticeList = sqlSession.selectList("mapper.notice.mainNoticeList");
+		return noticeList;
 	}
 	
 	@Override
