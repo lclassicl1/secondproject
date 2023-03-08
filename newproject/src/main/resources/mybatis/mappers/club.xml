@@ -142,7 +142,7 @@
  	</insert>
 
  	<!-- 클럽생성하기 -->
- 	<insert id="createClub" parameterType="clubDTO">
+ 	<insert id="createClub" parameterType="clubDTO" useGeneratedKeys="true" keyProperty="cNo" keyColumn="cNo">
  	<![CDATA[
 		insert into club(cName,cIntro,masterId,categoryNo,cLoc,cPeople)
 		values(#{cName},#{cIntro},#{masterId},#{categoryNo},#{cLoc},#{cPeople}) 	

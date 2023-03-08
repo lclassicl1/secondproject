@@ -28,7 +28,7 @@ text-align:center;
 <p><input type="hidden" name="cNo" id="cNo" readonly="readonly" value="${clubMemberDTO.cNo}"/></p> <!-- 클럽번호 -->
 <p><input type="hidden" name="no" id="no" readonly="readonly" value="${loginUser.no}"/></p> <!-- 회원번호 -->
 <p><input type="hidden" name="signIn" id="signIn" readonly="readonly" value="${clubMemberDTO.signIn}"/></p> <!-- 회원번호 -->
-<p><input type="submit" class="readmore" value="가입한 클럽으로 이동" class="a"/></p>
+<p class="a"><input type="submit" class="readmore" value="가입한 클럽으로 이동" class="a"/></p>
 </form>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>

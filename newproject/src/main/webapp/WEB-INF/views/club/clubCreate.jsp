@@ -71,8 +71,24 @@ $(document).ready(function(){
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
+<!-- SUBHEADER
+================================================== -->
+<div id="subheader">
+	<div class="row">
+		<div class="eight columns">
+			<p class="bread leftalign">
+				<b>클럽개설</b>  
+			</p>
+		</div>
+	</div>
+</div>
+<div class="hr">
+</div>
+<!-- CONTENT 
+================================================== -->
 <form id="creaFrm" action="${path}/club/clubCre" method="post">
 <input type="hidden" name="cNo" id="cNo"/>
+<p/>
 <table border="1" style="text-align:center; display: flex; justify-content: center; width: 100%;">
 	<tr>
 		<th>카테고리</th>
