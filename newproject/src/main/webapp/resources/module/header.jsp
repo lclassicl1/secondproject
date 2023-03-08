@@ -36,10 +36,10 @@
 		<nav id="nav-wrap">
 		<ul id="main-menu" class="nav-bar sf-menu">
 			<li class="current">
-			<a href="<%=request.getContextPath()%>/notice">공지사항</a>
+			<a href="${path}/notice">공지사항</a>
 			</li>
 			<li>
-			<a href="<%=request.getContextPath()%>/club/allClubList">다모여 클럽</a>
+			<a href="${path}/club/allClubList">다모여 클럽</a>
 			<ul>
 				<li><a href="#">자유주제</a></li>
 				<li><a href="${path}/club/clist?categoryNo=1">공부</a></li>
@@ -57,10 +57,10 @@
 			</ul> -->
 			</li>
 			<li>
-			<a href="<%=request.getContextPath()%>/myClub">내 클럽</a>
+			<a href="${path}/myClub">내 클럽</a>
 			</li>
 			<li>
-			<a href="<%=request.getContextPath()%>/myInfo">마이페이지</a>
+			<a href="${path}/myInfo">마이페이지</a>
 			</li>
 			<li>
 			<a class="nav-link" onclick="logout();">로그아웃</a>

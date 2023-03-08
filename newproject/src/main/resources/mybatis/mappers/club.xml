@@ -39,7 +39,7 @@
 		where 
 		    cName like concat('%',#{cName},'%')
 	  		and categoryNo like concat('%',#{categoryNo},'%')
-			order by cNo asc
+			order by cNo desc
   	]]> 	
  	</select>
  	
@@ -50,7 +50,7 @@
 		from club
 		where 
 		    cName like concat('%',#{cName},'%')
-			order by cNo asc
+			order by cNo desc
   	]]> 	
  	</select>
 
@@ -59,7 +59,7 @@
  	<![CDATA[
 		select *
 		from club
-		order by cNo asc
+		order by cNo desc
   	]]>
 	</select>  	
 
@@ -69,7 +69,7 @@
 		select *
 		from club
 		where categoryNo=#{categoryNo}
-		order by cNo asc
+		order by cNo desc
   	]]>
 	</select>  	
 
@@ -97,7 +97,8 @@
 	 	from board
 	 	where cNo=#{cNo}
 	 	and bType='모집'
-	 	limit 0, 2
+	 	order by boardNo desc
+	 	limit 0, 2	 	
   	]]>
 	</select> 
 	
