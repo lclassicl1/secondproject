@@ -48,7 +48,7 @@
 			</ul>
 			</li>
 			<li>
-			<a href="#">사진게시판(삭제예정)</a>
+			<a href="<%=request.getContextPath()%>/photo/main">사진게시판</a>
 			<!-- <ul>
 				<li><a href="blogpage1.html">Blog page style 1</a></li>
 				<li><a href="blogpage2.html">Blog page style 2</a></li>

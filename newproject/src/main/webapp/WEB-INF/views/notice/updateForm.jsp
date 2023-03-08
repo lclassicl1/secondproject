@@ -23,16 +23,45 @@
 			});	
 		});
 </script>
+<style>
+#tableCenter{
+	display: flex;
+ 	justify-content: center;
+	
+}
+table{
+	width:60%;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
 <header><jsp:include page="${path}/resources/module/header.jsp"/></header>
+<div id="subheader">
+		<div class="row">
+			<div class="eight columns">
+				<p class="bread leftalign">
+					<b>공지사항 글 수정</b>
+				</p> 
+			</div>
+			<div class="four columns">
+				<div class="row collapse">
+					<div class="ten mobile-three columns">
+						<div class="two mobile-one columns">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="hr">
+	</div>
 <main>
-	<h1>공지사항 수정</h1>
-	몇번글수정?:${no}
-	넘겨받은DTO:${noticeDTO}
+<%-- 	몇번글수정?:${no}
+	넘겨받은DTO:${noticeDTO} --%>
 	<form action="${path}/notice/updateForm" method="post">
 		<input type="hidden" name="no" id="no" value="${noticeDTO.no}"/>
+		<div id="tableCenter">
 		<table border="1">
 			<tr>
 				<th>작성자</th><td><input type="hidden" name="writername" id="writername" value="${noticeDTO.writername}"/>${noticeDTO.writername}</td>
@@ -49,6 +78,7 @@
 					<input type="button" value="뒤로가기" id="backBtn"/> </td>
 			</tr>
 		</table>
+		</div>
 	</form>
 </main>	
 <footer><jsp:include page="${path}/resources/module/footer.jsp"/></footer>
