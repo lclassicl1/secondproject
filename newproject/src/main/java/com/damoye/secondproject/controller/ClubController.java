@@ -99,6 +99,7 @@ public class ClubController {
 	//클럽상세보기 
 	@GetMapping("detail")
 	public String getClubDetail(HttpServletRequest request, int categoryNo,int cNo, Model model, ClubMemberDTO clubMemberDTO) throws Exception {
+		System.out.println("클럽 상세보기");
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("loginUser", user);
@@ -128,20 +129,8 @@ public class ClubController {
 			}
 			break;
 		}
-
-		 boolean exist = true; //초기값 있다면 
-		 for(ClubMemberDTO clubmbmer : signMemberList) {
-			 if(clubmbmer.getNo() == user.getNo()) {  // 클럽에 가입된 회원번호가 동일하다면 
-				 exist = true; //있다
-			 }
-			 	break; 
-			 }
-		 
-		model.addAttribute("exist", exist);
-		 
 		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
 		return "club/clubDetail";
-		
 	}
 	
 	//클럽 가입하기-signClub
@@ -272,6 +261,8 @@ public class ClubController {
 		model.addAttribute("categoryNo", categoryNo);
 		model.addAttribute("cNo", cNo);
 		model.addAttribute("clubMemberDTO",currentMember);
+		
+		System.out.println("cNo : " + cNo);
 
 		return "redirect:club/detail";
 	}
