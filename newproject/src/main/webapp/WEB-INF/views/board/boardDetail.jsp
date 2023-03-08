@@ -38,6 +38,9 @@ $(document).ready(function(){
 
 	
 });
+function openPop(){
+	window.open('${path}/chat/room?roomNo=${clubDTO.cNo}', 'clubChat', 'width=700px,height=800px,scrollbars=yes');
+};
 </script>
 <title>클럽게시판 글읽기</title>
 <style>
@@ -200,7 +203,7 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 	
 		<!-- SIDEBAR -->
 		<div class="four columns" id=float style="margin-top: 15px;">
-			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${categoryNo}&cNo=${boardVO.cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
+			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${clubDTO.categoryNo}&cNo=${boardVO.cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
 			<br class="clear"/>
 			<a href="<%=request.getContextPath() %>/board/list?cNo=${boardVO.cNo}&num=1"><h6 class="sidebartitle">CLUB BOARD</h6></a>
 			<br class="clear"/>

@@ -10,6 +10,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.damoye.secondproject.model.BoardVO;
+import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubMemberDTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -70,8 +72,14 @@ public class BoardDAOImpl implements BoardDAO {
 		System.out.println(cnt);
 		return cnt;
 	 }
-
-	
-	
+	 
+	 @Override
+	 public ClubDTO getClubDTOByNo(int cNo) {
+		 return sqlSession.selectOne("mapper.club.selClubDetail", cNo);
+	 }
+	 @Override
+	 public int validClubMember(ClubMemberDTO clubMember) {
+		return sqlSession.selectOne("mapper.club.clubJoinValid", clubMember);
+	}
 	
 }

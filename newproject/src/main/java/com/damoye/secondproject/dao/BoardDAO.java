@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.damoye.secondproject.model.BoardVO;
+import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubMemberDTO;
 
 public interface BoardDAO {
 	
@@ -27,5 +29,9 @@ public interface BoardDAO {
 
 	//클럽게시판 글삭제(update)
 	public int deleteBoard(int cNo, int boardNo,BoardVO boardVO) throws DataAccessException;
+
+	public ClubDTO getClubDTOByNo(int cNo);
+
+	public int validClubMember(ClubMemberDTO clubMember);
 	
 }
