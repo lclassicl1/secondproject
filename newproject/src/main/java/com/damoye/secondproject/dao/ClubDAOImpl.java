@@ -103,8 +103,9 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 	//클럽 생성
 	@Override
-	public int getCreClub(ClubDTO clubDTO) throws DataAccessException{
-		return sqlSession.insert("mapper.club.createClub", clubDTO);
+	public void getCreClub(ClubDTO clubDTO) throws DataAccessException{
+		System.out.println("dao"+clubDTO.getcNo());
+		sqlSession.insert("mapper.club.createClub", clubDTO);
 	}
 	//클럽수정 updateClub
 	@Override

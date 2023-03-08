@@ -40,7 +40,7 @@ public interface ClubDAO {
 	//클럽 가입
 	public void getSignClub(ClubMemberDTO clubMemberDTO) throws DataAccessException;
 	//클럽 생성
-	public int getCreClub(ClubDTO clubDTO) throws DataAccessException;
+	public void getCreClub(ClubDTO clubDTO) throws DataAccessException;
 	//클럽수정
 	public int getUpdateClub(ClubDTO clubDTO) throws DataAccessException;
 	//클럽삭제

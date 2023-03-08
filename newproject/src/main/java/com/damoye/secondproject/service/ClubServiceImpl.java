@@ -98,8 +98,9 @@ public class ClubServiceImpl implements ClubService {
 	}
 	//클럽 생성
 	@Override
-	public int getCreClub(ClubDTO clubDTO) throws Exception {
-		return clubDAO.getCreClub(clubDTO);		
+	public void getCreClub(ClubDTO clubDTO) throws Exception {
+		clubDAO.getCreClub(clubDTO);		
+		System.out.println("service"+clubDTO.getcNo());
 	}
 	//클럽수정
 	@Override

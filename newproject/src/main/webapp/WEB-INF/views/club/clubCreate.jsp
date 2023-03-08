@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/default.css">
 <style type="text/css">
  .texta{
 	  font-size:1.1em;
@@ -70,6 +72,7 @@ $(document).ready(function(){
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
 <form id="creaFrm" action="${path}/club/clubCre" method="post">
+<input type="hidden" name="cNo" id="cNo"/>
 <table border="1" style="text-align:center; display: flex; justify-content: center; width: 100%;">
 	<tr>
 		<th>카테고리</th>

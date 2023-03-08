@@ -157,6 +157,8 @@ public class ClubController {
 		//-------------------------------------		
 		clubDTO.setCategoryNo(categoryNo);
 		model.addAttribute("categoryNo", categoryNo);
+		System.out.println("컨트롤러g"+cNo);
+		
 
 		return "club/clubSignForm";		
 	}
@@ -165,6 +167,8 @@ public class ClubController {
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("loginUser", user);
+		System.out.println("컨트롤러p"+cNo);
+		
 		
 		ClubDTO club = new ClubDTO();
 		club.setcNo(cNo);
@@ -223,15 +227,53 @@ public class ClubController {
 	}	
 	//클럽 생성하기-처리요청
 	@PostMapping("clubCre")
-	public ModelAndView getInClubFrm(ClubDTO clubDTO, ModelAndView mv) throws Exception {		
-		logger.info(clubDTO.toString()); //확인용
-		int cnt=clubService.getCreClub(clubDTO);
-		if(cnt==1) {
-			mv.setViewName("user/main");
-		}else {
-			return null;
+	public String getInClubFrm(HttpServletRequest request, ClubDTO clubDTO, Model model, int categoryNo, int cNo) throws Exception {	
+		HttpSession session=request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		model.addAttribute("loginUser", user);
+		clubService.getCreClub(clubDTO);
+		//---------------
+		//카테고리명
+		String category=clubService.getSelCategoryName(categoryNo);
+		model.addAttribute("category", category);
+		//클럽 소개글-selClubDetail
+		clubDTO = clubService.getSelClubDetail(cNo);
+		model.addAttribute("clubDTO", clubDTO);
+		//클럽 가입자 수 clubCount
+		int clubSign=clubService.getClubCount(cNo);
+		model.addAttribute("sPeople", clubSign);		
+		//클럽 모임글 selBoardDetail
+		List<BoardVO> board=clubService.getSelBDetail(cNo);
+		model.addAttribute("boardVO", board);
+		//클럽가입한 회원 정보 리스트
+		ClubMemberDTO currentMember = null;
+		List<ClubMemberDTO> signMemberList=clubService.getSignMember(cNo);
+		model.addAttribute("signMemberList", signMemberList);	
+		
+		for(ClubMemberDTO clubmbmer : signMemberList) {
+			if(user.getNo() == clubmbmer.getNo()) { //로그인한 회원번호 == 클럽에 가입한 기존 회원번호
+				currentMember = clubmbmer;
+			}else if(user.getGrade()== 999) {
+				currentMember = clubmbmer;
+				break;
+			}
 		}
-		return mv;	 
+		
+		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보	
+		
+		boolean exist = true; //초기값 있다면
+		for(ClubMemberDTO clubmbmer : signMemberList) {
+			if(clubmbmer.getNo() == user.getNo()) { // 클럽에 가입된 회원번호가 동일하다면
+				exist = true; //있다
+			}
+				break;
+		}
+		model.addAttribute("exist", exist);		
+		model.addAttribute("categoryNo", categoryNo);
+		model.addAttribute("cNo", cNo);
+		model.addAttribute("clubMemberDTO",currentMember);
+
+		return "redirect:club/detail";
 	}
 	
 	//클럽 수정하기-폼요청
