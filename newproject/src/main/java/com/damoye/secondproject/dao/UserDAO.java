@@ -26,6 +26,9 @@ public interface UserDAO {
 	//회원 개인정보 수정
 	public void modifyUserInfo(User user);
 	
+	//아이디 중복 확인
+	public Integer checkId(String id);
+	
 	// 회원목록조회
 	public List<User> getAllMemberList();
 }

@@ -94,7 +94,7 @@ table{
 			</tr>
 			<tr>
 				<td colspan="2">
-					<c:if test="${userId == 'admin'}">
+					<c:if test="${loginUser.grade == 999}">
 						<input type="button" name="" id="updateNotice" value="수정"/>
 						<input type="button" name="" id="deleteNotice" value="삭제"/>
 					</c:if>	

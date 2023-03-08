@@ -5,22 +5,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="conPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="contextPath1" value="${pageContext.request.contextPath}"/>
 <c:set var="goodsVO"  value="${goodsMap.goodsVO}" />
 <c:set var="imageList"  value="${goodsMap.imageList}" />
- 
+<c:set var="path" value="<%=request.getContextPath()%>"/> 
+  
 <html>
 <head>
-<style>
+<link rel="stylesheet" href="${path}/resources/css/default.css">
 
-</style>
-<script>
-<script type="text/javascript">
-	function getfile(filename){
-		location.href="<c:url value='/download.do'/>?filename="+filename;
-	}
-</script>
 </head>
 <body>
+<header><jsp:include page="/resources/module/header.jsp"></jsp:include></header>
+<main>
 <%--컨트롤러로부터 아래와 같이 Model받았다
  Map goodsMap : 상품상세+상품이미지목록 
 Map-GoodsVO : 상품상세
@@ -28,30 +25,53 @@ Map-GoodsVO : 상품상세
 goodsMap.put("goodsVO", goodsVO);
 List<ImageFileVO> imageList = goodsRepository.selectGoodsDetailImage(goods_id);
 goodsMap.put("imageList",imageList); --%>
-
-
-
-	 	
-	<div class="thumbnail" style="text-align :center;  ">
-	
-		<h1>다모여</h1>
-		<h2>사진첩</h2>
-		<h3>제목:${goodsVO.goods_title}</h3>
-		 아이디:${AUTHORUSER_ID}<br/>
-		  등록일:<fmt:formatDate value="${goodsVO.credate}" pattern="yyyy-MM-dd"/><br/>
-			<img  style="width: 200px; height: 200px;" 
-			alt="HTML5 &amp; CSS3"
-				src="${conPath}/thumbnails?goods_id=${goodsVO.goods_id}&fileName=${goodsVO.fileName}">
-
-
+	<!-- SUBHEADER
+================================================== -->
+<div id="subheader">
+	<div class="row">
+		<div class="twelve columns">
+			<p class="left">
+				 <b>사진게시판</b>
+			</p>
+		</div>
 	</div>
+</div>
+<div class="hr">
+</div>
+<!-- CONTENT 
+================================================== -->
+<div class="row">
+	<!-- PROJECT DESCRIPTION-->
+	<div class="six columns">
+		<div class="sectiontitle">
+		<h4>제목:${goodsVO.goods_title}</h4>
+		</div>
+		<div>${goodsVO.goods_content}</div>
+	</div>
+	<div><h6>작성자:${goodsVO.id}</h6></div>
+	<!-- end main content-->
 	
+	<!-- SLIDER-->
 	
-		
+	<div class="six columns">
+		<div class="slider-wrapper theme-default">
+			<div id="slider" class="nivoSlider detailslider">
+				<img src="${conPath}/thumbnails?goods_id=${goodsVO.goods_id}&fileName=${goodsVO.fileName}">
+			</div>
+			<h5>등록일:<fmt:formatDate value="${goodsVO.credate}" pattern="yyyy-MM-dd"/></h5><br/>
+		</div>
+	</div>
+	<!-- end sliderr-->
+</div>
+
+<div class="hr">
+</div>
+			
+</main>
+<footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
 </body>
 </html>
 <%-- 로그인여부 담기 --%>
-<input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}"/>
 
 
 

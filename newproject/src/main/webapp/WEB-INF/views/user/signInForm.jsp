@@ -26,6 +26,7 @@ $(document).ready(function(){
 	        	checkBox.attr("disabled", false); //disabled해제(입력 가능으로 바뀜)
 	        	checkBox.attr("placeholder", "인증번호 6자리를 입력해주세요");
 	        	code = data;
+	        	alert("요청하신 이메일로 인증번호를 보내드렸습니다.");
 	        }
 	    });
 	});
@@ -59,6 +60,56 @@ $(document).ready(function(){
 	  container.classList.add('sign-in')
 	}, 200);
 });
+
+/*아이디 중복 확인*/
+$(document).ready(function(){
+	$("#check_Id").click(function(){
+        var id = $("#id").val();
+        
+        $.ajax({
+            type:"GET",
+            url:"/checkId",
+            data: {"id" : id},
+            success: function(data){ 
+            	console.log(data);
+                if(data == "N"){ // 만약 성공할시
+                	msg = "사용 가능한 아이디입니다.";
+                    $("#result_checkId").html(msg).css("color", "green");
+                    $("#pass").trigger("focus");
+                 
+             }else{ // 만약 실패할시
+            	 msg = "사용 불가능한 아이디입니다.";
+                     $("#result_checkId").html(msg).css("color","red");
+                     $("#id").val("").trigger("focus");
+             }
+                 
+         },
+            error : function(error){alert(error);}
+        });
+        
+    });
+    
+});
+
+/*submit*/
+$(document).ready(function(){
+	$("#submit").click(function(){
+		
+		if($("#result_checkId").text()==""){
+			alert("아이디 중복검사를 해주세요.");
+			console.log($("#result_checkId").text());
+			return false;
+		}
+		else if($("#mail_check_input_box_warn").text()==""){
+			alert("이메일 인증을 완료해주세요.");
+			console.log($("#mail_check_input_box_warn").text());
+			return false;
+		}
+
+		$("#signUpFrm").submit();
+
+	});
+});
 </script>
 <style>
 #zipcode{
@@ -86,31 +137,27 @@ a{
       <div class="col align-items-center flex-col sign-up">
         <div class="form-wrapper align-items-center">
           <div class="form sign-up">
-          	<form:form action="/signUp" modelAttribute="user" method="post" accept-charset="utf-8">
+          	<form:form id="signUpFrm" modelAttribute="user" method="post" accept-charset="utf-8" action="/signUp">
             <div class="input-group">
               <i class='bx bxs-user'></i>
-              <form:input path="id" name="id" oninput="checkId()" placeholder="ID"/><br/>
-				<form:errors path="id"/>
+              <form:input path="id" name="id" placeholder="ID" required="required"/> <input type="button" id="check_Id" value="중복확인"><br/>
+			  <span id="result_checkId" style="font-size:12px;"></span><br/>
             </div>
             <div class="input-group">
               <i class='bx bx-mail-send'></i>
-              <form:password path="password" name="password" placeholder="Password"/><br/>
+              <form:password path="password" name="password" placeholder="Password" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <input type="password" name="re_password" placeholder="Confirm password"/><br/>
+              <form:input path="name" name="name" placeholder="Name" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="name" name="name" placeholder="Name"/><br/>
+              <form:input path="zipcode" name="zipcode" id="zipcode" placeholder="Zipcode" required="required"/><button type="button" id="zipcode_Btn" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="zipcode" name="zipcode" id="zipcode" placeholder="Zipcode"/><button type="button" id="zipcode_Btn" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
-            </div>
-            <div class="input-group">
-              <i class='bx bxs-lock-alt'></i>
-              <form:input path="address" name="address" placeholder="Address"/><br/>
+              <form:input path="address" name="address" placeholder="Address" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
@@ -118,11 +165,11 @@ a{
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="pricynum" name="pricynum" placeholder="Pricynum"/><br/>
+              <form:input path="pricynum" name="pricynum" placeholder="Pricynum" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="email" class="Email" name="email" id="email"  placeholder="Email"/><button type="button" id="email_Btn" class="mail_button" onclick="mail_button">본인인증</button><br/>
+              <form:input path="email" class="Email" name="email" id="email"  placeholder="Email" required="required"/><button type="button" id="email_Btn" class="mail_button">본인인증</button><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
@@ -131,7 +178,7 @@ a{
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-              <form:input path="phonenum" name="phonenum" placeholder="Phonenum"/><br/>
+              <form:input path="phonenum" name="phonenum" placeholder="Phonenum" required="required"/><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
@@ -139,9 +186,7 @@ a{
               <form:radiobutton path="gender" name="gender" class="gender" value="M"/> 남성
 		<form:radiobutton path="gender" name="gender" class="gender" value="F"/> 여성<br/>
             </div>
-            <button>
-              Sign up
-            </button>
+            <button id="submit">Sign Up</button>
             </form:form>
             <p>
               <span>

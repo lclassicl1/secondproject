@@ -49,7 +49,7 @@
 	<select id="selectGoodsList" parameterType="String" resultMap="goodsResult">
 	 <![CDATA[			
 	 select t.* 
-	 from (select g.*,d.fileName
+	 from (select g.*,d.fileName,d.id
 		  from   goods g, goods_detail_image d
 		  where g.goods_id=d.goods_id
            order by creDate desc) t
@@ -61,7 +61,7 @@
 	<!-- 상품상세 조회 -->
 	<select id="selectGoodsDetail" resultMap="goodsResult" parameterType="int">
 	 <![CDATA[		
-	select g.*,d.fileName
+	select g.*,d.fileName,d.id
 	from   goods g, goods_detail_image d
 	where  g.goods_id=d.goods_id
 	       and
@@ -82,7 +82,7 @@
      ]]>
     </select>
     
-     <!-- 상품상세조회 : id검색 -->
+     <!--  : id검색 -->
     <select id="selectimNo" resultMap="imageResult" parameterType="String">
     <![CDATA[
    	select *

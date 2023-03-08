@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.ImageFileVO;
+import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.PhotoGoodsService;
 
 @Controller
@@ -37,16 +39,20 @@ public class PhotoController extends  PhotoBaseController {
 	
 	//입력폼보여주기
 	//요청방식 get
-	//요청주소 ~컨페/article/addForm
+	//요청주소 ~컨페/addForm
 	@GetMapping("/photo/addForm")
-	public String insertArticleForm(HttpServletRequest request) {
+	public String insertArticleForm(HttpSession session,Model model) {
 		//1.파라미터받기 //2.비즈니스로직
 		//3.model
 		//원칙적으로는 (로그인한 user가) 글입력 권한을 가진 사용자가 글입력해야지만
 		//여기에서는 임시로 세션에 정보를 저장하여 진행하겠다
-		HttpSession session = request.getSession();
-		session.setAttribute("isLogOn",true);
-		session.setAttribute("AUTHUSER_ID", "hongid");//임시
+		
+		//HttpSession session = request.getSession();
+		//session.setAttribute("isLogOn",true);
+		//session.setAttribute("AUTHUSER_ID", "hongid");//임시
+		User user = (User)session.getAttribute("loginUser");
+		String loginId = user.getId();
+		model.addAttribute("loginId",loginId );
 		//4.view
 		return "/photo/addForm";
 	}
@@ -91,10 +97,11 @@ public class PhotoController extends  PhotoBaseController {
 		//AuthUser라는 객체가 없는 상태라면 아래와 같이 임시 저장해놓고 사용하다가
 		//소스합쳐지면 잊지말고   정리하자~~~~~!!!!!!!!!!!!!!!
 		//session.setAttribute("AUTHUSER_NO",1);
-		session.setAttribute("AUTHUSER_ID","hongId");//로그인했다 가정하고
+		//session.setAttribute("AUTHUSER_ID","hongId");//로그인했다 가정하고
 		//session.setAttribute("AUTHUSER_NAME","홍GD");
-		
-		String id = (String)session.getAttribute("AUTHUSER_ID");
+		User user = (User)session.getAttribute("loginUser");
+		String id = user.getId();
+		//String id = (String)session.getAttribute("AUTHUSER_ID");
 		
 				
 		//2.form요소 중에서<input type="file"> 가져오기		
