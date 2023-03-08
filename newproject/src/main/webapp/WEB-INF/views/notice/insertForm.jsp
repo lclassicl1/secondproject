@@ -90,9 +90,9 @@ table{
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" id="submit" value="작성하기"/>&nbsp;
-					<input type="reset" value="취소"/>&nbsp;
-					<input type="button" value="뒤로가기" id="backBtn"/>
+				<td colspan="2"><input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
+					<input type="reset" value="취소" class="readmore"/>&nbsp;
+					<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
 				</td>
 			</tr>
 		</table>
