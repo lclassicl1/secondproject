@@ -124,10 +124,6 @@ table{
 					</div>
 				</td>
 			</tr> --%>
-			<tr>
-				<td colspan="5">
-				</td>
-			</tr>
 			</c:if>
 		</table>
 	</div>
