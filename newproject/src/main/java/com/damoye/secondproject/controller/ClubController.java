@@ -22,7 +22,7 @@ import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.ClubListPage;
 import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.User;
-import com.damoye.secondproject.service.ClubServiceImpl;
+import com.damoye.secondproject.service.ClubService;
 
 @Controller
 @RequestMapping("club/")
@@ -30,7 +30,7 @@ public class ClubController {
 	private static final Logger logger = LoggerFactory.getLogger(ClubController.class);
 
 	@Autowired
-	private ClubServiceImpl clubService;
+	private ClubService clubService;
 
 	//전체 카테고리의 모임 출력 
 	@GetMapping("/allClubList")
@@ -47,7 +47,6 @@ public class ClubController {
 	}
 	
 	//클럽리스트
-	//   ${path}/clist?categoryNo=1/clist?categoryNo=1
 	@GetMapping("clist")
 	public String getSelClub(@RequestParam int categoryNo,HttpServletRequest req, Model model) throws Exception {
 		String pageNoVal = req.getParameter("pageNo");
@@ -57,7 +56,6 @@ public class ClubController {
 		}
 		//특정 카테고리명 조회 selCategoryName
 		String cateogryName=clubService.getSelCategoryName(categoryNo);
-		//mv.addObject("category", cateogryName);
 		model.addAttribute("category", cateogryName);
 		model.addAttribute("categoryNo", categoryNo);
 	
@@ -169,7 +167,6 @@ public class ClubController {
 		model.addAttribute("loginUser", user);
 		
 		ClubDTO club = new ClubDTO();
-		System.out.println("클럽DTO : "+club);
 		club.setcNo(cNo);
 		model.addAttribute("cNo", cNo);
 		clubService.getSignClub(clubMemberDTO);	
@@ -211,7 +208,6 @@ public class ClubController {
 				break;
 		}
 		model.addAttribute("exist", exist);		
- 		
 
 		return "club/clubDetail";
 	}
@@ -231,11 +227,11 @@ public class ClubController {
 		logger.info(clubDTO.toString()); //확인용
 		int cnt=clubService.getCreClub(clubDTO);
 		if(cnt==1) {
-			mv.setViewName("club/main");
+			mv.setViewName("user/main");
 		}else {
 			return null;
 		}
-		return mv;	 // main 생성시 변경 필요
+		return mv;	 
 	}
 	
 	//클럽 수정하기-폼요청
@@ -294,7 +290,6 @@ public class ClubController {
 		clubMemberDTO.setcMemberNo(cMemberNo);	
 		int cnt=clubService.getMemberDel(cMemberNo);
 		
-		System.out.println("컨트롤러"+cnt);		
 			mv.addObject("cnt", cnt);
 		if(cnt==1) {
 			mv.setViewName("club/clubDrop");

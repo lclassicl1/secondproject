@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>탈퇴</title>
 </head>
 <body>
 <c:if test="${cnt==1}">
@@ -22,7 +22,7 @@
 </c:if>
 				
 <script>
-location.href="${path}/user/logoMain"; 
+location.href="${path}/logoMain"; 
 </script>
 </body>
 </html>

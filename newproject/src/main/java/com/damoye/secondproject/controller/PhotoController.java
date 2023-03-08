@@ -39,7 +39,7 @@ public class PhotoController extends  PhotoBaseController {
 	
 	//입력폼보여주기
 	//요청방식 get
-	//요청주소 ~컨페/article/addForm
+	//요청주소 ~컨페/addForm
 	@GetMapping("/photo/addForm")
 	public String insertArticleForm(HttpSession session,Model model) {
 		//1.파라미터받기 //2.비즈니스로직

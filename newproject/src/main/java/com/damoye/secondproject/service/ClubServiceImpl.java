@@ -17,7 +17,7 @@ import com.damoye.secondproject.model.User;
 public class ClubServiceImpl implements ClubService {
 	
 	@Autowired
-	private ClubDAOImpl clubDAO;
+	private ClubDAO clubDAO;
 
 	
 	@Override

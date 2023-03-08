@@ -7,45 +7,85 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<style type="text/css">
+ .texta{
+	  font-size:1.1em;
+	  border: none;
+	  resize: none;
+	  }
+</style>
 <meta charset="UTF-8">
 <script>
 
 $(document).ready(function(){
-		//클럽개설
-		$(function(){
+	//클럽개설
 		$("#createDone").on("click",function(){
-			var c=confirm("클럽 개설 성공!!");
-			  if(c){
-				  $('#creaFrm').attr("action","${path}/club/clubCre").submit();
-			  }else{
-				 return false;		 }
-		  	});	
-	});
+			let categoryNo = $('#categoryNo').val();
+			if(categoryNo == '' || categoryNo == null) {
+				alert('카테고리를 선택해주세요.');
+				$('#categoryNo').focus();
+				return false;
+			}
+			let cName = $('#cName').val();
+			if(cName == '' || cName == null) {
+				alert('클럽명을 작성해주세요');
+				$('#cName').focus();
+				return false;
+			}
+			
+			let cPeople = $('#cPeople').val();
+			if(cPeople == '' || cPeople == 0) {
+				alert('정원을 선택해주세요');
+				$('#cPeople').focus();
+				return false;
+			}
+
+			let cLoc = $('#cLoc').val();
+			if(cLoc == '' || cLoc == null) {
+				alert('지역을 입력해주세요');
+				$('#cLoc').focus();
+				return false;
+			}
+			
+			let cIntro = $('#cIntro').val();
+			if(cIntro == '' || cIntro == null) {
+				alert('소개글을 작성해주세요');
+				$('#cIntro').focus();
+				return false;
+			}
+
+		
+		 var c=confirm("클럽 개설 성공!!");
+		  if(c){
+			  $('#creaFrm').attr("action","${path}/club/clubCre").submit();
+		  }else{
+			 return false;		 
+			} 
+	  	});	
 });
 
 </script>
 <title>클럽 개설</title>
 </head>
 <body>
-session: ${loginUser}<br/>
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
-<form id="creaFrm" action="" method="post">
-<table border="1" style="text-align:center;">
+<form id="creaFrm" action="${path}/club/clubCre" method="post">
+<table style="text-align:center; display: flex; justify-content: center; width: 100%;">
 	<tr>
 		<th>카테고리</th>
 		<td>		
-		<select name="categoryNo" id="categoryNo" required="required">
+		<select name="categoryNo" id="categoryNo">
 			<option value=0>선택</option>
 			<option value=1>공부</option>
 			<option value=2>요리</option>
 			<option value=3>운동</option>
-			<option value=4>반려동물</option>
+			<option value=4>전체</option>
 		</select>		
 		</td>
 	</tr>
 	<tr>
 		<th>클럽명</th>
-		<td><input type="text" name="cName" id="cName" required="required" autofocus="autofocus" placeholder="클럽명을 입력해주세요."/></td>
+		<td><input type="text" name="cName" id="cName" autofocus="autofocus" placeholder="클럽명을 입력해주세요."/></td>
 	</tr>
 	<tr>
 		<th>클럽장</th>
@@ -54,7 +94,7 @@ session: ${loginUser}<br/>
 	<tr>
 		<th>정원(명)</th>
 		<td>
-		<select name="cPeople" id="cPeople" required="required">
+		<select name="cPeople" id="cPeople">
 			<option value=0>선택</option>
 			<option value=10>10명</option>
 			<option value=30>30명</option>
@@ -66,18 +106,20 @@ session: ${loginUser}<br/>
 	<tr>
 		<th>활동지역(구)</th>
 		<td>
-			<input type="text" name="cLoc" id="cLoc" required="required" placeholder="예시)서울시 강남구"/>
+			<input type="text" name="cLoc" id="cLoc" placeholder="예시)서울시 강남구"/>
 		</td>
 	</tr>
 	<tr>
 		<th>소개글</th>
 		<td colspan="2">
-			<textarea rows="30" cols="80" name="cIntro" id="cIntro" required="required" placeholder="클럽을 소개해주세요!"></textarea>
+			<textarea class="texta" rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-		<input type="button" name="createDone" id="createDone" value="클럽개설"/>
+		<div style="text-align: right;">
+		<button class="readmore" type="button" name="createDone" id="createDone">클럽개설</button>
+		</div>
 		</td>
 	</tr>
 </table>
