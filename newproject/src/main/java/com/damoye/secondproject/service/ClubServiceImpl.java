@@ -9,6 +9,7 @@ import com.damoye.secondproject.dao.ClubDAO;
 import com.damoye.secondproject.dao.ClubDAOImpl;
 import com.damoye.secondproject.model.BoardVO;
 import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubListPage;
 import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.User;
 
@@ -20,9 +21,13 @@ public class ClubServiceImpl implements ClubService {
 
 	
 	@Override
-	public List<ClubDTO> getAllClubList()throws Exception{	
-		List<ClubDTO> cList= clubDAO.getAllClubList();
-		return cList;
+	public ClubListPage getAllClubList(int pageNo)throws Exception{
+		int size = 6;
+		int total = clubDAO.clubCount();
+		int pageNum = (pageNo-1)*size;
+		
+		List<ClubDTO> cList= clubDAO.getAllClubList(pageNum);
+		return new ClubListPage(total,pageNo,size,cList);
 	}
 	//특정 카테고리 조회
 	@Override
@@ -32,22 +37,33 @@ public class ClubServiceImpl implements ClubService {
 	}
 	//클럽 목록 조회 selClubList
 	@Override
-	public List<ClubDTO> getSelClubList(int categoryNo)throws Exception{	
-		List<ClubDTO> cList= clubDAO.getSelClubList(categoryNo);
-		return cList;
+	public ClubListPage getSelClubList(int categoryNo,int pageNo)throws Exception{
+		int size = 6;
+		int pageNum = (pageNo-1)*size;
+		int total = clubDAO.categoryClubCount(categoryNo) ;
+		List<ClubDTO> cList= clubDAO.getSelClubList(categoryNo,pageNum);
+		return new ClubListPage(total,pageNo,size,cList);
 	}
 	
 	//검색
 	@Override
-	public List<ClubDTO> getSearchCName(ClubDTO clubDTO) throws Exception {
-		List<ClubDTO> cNameList=clubDAO.getSearchCName(clubDTO);
-		return cNameList;
+	public ClubListPage getSearchCName(ClubDTO clubDTO,int pageNo) throws Exception {
+		int size = 6;
+		int pageNum = (pageNo-1)*size;
+		int total = clubDAO.searchCategoryTotalCnt(clubDTO);
+		
+		List<ClubDTO> cNameList=clubDAO.getSearchCName(clubDTO,pageNum);
+		return new ClubListPage(total,pageNo,size,cNameList);
 	}
 	//전체 검색
 	@Override
-	public List<ClubDTO> getAllSearchCName(ClubDTO clubDTO) throws Exception {
-		List<ClubDTO> cNameList=clubDAO.getAllSearchCName(clubDTO);
-		return cNameList;
+	public ClubListPage getAllSearchCName(ClubDTO clubDTO,int pageNo) throws Exception {
+		int size = 6;
+		int pageNum = (pageNo-1)*size;
+		int total = clubDAO.searchTotalCnt(clubDTO);
+		
+		List<ClubDTO> cNameList=clubDAO.getAllSearchCName(clubDTO,pageNum);
+		return new ClubListPage(total,pageNo,size,cNameList);
 	}
 	
 	//클럽 상세보기-소개글

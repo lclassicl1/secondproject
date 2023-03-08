@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damoye.secondproject.model.ChatDTO;
+import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.ChatService;
@@ -45,6 +46,8 @@ public class ChatController {
 			return "club/clubNoJoin";
 		}
 		
+		ClubDTO clubDTO = chatService.getClubByNo(roomNo);
+		model.addAttribute("clubDTO",clubDTO);
 		return "chat/room";
 	}
 	@RequestMapping(value="/chat/addMessage", method=RequestMethod.POST)
@@ -52,7 +55,8 @@ public class ChatController {
 	public void addPostMessage(@RequestParam int roomNo,@RequestParam String content
 								,HttpSession session) {
 		ChatDTO chatDTO = new ChatDTO();
-		String writerId = (String)session.getAttribute("userId");
+		User user = (User)session.getAttribute("loginUser");
+		String writerId = user.getId();
 		chatDTO.setRoomNo(roomNo);
 		chatDTO.setWriterId(writerId);
 		chatDTO.setContent(content);
