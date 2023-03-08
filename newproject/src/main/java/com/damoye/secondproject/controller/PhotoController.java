@@ -141,7 +141,7 @@ public class PhotoController extends  PhotoBaseController {
 			//2)"글등록이 되었습니다."라는 alert띄우기
 			msg = "<script>";
 			msg+= "alert('글등록이 되었습니다.');";
-			msg+= "location.href='"+multipartRequest.getContextPath()+"/photo/addForm';";
+			msg+= "location.href='"+multipartRequest.getContextPath()+"/photo/main';";
 			msg+= "</script>";
 			//3)입력폼페이지로 이동
 		}catch(Exception e) {
