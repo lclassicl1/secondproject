@@ -19,6 +19,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damoye.secondproject.model.User;
@@ -49,7 +50,7 @@ public class SignUpController {
 	@RequestMapping(value="/signUp", method=RequestMethod.POST)
 	public String submitSignUp(@Valid User user, Model model, BindingResult bindingResult, HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");
-		
+		System.out.println("signUp진입");
 			if(bindingResult.hasErrors()) {
 				List<ObjectError> list = bindingResult.getAllErrors();
 				for(ObjectError e : list){
@@ -102,5 +103,22 @@ public class SignUpController {
         
         String num = Integer.toString(checkNum);
         return num;
+    }
+    
+    //아이디 중복 확인
+    @RequestMapping(value="/checkId", method=RequestMethod.GET)
+    @ResponseBody
+    public String checkId(@RequestParam("id") String id) {
+    	System.out.println("CONTROLLER");
+    	String flag = "N";
+    	
+    	int cnt = userService.checkId(id);
+    	System.out.println("cnt"+cnt);
+    	
+    	if(cnt == 1) flag = "Y";
+    	
+    	System.out.println("flag="+flag);
+    	
+    	return flag;
     }
 }
