@@ -52,7 +52,7 @@
 	 from (select g.*,d.fileName,d.id
 		  from   goods g, goods_detail_image d
 		  where g.goods_id=d.goods_id
-           order by creDate desc) t
+           order by goods_id desc) t
      limit 0,15
 	 ]]>	
 	</select>
