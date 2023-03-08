@@ -10,6 +10,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
 import com.damoye.secondproject.dao.UserDAO;
+import com.damoye.secondproject.model.Criteria;
+import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.User;
 
 
@@ -99,6 +101,12 @@ public class UserServiceImpl implements UserService {
 		List<User> memberList = userDAO.getAllMemberList();
 		
 		return memberList;
+	}
+	
+	@Override
+	public List<NoticeDTO> getNoticeList() {
+		List<NoticeDTO> noticeList = userDAO.getNoticeList();
+		return noticeList;
 	}
 
 }

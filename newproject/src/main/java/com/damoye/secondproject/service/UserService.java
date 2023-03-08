@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
+import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.User;
 
 
@@ -34,4 +35,6 @@ public interface UserService {
 	
 	// 회원목록조회
 	public List<User> getAllMemberList();
+
+	public List<NoticeDTO> getNoticeList();
 }
