@@ -14,7 +14,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${path}/resources/css/default.css">
-<style></style>
+<style>
+.btn {
+  position: absolute;
+  top: 24.5%;
+  left: 74.8%;
+  transform: translateX(-50%);
+}
+</style>
 <script>
 	/* Jquery 선언부 */
 		$(function(){
@@ -72,6 +79,13 @@ table{
 	</div>
 	<div class="hr">
 	</div>
+		<div class="btn">
+		<c:if test="${loginUser.grade == 999}">
+			<input type="button" name="" id="updateNotice" value="수정" class="readmore"/>
+			<input type="button" name="" id="deleteNotice" value="삭제" class="readmore"/>
+		</c:if>
+			<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록" class="readmore"/>
+		</div>
 	<div id="tableCenter">
 		<table border="1">
 			<tr>
@@ -91,15 +105,6 @@ table{
 			</tr>
 			<tr>
 				<th>조회수</th><td>${noticeDTO.readcnt}</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<c:if test="${loginUser.grade == 999}">
-						<input type="button" name="" id="updateNotice" value="수정"/>
-						<input type="button" name="" id="deleteNotice" value="삭제"/>
-					</c:if>	
-						<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록"/>
-				</td>
 			</tr>
 		</table>
 	</div>
