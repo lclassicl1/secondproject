@@ -22,6 +22,7 @@ $(document).ready(function(){
 	$("#updateBoard").on("click",function(){
 		location.href="${path}/board/boardUpdate?cNo=${boardVO.cNo}&boardNo=${boardVO.boardNo}&num=${num}";
 	});
+	
 	//글 삭제
 	$("#deleteBoard").on("click",function(){
 		alert("삭제하시겠습니까?")
@@ -32,6 +33,8 @@ $(document).ready(function(){
 	$("#deleteComm").on("click",function(){
 		alert("삭제하시겠습니까?")
 	});
+	
+	
 
 	
 });
@@ -171,8 +174,9 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<!-- 본인 댓글이면 수정 또는 삭제가능 -->
 		<span class="comments">
 		<c:if test="${loginUser.id == comm.commId}">
-	 		<input type="button" value="수정" onClick="location='${path}/comm/updateComm?boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">
-		<input type="button" value="삭제" onClick="location='${path}/comm/deleteComm?cNo=${boardVO.cNo}&boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">
+		<button type="submit" class="readmore" onClick="location='${path}/comm/updateComm?boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">수정</button>
+	 		<%-- <input type="button" value="수정" onClick="location='${path}/comm/updateComm?boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'"> --%>
+		<button type="submit" class="readmore" onClick="location='${path}/comm/deleteComm?cNo=${boardVO.cNo}&boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">삭제</button>
 		</c:if>
 		</span>
 		
@@ -180,7 +184,7 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<br class="clear">
   		<h6 class="sidebartitle"></h6>
 		<h5>Enter your comment</h5>
-		<!-- 댓글작성 -->
+		<!-- 댓글작성  -->
 		<form id="insertCommBoard" action="${path}/comm" method="POST">
 		<input type="hidden" name="commId" id="commId" value="${loginUser.id}"/>
 		<input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
