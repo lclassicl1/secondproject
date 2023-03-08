@@ -8,7 +8,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>클럽가입</title>
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
@@ -22,9 +22,8 @@
 <p><input type="hidden" name="cNo" id="cNo" readonly="readonly" value="${clubMemberDTO.cNo}"/></p> <!-- 클럽번호 -->
 <p><input type="hidden" name="no" id="no" readonly="readonly" value="${loginUser.no}"/></p> <!-- 회원번호 -->
 <p><input type="hidden" name="signIn" id="signIn" readonly="readonly" value="${clubMemberDTO.signIn}"/></p> <!-- 회원번호 -->
-<p><input type="submit" value="상세보기 이동"/></p>
+<p><input type="submit" class="readmore" value="가입한 클럽으로 이동"/></p>
 </form>
-
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>

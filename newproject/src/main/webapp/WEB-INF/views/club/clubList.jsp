@@ -9,6 +9,15 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/default.css">
+<script>
+	//클럽개설
+	$(function(){
+		$('#clubCreate').click(function(){
+			location.href='${path}/club/clubCre';
+		});
+	});
+
+</script>
 <title>클럽 리스트</title>
 <style>
 	#searchCName{
@@ -46,9 +55,6 @@
    					    <c:when test="${categoryNo eq 3}">
 					    	운동 모임
 					    </c:when>
-   					    <c:when test="${categoryNo eq 4}">
-					    	반려동물 모임
-					    </c:when>
 					    <c:otherwise>
 					    	전체 모임
 					    </c:otherwise>
@@ -68,6 +74,11 @@
 </div>
 <div class="hr">
 </div>
+<!-- ------------------------------------------------- -->
+<div style="text-align: right;">
+	<input class="readmore" type="button" name="clubCreate" id="clubCreate" value="클럽개설"/>
+</div>
+<!-- ------------------------------------------------- -->	
 <div class="row">
 	<div>
 		<form id="searchFrm" method="get" action="${path}/club/searchCName">
