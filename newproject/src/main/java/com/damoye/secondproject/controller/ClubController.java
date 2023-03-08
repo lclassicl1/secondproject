@@ -223,10 +223,20 @@ public class ClubController {
 	}	
 	//클럽 생성하기-처리요청
 	@PostMapping("clubCre")
-	public ModelAndView getInClubFrm(ClubDTO clubDTO, ModelAndView mv) throws Exception {		
+	public ModelAndView getInClubFrm(HttpSession session , ClubDTO clubDTO, ModelAndView mv) throws Exception {		
 		logger.info(clubDTO.toString()); //확인용
-		int cnt=clubService.getCreClub(clubDTO);
-		if(cnt==1) {
+		int cNo=clubService.getCreClub(clubDTO);
+		
+		User user = (User)session.getAttribute("loginUser");
+		int userNo = user.getNo();
+		ClubMemberDTO clubMemberDTO = new ClubMemberDTO();
+		clubMemberDTO.setcNo(cNo);
+		clubMemberDTO.setNo(userNo);
+		
+		clubService.getSignClub(clubMemberDTO);	
+		
+		
+		if(cNo!=0) {
 			mv.setViewName("user/main");
 		}else {
 			return null;
