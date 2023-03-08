@@ -31,6 +31,10 @@ public class ChatController {
 	@Autowired
 	private ChatService chatService;
 	
+	@RequestMapping("/clubNoJoin")
+	public String clubNoJoin() {
+		return "club/clubNoJoin";
+	}
 	@RequestMapping("/chat/room")
 	public String showRoom(int roomNo,HttpSession session, Model model) {
 		User user = (User)session.getAttribute("loginUser");
@@ -43,7 +47,7 @@ public class ChatController {
 		clubMember.setNo(userNo);
 		int result = chatService.validClubMember(clubMember);
 		if(result == 0) {
-			return "club/clubNoJoin";
+			return "redirect:/clubNoJoin";
 		}
 		
 		ClubDTO clubDTO = chatService.getClubByNo(roomNo);
