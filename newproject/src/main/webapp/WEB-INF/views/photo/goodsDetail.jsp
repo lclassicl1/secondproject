@@ -9,7 +9,7 @@
 <c:set var="goodsVO"  value="${goodsMap.goodsVO}" />
 <c:set var="imageList"  value="${goodsMap.imageList}" />
 <c:set var="path" value="<%=request.getContextPath()%>"/> 
- 
+  
 <html>
 <head>
 <link rel="stylesheet" href="${path}/resources/css/default.css">
