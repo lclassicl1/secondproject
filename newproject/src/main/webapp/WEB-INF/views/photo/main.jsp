@@ -56,7 +56,7 @@
 						<a class="projectdetail" href="${conPath}/photo/goodsDetail?goods_id=${item.goods_id}">+ Project Details</a>
 					</div>
 				</div>
-				<!— image here —>
+				<!-- image here -->
 				<img src="${conPath}/thumbnails?goods_id=${item.goods_id}&fileName=${item.fileName}" alt="image error">
 			</div>
 		</div>

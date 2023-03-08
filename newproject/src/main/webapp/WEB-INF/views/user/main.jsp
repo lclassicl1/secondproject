@@ -8,15 +8,6 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <meta charset="UTF-8">
-<script>
-	//클럽개설
-	$(function(){
-		$('#clubCreate').click(function(){
-			location.href='${path}/club/clubCre';
-		});
-	});
-
-</script>
 <title>damoye</title>
 </head>
 <body>
@@ -111,8 +102,8 @@
 			<a href="${path}/club/clist?categoryNo=4">
 			<span class="ca-icon"><i class="fa fa-camera"></i></span>
 			<div class="ca-content">
-				<h2 class="ca-main">반려동물</h2>
-				<h3 class="ca-sub">반려동물 모임입니다</h3>
+				<h2 class="ca-main">전체</h2>
+				<h3 class="ca-sub">전체</h3>
 			</div>
 			</a>
 			</li>
@@ -181,11 +172,6 @@
 		<!--end testimonials-->
 	</div>
 </div>
-
-<div class="row" style="text-align: right;">
-<input class="readmore" type="button" name="clubCreate" id="clubCreate" value="클럽개설"/>
-</div>
-
 <footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
 </body>
 </html>

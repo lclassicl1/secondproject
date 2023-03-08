@@ -12,8 +12,8 @@
 </head>
 <body>
 	<script>
-	alert("실패했습니다.확인 후 다시 시도해보세요");
-	location.href="${path}/user/logoMain"; 
+	alert("해당하는 사람인지 확인 후 다시 시도해보세요");
+	location.href="${path}/logoMain"; 
 	</script>
 </body>
 </html>

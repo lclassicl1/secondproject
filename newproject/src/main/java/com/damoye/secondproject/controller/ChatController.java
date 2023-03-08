@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damoye.secondproject.model.ChatDTO;
+import com.damoye.secondproject.model.ClubDTO;
 import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.ChatService;
@@ -30,6 +31,10 @@ public class ChatController {
 	@Autowired
 	private ChatService chatService;
 	
+	@RequestMapping("/clubNoJoin")
+	public String clubNoJoin() {
+		return "club/clubNoJoin";
+	}
 	@RequestMapping("/chat/room")
 	public String showRoom(int roomNo,HttpSession session, Model model) {
 		User user = (User)session.getAttribute("loginUser");
@@ -42,9 +47,11 @@ public class ChatController {
 		clubMember.setNo(userNo);
 		int result = chatService.validClubMember(clubMember);
 		if(result == 0) {
-			return "club/clubNoJoin";
+			return "redirect:/clubNoJoin";
 		}
 		
+		ClubDTO clubDTO = chatService.getClubByNo(roomNo);
+		model.addAttribute("clubDTO",clubDTO);
 		return "chat/room";
 	}
 	@RequestMapping(value="/chat/addMessage", method=RequestMethod.POST)
@@ -52,7 +59,8 @@ public class ChatController {
 	public void addPostMessage(@RequestParam int roomNo,@RequestParam String content
 								,HttpSession session) {
 		ChatDTO chatDTO = new ChatDTO();
-		String writerId = (String)session.getAttribute("userId");
+		User user = (User)session.getAttribute("loginUser");
+		String writerId = user.getId();
 		chatDTO.setRoomNo(roomNo);
 		chatDTO.setWriterId(writerId);
 		chatDTO.setContent(content);

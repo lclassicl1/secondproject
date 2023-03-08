@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.damoye.secondproject.model.BoardPage;
 import com.damoye.secondproject.model.BoardVO;
+import com.damoye.secondproject.model.ClubDTO;
+import com.damoye.secondproject.model.ClubMemberDTO;
 import com.damoye.secondproject.model.CommBoardVO;
 import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.BoardService;
@@ -50,9 +52,19 @@ public class BoardController {
 	*/
 	//클럽게시판 글목록+페이징
 	//요청주소 ~컨패/board/list?cNo=1
+	@RequestMapping("/clubNoJoin2")
+	public String clubNoJoin() {
+		return "club/clubNoJoin";
+	}
+	
 	@RequestMapping(value="/board/list", method=RequestMethod.GET)
-	public String getBoardListPage(Model model, @RequestParam int cNo, @RequestParam int num) throws Exception {
+	public String getBoardListPage(HttpSession session,Model model,@RequestParam int cNo,HttpServletRequest req) throws Exception {
 		
+		String numVal = req.getParameter("num");
+		int num = 1;
+		if(numVal !=null) {
+			num = Integer.parseInt(numVal);
+		}
 		BoardPage boardPage = new BoardPage();
 		
 		boardPage.setNum(num);
@@ -68,6 +80,20 @@ public class BoardController {
 		model.addAttribute("cNo", cNo);
 		model.addAttribute("boardPage", boardPage);
 		model.addAttribute("num", num);
+		
+		ClubDTO clubDTO = boardServiceImpl.getClubDTOByNo(cNo);
+		model.addAttribute("clubDTO", clubDTO);
+		
+		User user = (User)session.getAttribute("loginUser");
+		int userNo = user.getNo();
+		ClubMemberDTO clubMember = new ClubMemberDTO();
+		clubMember.setcNo(cNo);
+		clubMember.setNo(userNo);
+		int result = boardServiceImpl.validClubMember(clubMember);
+		if(result == 0) {
+			return "redirect:/clubNoJoin2";
+		}
+		
 		return "/board/boardListPage";
 		
 	}
@@ -75,11 +101,13 @@ public class BoardController {
 	//클럽게시판 글 상세보기+댓글보기
 	//요청주소 ~컨패/board/detail?cNo=&boardNo=
 	@RequestMapping(value="/board/detail", method=RequestMethod.GET)
-	public String boardDetail(Model model, @RequestParam(name="num") int num,@RequestParam(name="boardNo") int boardNo) throws Exception {
+	public String boardDetail(Model model,@RequestParam int cNo, @RequestParam(name="num") int num,@RequestParam(name="boardNo") int boardNo) throws Exception {
 		BoardVO boardVO = boardServiceImpl.getBoardDetail(boardNo);
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("num", num);
 		
+		ClubDTO clubDTO = boardServiceImpl.getClubDTOByNo(cNo);
+		model.addAttribute("clubDTO", clubDTO);
 		//댓글조회
 		List<CommBoardVO> commList = commboardServiceImpl.getcommList(boardNo);
 		model.addAttribute("commList", commList);
