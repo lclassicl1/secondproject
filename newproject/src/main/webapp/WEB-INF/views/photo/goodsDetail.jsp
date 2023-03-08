@@ -46,9 +46,12 @@ goodsMap.put("imageList",imageList); --%>
 		<div class="sectiontitle">
 		<h4>제목:${goodsVO.goods_title}</h4>
 		</div>
-		<div>${goodsVO.goods_content}</div>
+		<div><h6>작성자:${goodsVO.id}</h6></div>
+		<h6>등록일:<fmt:formatDate value="${goodsVO.credate}" pattern="yyyy-MM-dd"/></h6><br/>
+		<textarea readonly  rows="13" cols="15">${goodsVO.goods_content}</textarea>
+		
 	</div>
-	<div><h6>작성자:${goodsVO.id}</h6></div>
+	
 	<!-- end main content-->
 	
 	<!-- SLIDER-->
@@ -58,7 +61,7 @@ goodsMap.put("imageList",imageList); --%>
 			<div id="slider" class="nivoSlider detailslider">
 				<img src="${conPath}/thumbnails?goods_id=${goodsVO.goods_id}&fileName=${goodsVO.fileName}">
 			</div>
-			<h5>등록일:<fmt:formatDate value="${goodsVO.credate}" pattern="yyyy-MM-dd"/></h5><br/>
+			
 		</div>
 	</div>
 	<!-- end sliderr-->
