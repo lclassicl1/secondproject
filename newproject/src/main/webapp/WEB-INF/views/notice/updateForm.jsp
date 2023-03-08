@@ -14,13 +14,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${path}/resources/css/default.css">
-<style></style>
 <script>
 	/* Jquery 선언부 */
 		$(function(){
 			$('#backBtn').click(function(){
 				history.back();
 			});	
+			
+			$('#submitBtn').click(function(){
+				let title = $('#title').val();
+				let content = $('#content').val();
+				if(title == '' || title == null) {
+					alert('수정할 제목을 입력하셔야됩니다');
+					$('#title').focus();
+					return false;
+				}
+				
+				if(content == '' || content == null) {
+					alert('수정할 내용을 입력하셔야됩니다');
+					$('#content').focus();
+					return false;
+				} 
+				
+				$('#form').submit();
+			});
+			
 		});
 </script>
 <style>
@@ -31,6 +49,13 @@
 }
 table{
 	width:60%;
+}
+
+.btn {
+  position: absolute;
+  top: 24.5%;
+  left: 72.8%;
+  transform: translateX(-50%);
 }
 </style>
 <title>Insert title here</title>
@@ -59,10 +84,16 @@ table{
 <main>
 <%-- 	몇번글수정?:${no}
 	넘겨받은DTO:${noticeDTO} --%>
-	<form action="${path}/notice/updateForm" method="post">
+	
+	<form action="${path}/notice/updateForm" method="post" id="form">
 		<input type="hidden" name="no" id="no" value="${noticeDTO.no}"/>
+		<div class="btn">
+				<button type="button" id="submitBtn" class="readmore">수정하기</button>
+				<input type="reset" value="취소" class="readmore"/>
+				<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
+			</div>
 		<div id="tableCenter">
-		<table border="1">
+			<table border="1">
 			<tr>
 				<th>작성자</th><td><input type="hidden" name="writername" id="writername" value="${noticeDTO.writername}"/>${noticeDTO.writername}</td>
 			</tr>
@@ -71,11 +102,6 @@ table{
 			</tr>
 			<tr>
 				<th>내용</th><td><textarea rows="10" cols="30" name="content" id="content" placeholder="${noticeDTO.content}"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="수정하기"/>&nbsp;
-					<input type="reset" value="취소"/>&nbsp;
-					<input type="button" value="뒤로가기" id="backBtn"/> </td>
 			</tr>
 		</table>
 		</div>

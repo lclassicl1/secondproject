@@ -41,10 +41,10 @@
 			<li>
 			<a href="${path}/club/allClubList">다모여 클럽</a>
 			<ul>
-				<li><a href="#">자유주제</a></li>
-				<li><a href="${path}/club/clist?categoryNo=1">공부</a></li>
-				<li><a href="#">여행</a></li>
-				<li><a href="${path}/club/clist?categoryNo=2">요리</a></li>
+				<li><a href="${path}/club/allClubList">전체 모임</a></li>
+				<li><a href="${path}/club/clist?categoryNo=1">공부 모임</a></li>
+				<li><a href="${path}/club/clist?categoryNo=2">요리 모임</a></li>
+				<li><a href="${path}/club/clist?categoryNo=3">운동 모임</a></li>
 			</ul>
 			</li>
 			<li>

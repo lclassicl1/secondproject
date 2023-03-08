@@ -118,7 +118,8 @@ $(document).ready(function(){
   //메인 이미지는 반드시 첨부해야 합니다.  필수적으로 메인에 출력할 1개이미지를 첨부하도록 유도
   function fn_add_new_goods(obj){
       fileName = $('#f_main_image').val();
-      if(fileName != null && fileName != undefined){
+	  alert(fileName.length);
+      if(fileName.length!=0 && fileName != null && fileName != undefined){
          obj.submit();
       }else{
    	   alert("메인 이미지는 반드시 첨부해야 합니다.");
@@ -179,7 +180,7 @@ table{
             </td>
          </tr>
          <tr>
-	     <th>파일첨부</th>
+	     <th>파일추가/삭제</th>
 	     <td>
 	        <input type="button" value="파일추가" id="btnAddFile2" onclick="fn_addFile()"/>
 	      
@@ -187,14 +188,14 @@ table{
 	     </td>
 	    </tr>
 	    <tr>
-	     <th>첨부파일</th>
+	     <th>사진파일</th>
 	     <td>
 	     	<input  type='file' name='main_image' id='f_main_image' />
 	     </td>
 	    </tr>
  		<tr id="i2">
  		 <td colspan="2" style="text-align:center;">
- 		 <input type="button" value="첨부파일" onclick="fn_add_new_goods(this.form)"/>
+ 		 <input type="button" value="사진업로드"  onclick="fn_add_new_goods(this.form)"/>
  		 <input type="reset" id="btnReset" value="취소"/></td>	
  		 <tr>
  		</table>
