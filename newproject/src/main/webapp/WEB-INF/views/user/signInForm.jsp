@@ -91,6 +91,29 @@ $(document).ready(function(){
     
 });
 
+/*주민번호 중복 확인*/
+$(document).ready(function(){
+	$(".Email").click(function(){
+        var pricynum = $("#pricynum").val();
+        
+        $.ajax({
+            type:"POST",
+            url:"/checkPricynum",
+            data: {"pricynum" : pricynum},
+            success: function(cnt){ 
+                if(cnt == 0){ 
+                	 $("#result_pricynum").text("");
+             }else{ // 만약 실패할시
+            	 msg = "이미 가입된 회원입니다.";
+                     $("#result_pricynum").html(msg).css("color","red");
+                     $("#pricynum").val("").trigger("focus");
+             }
+         },
+            error : function(error){alert(error);}
+        });
+    });   
+});
+
 /*submit*/
 $(document).ready(function(){
 	$("#submit").click(function(){
@@ -115,13 +138,13 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$("#forgotId").click(function(){
 		newWin = window.open("${path}/findId", "아이디 찾기", "resizeable");
-		newWin.resizeTo(500, 380);
-		newWin.onresize = (_=>{newWin.resizeTo(500, 380);})
+		newWin.resizeTo(500, 400);
+		newWin.onresize = (_=>{newWin.resizeTo(500, 400);})
 	});
 	$("#forgotPw").click(function(){
 		newWin = window.open("${path}/findPw", "비밀번호 찾기", "resizeable");
-		newWin.resizeTo(500, 380);
-		newWin.onresize = (_=>{newWin.resizeTo(500, 380);})
+		newWin.resizeTo(500, 400);
+		newWin.onresize = (_=>{newWin.resizeTo(500, 400);})
 	});
 });
 </script>
@@ -180,6 +203,7 @@ a{
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
               <form:input path="pricynum" name="pricynum" placeholder="Pricynum" required="required"/><br/>
+              <span id="result_pricynum" style="font-size:12px;"></span><br/>
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
