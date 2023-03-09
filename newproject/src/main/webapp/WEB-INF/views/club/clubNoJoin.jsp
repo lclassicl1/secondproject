@@ -64,6 +64,7 @@
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
+<main>
 	<%-- ${boardList} 	${cNo} 	${num} ${boardPage} ${categoryNo} ${loginUser.id} --%>
  <!-- SUBHEADER
 ================================================== -->
@@ -111,6 +112,8 @@
 	</div>
   </div>
  </div>
+ </div>
+ </main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>

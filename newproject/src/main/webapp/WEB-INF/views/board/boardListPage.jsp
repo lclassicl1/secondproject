@@ -173,10 +173,10 @@
 		</ul>
 		</c:if>
 	  </div>
-	</div>
-	</main>
+
 	<div>
 	</div>
+	  </div>
 				<!-- SIDEBAR -->
 		<div class="four columns">
 			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${clubDTO.categoryNo}&cNo=${cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
@@ -185,8 +185,9 @@
 			<br class="clear"/>
 			<a href="#" target="_blank" onclick="openPop()"><h6 class="sidebartitle">CLUB CHAT</h6></a>
 		</div>
-	  </div>
+	</div>
 	 </div>
+</main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>

@@ -16,7 +16,6 @@ $(document).ready(function(){
 	
 	//글쓰기
 	$("#boardUpload").on("click",function(){
-		
 		location.href="${path}/board/list?cNo=${cNo}&num=1";
 	});
 	
