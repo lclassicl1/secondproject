@@ -111,7 +111,7 @@
 			//실시간 메시지 (1초마다 메시지리스트함수 실행)
 			setInterval(loadMessage,1000);
 			
-		});//ready end
+		}); //ready end
 		
 		
 	</script>

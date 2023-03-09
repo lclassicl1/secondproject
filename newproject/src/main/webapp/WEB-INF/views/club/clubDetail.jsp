@@ -26,7 +26,8 @@ $(document).ready(function(){
 	$("#btnUpdate").on("click",function(){
 		var c=confirm("클럽을 수정하시겠습니까?");
 		  if(c){
-				location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cIntro}";
+			  	let cIntro = '${clubDTO.cIntro}';
+				location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro="+cIntro;
 				}else{
 		 		return false;		 
 		 	}
@@ -70,17 +71,19 @@ $(document).ready(function(){
 	text-align:right;
 	}
 	.w{
+	 borderBottom:1px;
 	 width:80px;
 	 height:40px;
 	 font-weight:bold;
+	 font-size:1.1em;
 	 }
 	 .t{
 	 margin:auto; 
 	 margin-top:30px; 
 	 margin-bottom:30px; 
 	 display: flex; 
-	 justify-content: 
-	 center; width:60%; 
+	 justify-content:center; 
+	 width:70%; 
 	 }
 </style>
 </head>
@@ -110,7 +113,7 @@ $(document).ready(function(){
 			<div class="dots blogdots">
 			</div>
 			<div id="tablecenter">
-				<table border="1" class="t">
+				<table class="t">
 				<tr>
 					<th colspan="3" class="w">클럽명</th>
 					<td colspan="3" class="c">${clubDTO.cName}</td> <!-- 클럽명 -->
@@ -133,16 +136,19 @@ $(document).ready(function(){
 				<tr>
 					<td colspan="12" class="c"><u:pre value="${clubDTO.cIntro}"/></td><!-- 클럽소개글 -->
 				</tr>
-				<tr>
-					<th colspan="12" class="w"><모임활동(모집)></th>
-				</tr>
 				<c:if test="${empty boardVO}">
+				<tr>
+					<th colspan="12" class="w"><모임활동></th>
+				</tr>
 				<tr>
 					<td colspan="12" class="c">개설된 모임활동이 없습니다</td>
 				</tr>	
 				</c:if>
 				<c:if test="${!empty boardVO}">	
 				<c:forEach var="board" items="${boardVO}">
+				<tr>
+					<th colspan="12" class="w"><모임활동></th>
+				</tr>
 				<tr>
 					<th colspan="3" class="w">제목</th>
 					<td colspan="3" class="c">${board.bTitle}</td><!-- 타이틀 -->
@@ -165,7 +171,7 @@ $(document).ready(function(){
 				<tr>
 					<th colspan="4" class="w">회원번호</th>
 					<th colspan="4" class="w">회원아이디</th>
-					<th colspan="4" class="w">클럽가입한날짜</th>
+					<th colspan="4" class="w">가입일</th>
 				</tr>
 				<c:forEach var="sMember" items="${signMemberList}">
 				<tr>

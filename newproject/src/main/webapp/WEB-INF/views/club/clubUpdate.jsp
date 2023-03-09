@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<link rel="stylesheet" href="${path}/resources/css/default.css">
-<style type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/default.css"  type="text/css">
+<style>
  .texta{
 	  font-size:1.1em;
 	  border: none;
@@ -19,14 +19,15 @@
  width:80px;
  height:40px;
  font-weight:bold;
+ font-size:1.1em;
  }
  .t{
  margin:auto; 
  margin-top:30px; 
  margin-bottom:30px; 
  display: flex; 
- justify-content: 
- center; width:43%; 
+ justify-content:center; 
+ width:43%; 
  }
 </style>
 <meta charset="UTF-8">

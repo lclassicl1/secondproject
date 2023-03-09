@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${path}/resources/css/default.css">
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
@@ -36,6 +37,7 @@ body {
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
+<main>
 	${boardList}
 	${cNo}
 	${num}
@@ -100,5 +102,6 @@ body {
 		
 	</table>
 </body>
+</main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </html>

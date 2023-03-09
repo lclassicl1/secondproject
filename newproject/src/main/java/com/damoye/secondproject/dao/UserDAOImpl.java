@@ -42,6 +42,19 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
+	public User getMemberByInfo(String id, String name, String email) {
+		
+		String sql = "select no, id, password, name, zipcode, address, detailaddress, pricynum, email, phonenum, gender, grade, regdate FROM user where id=?";
+		
+		// queryForObject(String sql, RowMapper<T> rowMapper, Object...args)
+		return template.queryForObject(
+										sql, 
+										new MemberRowMapper(), 
+										id
+									  ); 
+	}
+	
+	@Override
 	public List<NoticeDTO> getNoticeList() {
 		List<NoticeDTO> noticeList = sqlSession.selectList("mapper.notice.mainNoticeList");
 		return noticeList;
@@ -97,11 +110,19 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 	}
+	
 	@Override
 	public Integer checkId(String id) {
 		System.out.println("DAO");
 		System.out.println("id="+id);
 		int cnt = sqlSession.selectOne("mapper.user.checkId",id);
+		return cnt;
+	}
+	
+	public Integer pricynumCheck(String pricynum) {
+		System.out.println("DAO");
+		System.out.println("pricynum="+pricynum);
+		int cnt = sqlSession.selectOne("mapper.user.pricynumCheck",pricynum);
 		return cnt;
 	}
 	

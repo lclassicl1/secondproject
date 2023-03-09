@@ -52,7 +52,7 @@
  		where cName like concat('%',#{cName},'%') 
   	]]>
 	</select>
-	<!-- 클럽 전체 수 -->
+	<!-- 해당 클럽 수 -->
  	<select id="searchCategoryTotalCnt" parameterType="map" resultType="int">
  	<![CDATA[
  		select count(*) 
@@ -70,7 +70,6 @@
 		where 
 		    cName like concat('%',#{cName},'%')
 			order by cNo desc limit #{pageNum},6
-
   	]]> 	
  	</select>
 
@@ -116,7 +115,7 @@
 	 	select *
 	 	from board
 	 	where cNo=#{cNo}
-	 	and bType='모집'
+	 	and bType='모임'
 	 	order by boardNo desc
 	 	limit 0, 2	 	
   	]]>

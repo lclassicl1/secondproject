@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User newPassword(User user, String id) {
+	public User newPassword(User user, String id, String name, String email) {
         char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
                 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         }
         String newPwd = str;
 		
-		user = userDAO.getMemberById(id);
+		user = userDAO.getMemberByInfo(id, name, email);
 		
 		user.changePassword(newPwd);
 		userDAO.updatePw(user);
@@ -94,6 +94,14 @@ public class UserServiceImpl implements UserService {
         result = userDAO.checkId(id);
         return result;
     }
+	
+	@Override
+	public int pricynumCheck(String pricynum) {
+		int cnt = userDAO.pricynumCheck(pricynum);
+		System.out.println("cnt: " + cnt);
+		return cnt;
+	}	
+
 	
 	@Override
 	public List<User> getAllMemberList() {

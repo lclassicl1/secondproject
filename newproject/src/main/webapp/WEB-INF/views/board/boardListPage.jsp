@@ -65,6 +65,13 @@
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
+<main>
+	<%-- ${boardList}
+	${cNo} <br/>
+	${num} <br/>
+	${boardPage}<br/>
+	${categoryNo}
+	${loginUser.id} --%>
 	<%-- ${boardList} 	${cNo} 	${num} ${boardPage} ${categoryNo} ${loginUser.id} --%>
  <!-- SUBHEADER
 ================================================== -->
@@ -167,6 +174,7 @@
 		</c:if>
 	  </div>
 	</div>
+	</main>
 	<div>
 	</div>
 				<!-- SIDEBAR -->

@@ -18,6 +18,7 @@ text-align:center;
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>	
+<main>
 <span></span><span></span><span></span>
 
 <script>
@@ -30,6 +31,7 @@ text-align:center;
 <p><input type="hidden" name="signIn" id="signIn" readonly="readonly" value="${clubMemberDTO.signIn}"/></p> <!-- 회원번호 -->
 <p class="a"><input type="submit" class="readmore" value="가입한 클럽으로 이동"/></p>
 </form>
+</main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>
