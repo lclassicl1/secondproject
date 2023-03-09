@@ -33,12 +33,15 @@ public class SignInController {
 
 	public String requestMain(Model model,HttpSession session,@ModelAttribute("user") User user) {
 
-		if((User)session.getAttribute("loginUser") == null) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		if(loginUser == null) {
 			return "user/signInForm";
 		}
 		
 		List<NoticeDTO> noticeList = userService.getNoticeList();
 		model.addAttribute("noticeList",noticeList);
+		
+		model.addAttribute("loginUser", loginUser);
 		
 		return "user/main";
 	}
