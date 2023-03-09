@@ -7,7 +7,13 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/default.css">
 <meta charset="UTF-8">
+<style>
+.a{
+text-align:center;
+}
+</style>
 <title>클럽가입</title>
 </head>
 <body>
@@ -16,13 +22,13 @@
 
 <script>
 </script>
-<h3>가입을 축하드립니다!!</h3>
+<h3 class="a">가입을 축하드립니다!!</h3>
 <form id="signClub" method="post" action="${path}/club/sign">
 <p><input type="hidden" name="categoryNo" id="categoryNo" readonly="readonly" value="${categoryNo}"/>
 <p><input type="hidden" name="cNo" id="cNo" readonly="readonly" value="${clubMemberDTO.cNo}"/></p> <!-- 클럽번호 -->
 <p><input type="hidden" name="no" id="no" readonly="readonly" value="${loginUser.no}"/></p> <!-- 회원번호 -->
 <p><input type="hidden" name="signIn" id="signIn" readonly="readonly" value="${clubMemberDTO.signIn}"/></p> <!-- 회원번호 -->
-<p><input type="submit" class="readmore" value="가입한 클럽으로 이동"/></p>
+<p class="a"><input type="submit" class="readmore" value="가입한 클럽으로 이동"/></p>
 </form>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
