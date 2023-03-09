@@ -176,7 +176,6 @@
 		</div>
 	  </div>
 	 </div>
-</div>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>
