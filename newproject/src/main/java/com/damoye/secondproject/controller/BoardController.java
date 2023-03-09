@@ -102,6 +102,7 @@ public class BoardController {
 		
 	}
 	
+	
 	//클럽게시판 글 상세보기+댓글보기
 	//요청주소 ~컨패/board/detail?cNo=&boardNo=
 	@RequestMapping(value="/board/detail", method=RequestMethod.GET)
