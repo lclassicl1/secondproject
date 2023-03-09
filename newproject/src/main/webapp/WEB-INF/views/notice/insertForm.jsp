@@ -24,7 +24,6 @@
 				return false;
 			}
 			
-			//내용 검증 현재 ck에디터 적용으로 반영 안되는듯
 			let content = $('#content').val();
 			if(content=='') {
 				alert('내용이 입력되지않았습니다');
