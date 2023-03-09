@@ -25,8 +25,8 @@
  margin-top:30px; 
  margin-bottom:30px; 
  display: flex; 
- justify-content: 
- center; width:43%; 
+ justify-content:center; 
+ width:43%; 
  }
 </style>
 <meta charset="UTF-8">
@@ -144,7 +144,7 @@ $(document).ready(function(){
 	</tr>
 	<tr>	
 		<td colspan="2">
-			<textarea class="texta" rows="20" cols="70" name="cIntro" id="cIntro" required="required">${clubDTO.cIntro}</textarea>
+			<pre><textarea class="texta" rows="20" cols="70" name="cIntro" id="cIntro" required="required">${clubDTO.cIntro}</textarea></pre>
 		</td>
 	</tr>
 	<tr>

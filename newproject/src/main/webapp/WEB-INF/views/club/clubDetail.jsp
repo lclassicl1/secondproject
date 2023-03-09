@@ -131,10 +131,10 @@ $(document).ready(function(){
 					<th colspan="12" class="w" style="width:50%;"><클럽소개글></th>
 				</tr>
 				<tr>
-					<td colspan="12" class="c">${clubDTO.cIntro}"</td><!-- 클럽소개글 -->
+					<td colspan="12" class="c"><u:pre value="${clubDTO.cIntro}"/></td><!-- 클럽소개글 -->
 				</tr>
 				<tr>
-					<th colspan="12" class="w"><모임활동(모집)></th>
+					<th colspan="12" class="w"><모임활동></th>
 				</tr>
 				<c:if test="${empty boardVO}">
 				<tr>

@@ -25,8 +25,8 @@
  margin-top:30px; 
  margin-bottom:30px; 
  display: flex; 
- justify-content: 
- center; width:43%; 
+ justify-content:center; 
+ width:43%; 
  }
 </style>
 <meta charset="UTF-8">
