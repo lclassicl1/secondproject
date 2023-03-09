@@ -32,7 +32,7 @@
 					<a href="${path}/myInfo">[${loginUser.id }]님</a>
 				</li>
 				<li>
-					<a class="nav-link" onclick="logout();">로그아웃</a>
+					<a href="#" class="nav-link" onclick="logout();">로그아웃</a>
 				</li>
 	 		</ul>
 	 	</nav>
