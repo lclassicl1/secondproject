@@ -85,11 +85,15 @@ public class BoardController {
 		model.addAttribute("clubDTO", clubDTO);
 		
 		User user = (User)session.getAttribute("loginUser");
+		int userGrade = user.getGrade();
 		int userNo = user.getNo();
 		ClubMemberDTO clubMember = new ClubMemberDTO();
 		clubMember.setcNo(cNo);
 		clubMember.setNo(userNo);
 		int result = boardServiceImpl.validClubMember(clubMember);
+		if(userGrade == 999) {
+			return "/board/boardListPage";
+		}
 		if(result == 0) {
 			return "redirect:/clubNoJoin2";
 		}

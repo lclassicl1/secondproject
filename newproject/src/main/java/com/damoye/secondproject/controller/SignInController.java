@@ -1,5 +1,7 @@
 package com.damoye.secondproject.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.damoye.secondproject.model.NoticeDTO;
 import com.damoye.secondproject.model.User;
+import com.damoye.secondproject.service.NoticeService;
 import com.damoye.secondproject.service.UserService;
 
 
@@ -27,11 +31,18 @@ public class SignInController {
 	
 	@RequestMapping("/logoMain")
 
-	public String requestMain(HttpSession session,@ModelAttribute("user") User user) {
+	public String requestMain(Model model,HttpSession session,@ModelAttribute("user") User user) {
 
-		if((User)session.getAttribute("loginUser") == null) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		if(loginUser == null) {
 			return "user/signInForm";
 		}
+		
+		List<NoticeDTO> noticeList = userService.getNoticeList();
+		model.addAttribute("noticeList",noticeList);
+		
+		model.addAttribute("loginUser", loginUser);
+		
 		return "user/main";
 	}
 	
@@ -61,6 +72,10 @@ public class SignInController {
 				model.addAttribute("loginUser", loginUser);
 				
 				session.setAttribute("loginUser", loginUser);
+				
+				List<NoticeDTO> noticeList = userService.getNoticeList();
+				model.addAttribute("noticeList",noticeList);
+				
 				return "user/main";
 			}
 		else {

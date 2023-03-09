@@ -110,6 +110,20 @@ $(document).ready(function(){
 
 	});
 });
+
+/*아이디 비밀번호*/
+$(document).ready(function(){
+	$("#forgotId").click(function(){
+		newWin = window.open("${path}/findId", "아이디 찾기", "resizeable");
+		newWin.resizeTo(500, 380);
+		newWin.onresize = (_=>{newWin.resizeTo(500, 380);})
+	});
+	$("#forgotPw").click(function(){
+		newWin = window.open("${path}/findPw", "비밀번호 찾기", "resizeable");
+		newWin.resizeTo(500, 380);
+		newWin.onresize = (_=>{newWin.resizeTo(500, 380);})
+	});
+});
 </script>
 <style>
 #zipcode{
@@ -220,11 +234,11 @@ a{
             </form:form>
             <p>
               <b>
-               <a href="<%=request.getContextPath()%>/findId"> Forgot ID?</a>
+               <a href="#" id="forgotId">Forgot ID?</a>
               </b>
               /
               <b>
-                <a href="<%=request.getContextPath()%>/findPw">Forgot password?</a>
+               <a href="#" id="forgotPw">Forgot password?</a>
               </b>
             </p>
             <p>

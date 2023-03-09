@@ -36,7 +36,7 @@
 <!-- CONTENT 
 ================================================== -->
 <div class="row" style="display: flex; justify-content: right;">
-	<input type="button" value="파얼업로드" onClick="location.href='${conPath}/photo/addForm'" class='postfix button expand' style="width:100px;"/>
+	<input type="button" value="사진업로드" onClick="location.href='${conPath}/photo/addForm'" class='readmore' style="width:100px;"/>
 </div>
 <div id="portofolio" class="row">
 	<!-- Project 1-->
@@ -49,6 +49,7 @@
 	<c:forEach items="${goodsMap.bestseller}" var="item">
 		<c:set var="goods_count" value="${goods_count+1 }" />
 		<div class="six columns category trains">
+			<h6>제목:${item.goods_title}</h6>
 			<h6>작성자:${item.id}</h6>
 			<div class="portofoliothumb">
 				<div class="portofoliothumboverlay">

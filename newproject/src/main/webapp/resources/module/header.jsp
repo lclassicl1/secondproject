@@ -24,7 +24,22 @@
 </script>
 </head>
 <body>
-<div class="row" style="margin-top: 15px;">
+<div class="row" style="width:100%; margin-top:-20px; margin-bottom:-50px; display: flex; justify-content: right;">
+	 <div class="headermenu eight columns noleftmarg" style="width: 66.6666%;">
+	 	<nav id="nav-wrap">
+	 		<ul id="main-menu" class="nav-bar sf-menu">
+	 			<li>
+					<a href="${path}/myInfo">[${loginUser.id }]님</a>
+				</li>
+				<li>
+					<a class="nav-link" onclick="logout();">로그아웃</a>
+				</li>
+	 		</ul>
+	 	</nav>
+	 </div>
+</div>
+
+<div class="row" style="margin-top: -15px; margin-bottom:10px;">
 	<div class="headerlogo four columns">
 		<div class="logo">
 			<a href="${path}/logoMain">
@@ -41,10 +56,10 @@
 			<li>
 			<a href="${path}/club/allClubList">다모여 클럽</a>
 			<ul>
-				<li><a href="#">자유주제</a></li>
-				<li><a href="${path}/club/clist?categoryNo=1">공부</a></li>
-				<li><a href="#">여행</a></li>
-				<li><a href="${path}/club/clist?categoryNo=2">요리</a></li>
+				<li><a href="${path}/club/allClubList">전체 모임</a></li>
+				<li><a href="${path}/club/clist?categoryNo=1">공부 모임</a></li>
+				<li><a href="${path}/club/clist?categoryNo=2">요리 모임</a></li>
+				<li><a href="${path}/club/clist?categoryNo=3">운동 모임</a></li>
 			</ul>
 			</li>
 			<li>
@@ -59,17 +74,12 @@
 			<li>
 			<a href="${path}/myClub">내 클럽</a>
 			</li>
-			<li>
+			<%-- <li>
 			<a href="${path}/myInfo">마이페이지</a>
 			</li>
 			<li>
 			<a class="nav-link" onclick="logout();">로그아웃</a>
-			<!-- <ul>
-				<li><a href="columns.html">Columns</a></li>
-				<li><a href="elements.html">Elements</a></li>
-				<li><a href="typography.html">Typography</a></li>
-			</ul> -->
-			</li>
+			</li> --%>
 		</ul>
 		</nav>
 	</div>

@@ -18,7 +18,9 @@
 			var listCount; //db에서 가져온 메시지의 크기
 			
 			/* 작성버튼 클릭시 입력동작  */
-			$('#formBtn').on("click",addMessage());
+			$('#formBtn').on("click",function(){
+				addMessage();
+			});
 			
 			/* 작성폼에서 엔터시 입력동작 */ 
 			$('#content').on("keyup",function(key){

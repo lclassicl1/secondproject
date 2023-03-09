@@ -98,8 +98,7 @@ public class ClubController {
 	
 	//클럽상세보기 
 	@GetMapping("detail")
-	public String getClubDetail(HttpServletRequest request, int categoryNo,int cNo, Model model, ClubMemberDTO clubMemberDTO) throws Exception {
-		HttpSession session=request.getSession();
+	public String getClubDetail(HttpSession session, int categoryNo,int cNo, Model model) throws Exception {
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("loginUser", user);
 		//카테고리명
@@ -223,11 +222,27 @@ public class ClubController {
 	}	
 	//클럽 생성하기-처리요청
 	@PostMapping("clubCre")
-	public ModelAndView getInClubFrm(ClubDTO clubDTO, ModelAndView mv) throws Exception {		
+	public ModelAndView getInClubFrm(HttpSession session , ClubDTO clubDTO, ModelAndView mv) throws Exception {		
 		logger.info(clubDTO.toString()); //확인용
-		int cnt=clubService.getCreClub(clubDTO);
-		if(cnt==1) {
-			mv.setViewName("user/main");
+		int cNo=clubService.getCreClub(clubDTO);
+		
+		User user = (User)session.getAttribute("loginUser");
+		int userNo = user.getNo();
+		ClubMemberDTO clubMemberDTO = new ClubMemberDTO();
+		clubMemberDTO.setcNo(cNo);
+		clubMemberDTO.setNo(userNo);
+		
+		clubService.getSignClub(clubMemberDTO);	
+		
+		if(cNo!=0) {
+			ClubDTO club = clubService.getSelClubDetail(cNo);
+			int categoryNo = club.getCategoryNo();
+			
+			System.out.println(categoryNo);
+			
+			mv.addObject("cNo", cNo);
+			mv.addObject("categoryNo", categoryNo);
+			mv.setViewName("redirect:detail");
 		}else {
 			return null;
 		}
