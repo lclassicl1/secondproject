@@ -124,7 +124,7 @@ $(document).ready(function(){
 					<td colspan="3" class="c"><fmt:formatDate value="${clubDTO.creDate}" type="date" pattern="yyyy.MM.dd"/></td><!-- 클럽개설일 -->
 				</tr>
 				<tr>
-					<th colspan="6" class="w">활동지역</th>
+					<th colspan="6" class="w">활동지역(구)</th>
 					<td colspan="6" class="c">${clubDTO.cLoc}</td><!-- 지역 -->
 				</tr>
 				<tr>
@@ -187,7 +187,7 @@ $(document).ready(function(){
 						</div>
 		 		</c:if>
 		 		<!-- 클럽에 가입하지않은 회원 -->
-				<c:if test="${gMember && (currentMember.signIn != 'Y') || exist==false}">
+				<c:if test="${gMember && (currentMember.signIn != 'Y')}">
 						<div class="r">
 							<input type="button" name="btnSign" id="btnSign" class="readmore" value="클럽가입"/>
 						</div>

@@ -128,15 +128,15 @@ public class ClubController {
 			break;
 		}
 
-		 boolean exist = true; //초기값 있다면 
+/*		 boolean exist = true; //초기값 있다면 
 		 for(ClubMemberDTO clubmbmer : signMemberList) {
 			 if(clubmbmer.getNo() == user.getNo()) {  // 클럽에 가입된 회원번호가 동일하다면 
 				 exist = true; //있다
 			 }
 			 	break; 
 			 }
-		 
 		model.addAttribute("exist", exist);
+ */	 
 		 
 		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
 		return "club/clubDetail";
@@ -199,7 +199,7 @@ public class ClubController {
 		
 		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보	
 		
-		boolean exist = true; //초기값 있다면
+/*		boolean exist = true; //초기값 있다면
 		for(ClubMemberDTO clubmbmer : signMemberList) {
 			if(clubmbmer.getNo() == user.getNo()) { // 클럽에 가입된 회원번호가 동일하다면
 				exist = true; //있다
@@ -207,7 +207,7 @@ public class ClubController {
 				break;
 		}
 		model.addAttribute("exist", exist);		
-
+*/
 		return "club/clubDetail";
 	}
 	//클럽 생성하기-폼요청
