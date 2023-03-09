@@ -25,10 +25,15 @@ $(document).ready(function(){
 </script>
 <title>클럽게시판 글쓰기</title>
 <style>
-	#boardWrite {
-		width:66.6666%
+	.twelve.columns.noleftmargin {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  height: 100%;
 	}
-	
+	#boardWrite {
+		width:643.33px;
+	}
 	#select {
 		width:100px;
 	}
@@ -102,18 +107,7 @@ $(document).ready(function(){
 		<br class="clear">
 	     </form>
 	</div>
-		
-	
-		<!-- SIDEBAR -->
-		<div class="four columns" style="margin-top: 15px;">
-			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${categoryNo}&cNo=${cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
-			<br class="clear"/>
-			<a href="<%=request.getContextPath() %>/board/list?cNo=${cNo}&num=1"><h6 class="sidebartitle">CLUB BOARD</h6></a>
-			<br class="clear"/>
-			<a href="#" target="_blank" onclick="openPop()"><h6 class="sidebartitle">CLUB CHAT</h6></a>
-		</div>
-		
-		
+
 
 </div>
  

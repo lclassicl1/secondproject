@@ -21,8 +21,9 @@
 </script>
 <title>클럽게시판</title>
 <style>
+
 	#boardDetail {
-		border:1px;
+		border:1px solid;
 		width:66.6666%;
 	}
 	
@@ -30,7 +31,6 @@
 		display: flex;
 		justify-content: center;
 		vertical-align:middle;
-		border : 1px solid;
 		margin-top:15px;
 		margin-bottom: 20px;
 		margin-right: 10px;
@@ -91,7 +91,7 @@
 </div>
 <!-- CONTENT 
 ================================================== -->
-
+	<div class="hr">
 <div class="row">
 	<div class="twelve columns noleftmargin">
 	     <!-- MAIN CONTENT -->
@@ -101,11 +101,13 @@
 	<!-- 작성글이 없는 경우 -->
 	<div class="tableCenter">
  	<c:if test="${empty boardList}">
-	<p>
 	<div class="dots blogdots"></div>
-	<h5>클럽에 첫번째 글을 작성해보세요</h5>	
+	<br class="clear">
+	<br class="clear">
+	<h5 align="center">클럽에 첫번째 글을 작성해보세요</h5>
 	<span class="comments"><button type="submit" class="readmore" name="btnWrite" id="btnWrite">글쓰기</button></span>
-	<p>
+	<br class="clear">
+	<br class="clear">
 	<div class="dots blogdots"></div>
 	</c:if>
 		
@@ -135,6 +137,7 @@
 	
 		 <span class="comments"><button type="submit" class="readmore" name="btnWrite" id="btnWrite">글쓰기</button>
 		 </span>
+		 <br class="clear">
 	</c:if>
 	<c:if test="${not empty boardList}">
 		<ul class="pagination">
@@ -167,7 +170,7 @@
 	<div>
 	</div>
 				<!-- SIDEBAR -->
-		<div class="four columns" style="margin-top: 30px;">
+		<div class="four columns">
 			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${clubDTO.categoryNo}&cNo=${cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
 			<br class="clear"/>
 			<a href="<%=request.getContextPath() %>/board/list?cNo=${cNo}&num=1"><h6 class="sidebartitle">CLUB BOARD</h6></a>
