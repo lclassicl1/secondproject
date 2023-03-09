@@ -116,7 +116,7 @@
 	 	select *
 	 	from board
 	 	where cNo=#{cNo}
-	 	and bType='모집'
+	 	and bType='모임'
 	 	order by boardNo desc
 	 	limit 0, 2	 	
   	]]>
