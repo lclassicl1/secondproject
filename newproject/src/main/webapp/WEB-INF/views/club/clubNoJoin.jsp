@@ -22,41 +22,17 @@
 <title>클럽게시판</title>
 <style>
 
-	#boardDetail {
-		border:1px solid;
+	.twelve.columns.noleftmargin {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  height: 100%;
 	}
-	
-	#tableCenter {
-		display: flex;
-		justify-content: center;
-		vertical-align:middle;
-		margin-top:15px;
-		margin-bottom: 20px;
-		margin-right: 10px;
-	}
-	
-	.c1 {
-		width:500px;
-		vertical-align:middle;
-		height:30px;
-		
-		
-	}
-	.c {
-		width:100px;
-		vertical-align:middle;
-		text-align: center;
-	}
-	
-	
-	#textarea {
-		resize:none;
-		width:598.46px;
-		height:100px;
-	}
-	
-	#btnComm {
-		text-align:center;
+	#noBoard {
+		width:643.33px;
+    	display:table-cell;
+  		vertical-align:middle;
+  		margin:70px;
 	}
 
 
@@ -65,7 +41,6 @@
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
 <main>
-	<%-- ${boardList} 	${cNo} 	${num} ${boardPage} ${categoryNo} ${loginUser.id} --%>
  <!-- SUBHEADER
 ================================================== -->
 <div id="subheader">
@@ -91,27 +66,23 @@
 </div>
 <!-- CONTENT 
 ================================================== -->
-	<div class="hr">
 <div class="row">
 	<div class="twelve columns noleftmargin">
 	     <!-- MAIN CONTENT -->
-		<div class="eight columns noleftmargin" id="boardDetail">
-		<div class="hr">
-</div>
-	<div class="tableCenter">
-	<div class="dots blogdots"></div>
-	<br class="clear">
-	<h5 align="center">클럽 가입된 회원만 이용 가능합니다.</h5>	
-	<br class="clear">
-	<div class="dots blogdots"></div>
-	<br class="clear">
-		
-	  	</div>
+		<div class="eight columns noleftmargin" id="noBoard">
+		<div class="hr"></div>
+		<div class="tableCenter">
+			<div class="dots blogdots"></div>
+			<br class="clear">
+			<h5 align="center">클럽 가입된 회원만 이용 가능합니다.</h5>
+			<p>
+			<br class="clear">
+			<div class="dots blogdots"></div>
+			<br class="clear">
+		</div>
+	  	
 	   </div>
-	 <div>
-	</div>
-  </div>
- </div>
+  	</div>
  </div>
  </main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>

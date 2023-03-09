@@ -120,26 +120,25 @@
 		
 	<!-- 작성글이 있는 경우 -->
 	<c:if test="${not empty boardList}">
-	<div class="tableCenter" style="display:table-row">
-	</div>
 
 	    <div class="c" style="display:table-cell"></div>
 	    <div class="c1" style="display:table-cell"><b>제목</b></div>
 	    <div class="c" style="display:table-cell"><b>작성자</b></div>
 	    <div class="c" style="display:table-cell"><b>작성일</b></div>
 	    <div class="c" style="display:table-cell"><b>댓글</b></div>
+		
 		<c:forEach var="list" items="${boardList}">
-		<c:if test="${list.bIsShow=='Y'}">
+		 <c:if test="${list.bIsShow=='Y'}">
 		  <div class="table" style="display:table-row">
-		  <input type="hidden" value="${list.boardNo}">
-	        
+		  	
+		  	<input type="hidden" value="${list.boardNo}">
 	        <div class="c" style="display:table-cell">${list.bType}</div>
 	        <div class="c1" style="display:table-cell"> <a href="${path}/board/detail?cNo=${list.cNo}&num=${num}&boardNo=${list.boardNo}"><b>${list.bTitle}</b></a></div>
 	        <div class="c" style="display:table-cell">${list.bWriter}</div>
 	        <div class="c" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${list.bRegdate}"/></div>
 	        <div class="c" style="display:table-cell">${list.commCnt}</div>
 	  	  </div>
-		</c:if>
+		 </c:if>
 		</c:forEach>
 	
 		 <span class="comments"><button type="submit" class="readmore" name="btnWrite" id="btnWrite">글쓰기</button>
@@ -173,10 +172,9 @@
 		</ul>
 		</c:if>
 	  </div>
-
-	<div>
-	</div>
-	  </div>
+	 <div>
+    </div>
+   </div>
 				<!-- SIDEBAR -->
 		<div class="four columns">
 			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${clubDTO.categoryNo}&cNo=${cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
@@ -185,8 +183,9 @@
 			<br class="clear"/>
 			<a href="#" target="_blank" onclick="openPop()"><h6 class="sidebartitle">CLUB CHAT</h6></a>
 		</div>
-	</div>
-	 </div>
+		
+   </div>
+</div>
 </main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
