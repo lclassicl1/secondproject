@@ -19,6 +19,7 @@
  width:80px;
  height:40px;
  font-weight:bold;
+ font-size:1.1em;
  }
  .t{
  margin:auto; 

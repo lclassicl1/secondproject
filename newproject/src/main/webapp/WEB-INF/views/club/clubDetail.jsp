@@ -73,6 +73,7 @@ $(document).ready(function(){
 	 width:80px;
 	 height:40px;
 	 font-weight:bold;
+	 font-size:1.1em;
 	 }
 	 .t{
 	 margin:auto; 
@@ -80,7 +81,7 @@ $(document).ready(function(){
 	 margin-bottom:30px; 
 	 display: flex; 
 	 justify-content:center; 
-	 width:60%; 
+	 width:70%; 
 	 }
 </style>
 </head>
@@ -133,16 +134,19 @@ $(document).ready(function(){
 				<tr>
 					<td colspan="12" class="c"><u:pre value="${clubDTO.cIntro}"/></td><!-- 클럽소개글 -->
 				</tr>
+				<c:if test="${empty boardVO}">
 				<tr>
 					<th colspan="12" class="w"><모임활동></th>
 				</tr>
-				<c:if test="${empty boardVO}">
 				<tr>
 					<td colspan="12" class="c">개설된 모임활동이 없습니다</td>
 				</tr>	
 				</c:if>
 				<c:if test="${!empty boardVO}">	
 				<c:forEach var="board" items="${boardVO}">
+				<tr>
+					<th colspan="12" class="w"><모임활동></th>
+				</tr>
 				<tr>
 					<th colspan="3" class="w">제목</th>
 					<td colspan="3" class="c">${board.bTitle}</td><!-- 타이틀 -->

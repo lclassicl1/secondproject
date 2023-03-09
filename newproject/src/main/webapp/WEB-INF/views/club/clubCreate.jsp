@@ -19,6 +19,7 @@
  width:80px;
  height:40px;
  font-weight:bold;
+ font-size:1.1em;
  }
  .t{
  margin:auto; 
@@ -140,7 +141,7 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<th class="w"><b>클럽소개글</b></th>
+		<th class="w"><b>클럽 <br/>소개글</b></th>
 		<td>
 			<textarea rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
 		</td>
