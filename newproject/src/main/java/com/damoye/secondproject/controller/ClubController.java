@@ -225,13 +225,11 @@ public class ClubController {
 	public ModelAndView getInClubFrm(HttpSession session , ClubDTO clubDTO, ModelAndView mv) throws Exception {		
 		logger.info(clubDTO.toString()); //확인용
 		int cNo=clubService.getCreClub(clubDTO);
-		
 		User user = (User)session.getAttribute("loginUser");
 		int userNo = user.getNo();
 		ClubMemberDTO clubMemberDTO = new ClubMemberDTO();
 		clubMemberDTO.setcNo(cNo);
 		clubMemberDTO.setNo(userNo);
-		
 		clubService.getSignClub(clubMemberDTO);	
 		
 		if(cNo!=0) {
