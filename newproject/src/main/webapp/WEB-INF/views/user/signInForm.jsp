@@ -10,6 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>로그인</title>
+<style>
+	#upId{width:291px;}
+	#check_Id{width:124px;}
+	#submit{margin-top:10px;}
+</style>
 <script>
 var code=""; //이메일로 전송되는 인증번호 저장을 위한 변수작성
 
@@ -175,9 +180,9 @@ a{
         <div class="form-wrapper align-items-center">
           <div class="form sign-up">
           	<form:form id="signUpFrm" modelAttribute="user" method="post" accept-charset="utf-8" action="/signUp">
-            <div class="input-group">
+            <div class="input-group" style="text-align:left;">
               <i class='bx bxs-user'></i>
-              <form:input path="id" name="id" placeholder="ID" required="required"/> <input type="button" id="check_Id" value="중복확인"><br/>
+              <form:input path="id" name="id" placeholder="ID" id="upId" required="required"/><button type="button" id="check_Id">중복확인</button><br/>
 			  <span id="result_checkId" style="font-size:12px;"></span><br/>
             </div>
             <div class="input-group">
@@ -220,9 +225,15 @@ a{
             </div>
             <div class="input-group">
               <i class='bx bxs-lock-alt'></i>
-             Gender
+             <div>
+             	Gender
+             </div>
+             <div style="float:left; padding-left:157px;">
               <form:radiobutton path="gender" name="gender" class="gender" value="M"/> 남성
-		<form:radiobutton path="gender" name="gender" class="gender" value="F"/> 여성<br/>
+			  </div>
+			  <div style="float:left;">
+			  	<form:radiobutton path="gender" name="gender" class="gender" value="F"/> 여성<br/>
+			  </div>            
             </div>
             <button id="submit">Sign Up</button>
             </form:form>
