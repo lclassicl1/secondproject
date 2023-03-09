@@ -78,7 +78,6 @@ $(document).ready(function(){
 			} 
 	  	});	
 });
-
 </script>
 <title>클럽 개설</title>
 </head>
