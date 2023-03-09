@@ -31,6 +31,7 @@
 		justify-content: center;
 		vertical-align:middle;
 		border : 1px solid;
+		margin-top:15px;
 		margin-bottom: 20px;
 		margin-right: 10px;
 	}
@@ -95,17 +96,17 @@
 	<div class="twelve columns noleftmargin">
 	     <!-- MAIN CONTENT -->
 		<div class="eight columns noleftmargin" id="boardDetail">
-	<div class="hr">
+		<div class="hr">
 </div>
 	<!-- 작성글이 없는 경우 -->
 	<div class="tableCenter">
  	<c:if test="${empty boardList}">
 	<p>
 	<div class="dots blogdots"></div>
-	<h5>클럽에 첫번째 글을 작성해보세요</h5>	<button type="submit" class="readmore" name="btnWrite" id="btnWrite">글쓰기</button>
+	<h5>클럽에 첫번째 글을 작성해보세요</h5>	
+	<span class="comments"><button type="submit" class="readmore" name="btnWrite" id="btnWrite">글쓰기</button></span>
 	<p>
 	<div class="dots blogdots"></div>
-		<div style="display:table-row"><input type="button" name="btnWrite" id="btnWrite" value="글쓰기"></div>
 	</c:if>
 		
 	<!-- 작성글이 있는 경우 -->
@@ -114,10 +115,10 @@
 	</div>
 
 	    <div class="c" style="display:table-cell"></div>
-	    <div class="c1" style="display:table-cell">제목</div>
-	    <div class="c" style="display:table-cell">작성자</div>
-	    <div class="c" style="display:table-cell">작성일</div>
-	    <div class="c" style="display:table-cell">댓글</div>
+	    <div class="c1" style="display:table-cell"><b>제목</b></div>
+	    <div class="c" style="display:table-cell"><b>작성자</b></div>
+	    <div class="c" style="display:table-cell"><b>작성일</b></div>
+	    <div class="c" style="display:table-cell"><b>댓글</b></div>
 		<c:forEach var="list" items="${boardList}">
 		<c:if test="${list.bIsShow=='Y'}">
 		  <div class="table" style="display:table-row">
@@ -131,15 +132,15 @@
 	  	  </div>
 		</c:if>
 		</c:forEach>
-	</c:if>
 	
 		 <span class="comments"><button type="submit" class="readmore" name="btnWrite" id="btnWrite">글쓰기</button>
 		 </span>
+	</c:if>
 	<c:if test="${not empty boardList}">
 		<ul class="pagination">
 		
 		<c:if test="${boardPage.prev}">
-			<li class="arrow unavailable"><a href="/board/list?cNo=${cNo}&num=${boardPage.startPageNum - 1}">&laquo;</a></li>
+			<li class="arrow unavailable"><a href="/board/list?cNo=${cNo}&num=${boardPage.startPageNum - 1}">prev</a></li>
 		</c:if>
 		
 		<c:forEach begin="${boardPage.startPageNum}" end="${boardPage.endPageNum}" var="num">
@@ -156,17 +157,17 @@
 		<c:if test="${boardPage.endPageNum < boardPage.pageNum}">
 	
 		<c:if test="${boardPage.next}">
-			<li class="arrow"><a href="/board/list?cNo=${cNo}&num=${boardPage.endPageNum + 1}">&raquo;</a></li>
+			<li class="arrow"><a href="/board/list?cNo=${cNo}&num=${boardPage.endPageNum + 1}">next</a></li>
 		</c:if>
 		</c:if>
-		
+		</ul>
 		</c:if>
 	  </div>
 	</div>
 	<div>
 	</div>
 				<!-- SIDEBAR -->
-		<div class="four columns" id=float style="margin-top: 15px;">
+		<div class="four columns" style="margin-top: 30px;">
 			<a href="<%=request.getContextPath()%>/club/detail?categoryNo=${clubDTO.categoryNo}&cNo=${cNo}"><h6 class="sidebartitle">CLUB INTRODUCE</h6></a>
 			<br class="clear"/>
 			<a href="<%=request.getContextPath() %>/board/list?cNo=${cNo}&num=1"><h6 class="sidebartitle">CLUB BOARD</h6></a>
