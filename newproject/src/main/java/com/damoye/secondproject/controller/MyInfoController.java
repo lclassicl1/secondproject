@@ -34,8 +34,7 @@ public class MyInfoController {
 	public String submitMyInfo(HttpSession session,@ModelAttribute("user") User user, String id, String password, String email, String phonenum, String zipcode, String address, String detailaddress) {
 		
 		userService.modifyUserInfo(user.getId(), password, email, phonenum, zipcode, address, detailaddress);
-		
-		session.invalidate(); //세션 종료
-		return "redirect:/signIn";
+
+		return "redirect:/logout";
 	}
 }
