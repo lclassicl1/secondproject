@@ -16,19 +16,19 @@
 	  resize: none;
 	  }
  .w{
- width:80px;
- height:40px;
- font-weight:bold;
- font-size:1.1em;
- }
+	 width:80px;
+	 height:40px;
+	 font-weight:bold;
+	 font-size:1.1em;
+	 }
  .t{
- margin:auto; 
- margin-top:30px; 
- margin-bottom:30px; 
- display: flex; 
- justify-content:center; 
- width:43%; 
- }
+	 margin:auto; 
+	 margin-top:30px; 
+	 margin-bottom:30px; 
+	 display: flex; 
+	 justify-content:center; 
+	 width:43%; 
+	 }
 </style>
 <meta charset="UTF-8">
 <script>
