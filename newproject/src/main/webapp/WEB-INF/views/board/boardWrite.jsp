@@ -9,7 +9,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-
 	//목록으로
 	$("#btnList").on("click",function(){
 		location.href="${path}/board/list?cNo=${cNo}&num=${num}";
@@ -48,7 +47,7 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="eight columns">
 			<p class="bread leftalign">
-				<b>클럽게시판</b>
+				<b>클럽게시판 글쓰기</b>
 			</p>
 		</div>
 		<div class="four columns">
@@ -91,8 +90,7 @@ $(document).ready(function(){
 			
 			<pre><textarea rows="30" cols="50" name="bContent" id="bContent" required="required" placeholder="내용을 입력하세요"></textarea></pre>
 		
-		<p class="clear authortext">
-		<br class="clear">
+
 		<!-- 본인글이면 수정 또는 삭제가능 -->
 		<!-- <button type="button" onclick="location.href='${path}/board/?cNo=${boardVO.cNo}'">목록으로</button> -->
 		</div>
