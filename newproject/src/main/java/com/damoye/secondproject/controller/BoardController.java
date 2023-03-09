@@ -166,7 +166,7 @@ public class BoardController {
 		System.out.println("boardVO"+boardVO);
 		int cnt = boardServiceImpl.updateSubmitBoard(boardVO);
 		if(cnt==1) {
-			mv.setViewName("redirect:/board/detail?"+boardVO.getcNo()+"&boardNo="+boardVO.getBoardNo()+"&num="+1);
+			mv.setViewName("redirect:/board/detail?cNo="+boardVO.getcNo()+"&boardNo="+boardVO.getBoardNo()+"&num="+1);
 		}else {
 			mv.setViewName("redirect:/board/boardUpdate?cNo="+boardVO.getcNo()+"&boardNo="+boardVO.getBoardNo());
 		}

@@ -47,7 +47,16 @@ function openPop(){
 	#boardDetail {
 		width:66.6666%
 	}
-
+	
+	#textarea {
+		resize:none;
+		width:598.46px;
+		height:100px;
+	}
+	
+	#btnComm {
+		text-align:center;
+	}
 
 
 </style>
@@ -56,10 +65,7 @@ function openPop(){
 
 <header><jsp:include page="/resources/module/header.jsp"/></header>
 <main>
-	현재 세션 아이디:${loginUser.id}<br/>
-	<%-- 게시글정보: ${boardList} --%>
-	${boardVO}<br/>
-	${num}<br/>
+	<%-- 게시글정보: ${boardList} ${boardVO} ${num} 세션 아이디:${loginUser.id}--%>
 <!-- 출력해야하는 게시글 내용 :
 ${boardVO.boardNo} ${boardVO.bType} ${boardVO.bWriter} ${boardVO.bRegdate} ${boardVO.bModdate}
 ${boardVO.bTitle} ${boardVO.bContent}
@@ -71,10 +77,6 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 
 <!-- 
 	<form id="insertCommBoard" action="${path}/comm" method="POST">
-	<input type="hidden" name="commId" id="commId" value="${loginUser.id}"/>
-	<input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
-  	<input type="hidden" name="num" id="num" value="${num}"/>
-  	<input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/>
  -->
 
 	<input type="hidden" name="commId" id="commId" value="${loginUser.id}"/>
@@ -89,7 +91,7 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 	<div class="row">
 		<div class="eight columns">
 			<p class="bread leftalign">
-				<b>클럽게시판</b>
+				<b>${clubDTO.cName} 게시판</b>
 			</p>
 		</div>
 		<div class="four columns">
@@ -138,15 +140,17 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<div class="social dribbble">
 			<a href="#"></a>
 		</div>
-		</div>
-		<p class="clear authortext">
+		<br/>
 		<span class="comments">
 			<c:if test="${boardVO.bRegdate == boardVO.bModdate}">작성 <fmt:formatDate pattern="yyyy-MM-dd" value="${boardVO.bRegdate}"/></c:if>
 		 	<c:if test="${boardVO.bRegdate != boardVO.bModdate}">작성 <fmt:formatDate pattern="yyyy-MM-dd" value="${boardVO.bRegdate}"/>
 		        (수정 <fmt:formatDate pattern="yyyy-MM-dd" value="${boardVO.bModdate}"/>)</c:if>
 		</span>
+		</div>
+		<p class="clear authortext">
 			<b><pre>${boardVO.bContent}</pre></b>
-		<br class="clear">
+			<br class="clear">
+		<p class="clear authortext">
 		<!-- 본인글이면 수정 또는 삭제가능 -->
 		<!-- <button type="button" onclick="location.href='${path}/board/?cNo=${boardVO.cNo}'">목록으로</button> -->
 	  <span class="comments">
@@ -163,6 +167,7 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<p>작성된 댓글이 없습니다</p>
 		</c:if>
 		<c:forEach var="comm" items="${commList}">
+		<br class="clear">
 			<hr>
 		<div class="gravatar">
 			<img src="http://www.wowthemes.net/demo/studiofrancesca/images/gravatar.png" alt="" width=40px;>
@@ -178,7 +183,6 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<span class="comments">
 		<c:if test="${loginUser.id == comm.commId}">
 		<button type="submit" class="readmore" onClick="location='${path}/comm/updateComm?boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">수정</button>
-	 		<%-- <input type="button" value="수정" onClick="location='${path}/comm/updateComm?boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'"> --%>
 		<button type="submit" class="readmore" onClick="location='${path}/comm/deleteComm?cNo=${boardVO.cNo}&boardNo=${boardVO.boardNo}&commNo=${comm.commNo}'">삭제</button>
 		</c:if>
 		</span>
@@ -193,11 +197,13 @@ ${comm.commNo} ${comm.commId} ${comm.commRegdate} ${comm.commModdate} ${comm.com
 		<input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
 	 	<input type="hidden" name="num" id="num" value="${num}"/>
 	 	<input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/>
-		<textarea class="six smoothborder" rows="7" placeholder="Comments *" name="comment" id="comment" required="required"></textarea>
+		<textarea class="six smoothborder" id="textarea" rows="7" placeholder="Comments *" name="comment" id="comment" required="required"></textarea>
   		<br class="clear">
   		<!-- <input type="button" name="boardList1" id="boardList1" value="목록으로"/> -->
+  		<div class="btnComm" id="btnComm">
 		<button type="submit" class="readmore" name="boardList1" id="boardList1">목록으로</button>
 		<button type="submit" class="readmore">등록</button>
+  		</div>
 		</form>	
 		</div>
 	
