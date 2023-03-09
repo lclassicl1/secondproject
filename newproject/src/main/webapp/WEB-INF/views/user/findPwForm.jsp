@@ -55,7 +55,7 @@ $(document).ready(function(){
 	              <form:input path="email" name="email" id="input1" placeholder="email"/><br/>
 				 <c:if test="${errors.email}"><span class="error"></span></c:if> 
 	            </div>
-				<c:if test="${errors.idOrPwNotMatch}"><span class="error">일치하는 회원이 없습니다.</span></c:if>
+				<c:if test="${errors.notMatch}"><span class="error">일치하는 회원이 없습니다.</span></c:if>
             </form:form>
           </div>
         </div>

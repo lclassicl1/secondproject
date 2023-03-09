@@ -44,13 +44,13 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getMemberByInfo(String id, String name, String email) {
 		
-		String sql = "select no, id, password, name, zipcode, address, detailaddress, pricynum, email, phonenum, gender, grade, regdate FROM user where id=? and name=? and email=?";
+		String sql = "select no, id, password, name, zipcode, address, detailaddress, pricynum, email, phonenum, gender, grade, regdate FROM user where id=?";
 		
 		// queryForObject(String sql, RowMapper<T> rowMapper, Object...args)
 		return template.queryForObject(
 										sql, 
 										new MemberRowMapper(), 
-										id,name,email
+										id
 									  ); 
 	}
 	

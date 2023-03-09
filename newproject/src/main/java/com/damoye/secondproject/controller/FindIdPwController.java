@@ -1,6 +1,7 @@
 package com.damoye.secondproject.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -14,8 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damoye.secondproject.InvalidEmailException;
 import com.damoye.secondproject.InvalidIdException;
@@ -84,6 +88,9 @@ public class FindIdPwController {
 		if(email==null || email.isEmpty()) {
 			errors.put("email", Boolean.TRUE);
 		}
+		if(!(id==user.getId())||!(name==user.getName())||!(email==user.getEmail())) {
+			errors.put("notMatch", Boolean.TRUE);
+		}
 		if(!errors.isEmpty()) {
 			return "user/findPwForm";
 		}
@@ -127,9 +134,10 @@ public class FindIdPwController {
 			errors.put("email", Boolean.TRUE);
 			return "user/findPwForm";
 		}catch(MemberNotFoundException e) {
-			errors.put("idOrPwNotMatch", Boolean.TRUE);
+			errors.put("notMatch", Boolean.TRUE);
 			return "user/findPwForm";
 		}
 		
 	}
+	
 }
