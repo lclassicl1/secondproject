@@ -125,7 +125,7 @@
 		  <input type="hidden" value="${list.boardNo}">
 	        
 	        <div class="c" style="display:table-cell">${list.bType}</div>
-	        <div class="c1" style="display:table-cell"> <a href="${path}/board/detail?cNo=${list.cNo}&num=${num}&boardNo=${list.boardNo}">${list.bTitle}</a></div>
+	        <div class="c1" style="display:table-cell"> <a href="${path}/board/detail?cNo=${list.cNo}&num=${num}&boardNo=${list.boardNo}"><b>${list.bTitle}</b></a></div>
 	        <div class="c" style="display:table-cell">${list.bWriter}</div>
 	        <div class="c" style="display:table-cell"><fmt:formatDate pattern="yyyy-MM-dd" value="${list.bRegdate}"/></div>
 	        <div class="c" style="display:table-cell">${list.commCnt}</div>
@@ -140,7 +140,7 @@
 		<ul class="pagination">
 		
 		<c:if test="${boardPage.prev}">
-			<li class="arrow unavailable"><a href="/board/list?cNo=${cNo}&num=${boardPage.startPageNum - 1}">prev</a></li>
+			<li class="arrow unavailable"><a href="/board/list?cNo=${cNo}&num=${boardPage.startPageNum - 1}">&laquo;</a></li>
 		</c:if>
 		
 		<c:forEach begin="${boardPage.startPageNum}" end="${boardPage.endPageNum}" var="num">
@@ -157,7 +157,7 @@
 		<c:if test="${boardPage.endPageNum < boardPage.pageNum}">
 	
 		<c:if test="${boardPage.next}">
-			<li class="arrow"><a href="/board/list?cNo=${cNo}&num=${boardPage.endPageNum + 1}">next</a></li>
+			<li class="arrow"><a href="/board/list?cNo=${cNo}&num=${boardPage.endPageNum + 1}">&raquo;</a></li>
 		</c:if>
 		</c:if>
 		</ul>
