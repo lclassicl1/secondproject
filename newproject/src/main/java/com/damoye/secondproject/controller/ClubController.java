@@ -98,8 +98,7 @@ public class ClubController {
 	
 	//클럽상세보기 
 	@GetMapping("detail")
-	public String getClubDetail(HttpServletRequest request, int categoryNo,int cNo, Model model, ClubMemberDTO clubMemberDTO) throws Exception {
-		HttpSession session=request.getSession();
+	public String getClubDetail(HttpSession session, int categoryNo,int cNo, Model model) throws Exception {
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("loginUser", user);
 		//카테고리명
@@ -235,9 +234,15 @@ public class ClubController {
 		
 		clubService.getSignClub(clubMemberDTO);	
 		
-		
 		if(cNo!=0) {
-			mv.setViewName("user/main");
+			ClubDTO club = clubService.getSelClubDetail(cNo);
+			int categoryNo = club.getCategoryNo();
+			
+			System.out.println(categoryNo);
+			
+			mv.addObject("cNo", cNo);
+			mv.addObject("categoryNo", categoryNo);
+			mv.setViewName("redirect:detail");
 		}else {
 			return null;
 		}
