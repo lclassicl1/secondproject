@@ -91,7 +91,7 @@ table{
 	<!-- 관리자만 글쓰기 작성 활성화 -->
 	<div id="btn">
 		<c:if test="${loginUser.grade == 999}">
-			<input type="button" value="글쓰기" id="noticeWrite" class="readmore""/>
+			<input type="button" value="글쓰기" id="noticeWrite" class="readmore"/>
 		</c:if>
 	</div>
 	<div id="tableCenter">
