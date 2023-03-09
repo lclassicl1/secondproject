@@ -16,22 +16,22 @@
 	  resize: none;
 	  }
  .w{
- width:80px;
- height:40px;
- font-weight:bold;
- }
+	 width:80px;
+	 height:40px;
+	 font-weight:bold;
+	 font-size:1.1em;
+	 }
  .t{
- margin:auto; 
- margin-top:30px; 
- margin-bottom:30px; 
- display: flex; 
- justify-content: 
- center; width:43%; 
- }
+	 margin:auto; 
+	 margin-top:30px; 
+	 margin-bottom:30px; 
+	 display: flex; 
+	 justify-content:center; 
+	 width:43%; 
+	 }
 </style>
 <meta charset="UTF-8">
 <script>
-
 $(document).ready(function(){
 	//클럽개설
 		$("#createDone").on("click",function(){
@@ -140,9 +140,9 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<th class="w"><b>클럽소개글</b></th>
+		<th class="w"><b>클럽 <br/>소개글</b></th>
 		<td>
-			<textarea class="texta" rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
+			<textarea rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
 		</td>
 	</tr>
 	<tr>
