@@ -32,7 +32,6 @@
 </style>
 <meta charset="UTF-8">
 <script>
-
 $(document).ready(function(){
 	//클럽개설
 		$("#createDone").on("click",function(){
