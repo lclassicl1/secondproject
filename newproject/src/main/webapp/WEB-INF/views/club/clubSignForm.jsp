@@ -22,13 +22,13 @@ text-align:center;
 
 <script>
 </script>
-<h3 class="a">가입을 축하드립니다!!</h3>
+<h3 class="a">클럽에 가입 하시겠습니까?</h3>
 <form id="signClub" method="post" action="${path}/club/sign">
 <p><input type="hidden" name="categoryNo" id="categoryNo" readonly="readonly" value="${categoryNo}"/>
 <p><input type="hidden" name="cNo" id="cNo" readonly="readonly" value="${clubMemberDTO.cNo}"/></p> <!-- 클럽번호 -->
 <p><input type="hidden" name="no" id="no" readonly="readonly" value="${loginUser.no}"/></p> <!-- 회원번호 -->
 <p><input type="hidden" name="signIn" id="signIn" readonly="readonly" value="${clubMemberDTO.signIn}"/></p> <!-- 회원번호 -->
-<p class="a"><input type="submit" class="readmore" value="가입한 클럽으로 이동"/></p>
+<p class="a"><input type="submit" class="readmore" value="클럽가입"/></p>
 </form>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>

@@ -15,23 +15,11 @@ $(document).ready(function(){
 	
 	//클럽가입
 	$("#btnSign").on("click",function(){
-		var c=confirm("클럽에 가입하시겠습니까?");
-		  if(c){
-				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";
-				}else{
-				return false;		 
-			}
-  	});		 
-	//클럽수정버튼 cNo
-	$("#btnUpdate").on("click",function(){
-		var c=confirm("클럽을 수정하시겠습니까?");
-		  if(c){
-			  	let cIntro = '${clubDTO.cIntro}';
-				location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro="+cIntro;
-				}else{
-		 		return false;		 
-		 	}
+		
+				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";	 
 	});
+	 
+
 	//클럽회원탈퇴
 	$("#btnDelMember").on("click",function(){
 		var c=confirm("클럽을 탈퇴하시겠습니까?");
@@ -83,7 +71,7 @@ $(document).ready(function(){
 	 margin-bottom:30px; 
 	 display: flex; 
 	 justify-content:center; 
-	 width:70%; 
+	 width:100%; 
 	 }
 </style>
 </head>
@@ -113,6 +101,7 @@ $(document).ready(function(){
 			<div class="dots blogdots">
 			</div>
 			<div id="tablecenter">
+			<form id="" action="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cNo}" method="get">
 				<table class="t">
 				<tr>
 					<th colspan="3" class="w">클럽명</th>
@@ -182,11 +171,12 @@ $(document).ready(function(){
 				</c:forEach>
 				</c:if>
 				</table>
+				</form>
 			</div>
 				<%-- 클럽장,관리자만 수정 가능 --%>
 				<c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
 						<div class="r">
-							<input type="button" name="btnUpdate" id="btnUpdate" class="readmore" value="클럽수정"/>
+							<button type="submit" class="readmore">클럽수정</button>
 						</div><br/>
 						<div class="r">
 							<input type="button" name="btnADel" id="btnADel" class="readmore" value="클럽삭제"/>
