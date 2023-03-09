@@ -128,15 +128,15 @@ public class ClubController {
 			break;
 		}
 
-		 boolean exist = true; //초기값 있다면 
+/*		 boolean exist = true; //초기값 있다면 
 		 for(ClubMemberDTO clubmbmer : signMemberList) {
 			 if(clubmbmer.getNo() == user.getNo()) {  // 클럽에 가입된 회원번호가 동일하다면 
 				 exist = true; //있다
 			 }
 			 	break; 
 			 }
-		 
 		model.addAttribute("exist", exist);
+ */	 
 		 
 		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
 		return "club/clubDetail";
@@ -199,7 +199,7 @@ public class ClubController {
 		
 		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보	
 		
-		boolean exist = true; //초기값 있다면
+/*		boolean exist = true; //초기값 있다면
 		for(ClubMemberDTO clubmbmer : signMemberList) {
 			if(clubmbmer.getNo() == user.getNo()) { // 클럽에 가입된 회원번호가 동일하다면
 				exist = true; //있다
@@ -207,7 +207,7 @@ public class ClubController {
 				break;
 		}
 		model.addAttribute("exist", exist);		
-
+*/
 		return "club/clubDetail";
 	}
 	//클럽 생성하기-폼요청
@@ -225,13 +225,11 @@ public class ClubController {
 	public ModelAndView getInClubFrm(HttpSession session , ClubDTO clubDTO, ModelAndView mv) throws Exception {		
 		logger.info(clubDTO.toString()); //확인용
 		int cNo=clubService.getCreClub(clubDTO);
-		
 		User user = (User)session.getAttribute("loginUser");
 		int userNo = user.getNo();
 		ClubMemberDTO clubMemberDTO = new ClubMemberDTO();
 		clubMemberDTO.setcNo(cNo);
 		clubMemberDTO.setNo(userNo);
-		
 		clubService.getSignClub(clubMemberDTO);	
 		
 		if(cNo!=0) {

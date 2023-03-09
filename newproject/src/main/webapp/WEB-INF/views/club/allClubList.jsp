@@ -9,6 +9,15 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/default.css">
+<script>
+	//클럽개설
+	$(function(){
+		$('#clubCreate').click(function(){
+			location.href='${path}/club/clubCre';
+		});
+	});
+
+</script>
 <title>클럽 리스트</title>
 <style>
 	#searchCName{
@@ -63,6 +72,9 @@
 <div class="hr">
 </div>
 <div class="row">
+<div style="text-align: right;">
+	<input class="readmore" type="button" name="clubCreate" id="clubCreate" value="클럽개설"/>
+</div>
 	<div>
 		<form id="searchFrm" method="get" action="${path}/club/allSearchCName?pageNo=1">
 				<input type="text" id="searchCName" name="searchCName" placeholder="Search..."/>
