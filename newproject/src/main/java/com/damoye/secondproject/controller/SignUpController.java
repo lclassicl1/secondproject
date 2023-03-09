@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -121,4 +122,18 @@ public class SignUpController {
     	
     	return flag;
     }
+    
+	//아이디 중복체크
+	@PostMapping("/checkPricynum")
+	@ResponseBody
+	public int Pricynumcheck(@RequestParam("pricynum") String pricynum) {
+		System.out.println("컨트롤러 접근");
+		int cnt = userService.pricynumCheck(pricynum);
+		System.out.println("cnt="+cnt);
+		return cnt;
+		
+	}
+	
+
+
 }

@@ -46,11 +46,11 @@ $(document).ready(function(){
 	</div>
 <div class="hr">
 </div>
-<div style="text-align:center; padding-top:3%;">
+<div style="text-align:center; padding-top:1%;">
 	
 <div>
-	<img src="${path}/resources/img/gravatar.png" width="295px;" height="295px;" class="radius">
-		<table style="margin-left:auto; margin-right:auto; width:295px">
+	<img src="${path}/resources/img/gravatar.png" width="170px;" height="170px;" class="radius">
+		<table style="margin-left:auto; margin-right:auto; margin-top:20px; width:295px">
 			<tr>
 				<td colspan="2" style="text-align:center"><h5>${loginUser.name}님</h5></td>
 			</tr>

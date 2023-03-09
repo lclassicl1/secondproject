@@ -79,20 +79,39 @@ $(document).ready(function(){
     
 });
 
+/*주민번호 중복 확인*/
+$(document).ready(function(){
+	$(".Email").click(function(){
+        var pricynum = $("#pricynum").val();
+        
+        $.ajax({
+            type:"POST",
+            url:"/checkPricynum",
+            data: {"pricynum" : pricynum},
+            success: function(cnt){ 
+                if(cnt == 0){ 
+                	 $("#result_pricynum").text("");
+             }else{ // 만약 실패할시
+            	 msg = "이미 가입된 회원입니다.";
+                     $("#result_pricynum").html(msg).css("color","red");
+                     $("#pricynum").val("").trigger("focus");
+             }
+         },
+            error : function(error){alert(error);}
+        });
+    });   
+});
 $(document).ready(function(){
 	$("#submit").click(function(){
 		
 		if($("#result_checkId").text()==""){
 			alert("아이디 중복검사를 해주세요.");
-			console.log($("#result_checkId").text());
 			return false;
 		}
 		else if($("#mail_check_input_box_warn").text()==""){
 			alert("이메일 인증을 완료해주세요.");
-			console.log($("#mail_check_input_box_warn").text());
 			return false;
 		}
-
 		$("#signUpFrm").submit();
 
 	});
@@ -114,7 +133,8 @@ $(document).ready(function(){
 	우편번호:<form:input path="zipcode" name="zipcode" required="required"/><button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
 	주소:<form:input path="address" name="address" required="required"/><br/>
 	상세주소:<form:input path="detailaddress" name="detailaddress"/><br/>
-	주민등록번호:<form:input path="pricynum" name="pricynum" required="required"/><br/>
+	주민등록번호:<form:input path="pricynum" name="pricynum" id="pricynum" class="pricynum" required="required"/><br/>
+	<span id="result_pricynum" style="font-size:12px;"></span><br/>
 	이메일:<form:input path="email" class="Email" name="email" required="required"/><button type="button" class="mail_button">본인인증</button><br/>
 	이메일 인증:<input type="text" id="mail-check-input" name="email_check" disabled="disabled" placeholder="이메일 입력과 본인인증을 해주세요" maxlength="6"/>
 	<span id="mail_check_input_box_warn"></span><br/>

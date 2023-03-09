@@ -80,7 +80,7 @@ $(document).ready(function(){
 	    	 <span class="comments">글 타입을 선택하세요</span>
 			<div class="select" id="select">
 			<select name="bType" id="bType" required="required">
-			<option value="모집">모집</option>
+			<option value="모임">모임</option>
 			<option value="자유" selected>자유</option>
 	    	</select>
 			</div>
