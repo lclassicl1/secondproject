@@ -45,6 +45,7 @@
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
+<main>
 	<%-- ${boardList}
 	${cNo} <br/>
 	${num} <br/>
@@ -120,7 +121,7 @@
 		
 	</c:if>
 	</div>
-	
+	</main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>
