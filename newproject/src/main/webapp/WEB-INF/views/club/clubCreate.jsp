@@ -142,7 +142,7 @@ $(document).ready(function(){
 	<tr>
 		<th class="w"><b>클럽소개글</b></th>
 		<td>
-			<textarea class="texta" rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
+			<textarea rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
 		</td>
 	</tr>
 	<tr>
