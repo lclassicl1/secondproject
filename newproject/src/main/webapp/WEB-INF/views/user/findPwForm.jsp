@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${path}/resources/css/default.css">
 <title>FIND PASSWORD</title>
 <style>
+	.error{font-size:5px;}
 	#input1{width:350px; height:40px; background:#EFEFEF; font-size:15px; border:1px solid white; border-radius:5px;}
 	#input1::placeholder{color:#969696}
 	#sub{
@@ -43,18 +44,18 @@ $(document).ready(function(){
           <div>
           	<form:form id="findPwFrm" action="findPw" modelAttribute="user" method="post">
 	            <div style="text-align:center; padding-top:10px; padding-bottom:10px;">
-	              <form:input path="id" id="input1" placeholder="ID" />
-					<span class="fieldError"><form:errors path="id"/></span>
+	              <form:input path="id" name="id" id="input1" placeholder="ID"/><br/>
+					<c:if test="${errors.id}"><span class="error"></span></c:if>
 	            </div>
 	            <div style="text-align:center; padding-bottom:10px;">
-	              <form:input path="name" id="input1" placeholder="name" />
-				<span class="fieldError"><form:errors path="name" /></span>
+	              <form:input path="name" name="name" id="input1" placeholder="name"/><br/>
+				 <c:if test="${errors.name}"><span class="error"></span></c:if>
 	            </div>
 	            <div style="text-align:center; padding-bottom:10px;">
-	              <form:input path="email" id="input1" placeholder="email" />
-				<span class="fieldError"><form:errors path="email" /></span>
+	              <form:input path="email" name="email" id="input1" placeholder="email"/><br/>
+				 <c:if test="${errors.email}"><span class="error"></span></c:if> 
 	            </div>
-
+				<c:if test="${errors.notMatch}"><span class="error">일치하는 회원이 없습니다.</span></c:if>
             </form:form>
           </div>
         </div>

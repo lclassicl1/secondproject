@@ -19,6 +19,9 @@ public interface UserDAO {
 	//회원 id활용
 	public User getMemberById(String id);
 	
+	//비밀번호 찾기 시 활용
+	public User getMemberByInfo(String id, String name, String email);
+	
 	//회원 아이디 찾기
 	public User findId(String name,String email, String phonenum);
 	
@@ -30,6 +33,9 @@ public interface UserDAO {
 	
 	//아이디 중복 확인
 	public Integer checkId(String id);
+	
+	//주민번호 중복 확인
+	public Integer pricynumCheck(String pricynum);
 	
 	// 회원목록조회
 	public List<User> getAllMemberList();

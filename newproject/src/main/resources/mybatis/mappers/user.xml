@@ -26,6 +26,12 @@
         ]]>
     </select>
     
+   	<select id="pricynumCheck" parameterType="String" resultType="Integer">
+       <![CDATA[
+       	select count(pricynum) from user where pricynum=#{pricynum}
+       ]]>
+    </select>
+    
 </mapper>
 
 

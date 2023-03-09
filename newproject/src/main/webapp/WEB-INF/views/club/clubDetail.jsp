@@ -63,6 +63,26 @@ $(document).ready(function(){
 		display: flex;
 	    justify-content: center;		
 	}
+	.c{
+	text-align:center;
+	}
+	.r{
+	text-align:right;
+	}
+	.w{
+	 width:80px;
+	 height:40px;
+	 font-weight:bold;
+	 font-size:1.1em;
+	 }
+	 .t{
+	 margin:auto; 
+	 margin-top:30px; 
+	 margin-bottom:30px; 
+	 display: flex; 
+	 justify-content:center; 
+	 width:70%; 
+	 }
 </style>
 </head>
 <body>
@@ -90,123 +110,98 @@ $(document).ready(function(){
 			<h4>${clubDTO.cName} <span class="comments"><fmt:formatDate value="${clubDTO.creDate}" type="date" pattern="yyyy.MM.dd"/></span></h4>
 			<div class="dots blogdots">
 			</div>
-			<p>
-				${clubDTO.cIntro}
-			</p>
-			<div id="tableCenter">
-				<table style="text-align:center; display: flex; justify-content: center; width: 100%;">
+			<div id="tablecenter">
+				<table border="1" class="t">
 				<tr>
-					<th>클럽명</th>
-					<td colspan="2">${clubDTO.cName}</td> <!-- 클럽명 -->
+					<th colspan="3" class="w">클럽명</th>
+					<td colspan="3" class="c">${clubDTO.cName}</td> <!-- 클럽명 -->
+					<th colspan="3" class="w">가입인원</th>
+					<td colspan="3" class="c">${sPeople}/${clubDTO.cPeople}(명)</td><!--가입자수/ 정원(명) -->
 				</tr>
 				<tr>
-					<th>활동지역</th>
-					<td colspan="2">${clubDTO.cLoc}</td><!-- 지역 -->
+					<th colspan="3" class="w">클럽장</th>
+					<td colspan="3" class="c">${clubDTO.masterId}</td><!-- 클럽장 -->		
+					<th colspan="3" class="w">개설일</th>
+					<td colspan="3" class="c"><fmt:formatDate value="${clubDTO.creDate}" type="date" pattern="yyyy.MM.dd"/></td><!-- 클럽개설일 -->
 				</tr>
 				<tr>
-					<th>클럽장</th>
-					<td colspan="2">${clubDTO.masterId}</td><!-- 클럽장 -->		
+					<th colspan="6" class="w">활동지역(구)</th>
+					<td colspan="6" class="c">${clubDTO.cLoc}</td><!-- 지역 -->
 				</tr>
 				<tr>
-					<th>개설일</th>
-					<td colspan="2"><fmt:formatDate value="${clubDTO.creDate}" type="date" pattern="yyyy.MM.dd"/></td><!-- 클럽개설일 -->
+					<th colspan="12" class="w" style="width:50%;"><클럽소개글></th>
 				</tr>
 				<tr>
-					<th>가입인원</th>
-					<td colspan="2">${sPeople}/${clubDTO.cPeople}(명)</td><!--가입자수/ 정원(명) -->
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<th colspan="3"> <클럽소개글> </th>
-				</tr>
-				<tr>
-					<td colspan="3"><u:pre value="${clubDTO.cIntro}"/></td><!-- 클럽소개글 -->
-				</tr>
-				<tr>
-					<th colspan="3"> <모임활동(모집)> </th>
+					<td colspan="12" class="c"><u:pre value="${clubDTO.cIntro}"/></td><!-- 클럽소개글 -->
 				</tr>
 				<c:if test="${empty boardVO}">
 				<tr>
-					<td colspan="3">개설된 모임활동이 없습니다</td>
+					<th colspan="12" class="w"><모임활동></th>
+				</tr>
+				<tr>
+					<td colspan="12" class="c">개설된 모임활동이 없습니다</td>
 				</tr>	
 				</c:if>
 				<c:if test="${!empty boardVO}">	
 				<c:forEach var="board" items="${boardVO}">
 				<tr>
-					<th colspan="2">제목</th>
-					<th colspan="1">작성자</th>
+					<th colspan="12" class="w"><모임활동></th>
 				</tr>
 				<tr>
-					<td colspan="2">${board.bTitle}</td><!-- 타이틀 -->
-					<td colspan="1">${board.bWriter}</td><!-- 작성자 -->
+					<th colspan="3" class="w">제목</th>
+					<td colspan="3" class="c">${board.bTitle}</td><!-- 타이틀 -->
+					<th colspan="3" class="w">주최자</th>
+					<td colspan="3" class="c">${board.bWriter}</td><!-- 작성자 -->
 				</tr>
 				<tr>
-					<th colspan="3">모집내용</th>
+					<th colspan="12" class="w">모집내용</th>
 				</tr>
 				<tr>
-					<td colspan="3"><u:pre value="${board.bContent}"/></td><!-- 모집내용 -->
+					<td colspan="12" class="c"><u:pre value="${board.bContent}"/></td><!-- 모집내용 -->
 				</tr>
 				</c:forEach>
 				</c:if>
 				<%--관리자모드 --%>
 				<c:if test="${(!empty loginUser) && (loginUser.grade == 999)}"> 
 				<tr>
-					<th colspan="3"> <가입자 리스트> </th>
+					<th colspan="12" class="w"><가입자 리스트></th>
 				</tr>
 				<tr>
-					<th>회원번호</th>
-					<th>회원아이디</th>
-					<th>클럽가입한날짜</th>
+					<th colspan="4" class="w">회원번호</th>
+					<th colspan="4" class="w">회원아이디</th>
+					<th colspan="4" class="w">클럽가입한날짜</th>
 				</tr>
 				<c:forEach var="sMember" items="${signMemberList}">
 				<tr>
-					<td>${sMember.no}</td><%-- 회원번호 --%>
-					<td>${sMember.id}</td><%-- 회원아이디 --%>
-					<td><fmt:formatDate value="${sMember.joinDate}" type="date" pattern="yyyy.MM.dd"/></td><%-- 클럽가입자날짜 --%>
+					<td colspan="4" class="c">${sMember.no}</td><%-- 회원번호 --%>
+					<td colspan="4" class="c">${sMember.id}</td><%-- 회원아이디 --%>
+					<td colspan="4" class="c"><fmt:formatDate value="${sMember.joinDate}" type="date" pattern="yyyy.MM.dd"/></td><%-- 클럽가입자날짜 --%>
 				</tr>
 				</c:forEach>
 				</c:if>
-
+				</table>
+			</div>
 				<%-- 클럽장,관리자만 수정 가능 --%>
-				<c:if test="${(loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
-				<tr>
-					<td colspan="3">
-						<div style="text-align:center;">
+				<c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
+						<div class="r">
 							<input type="button" name="btnUpdate" id="btnUpdate" class="readmore" value="클럽수정"/>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<div style="text-align:right;">
+						</div><br/>
+						<div class="r">
 							<input type="button" name="btnADel" id="btnADel" class="readmore" value="클럽삭제"/>
 						</div>
-					</td>
-				</tr>
 		 		</c:if>
 		 		<!-- 클럽에 가입하지않은 회원 -->
-				<c:if test="${gMember && (currentMember.signIn != 'Y') || exist==false}">
-				<tr>
-					<td colspan="3">			
-						<div style="text-align:center;">
+				<c:if test="${gMember && (currentMember.signIn != 'Y')}">
+						<div class="r">
 							<input type="button" name="btnSign" id="btnSign" class="readmore" value="클럽가입"/>
 						</div>
-					</td>
-				</tr>
 				</c:if>
 				<%-- 클럽에 가입한 일반회원만 보이게 처리 필요 --%>
 				<c:if test="${gMember && (currentMember.signIn == 'Y') && (loginUser.no == currentMember.no)}">
-				<tr>
-					<td colspan="3">
-						<div style="text-align:center;">
+						<div class="r">
 							<input type="button" name="btnDelMember" id="btnDelMember" class="readmore" value="클럽탈퇴(회원)"/>
 						</div>
-					</td>
-				</tr>
 				</c:if>
-				</table>
-			</div>
 		</div>
 		<!-- SIDEBAR -->
 		<div class="four columns" style="margin-top: 15px;">
@@ -215,11 +210,14 @@ $(document).ready(function(){
 			<a href="${path}/board/list?cNo=${clubDTO.cNo}&num=1"><h6 class="sidebartitle">CLUB BOARD</h6></a>
 			<br class="clear"/>
 			<a href="#" target="_blank" onclick="openPop()"><h6 class="sidebartitle">CLUB CHAT</h6></a>
+
 		</div>
+
 	</div>
+
+</div>
 </div>
 <div class="hr">
-</div>
 
 </main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>

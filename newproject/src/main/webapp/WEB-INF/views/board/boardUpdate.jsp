@@ -11,92 +11,100 @@
 $(document).ready(function(){
 	//목록으로
 	$("#btnList").on("click",function(){
-		location.href="${path}/board/list?cNo=${boardVO.cNo}&num=${num}";
+		location.href="${path}/board/list?cNo=${boardVO.cNo}&num=1";
+	});
+	//수정하기
+	$("#btnUpdate").on("click",function(){
+		location.href="${path}/board/boardUpdate";
 	});
 	
-
 });
 
 </script>
-<title>클럽게시판 수정하기</title>
+<title>클럽게시판 글수정</title>
 <style>
-body {
- background-color: transparent !important;
-}
-  .container{
- 	display: grid;
-  	border: 1px solid;
-  	text-align: center;
-  	margin:0 auto;
-  	min-width:100px;
-  }
-    .divTableBody, .c{
- 	display: inline-block;
-  	border: 1px solid;
-  	text-align: center;
-  	margin:0 auto;
-  	min-width:100px;
-  }
-  .c1{
-  	display: inline-block;
-  	border: 1px solid;
-  	table-layout: fixed;
-  	text-align: left;
-  	min-width:500px;
-  }
-
+	.twelve.columns.noleftmargin {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  height: 100%;
+	}
+	#boardWrite {
+		width:643.33px;
+	}
+	#select {
+		width:100px;
+	}
+	
+	#btnComm {
+		text-align:center;
+	}
 
 </style>
 </head>
 <body>
 <header><jsp:include page="/resources/module/header.jsp"/></header>
-<form id=boardUpdate action="${path}/board/boardUpdate" method="POST">
-	<div><h1>클럽게시판 수정하기</h1></div>
-	<%-- 게시글정보: ${boardList} --%>
-	${boardVO}
-	${boardVO.cNo}
-	${num}
-	${boardVO.boardNo}
-	${boardVO.bType}
-	${boardVO.bTitle}
-	${boardVO.bContent}
-
-  <div class="container" style="display:table; width:100%;">
-  <%-- <input type="hidden" name="bWriter" id="bWriter" value="${sessionScope.userId}"/> 
-  --%>
-  <input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
-  <input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/>
-	<div class="divTableBody">
-	  <div style="display:table-row">
-	    <div class="c" style="display:table-cell">타입</div>
-	    <div class="c1" style="display:table-cell">
-	  	<select name="bType" id="bType" required="required" value="${boardVO.bType}">
-		 	<option value="모집">모집</option>
-			<option value="자유">자유</option>
-		</select>
-	  </div>
-</div>
-	  <div style="display:table-row">
-	    <div class="c" style="display:table-cell">제목</div>
-        <div class="c1" style="display:table-cell">
-        <input type="text" name="bTitle" id="bTitle" value="${boardVO.bTitle}" required="required"/>
-        </div>
-	  </div>
-	  <div style="display:table-row">
-	    <div class="c" style="display:table-cell">내용</div>
-        <div class="c1" style="display:table-cell; height:400px;">
-        <textarea name="bContent" id="bContent" required="required">${boardVO.bContent}</textarea>
-        </div>
-	  </div>
+<main>
+<!-- SUBHEADER
+================================================== -->
+<div id="subheader">
+	<div class="row">
+		<div class="eight columns">
+			<p class="bread leftalign">
+				<b>게시글 수정</b>
+			</p>
+		</div>
+		<div class="four columns">
+			<div class="row collapse">
+				<div class="ten mobile-three columns">
+					<!-- <input type="text" class="nomargin" placeholder="Search..."> -->
+				</div>
+				<div class="two mobile-one columns">
+					<!-- <a href="#" class="postfix button expand">Go</a> -->
+				</div>
+			</div>
+		</div>
 	</div>
-	  <div style="display:table-row">
-	  	<input type="button" name="btnList" id="btnList" value="목록으로"/>
-	  	<input type="submit" name="btnUpdate" id="btnUpdate" value="수정하기"/>
-	  </div>	 
-	  
+</div>
+<div class="hr">
+</div>
+<!-- CONTENT 
+================================================== -->
+<div class="row">
+	<div class="twelve columns noleftmargin">
+		<!-- MAIN CONTENT -->
+<%-- 	${boardVO} --%>
+<form id=boardUpdate action="${path}/board/boardUpdate" method="POST">
+	  <input type="hidden" name="cNo" id="cNo" value="${boardVO.cNo}"/>
+	  <input type="hidden" name="boardNo" id="boardNo" value="${boardVO.boardNo}"/>
+	<div class="eight columns noleftmargin" id="boardWrite">
+<h5>TITLE</h5>
+		<div class="panel">
+	    	 <span class="comments">글 타입을 선택하세요</span>
+			<div class="select" id="select">
+			<select name="bType" id="bType" required="required" value="${boardVO.bType}">
+				<option value="모집">모집</option>
+				<option value="자유">자유</option>
+	    	</select>
+		</div>
+		<input type="text" name="bTitle" id="bTitle" required="required" value="${boardVO.bTitle}">
+	</div>
+	<h5>CONTENTS</h5>
+	<div class="panel">
+	
+		<pre><textarea rows="30" cols="50" name="bContent" id="bContent" required="required">${boardVO.bContent}</textarea></pre>
+	
+	</div>
+	<br class="clear">
+	<div class="btnComm" id="btnComm">
+		<button type="submit" class="readmore" name="btnList" id="btnList">목록으로</button>
+	  	<button type="submit" class="readmore" name="btnUpdate" id="btnUpdate">수정하기</button>
+	</div>	 
+	  </form>
+	</div>
   </div>
-</form>
-
+</div>
+</main>
 <footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>
