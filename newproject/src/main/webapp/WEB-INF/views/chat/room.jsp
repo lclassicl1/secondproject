@@ -60,6 +60,7 @@
 			function loadMessage(){
 				var roomNo = ${param.roomNo};
 				var loginId ='${userId}';
+
 				$.ajax({
 		 			type: "POST",
 		 			url: "./checkMessage",

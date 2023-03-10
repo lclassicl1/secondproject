@@ -69,7 +69,7 @@ $(document).ready(function(){
 <div class="hr">
 </div>
 <!-- CONTENT 
-================================================== -->
+================================================= -->
 <div class="row">
 	<div class="twelve columns noleftmargin">
 		<!-- MAIN CONTENT -->
@@ -83,7 +83,7 @@ $(document).ready(function(){
 	    	 <span class="comments">글 타입을 선택하세요</span>
 			<div class="select" id="select">
 			<select name="bType" id="bType" required="required" value="${boardVO.bType}">
-				<option value="모집">모집</option>
+				<option value="모임">모임</option>
 				<option value="자유">자유</option>
 	    	</select>
 		</div>
