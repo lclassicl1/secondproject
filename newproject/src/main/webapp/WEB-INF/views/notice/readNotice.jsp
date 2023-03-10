@@ -84,17 +84,17 @@ table{
 	</div>
 	<div class="hr">
 	</div>
-		<div class="btn">
+		<div style="width:60%; margin-left:auto; margin-right:auto; text-align:right;">
 		<c:if test="${loginUser.grade == 999}">
 
-		<div style="width:60%; margin-left:auto; margin-right:auto; text-align:right;">
+		
 			<input type="button" name="" id="updateNotice" value="수정" class="readmore"/>
 			<input type="button" name="" id="deleteNotice" value="삭제" class="readmore"/>
 
 		</c:if>
 			<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록" class="readmore"/>
 		</div>
-		</div>
+
 	<div id="tableCenter">
 		<table border="1">
 			<tr>

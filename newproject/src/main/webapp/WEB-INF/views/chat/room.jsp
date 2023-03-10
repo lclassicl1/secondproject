@@ -59,7 +59,8 @@
 			//메시지 불러오기 
 			function loadMessage(){
 				var roomNo = ${param.roomNo};
-				var loginId = ${userId}
+				var loginId ='${userId}';
+
 				$.ajax({
 		 			type: "POST",
 		 			url: "./checkMessage",

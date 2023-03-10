@@ -13,6 +13,22 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/default.css">
 <title>사진 등록</title>
+<style>
+
+input[type=file]::file-selector-button {
+  width: 73.3px;
+  height: 30px;
+  color:white;
+  background: #286D4B;
+  border: 0px solid white;
+  cursor: pointer;
+  &:mouseover {
+    background: rgb(77,77,77);
+    color: #fff;
+  }
+
+}
+</style>
 <script>
 let count=1; //기존의 것
 
@@ -35,7 +51,6 @@ $(document).ready(function(){
   	count--; 
    
   });
-  
   
   
   //<input type="button" value="파일추가" id="btnAddFile"/>
@@ -182,9 +197,9 @@ table{
          <tr>
 	     <th>파일추가/삭제</th>
 	     <td>
-	        <input type="button" value="파일추가" id="btnAddFile2" onclick="fn_addFile()"/>
+	        <input type="button" class="readmore" value="파일추가" id="btnAddFile2" onclick="fn_addFile()"/>
 	      
-	    	<input type="button" value="파일삭제" id="btnDelFile2"/>
+	    	<input type="button" class="readmore" value="파일삭제" id="btnDelFile2"/>
 	     </td>
 	    </tr>
 	    <tr>
@@ -195,8 +210,8 @@ table{
 	    </tr>
  		<tr id="i2">
  		 <td colspan="2" style="text-align:center;">
- 		 <input type="button" value="사진업로드"  onclick="fn_add_new_goods(this.form)"/>
- 		 <input type="reset" id="btnReset" value="취소"/></td>	
+ 		 <input type="button" value="사진업로드" class="readmore" onclick="fn_add_new_goods(this.form)"/>
+ 		 <input type="reset" id="btnReset" class="readmore" value="취소"/></td>	
  		 <tr>
  		</table>
  	  </tbody>
