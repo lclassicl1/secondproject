@@ -82,6 +82,11 @@ table{
 	<div class="hr">
 	</div>
 	<form action="${path}/notice/insert" method="post" id="form">
+			<div style="width:60%; margin-left:auto; margin-right:auto; text-align:right;">
+					<input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
+					<input type="reset" value="취소" class="readmore"/>&nbsp;
+					<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
+			</div>
 		<div id="tableCenter">
 		<table border="1">
 			<tr>
@@ -97,12 +102,6 @@ table{
 					<!-- <div id="content" name="content"></div> -->
 				</td>
 			</tr>
-			<!-- <tr>
-				<td colspan="2"><input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
-					<input type="reset" value="취소" class="readmore"/>&nbsp;
-					<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
-				</td>
-			</tr> -->
 		</table>
 		</div>
 		<div id="btn" style="display: flex;justify-content: right;width: 80%;">
