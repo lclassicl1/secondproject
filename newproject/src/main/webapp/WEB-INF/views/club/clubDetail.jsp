@@ -101,7 +101,6 @@ $(document).ready(function(){
 			<div class="dots blogdots">
 			</div>
 			<div id="tablecenter">
-			<form id="" action="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cNo}" method="get">
 				<table class="t">
 				<tr>
 					<th colspan="3" class="w">클럽명</th>
@@ -139,7 +138,7 @@ $(document).ready(function(){
 					<th colspan="12" class="w"><모임활동></th>
 				</tr>
 				<tr>
-					<th colspan="3" class="w">제목</th>
+					<th colspan="3" class="w">모임명</th>
 					<td colspan="3" class="c">${board.bTitle}</td><!-- 타이틀 -->
 					<th colspan="3" class="w">주최자</th>
 					<td colspan="3" class="c">${board.bWriter}</td><!-- 작성자 -->
@@ -171,13 +170,19 @@ $(document).ready(function(){
 				</c:forEach>
 				</c:if>
 				</table>
-				</form>
-			</div>
 				<%-- 클럽장,관리자만 수정 가능 --%>
 				<c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
 						<div class="r">
-							<button type="submit" class="readmore">클럽수정</button>
-						</div><br/>
+						<form id="updateFrm" action="${path}/club/clubUp" method="get">
+						<input type="hidden" name="cNo" id="cNo" value="${clubDTO.cNo}"/>
+						<input type="hidden" name="cName" id="cName" value="${clubDTO.cName}"/>
+						<input type="hidden" name="cIntro" id="cIntro" value="${clubDTO.cIntro}"/>
+						<input type="hidden" name="categoryNo" id="categoryNo" value="${clubDTO.categoryNo}"/>
+						<input type="hidden" name="cLoc" id="cLoc" value="${clubDTO.cLoc}"/>
+						<input type="hidden" name="cPeople" id="cPeople" value="${clubDTO.cPeople}"/>
+						<input type="submit" class="readmore" value="클럽수정"/>
+						</form>
+						</div>
 						<div class="r">
 							<input type="button" name="btnADel" id="btnADel" class="readmore" value="클럽삭제"/>
 						</div>
@@ -194,6 +199,7 @@ $(document).ready(function(){
 							<input type="button" name="btnDelMember" id="btnDelMember" class="readmore" value="클럽탈퇴(회원)"/>
 						</div>
 				</c:if>
+			</div>
 		</div>
 		<!-- SIDEBAR -->
 		<div class="four columns" style="margin-top: 15px;">
