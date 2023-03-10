@@ -1,9 +1,5 @@
 package com.damoye.secondproject.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -158,7 +154,6 @@ public class ClubController {
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("loginUser", user);
-		
 		ClubDTO club = new ClubDTO();
 		club.setcNo(cNo);
 		model.addAttribute("cNo", cNo);
