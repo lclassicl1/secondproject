@@ -106,18 +106,19 @@ public class BoardController {
 	//클럽게시판 글 상세보기+댓글보기
 	//요청주소 ~컨패/board/detail?cNo=&boardNo=
 	@RequestMapping(value="/board/detail", method=RequestMethod.GET)
-	public String boardDetail(Model model,@RequestParam int cNo, @RequestParam(name="num") int num,@RequestParam(name="boardNo") int boardNo) throws Exception {
+	public String boardDetail(Model model,@RequestParam int cNo, @RequestParam(name="num") int num,
+			@RequestParam(name="boardNo") int boardNo) throws Exception {
+		
 		BoardVO boardVO = boardServiceImpl.getBoardDetail(boardNo);
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("num", num);
 		
 		ClubDTO clubDTO = boardServiceImpl.getClubDTOByNo(cNo);
 		model.addAttribute("clubDTO", clubDTO);
+		
 		//댓글조회
 		List<CommBoardVO> commList = commboardServiceImpl.getcommList(boardNo);
 		model.addAttribute("commList", commList);
-		
-
 
 		return "/board/boardDetail";
 		

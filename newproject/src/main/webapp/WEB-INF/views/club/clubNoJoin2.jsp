@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/default.css">
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" href="${path}/resources/css/style.css">
+<link rel="stylesheet" href="${path}/resources/css/skins/green.css">
+<link rel="stylesheet" href="${path}/resources/css/responsive.css">
 <meta charset="UTF-8">
 <script>
 	$(function(){
@@ -39,33 +43,7 @@
 </style>
 </head>
 <body>
-<header><jsp:include page="/resources/module/header.jsp"/></header>
 <main>
- <!-- SUBHEADER
-================================================== -->
-<div id="subheader">
-	<div class="row">
-		<div class="eight columns">
-			<p class="bread leftalign">
-				<b>${clubDTO.cName} 게시판</b>  
-			</p>
-		</div>
-		<div class="four columns">
-			<div class="row collapse">
-				<div class="ten mobile-three columns">
-					<!-- <input type="text" class="nomargin" placeholder="Search..."> -->
-				</div>
-				<div class="two mobile-one columns">
-					<!-- <a href="#" class="postfix button expand">Go</a> -->
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="hr">
-</div>
-<!-- CONTENT 
-================================================== -->
 <div class="row">
 	<div class="twelve columns noleftmargin">
 	     <!-- MAIN CONTENT -->
@@ -85,6 +63,5 @@
   	</div>
  </div>
  </main>
-<footer><jsp:include page="/resources/module/footer.jsp"/></footer>
 </body>
 </html>

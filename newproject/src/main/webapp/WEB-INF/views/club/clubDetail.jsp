@@ -15,11 +15,16 @@ $(document).ready(function(){
 	
 	//클럽가입
 	$("#btnSign").on("click",function(){
-		
-				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";	 
+	
+		var c=confirm("클럽에 가입하시겠습니까?");
+		  if(c){
+				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";
+				}else{
+				return false;		 
+			}
+  	});		 
 	});
 	 
-
 	//클럽회원탈퇴
 	$("#btnDelMember").on("click",function(){
 		var c=confirm("클럽을 탈퇴하시겠습니까?");

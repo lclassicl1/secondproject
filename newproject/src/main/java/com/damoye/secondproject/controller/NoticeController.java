@@ -36,20 +36,20 @@ public class NoticeController {
 	 * @Autowired NoticePaging noticePaging;
 	 */
 	
-	//공지사항 전체글 리스트
+	//공지사항 전체글 리스트 / 페이징처리
 	@RequestMapping(value="notice", method=RequestMethod.GET)
 	public String getNoticeList(Model model, HttpServletRequest req, Criteria cri) throws UnsupportedEncodingException {
 		req.setCharacterEncoding("UTF-8");
-		//세션
-//		HttpSession session = req.getSession();
-//		String id = (String) session.getAttribute("id");
-//		System.out.println("id값:"+id);
 		
+		//페이징 처리를 위한 limit 쿼리문의 실행 메소드
 		List<NoticeDTO> noticeList = noticeServiceImpl.getNoticeList(cri);
+		
+		//전체 게시글의 개수를 구하기
 		int total = noticeServiceImpl.selectAllCount();
 		
+		//limit 쿼리문을 수행하고 나면 해당 total값과 현재페이지와 한페이지에 보여줄 필드를 보유하고있는 Criteria 클래스의 값을 
+		//파라미터값으로 제공하고 생성하면 해당값을 기준으로 한 생성자를 호출하게된다
 		noticePaging = new NoticePaging(cri, total);
-		System.out.println(noticePaging+"개"+total);
 		model.addAttribute("paging",noticePaging);
 		model.addAttribute("text/html; charset=UTF-8");
 		model.addAttribute("noticeList",noticeList);

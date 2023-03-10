@@ -108,7 +108,6 @@ $(document).ready(function(){
 			<option value=1>공부</option>
 			<option value=2>요리</option>
 			<option value=3>운동</option>
-			<option value=4>전체</option>
 		</select>		
 		</td>
 	</tr>
