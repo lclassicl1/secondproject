@@ -59,6 +59,7 @@
 			//메시지 불러오기 
 			function loadMessage(){
 				var roomNo = ${param.roomNo};
+				var loginId ='${userId}';
 				$.ajax({
 		 			type: "POST",
 		 			url: "./checkMessage",
@@ -75,7 +76,7 @@
 		 					
 		 					var writerData = data.message[i].writerId;
 		 					
-		 					if(${userId} == writerData){
+		 					if(loginId == writerData){
 		 						drawMyMessage(data.message[i]);
 		 					}else{
 			 					drawMessage(data.message[i]);

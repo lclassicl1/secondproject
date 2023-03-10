@@ -42,13 +42,28 @@ goodsMap.put("imageList",imageList); --%>
 ================================================== -->
 <div class="row">
 	<!-- PROJECT DESCRIPTION-->
-	<div class="six columns">
+	<br>
+	<div class="six columns" >
 		<div class="sectiontitle">
+	
 		<h4>제목:${goodsVO.goods_title}</h4>
 		</div>
 		<div><h6>작성자:${goodsVO.id}</h6></div>
 		<h6>등록일:<fmt:formatDate value="${goodsVO.credate}" pattern="yyyy-MM-dd"/></h6><br/>
-		<textarea readonly  rows="13" cols="15">${goodsVO.goods_content}</textarea>
+		
+		<style>
+    .box {
+        width: 450px;
+        height: 250px;
+    }
+</style>
+
+<div class="box" style="border:1px solid;">
+    <p>${goodsVO.goods_content}</p>
+</div>
+			
+	
+		
 		
 	</div>
 	
@@ -65,11 +80,12 @@ goodsMap.put("imageList",imageList); --%>
 		</div>
 	</div>
 	<!-- end sliderr-->
+	
 </div>
 
 <div class="hr">
 </div>
-			
+	
 </main>
 <footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
 </body>
