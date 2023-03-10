@@ -115,6 +115,7 @@
 	 	select *
 	 	from board
 	 	where cNo=#{cNo}
+	 	and bIsShow='Y'
 	 	and bType='모임'
 	 	order by boardNo desc
 	 	limit 0, 2	 	
