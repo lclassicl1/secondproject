@@ -15,10 +15,9 @@ $(document).ready(function(){
 	
 	//클럽가입
 	$("#btnSign").on("click",function(){
-		
 				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";	 
-	});
-	 
+
+  	});		 
 
 	//클럽회원탈퇴
 	$("#btnDelMember").on("click",function(){
@@ -102,6 +101,7 @@ $(document).ready(function(){
 			</div>
 			<div id="tablecenter">
 				<table class="t">
+				<tbody style="margin:30px;">
 				<tr>
 					<th colspan="3" class="w">클럽명</th>
 					<td colspan="3" class="c">${clubDTO.cName}</td> <!-- 클럽명 -->
@@ -169,6 +169,7 @@ $(document).ready(function(){
 				</tr>
 				</c:forEach>
 				</c:if>
+				</tbody>
 				</table>
 				<%-- 클럽장,관리자만 수정 가능 --%>
 				<c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
