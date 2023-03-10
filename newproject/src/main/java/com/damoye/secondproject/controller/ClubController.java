@@ -154,7 +154,6 @@ public class ClubController {
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute("loginUser");
 		model.addAttribute("loginUser", user);
-		
 		ClubDTO club = new ClubDTO();
 		club.setcNo(cNo);
 		model.addAttribute("cNo", cNo);
