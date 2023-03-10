@@ -52,12 +52,7 @@ table{
 }
 
 #btn {
-  /* position: absolute;
-  top: 24.5%;
-  left: 77.8%;
-  transform: translateX(-50%); */
-  /* text-align: right;
-  margin-right: 70px; */
+
 }
 </style>
 </head>
@@ -93,7 +88,9 @@ table{
 	<!-- 관리자만 글쓰기 작성 활성화 -->
 	<div class="row" style="display: flex;justify-content: right;width: 60%; margin-bottom: 6px;">
 		<c:if test="${loginUser.grade == 999}">
-			<input type="button" value="글쓰기" id="noticeWrite" class="readmore"/>
+				<div style="width:60%; margin-left:auto; margin-right:auto; text-align:right;">
+					<input type="button" value="글쓰기" id="noticeWrite" class="readmore"/>
+				</div>
 		</c:if>
 	</div>
 	<div id="tableCenter">
