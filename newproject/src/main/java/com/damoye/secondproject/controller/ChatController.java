@@ -33,7 +33,7 @@ public class ChatController {
 	
 	@RequestMapping("/clubNoJoin")
 	public String clubNoJoin() {
-		return "club/clubNoJoin";
+		return "club/clubNoJoin2";
 	}
 	@RequestMapping("/chat/room")
 	public String showRoom(int roomNo,HttpSession session, Model model) {

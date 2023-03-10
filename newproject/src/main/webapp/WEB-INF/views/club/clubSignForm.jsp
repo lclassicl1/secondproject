@@ -23,7 +23,7 @@ text-align:center;
 
 <script>
 </script>
-<h3 class="a">가입하시겠습니까?</h3>
+<h3 class="a">클럽에 가입 하시겠습니까?</h3>
 <form id="signClub" method="post" action="${path}/club/sign">
 <p><input type="hidden" name="categoryNo" id="categoryNo" readonly="readonly" value="${categoryNo}"/>
 <p><input type="hidden" name="cNo" id="cNo" readonly="readonly" value="${clubMemberDTO.cNo}"/></p> <!-- 클럽번호 -->
