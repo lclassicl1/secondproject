@@ -54,8 +54,8 @@ table{
   top: 24.5%;
   left: 77.8%;
   transform: translateX(-50%); */
-  text-align: right;
-  margin-right: 285px;
+  /* text-align: right;
+  margin-right: 285px; */
 }
 </style>
 </head>
@@ -82,11 +82,6 @@ table{
 	<div class="hr">
 	</div>
 	<form action="${path}/notice/insert" method="post" id="form">
-		<div id="btn">
-		<input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
-						<input type="reset" value="취소" class="readmore"/>&nbsp;
-						<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
-		</div>				
 		<div id="tableCenter">
 		<table border="1">
 			<tr>
@@ -110,6 +105,11 @@ table{
 			</tr> -->
 		</table>
 		</div>
+		<div id="btn" style="display: flex;justify-content: right;width: 80%;">
+		<input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
+						<input type="reset" value="취소" class="readmore"/>&nbsp;
+						<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
+		</div>				
 	</form>
 </main>	
 <footer><jsp:include page="/resources/module/footer.jsp"></jsp:include></footer>
