@@ -71,6 +71,7 @@ $(document).ready(function(){
 	text-align:right;
 	}
 	.w{
+	 borderBottom:1px;
 	 width:80px;
 	 height:40px;
 	 font-weight:bold;
@@ -112,7 +113,7 @@ $(document).ready(function(){
 			<div class="dots blogdots">
 			</div>
 			<div id="tablecenter">
-				<table border="1" class="t">
+				<table class="t">
 				<tr>
 					<th colspan="3" class="w">클럽명</th>
 					<td colspan="3" class="c">${clubDTO.cName}</td> <!-- 클럽명 -->
@@ -170,7 +171,7 @@ $(document).ready(function(){
 				<tr>
 					<th colspan="4" class="w">회원번호</th>
 					<th colspan="4" class="w">회원아이디</th>
-					<th colspan="4" class="w">클럽가입한날짜</th>
+					<th colspan="4" class="w">가입일</th>
 				</tr>
 				<c:forEach var="sMember" items="${signMemberList}">
 				<tr>
