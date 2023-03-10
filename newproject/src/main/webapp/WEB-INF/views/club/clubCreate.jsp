@@ -138,9 +138,9 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<th class="w"><b>클럽 <br/>소개글</b></th>
+		<th style="font-size:1.1em;"><b>클럽<br/>소개글</b></th>
 		<td>
-			<textarea rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
+			<textarea class="texta" rows="20" cols="70" name="cIntro" id="cIntro" placeholder="클럽을 소개해주세요!"></textarea>
 		</td>
 	</tr>
 	<tr>

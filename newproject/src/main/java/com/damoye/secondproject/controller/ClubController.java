@@ -1,5 +1,9 @@
 package com.damoye.secondproject.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +29,7 @@ import com.damoye.secondproject.model.User;
 import com.damoye.secondproject.service.ClubService;
 
 @Controller
-@RequestMapping("club/")
+@RequestMapping("/club/")
 public class ClubController {
 	private static final Logger logger = LoggerFactory.getLogger(ClubController.class);
 
@@ -33,7 +37,7 @@ public class ClubController {
 	private ClubService clubService;
 
 	//전체 카테고리의 모임 출력 
-	@GetMapping("/allClubList")
+	@GetMapping("allClubList")
 	public String getAllClub(Model model,HttpServletRequest req) throws Exception {
 		String pageNoVal = req.getParameter("pageNo");
 		int pageNo = 1;
@@ -112,8 +116,8 @@ public class ClubController {
 		int clubSign=clubService.getClubCount(cNo);
 		model.addAttribute("sPeople", clubSign);		
 		//클럽 모임글 selBoardDetail
-		List<BoardVO> board=clubService.getSelBDetail(cNo);
-		model.addAttribute("boardVO", board);
+		List<BoardVO> boardList=clubService.getSelBDetail(cNo);
+		model.addAttribute("boardVO", boardList);
 		//클럽가입한 회원 정보 리스트
 		ClubMemberDTO currentMember = null;
 		List<ClubMemberDTO> signMemberList=clubService.getSignMember(cNo);
@@ -128,16 +132,6 @@ public class ClubController {
 			break;
 		}
 
-/*		 boolean exist = true; //초기값 있다면 
-		 for(ClubMemberDTO clubmbmer : signMemberList) {
-			 if(clubmbmer.getNo() == user.getNo()) {  // 클럽에 가입된 회원번호가 동일하다면 
-				 exist = true; //있다
-			 }
-			 	break; 
-			 }
-		model.addAttribute("exist", exist);
- */	 
-		 
 		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보
 		return "club/clubDetail";
 		
@@ -198,16 +192,7 @@ public class ClubController {
 		}
 		
 		model.addAttribute("currentMember", currentMember); //클럽에 가입한 회원 상세정보	
-		
-/*		boolean exist = true; //초기값 있다면
-		for(ClubMemberDTO clubmbmer : signMemberList) {
-			if(clubmbmer.getNo() == user.getNo()) { // 클럽에 가입된 회원번호가 동일하다면
-				exist = true; //있다
-			}
-				break;
-		}
-		model.addAttribute("exist", exist);		
-*/
+
 		return "club/clubDetail";
 	}
 	//클럽 생성하기-폼요청
@@ -300,7 +285,7 @@ public class ClubController {
 		return mv;
 	}
 	//----------------------------------------------------------------------------------------
-	//클럽회원삭제(탈퇴)
+	//클럽회원삭제(회원탈퇴)
 	 @GetMapping("clubMemberDel") 
 	 public ModelAndView delUp(HttpServletRequest request,ClubMemberDTO clubMemberDTO, ModelAndView mv) throws Exception {	
 		int cMemberNo = Integer.parseInt(request.getParameter("cMemberNo"));
