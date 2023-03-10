@@ -12,26 +12,11 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 $(document).ready(function(){	
-	
 	//클럽가입
 	$("#btnSign").on("click",function(){
-		var c=confirm("클럽에 가입하시겠습니까?");
-		  if(c){
-				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";
-				}else{
-				return false;		 
-			}
-  	});		 
-	//클럽수정버튼 cNo
-	$("#btnUpdate").on("click",function(){
-		var c=confirm("클럽을 수정하시겠습니까?");
-		  if(c){
-			  	let cIntro = '${clubDTO.cIntro}';
-				location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro="+cIntro;
-				}else{
-		 		return false;		 
-		 	}
+				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";	 
 	});
+
 	//클럽회원탈퇴
 	$("#btnDelMember").on("click",function(){
 		var c=confirm("클럽을 탈퇴하시겠습니까?");
@@ -83,7 +68,7 @@ $(document).ready(function(){
 	 margin-bottom:30px; 
 	 display: flex; 
 	 justify-content:center; 
-	 width:70%; 
+	 width:100%; 
 	 }
 </style>
 </head>
@@ -114,6 +99,7 @@ $(document).ready(function(){
 			</div>
 			<div id="tablecenter">
 				<table class="t">
+				<tbody style="margin:30px;">
 				<tr>
 					<th colspan="3" class="w">클럽명</th>
 					<td colspan="3" class="c">${clubDTO.cName}</td> <!-- 클럽명 -->
@@ -150,7 +136,7 @@ $(document).ready(function(){
 					<th colspan="12" class="w"><모임활동></th>
 				</tr>
 				<tr>
-					<th colspan="3" class="w">제목</th>
+					<th colspan="3" class="w">모임명</th>
 					<td colspan="3" class="c">${board.bTitle}</td><!-- 타이틀 -->
 					<th colspan="3" class="w">주최자</th>
 					<td colspan="3" class="c">${board.bWriter}</td><!-- 작성자 -->
@@ -181,13 +167,21 @@ $(document).ready(function(){
 				</tr>
 				</c:forEach>
 				</c:if>
+				</tbody>
 				</table>
-			</div>
 				<%-- 클럽장,관리자만 수정 가능 --%>
 				<c:if test="${(!empty loginUser) && (loginUser.grade == 999) || (loginUser.id == clubDTO.masterId)}">
 						<div class="r">
-							<input type="button" name="btnUpdate" id="btnUpdate" class="readmore" value="클럽수정"/>
-						</div><br/>
+						<form id="updateFrm" action="${path}/club/clubUp" method="get">
+						<input type="hidden" name="cNo" id="cNo" value="${clubDTO.cNo}"/>
+						<input type="hidden" name="cName" id="cName" value="${clubDTO.cName}"/>
+						<input type="hidden" name="cIntro" id="cIntro" value="${clubDTO.cIntro}"/>
+						<input type="hidden" name="categoryNo" id="categoryNo" value="${clubDTO.categoryNo}"/>
+						<input type="hidden" name="cLoc" id="cLoc" value="${clubDTO.cLoc}"/>
+						<input type="hidden" name="cPeople" id="cPeople" value="${clubDTO.cPeople}"/>
+						<input type="submit" class="readmore" value="클럽수정"/>
+						</form>
+						</div>
 						<div class="r">
 							<input type="button" name="btnADel" id="btnADel" class="readmore" value="클럽삭제"/>
 						</div>
@@ -204,6 +198,7 @@ $(document).ready(function(){
 							<input type="button" name="btnDelMember" id="btnDelMember" class="readmore" value="클럽탈퇴(회원)"/>
 						</div>
 				</c:if>
+			</div>
 		</div>
 		<!-- SIDEBAR -->
 		<div class="four columns" style="margin-top: 15px;">

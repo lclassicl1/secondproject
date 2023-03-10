@@ -99,9 +99,9 @@ $(document).ready(function(){
 </div>
 <!-- CONTENT 
 ================================================== -->
-<form id="clubUp" action="" method="post">
+<form id="clubUp" method="post">
 <input type="hidden" name="cNo" value="${clubDTO.cNo}"/>
-<table border="1" class="t">
+<table class="t">
 	<tr>
 		<th class="w">카테고리</th>
 		<td>
@@ -110,7 +110,6 @@ $(document).ready(function(){
 			<option value=1>공부</option>
 			<option value=2>요리</option>
 			<option value=3>운동</option>
-			<option value=4>전체</option>
 		</select>		
 		</td>
 	</tr>
@@ -141,10 +140,8 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<th colspan="2"><b>클럽소개글</b></th>
-	</tr>
-	<tr>	
-		<td colspan="2">
+		<th style="font-size:1.1em;"><b>클럽<br/>소개글</b></th>
+		<td>
 			<pre><textarea class="texta" rows="20" cols="70" name="cIntro" id="cIntro" required="required">${clubDTO.cIntro}</textarea></pre>
 		</td>
 	</tr>

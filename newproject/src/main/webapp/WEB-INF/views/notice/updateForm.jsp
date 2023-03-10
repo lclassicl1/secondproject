@@ -81,7 +81,6 @@ table{
 <main>
 <%-- 	몇번글수정?:${no}
 	넘겨받은DTO:${noticeDTO} --%>
-	
 	<form action="${path}/notice/updateForm" method="post" id="form">
 		<input type="hidden" name="no" id="no" value="${noticeDTO.no}"/>
 		<div class="btn">
@@ -91,6 +90,8 @@ table{
 				<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
 		</div>
 			</div>
+		<input type="hidden" name="no" id="no" value="${noticeDTO.no}"/>
+		
 		<div id="tableCenter">
 			<table border="1">
 			<tr>

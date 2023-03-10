@@ -86,7 +86,7 @@ table{
 	<input type="hidden" name="pageNo" value="${paging.cri.pageNo}">
 	<input type="hidden" name="amount" value="${paging.cri.amount}">
 	<!-- 관리자만 글쓰기 작성 활성화 -->
-	<div id="btn">
+	<div class="row" style="display: flex;justify-content: right;width: 60%; margin-bottom: 6px;">
 		<c:if test="${loginUser.grade == 999}">
 				<div style="width:60%; margin-left:auto; margin-right:auto; text-align:right;">
 					<input type="button" value="글쓰기" id="noticeWrite" class="readmore"/>
@@ -94,6 +94,11 @@ table{
 		</c:if>
 	</div>
 	<div id="tableCenter">
+	<%-- <div id="btn">
+		<c:if test="${loginUser.grade == 999}">
+			<input type="button" value="글쓰기" id="noticeWrite" class="readmore"/>
+		</c:if>
+	</div> --%>
 		<table border="1">
 			<tr>
 				<th>제목</th><th>작성자</th><th>작성시간</th><th>조회수</th>
