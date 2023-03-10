@@ -24,8 +24,9 @@ $(document).ready(function(){
   	});		 
 	//클럽수정버튼 cNo
 	$("#btnUpdate").on("click",function(){
-		var c=confirm("클럽을 수정하시겠습니까?");
+		let c=confirm("클럽을 수정하시겠습니까?");
 		  if(c){
+			  	let content = ${clubDTO.cIntro};
 				location.href="${path}/club/clubUp?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&cName=${clubDTO.cName}&cLoc=${clubDTO.cLoc}&cPeople=${clubDTO.cPeople}&cIntro=${clubDTO.cIntro}";
 				}else{
 		 		return false;		 

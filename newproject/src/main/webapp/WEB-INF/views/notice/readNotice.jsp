@@ -55,6 +55,14 @@
 table{
 	width:60%;
 }
+.btn {
+/*   position: absolute;
+  top: 24.5%;
+  left: 72.8%;
+  transform: translateX(-50%); */
+    text-align: right;
+  margin-right: 285px;
+}
 </style>
 </head>
 <body>
@@ -81,8 +89,7 @@ table{
 	</div>
 		<div class="btn">
 		<c:if test="${loginUser.grade == 999}">
-			<input type="button" name="" id="updateNotice" value="수정" class="readmore"/>
-			<input type="button" name="" id="deleteNotice" value="삭제" class="readmore"/>
+			<input type="button" name="" id="updateNotice" value="수정" class="readmore"/><input type="button" name="" id="deleteNotice" value="삭제" class="readmore"/>
 		</c:if>
 			<input type="button" name="moveNoticeList" id="moveNoticeList" value="목록" class="readmore"/>
 		</div>

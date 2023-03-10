@@ -48,6 +48,15 @@
 table{
 	width:60%;
 }
+
+#btn {
+  /* position: absolute;
+  top: 24.5%;
+  left: 77.8%;
+  transform: translateX(-50%); */
+  text-align: right;
+  margin-right: 285px;
+}
 </style>
 </head>
 <body>
@@ -73,6 +82,11 @@ table{
 	<div class="hr">
 	</div>
 	<form action="${path}/notice/insert" method="post" id="form">
+		<div id="btn">
+		<input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
+						<input type="reset" value="취소" class="readmore"/>&nbsp;
+						<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
+		</div>				
 		<div id="tableCenter">
 		<table border="1">
 			<tr>
@@ -88,12 +102,12 @@ table{
 					<!-- <div id="content" name="content"></div> -->
 				</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td colspan="2"><input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
 					<input type="reset" value="취소" class="readmore"/>&nbsp;
 					<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
 				</td>
-			</tr>
+			</tr> -->
 		</table>
 		</div>
 	</form>
