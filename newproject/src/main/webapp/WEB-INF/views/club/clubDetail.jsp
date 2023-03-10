@@ -12,11 +12,9 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 $(document).ready(function(){	
-	
 	//클럽가입
 	$("#btnSign").on("click",function(){
 				location.href="${path}/club/sign?categoryNo=${clubDTO.categoryNo}&cNo=${clubDTO.cNo}&no=${loginUser.no}";	 
-
   	});		 
 
 	//클럽회원탈퇴
