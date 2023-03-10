@@ -52,10 +52,7 @@ table{
 }
 
 .btn {
-  position: absolute;
-  top: 24.5%;
-  left: 72.8%;
-  transform: translateX(-50%);
+
 }
 </style>
 <title>Insert title here</title>
@@ -88,9 +85,11 @@ table{
 	<form action="${path}/notice/updateForm" method="post" id="form">
 		<input type="hidden" name="no" id="no" value="${noticeDTO.no}"/>
 		<div class="btn">
+		<div style="width:60%; margin-left:auto; margin-right:auto; text-align:right;">
 				<button type="button" id="submitBtn" class="readmore">수정하기</button>
 				<input type="reset" value="취소" class="readmore"/>
 				<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
+		</div>
 			</div>
 		<div id="tableCenter">
 			<table border="1">

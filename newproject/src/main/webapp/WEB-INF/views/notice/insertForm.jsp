@@ -74,6 +74,11 @@ table{
 	<div class="hr">
 	</div>
 	<form action="${path}/notice/insert" method="post" id="form">
+			<div style="width:60%; margin-left:auto; margin-right:auto; text-align:right;">
+					<input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
+					<input type="reset" value="취소" class="readmore"/>&nbsp;
+					<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
+			</div>
 		<div id="tableCenter">
 		<table border="1">
 			<tr>
@@ -87,12 +92,6 @@ table{
 				<td>
 					<textarea rows="10" cols="30" name="content" id="content" placeholder="내용을 입력해주세요"></textarea>
 					<!-- <div id="content" name="content"></div> -->
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" id="submit" value="작성하기" class="readmore"/>&nbsp;
-					<input type="reset" value="취소" class="readmore"/>&nbsp;
-					<input type="button" value="뒤로가기" id="backBtn" class="readmore"/>
 				</td>
 			</tr>
 		</table>
