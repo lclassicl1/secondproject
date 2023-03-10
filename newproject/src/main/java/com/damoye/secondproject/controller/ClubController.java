@@ -288,7 +288,11 @@ public class ClubController {
 		//수정
 		int cnt=clubService.getUpdateClub(clubDTO);	
 		if(cnt==1) {
-			mv.setViewName("user/main");
+			int cNo = clubDTO.getcNo();
+			int categoryNo =  clubDTO.getCategoryNo();
+			mv.addObject("cNo",cNo);
+			mv.addObject("categoryNo",categoryNo);
+			mv.setViewName("redirect:/club/detail");
 		}else {
 			mv.setViewName("redirect:/club/clubUp?cNo="+clubDTO.getcNo());
 		}
